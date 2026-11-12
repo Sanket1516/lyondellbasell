@@ -1,6 +1,7 @@
 "use server";
 import { resolveSource } from "@/lib/demo-docs";
 import { DEMO_TODAY } from "@/lib/constants";
+import { matchInState } from "@/lib/matching";
 import { getSessionUser } from "@/lib/session";
 import { getState, updateState } from "@/lib/store";
 import { UNKNOWN_VENDOR } from "@/lib/status";
@@ -25,7 +26,7 @@ export type SubmitResult = { ok: true; invoiceId: string } | { ok: false; error:
 const isNum = (n: unknown): n is number => typeof n === "number" && Number.isFinite(n) && n >= 0;
 const text = (s: unknown, max = 200) => (typeof s === "string" ? s.trim().slice(0, max) : "");
 
-/** Creates the invoice with status "Submitted". Matching and verdicts come in later tickets. */
+/** Creates the invoice, then runs the match engine, which sets the verdict and status. */
 export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
   const user = await getSessionUser();
   if (!user || user.role !== "supplier") return { ok: false, error: "Please sign in as a supplier." };
@@ -47,7 +48,9 @@ export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
 
   return updateState<SubmitResult>((s) => {
     const existing = s.invoices.find((i) => i.id === id);
-    if (existing && existing.status !== "received") return { ok: false, error: `Invoice ${id} has already been submitted and is ${existing.status.replace("_", " ")}.` };
+    // A supplier may correct their own submission until the workflow has started on it (tasks, approval, payment).
+    const replaceable = existing && existing.submittedBy && ["received", "matched", "pending_owner", "pending_approval", "blocked"].includes(existing.status) && !s.tasks.some((t) => t.invoiceId === id);
+    if (existing && !replaceable) return { ok: false, error: `Invoice ${id} has already been submitted and is ${existing.status.replace("_", " ")}.` };
 
     const gstin = text(p.vendorGstin, 15).toUpperCase();
     const vname = text(p.vendorName, 80);
@@ -81,6 +84,8 @@ export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
     };
     if (existing) s.invoices[s.invoices.indexOf(existing)] = inv;
     else s.invoices.push(inv);
+    s.findings = s.findings.filter((f) => f.invoiceId !== id);
+    matchInState(s, id, user.username);
     return { ok: true, invoiceId: id };
   });
 }

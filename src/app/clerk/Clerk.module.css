@@ -1,0 +1,5 @@
+.lead { color: var(--ink-soft); margin-bottom: 14px; }
+.filters { display: flex; gap: 2px; border-bottom: 1px solid var(--line-strong); margin-bottom: 12px; }
+.filter { padding: 7px 12px; color: var(--ink-soft); text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px; font-weight: 500; }
+.filter:hover { color: var(--ink); }
+.filterOn { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }

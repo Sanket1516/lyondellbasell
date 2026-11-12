@@ -29,10 +29,10 @@ beforeEach(() => {
 });
 
 describe("submitInvoice", () => {
-  it("creates a Submitted invoice under the vendor matched by GSTIN", async () => {
+  it("creates the invoice, runs the match (no PO on file here, so it is blocked) under the vendor matched by GSTIN", async () => {
     const r = await submitInvoice(payload());
     expect(r).toEqual({ ok: true, invoiceId: "INV-7781" });
-    expect(state.invoices[0]).toMatchObject({ id: "INV-7781", vendorId: "V-1001", status: "received", poId: "4500001234", submittedBy: "vihar.supplier", sourceFile: "demo:INV-7781.pdf" });
+    expect(state.invoices[0]).toMatchObject({ id: "INV-7781", vendorId: "V-1001", status: "blocked", verdict: "block", poId: "4500001234", submittedBy: "vihar.supplier", sourceFile: "demo:INV-7781.pdf" });
     expect(state.invoices[0].lines[0].taxRatePct).toBe(18);
   });
 

@@ -30,7 +30,9 @@ export function loadSeed(dir = SEED_DIR): AppState {
   return state;
 }
 
-let cache: AppState | undefined;
+// Next.js bundles server actions, route handlers and pages separately, so a module-level variable would be
+// one copy per bundle and a page could miss a change made by an action. globalThis is shared by all of them.
+const g = globalThis as unknown as { __plantXState?: AppState };
 
 function persist(state: AppState) {
   fs.mkdirSync(path.dirname(STATE_FILE), { recursive: true });
@@ -39,14 +41,14 @@ function persist(state: AppState) {
 
 /** In-memory state, persisted to data/state.json. The first read falls back to the seed. */
 export function getState(): AppState {
-  if (cache) return cache;
+  if (g.__plantXState) return g.__plantXState;
   if (fs.existsSync(STATE_FILE)) {
-    cache = JSON.parse(fs.readFileSync(STATE_FILE, "utf8")) as AppState;
+    g.__plantXState = JSON.parse(fs.readFileSync(STATE_FILE, "utf8")) as AppState;
   } else {
-    cache = loadSeed();
-    persist(cache);
+    g.__plantXState = loadSeed();
+    persist(g.__plantXState);
   }
-  return cache;
+  return g.__plantXState;
 }
 
 /** Mutate state through a function, then save. */
@@ -58,7 +60,7 @@ export function updateState<T>(fn: (s: AppState) => T): T {
 }
 
 export function resetState(): AppState {
-  cache = loadSeed();
-  persist(cache);
-  return cache;
+  g.__plantXState = loadSeed();
+  persist(g.__plantXState);
+  return g.__plantXState;
 }

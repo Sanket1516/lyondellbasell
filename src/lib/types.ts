@@ -120,6 +120,8 @@ export interface Invoice {
   printedVendor?: { name: string; gstin?: string };
   /** Date the exception was closed or the invoice was paid. Used for ageing. */
   resolvedOn?: string;
+  /** A clerk's decision on a possible-duplicate finding. A reason is always required. */
+  duplicateDecision?: { decision: "duplicate" | "not_duplicate"; matchedInvoiceId: string; by: string; reason: string; at: string };
   /** Username that submitted it (a supplier login may submit on behalf of the vendor on the document). */
   submittedBy?: string;
 }
@@ -132,7 +134,16 @@ export type FindingKind =
   | "unknown_vendor"
   | "duplicate"
   | "tax"
-  | "uom";
+  | "uom"
+  | "arithmetic"
+  | "not_on_po";
+
+/** One underlying record the engine used, shown behind "Show evidence". */
+export interface EvidenceRef {
+  kind: "po" | "goods_receipt" | "contract" | "delivery_note" | "uom_rule" | "invoice";
+  ref: string;
+  text: string;
+}
 
 export interface Finding {
   id: string;
@@ -144,6 +155,13 @@ export interface Finding {
   rootCause: string;
   owner: string; // named owner, e.g. "Buyer"
   smallestFix: string;
+  /** Set by the matching engine (absent on older seeded findings). */
+  expected?: string;
+  actual?: string;
+  deltaPct?: number;
+  evidence?: EvidenceRef[];
+  /** Duplicate findings: the invoice this one looks like. */
+  matchedInvoiceId?: string;
 }
 
 export type TaskStatus = "open" | "done";
