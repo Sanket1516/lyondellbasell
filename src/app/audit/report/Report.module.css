@@ -4,7 +4,7 @@
 .scope { color: var(--ink-soft); margin: 10px 0 18px; max-width: 80ch; }
 .page h2 { margin: 18px 0 8px; font-size: 15px; }
 .table { width: 100%; border-collapse: collapse; font-size: 13px; background: var(--surface); border: 1px solid var(--line); }
-.table th { text-align: left; background: #efede6; font-size: 12px; font-weight: 600; color: var(--ink-soft); padding: 7px 10px; border-bottom: 1px solid var(--line-strong); }
+.table th { text-align: left; background: var(--paper-deep); font-size: 12px; font-weight: 600; color: var(--ink-soft); padding: 7px 10px; border-bottom: 1px solid var(--line-strong); }
 .table td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .table tr:last-child td { border-bottom: 0; }
 .control { font-weight: 600; width: 22%; }

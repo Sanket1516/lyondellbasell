@@ -13,8 +13,16 @@ export default function LoginForm({ accounts }: { accounts: Account[] }) {
 
   return (
     <div className={s.page}>
+      <aside className={s.hero} aria-hidden="true">
+        <div className={s.heroName}><span>Plant X</span><span>Payables</span><span>Desk</span></div>
+        <div className={s.run}>
+          <div className={s.pipe}><i style={{ background: "var(--band-po)" }} /><b>Purchase order</b></div>
+          <div className={s.pipe}><i style={{ background: "var(--band-rc)" }} /><b>Goods receipt</b></div>
+          <div className={s.pipe}><i style={{ background: "var(--band-inv)" }} /><b>Invoice</b></div>
+        </div>
+      </aside>
       <section className={s.card}>
-        <h1>Plant X Payables Desk</h1>
+        <h1>Sign in</h1>
         <p className={s.sub}>Sign in with your payables desk account.</p>
         <form action={action} className={s.form}>
           <Input label="Username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" required />

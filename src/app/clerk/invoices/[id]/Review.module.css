@@ -5,22 +5,22 @@
 .total { display: flex; flex-direction: column; align-items: flex-end; font-size: 18px; font-weight: 600; }
 .totalLabel { font-family: var(--font-sans); font-size: 11.5px; font-weight: 500; color: var(--ink-soft); }
 
-.banner { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--line-strong); border-left-width: 4px; border-radius: var(--radius); }
-.banner_approve { border-left-color: var(--ok); }
-.banner_flag { border-left-color: var(--warn); }
-.banner_block { border-left-color: var(--bad); }
+.banner { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line-strong); border-top-width: 4px; border-radius: 0; }
+.banner_approve { border-top-color: var(--ok); }
+.banner_flag { border-top-color: var(--warn); }
+.banner_block { border-top-color: var(--bad); }
 .bannerText { flex: 1; font-weight: 500; }
 .assump { color: var(--ink-soft); font-size: 12px; margin: 6px 0 14px; }
 
 .sticky { position: sticky; top: 12px; }
-.fixture { font-size: 13px; padding: 8px 12px; border: 1px solid var(--warn); border-left-width: 3px; background: var(--warn-wash); color: var(--warn-ink); font-weight: 500; border-radius: var(--radius); margin-bottom: 8px; }
+.fixture { font-size: 13px; padding: 8px 12px; border: 1px solid var(--warn); border-top-width: 4px; background: var(--warn-wash); color: var(--warn-ink); font-weight: 500; border-radius: 0; margin-bottom: 8px; }
 .stack { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .desc { color: var(--ink-soft); }
 .totals { margin-top: 8px; font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); text-align: right; }
 
 .findings { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
 .finding { border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 12px; background: var(--surface); }
-.findingOn { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.findingOn { border-color: var(--accent); box-shadow: inset 0 3px 0 var(--accent); }
 .findingTop { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .findingKind { font-size: 12.5px; font-weight: 600; flex: 1; }
 .msg { margin-bottom: 8px; }
@@ -42,14 +42,14 @@
 .sameTag { font-family: var(--font-sans); font-size: 11px; color: var(--ink-soft); }
 .decide { display: flex; flex-direction: column; gap: 6px; max-width: 640px; }
 .decideLabel { font-size: 12.5px; font-weight: 500; }
-.textarea { font: inherit; padding: 8px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); resize: vertical; }
+.textarea { font: inherit; padding: 8px; border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); resize: vertical; }
 .decideBtns { display: flex; gap: 10px; margin-top: 4px; }
 .err { color: var(--bad); font-weight: 500; }
-.decided { padding: 8px 12px; border: 1px solid var(--line-strong); border-left: 3px solid var(--accent); background: var(--accent-wash); border-radius: var(--radius); }
+.decided { padding: 8px 12px; border: 1px solid var(--line-strong); border-top: 4px solid var(--accent); background: var(--accent-wash); border-radius: 0; }
 
 .taskRow { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
 .taskMeta { margin: 0; font-size: 12.5px; color: var(--ink-soft); }
 .taskNote { margin: 0; font-size: 12.5px; color: var(--ink-soft); }
-.flow { margin: 10px 0 14px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--line-strong); border-left: 4px solid var(--accent); border-radius: var(--radius); display: flex; flex-direction: column; gap: 8px; }
+.flow { margin: 10px 0 14px; padding: 10px 14px; background: var(--surface); border: 1.5px solid var(--line-strong); border-top: 4px solid var(--accent); border-radius: 0; display: flex; flex-direction: column; gap: 8px; }
 .flowRow { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .flowText { margin: 0; font-weight: 500; }

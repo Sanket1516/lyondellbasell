@@ -1,8 +1,8 @@
 .lead { color: var(--ink-soft); margin-bottom: 14px; max-width: 74ch; }
 .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-bottom: 16px; }
 .filters label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 500; color: var(--ink-soft); }
-.filters input, .filters select { font: inherit; height: 32px; padding: 0 8px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); min-width: 150px; }
-.btn { height: 32px; padding: 0 14px; font: inherit; font-weight: 500; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); cursor: pointer; }
+.filters input, .filters select { font: inherit; height: 32px; padding: 0 8px; border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); min-width: 150px; }
+.btn { height: 32px; padding: 0 14px; font: inherit; font-weight: 500; border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); cursor: pointer; }
 .btn:hover { background: var(--neutral-wash); }
 
 /* KPI strip: four figures, definition on hover or keyboard focus */
@@ -31,7 +31,7 @@
 .barTrack { fill: var(--neutral-wash); }
 .barFill { fill: var(--accent); }
 .barValue { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
-.barOn { background: var(--accent-wash); box-shadow: inset 3px 0 0 var(--accent); font-weight: 600; }
+.barOn { background: var(--accent-wash); box-shadow: inset 0 3px 0 var(--accent); font-weight: 600; }
 
 /* Ageing bar */
 .ageSvg { width: 100%; height: 30px; display: block; border-radius: var(--radius); }
@@ -42,9 +42,9 @@
 .swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
 
 /* Tables */
-.tableWrap { overflow: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.tableWrap { overflow: auto; border-top: 3px solid var(--ink); background: var(--surface); }
 .table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.table th { position: sticky; top: 0; background: #efede6; text-align: left; font-size: 12px; font-weight: 600; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
+.table th { position: sticky; top: 0; background: var(--paper-deep); text-align: left; font-size: 12px; font-weight: 600; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
 .table td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .table tr:last-child td { border-bottom: 0; }
 .r { text-align: right !important; }

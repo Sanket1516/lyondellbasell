@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import type { User } from "@/lib/types";
 import { ROLE_HOME } from "@/lib/users";
 import { logoutAction, resetDemoAction } from "@/app/actions";
+import NavLinks from "./NavLinks";
 import s from "./AppShell.module.css";
 
 const NAV: Record<User["role"], { href: string; label: string }[]> = {
@@ -15,28 +16,28 @@ export default function AppShell({ user, children }: { user: User; children: Rea
   const canReset = user.role !== "supplier";
   return (
     <div className={s.shell}>
-      <header className={s.bar}>
-        <div className={s.brand}>Plant X <span>Payables Desk</span></div>
-        <div className={s.who}>
-          <span className={s.role}>{user.title}</span>
-          <span>{user.displayName}</span>
-          <form action={logoutAction}><button className={s.link} type="submit">Log out</button></form>
-        </div>
-      </header>
       <nav className={s.rail} aria-label="Main">
-        <ul>
-          {NAV[user.role].map((n) => (
-            <li key={n.href}><Link href={n.href}>{n.label}</Link></li>
-          ))}
-        </ul>
-        {canReset && (
-          <details className={s.footer}>
-            <summary>Demo controls</summary>
-            <form action={resetDemoAction}>
-              <button className={s.link} type="submit">Reset demo data</button>
-            </form>
-          </details>
-        )}
+        <div className={s.brand}>
+          <span className={s.bands} aria-hidden="true" />
+          <strong>Plant X</strong>
+          <span>Payables Desk</span>
+        </div>
+        <NavLinks items={NAV[user.role]} />
+        <div className={s.foot}>
+          <div className={s.who}>
+            <span className={s.role}>{user.title}</span>
+            <span>{user.displayName}</span>
+            <form action={logoutAction}><button className={s.link} type="submit">Log out</button></form>
+          </div>
+          {canReset && (
+            <details className={s.footer}>
+              <summary>Demo controls</summary>
+              <form action={resetDemoAction}>
+                <button className={s.link} type="submit">Reset demo data</button>
+              </form>
+            </details>
+          )}
+        </div>
       </nav>
       <main className={s.main} data-home={ROLE_HOME[user.role]}>{children}</main>
     </div>

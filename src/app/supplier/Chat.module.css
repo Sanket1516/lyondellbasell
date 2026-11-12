@@ -1,7 +1,7 @@
 .source { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 10px; }
 .row { margin-bottom: 10px; }
 .pick { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 500; color: var(--ink-soft); max-width: 260px; }
-.pick select { font: inherit; height: 32px; padding: 0 8px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); }
+.pick select { font: inherit; height: 32px; padding: 0 8px; border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .chip { font: inherit; font-size: 13px; padding: 5px 11px; border: 1px solid var(--accent); color: var(--accent); background: var(--surface); border-radius: var(--radius); cursor: pointer; }
 .chip:hover:not(:disabled) { background: var(--accent-wash); }
@@ -14,4 +14,4 @@
 .based { color: var(--ink-soft); font-size: 12px; }
 .err { color: var(--bad); margin-bottom: 8px; }
 .form { display: flex; gap: 8px; }
-.form input { flex: 1; font: inherit; height: 34px; padding: 0 10px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); }
+.form input { flex: 1; font: inherit; height: 34px; padding: 0 10px; border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink); }

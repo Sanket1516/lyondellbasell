@@ -1,46 +1,65 @@
 .shell {
   display: grid;
-  grid-template-columns: var(--rail-w) 1fr;
-  grid-template-rows: var(--bar-h) 1fr;
+  grid-template-columns: var(--rail-w) minmax(0, 1fr);
   min-height: 100vh;
 }
-.bar {
-  grid-column: 1 / 3;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 16px;
-  background: var(--ink); color: #fff;
-}
-.brand { font-weight: 600; }
-.brand span { font-weight: 400; color: #c9ced6; margin-left: 6px; }
-.who { display: flex; gap: 14px; align-items: center; font-size: 13px; }
-.role {
-  border: 1px solid #5d6674; border-radius: var(--radius);
-  padding: 1px 8px; font-size: 12px;
-}
-.link {
-  font: inherit; background: none; border: 0; padding: 2px 0; cursor: pointer;
-  color: inherit; text-decoration: underline; text-underline-offset: 2px;
-}
 .rail {
-  border-right: 1px solid var(--line);
-  padding: 16px 0;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: #efede6;
+  position: sticky; top: 0; height: 100vh;
+  display: flex; flex-direction: column; gap: 28px;
+  padding: 22px 0 18px;
+  background: var(--rail); color: var(--rail-ink);
 }
-.rail ul { list-style: none; margin: 0; padding: 0; }
-.rail a {
-  display: block; padding: 8px 16px; color: var(--ink); text-decoration: none;
-  border-left: 3px solid transparent;
+.brand { display: flex; flex-direction: column; gap: 2px; padding: 0 20px; }
+.brand strong { font-size: 26px; font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; }
+.brand > span:last-child { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rail-soft); }
+.bands { display: block; width: 56px; height: 8px; margin-bottom: 12px; background: var(--bands); }
+
+.rail ul { list-style: none; margin: 0; padding: 0; flex: 1; }
+.rail li a {
+  position: relative; display: block; padding: 10px 20px 10px 34px;
+  color: var(--rail-ink); text-decoration: none; font-weight: 500;
 }
-.rail a:hover { background: var(--neutral-wash); border-left-color: var(--accent); }
-.footer { padding: 0 16px; font-size: 12px; color: var(--ink-soft); }
+.rail li a::before {
+  content: ""; position: absolute; left: 20px; top: 50%; width: 6px; height: 6px;
+  margin-top: -3px; background: var(--rail-soft); transform: scaleX(0.5); transform-origin: left;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), background 180ms;
+}
+.rail li a:hover { background: rgba(255, 255, 255, 0.06); }
+.rail li a:hover::before { transform: scaleX(1.5); }
+.rail li a.on { background: rgba(255, 255, 255, 0.1); font-weight: 700; }
+.rail li a.on::before { transform: scaleX(1); background: var(--band-inv); }
+.rail li a:focus-visible { box-shadow: inset 0 0 0 2px var(--band-inv); border-radius: 0; }
+
+.foot { padding: 0 20px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
+.who { display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+.role { font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--band-inv); font-weight: 600; }
+.link {
+  font: inherit; background: none; border: 0; padding: 2px 0; cursor: pointer; align-self: flex-start;
+  color: var(--rail-soft); text-decoration: underline; text-underline-offset: 3px;
+}
+.link:hover { color: var(--rail-ink); }
+.link:focus-visible { box-shadow: 0 0 0 2px var(--rail), 0 0 0 4px var(--band-inv); }
+.footer { color: var(--rail-soft); font-size: 12px; }
 .footer summary { cursor: pointer; }
-.footer .link { color: var(--ink-soft); margin-top: 6px; }
-.main { padding: 24px; max-width: 1200px; }
-.bar .link:focus-visible { box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px #fff; }
+.footer .link { margin-top: 6px; }
+
+.main { padding: 30px 36px 48px; max-width: 1560px; min-width: 0; }
+
+@media (max-width: 800px) {
+  .shell { grid-template-columns: 1fr; }
+  .rail { position: static; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 16px; }
+  .brand { padding: 0; }
+  .bands { margin-bottom: 6px; }
+  .rail ul { display: flex; flex-wrap: wrap; flex: 1 1 100%; order: 3; }
+  .rail li a { padding: 8px 12px 8px 24px; }
+  .rail li a::before { left: 10px; }
+  .foot { flex-direction: row; flex-wrap: wrap; padding: 0; margin-left: auto; }
+  .who { border: 0; padding: 0; flex-direction: row; gap: 10px; align-items: center; }
+  .main { padding: 20px 16px 40px; }
+}
 
 @media print {
   .shell { display: block; min-height: 0; }
-  .bar, .rail { display: none; }
+  .rail { display: none; }
   .main { padding: 0; max-width: none; }
 }

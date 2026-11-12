@@ -1,32 +1,49 @@
+/*
+  Pipe-marking world: plants identify what runs through a line with colour bands.
+  Here the three documents an invoice is matched against get one band each:
+  PO = blue, goods receipt = green, invoice = amber. Status colours stay separate.
+*/
 :root {
-  --paper: #f6f5f1;
-  --surface: #ffffff;
-  --ink: #1b2330;
-  --ink-soft: #4a5362;
-  --line: #d9d6cc;
-  --line-strong: #bdb9ac;
-  --accent: #0f5c63;
+  --paper: #e4e8e2;
+  --paper-deep: #d6dcd3;
+  --surface: #f7f8f5;
+  --ink: #0f1b2a;
+  --ink-soft: #435061;
+  --line: #c6cdc3;
+  --line-strong: #9fa99f;
+  --accent: #b83a0a;
   --accent-ink: #ffffff;
-  --accent-wash: #e3eeee;
+  --accent-wash: #fbe4d6;
 
-  --ok: #2e7d4f;
-  --ok-wash: #e4f1e8;
-  --warn: #b7791f;
-  --warn-ink: #7a4f0d;
-  --warn-wash: #f8eed8;
-  --bad: #b3372f;
-  --bad-wash: #f7e3e1;
-  --neutral: #6b7280;
-  --neutral-ink: #4b5260;
-  --neutral-wash: #ecebe6;
+  --rail: #0f1d30;
+  --rail-ink: #dfe6ee;
+  --rail-soft: #8fa0b4;
 
-  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  --band-po: #2458b8;
+  --band-rc: #1b8a5a;
+  --band-inv: #e6b422;
 
-  --radius: 4px;
-  --rail-w: 208px;
-  --bar-h: 48px;
-  --focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
+  --ok: #1c7a4f;
+  --ok-wash: #d9eee2;
+  --warn: #946200;
+  --warn-ink: #5f3f00;
+  --warn-wash: #f7e8bd;
+  --bad: #b3261e;
+  --bad-wash: #f7d9d5;
+  --neutral: #5d6978;
+  --neutral-ink: #3f4a58;
+  --neutral-wash: #dde2db;
+
+  --font-sans: "Archivo Variable", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Spline Sans Mono", ui-monospace, Consolas, monospace;
+
+  --radius: 3px;
+  --rail-w: 232px;
+  --bar-h: 0px;
+  --focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+
+  /* the signature: three hard-stop bands, PO / receipt / invoice */
+  --bands: linear-gradient(90deg, var(--band-po) 0 33.34%, var(--band-rc) 0 66.67%, var(--band-inv) 0 100%);
 }
 
 *,
@@ -42,24 +59,27 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 14.5px;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3 {
   margin: 0;
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 700;
+  line-height: 1.15;
+  font-stretch: 78%;
+  letter-spacing: 0.01em;
+  text-wrap: balance;
 }
-h1 { font-size: 20px; }
-h2 { font-size: 16px; }
-h3 { font-size: 14px; }
+h1 { font-size: 28px; text-transform: uppercase; }
+h2 { font-size: 17px; text-transform: uppercase; }
+h3 { font-size: 15px; font-stretch: 90%; }
 p { margin: 0; }
 
 a {
   color: var(--accent);
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 
 .num,
@@ -69,11 +89,14 @@ a {
 }
 .num { text-align: right; }
 
+::selection { background: var(--band-inv); color: var(--ink); }
 :focus-visible {
   outline: none;
   box-shadow: var(--focus);
   border-radius: var(--radius);
 }
+
+* { scrollbar-color: var(--line-strong) var(--paper); }
 
 .sr-only {
   position: absolute;

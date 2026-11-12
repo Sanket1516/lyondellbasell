@@ -13,7 +13,7 @@
 .dropHint { color: var(--ink-soft); margin-bottom: 10px; }
 .browse {
   display: inline-flex; align-items: center; height: 32px; padding: 0 14px;
-  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface);
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface);
   font-weight: 500; cursor: pointer;
 }
 .browse:hover { background: var(--neutral-wash); }
@@ -30,7 +30,7 @@ input:focus-visible + .browse { box-shadow: var(--focus); }
 
 .reviewHead { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
 .sub { color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
-.note { font-size: 13px; padding: 8px 12px; border: 1px solid var(--line-strong); border-left-width: 3px; background: var(--surface); border-radius: var(--radius); margin-bottom: 10px; }
+.note { font-size: 13px; padding: 8px 12px; border: 1.5px solid var(--line-strong); border-top-width: 4px; background: var(--surface); border-radius: 0; margin-bottom: 10px; }
 .noteFixture { border-color: var(--warn); background: var(--warn-wash); color: var(--warn-ink); font-weight: 500; }
 
 .form { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
@@ -40,7 +40,7 @@ input:focus-visible + .browse { box-shadow: var(--focus); }
 .rowLabel { font-size: 12.5px; font-weight: 500; color: var(--ink-soft); padding-left: 4px; }
 .input {
   font: inherit; height: 32px; padding: 0 8px; width: 100%;
-  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink);
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink);
 }
 .inputCheck { border-color: var(--bad); border-style: dashed; }
 
@@ -59,7 +59,7 @@ input:focus-visible + .browse { box-shadow: var(--focus); }
 .lfLabel { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; }
 .cell {
   font: inherit; font-size: 13px; width: 100%; height: 30px; padding: 0 8px;
-  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink);
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink);
 }
 .cellActive { border-color: var(--accent); background: var(--accent-wash); }
 .cellNum { text-align: right; }
