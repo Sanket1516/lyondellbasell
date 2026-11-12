@@ -109,3 +109,7 @@
 .timelineItem { position: relative; padding: 0 0 14px 16px; }
 .timelineItem::before { content: ""; position: absolute; left: -4px; top: 6px; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
 .timelineWhen { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); }
+
+/* Keyboard-selected row */
+.rowOn td { background: var(--accent-wash); }
+.rowOn td:first-child { box-shadow: inset 3px 0 0 var(--accent); }

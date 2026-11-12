@@ -7,8 +7,8 @@ import s from "./AppShell.module.css";
 
 const NAV: Record<User["role"], { href: string; label: string }[]> = {
   supplier: [{ href: "/supplier", label: "My invoices" }],
-  clerk: [{ href: "/clerk", label: "Invoice queue" }, { href: "/audit", label: "Audit trail" }],
-  approver: [{ href: "/approver", label: "Approvals" }, { href: "/audit", label: "Audit trail" }],
+  clerk: [{ href: "/clerk", label: "Invoice queue" }, { href: "/dashboard", label: "Exceptions dashboard" }, { href: "/audit", label: "Audit trail" }, { href: "/audit/report", label: "Controls report" }],
+  approver: [{ href: "/approver", label: "Approvals" }, { href: "/dashboard", label: "Exceptions dashboard" }, { href: "/audit", label: "Audit trail" }, { href: "/audit/report", label: "Controls report" }],
 };
 
 export default function AppShell({ user, children }: { user: User; children: ReactNode }) {

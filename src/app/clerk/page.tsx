@@ -40,7 +40,7 @@ export default async function ClerkHome({ searchParams }: { searchParams: Promis
     <>
       <h1 style={{ marginBottom: 6 }}>Invoice queue</h1>
       <p className={s.lead}>
-        {open.length} open: {count("block")} blocked, {count("flag")} flagged, {count("approve")} clean. Oldest first.
+        {open.length} open: {count("block")} blocked, {count("flag")} flagged, {count("approve")} clean. Oldest first. Keys: J and K to move, Enter to open.
       </p>
       <nav className={s.filters} aria-label="Queue filter">
         <Link href="/clerk" aria-current={all ? undefined : "page"} className={all ? s.filter : `${s.filter} ${s.filterOn}`}>Open ({open.length})</Link>

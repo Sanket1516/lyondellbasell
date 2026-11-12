@@ -31,7 +31,7 @@ export function Select({ label, children, ...p }: SelectHTMLAttributes<HTMLSelec
 
 export interface Column<T> { header: string; render: (row: T) => ReactNode; numeric?: boolean }
 
-export function Table<T>({ columns, rows, rowKey }: { columns: Column<T>[]; rows: T[]; rowKey: (r: T) => string }) {
+export function Table<T>({ columns, rows, rowKey, selectedKey }: { columns: Column<T>[]; rows: T[]; rowKey: (r: T) => string; selectedKey?: string }) {
   return (
     <div className={s.tableWrap}>
       <table className={s.table}>
@@ -40,7 +40,7 @@ export function Table<T>({ columns, rows, rowKey }: { columns: Column<T>[]; rows
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={rowKey(r)}>
+            <tr key={rowKey(r)} data-row={rowKey(r)} className={selectedKey !== undefined && selectedKey === rowKey(r) ? s.rowOn : undefined} aria-selected={selectedKey !== undefined ? selectedKey === rowKey(r) : undefined}>
               {columns.map((c) => (
                 <td key={c.header} className={c.numeric ? cx(s.right, "mono") : undefined}>{c.render(r)}</td>
               ))}

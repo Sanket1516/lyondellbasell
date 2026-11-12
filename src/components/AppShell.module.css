@@ -38,3 +38,9 @@
 .footer .link { color: var(--ink-soft); margin-top: 6px; }
 .main { padding: 24px; max-width: 1200px; }
 .bar .link:focus-visible { box-shadow: 0 0 0 2px var(--ink), 0 0 0 4px #fff; }
+
+@media print {
+  .shell { display: block; min-height: 0; }
+  .bar, .rail { display: none; }
+  .main { padding: 0; max-width: none; }
+}

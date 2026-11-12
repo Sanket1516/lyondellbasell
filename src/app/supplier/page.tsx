@@ -3,6 +3,7 @@ import { listDemoDocs } from "@/lib/demo-docs";
 import { getSessionUser } from "@/lib/session";
 import { getState } from "@/lib/store";
 import { InvoiceList, type InvoiceRow } from "./InvoiceList";
+import { PaymentChat } from "./PaymentChat";
 import { UploadFlow } from "./UploadFlow";
 
 export const dynamic = "force-dynamic";
@@ -31,6 +32,7 @@ export default async function SupplierHome() {
         <Panel title={`Your invoices (${rows.length})`}>
           <InvoiceList rows={rows} showVendor={showVendor} />
         </Panel>
+        <PaymentChat invoiceIds={rows.map((r) => r.id)} />
       </div>
     </>
   );
