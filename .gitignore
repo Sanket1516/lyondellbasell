@@ -20,3 +20,5 @@ data/state.pre-tamper.json
 
 data/uploads/
 public/pdf.worker.min.mjs
+data/plantx.db
+data/plantx.db-*
