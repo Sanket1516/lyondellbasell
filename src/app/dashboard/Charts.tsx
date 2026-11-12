@@ -27,7 +27,7 @@ export function HBars({ data, caption }: { data: BarDatum[]; caption: string }) 
 
 export interface AgeDatum { id: string; label: string; count: number; href: string; active?: boolean }
 
-const SHADE = ["#f0b793", "#dd7b45", "#b83a0a", "#5e1d04"]; // accent, light to dark: older is darker
+const SHADE = ["#c7c3fb", "#9b8ff5", "#6a5cee", "#3a2fb0"]; // indigo, light to dark: older is darker
 
 /** One stacked bar for the whole queue, split by age bucket. Segments and legend entries are links. */
 export function AgeBar({ data }: { data: AgeDatum[] }) {

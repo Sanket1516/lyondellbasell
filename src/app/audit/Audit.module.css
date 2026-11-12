@@ -10,7 +10,7 @@
 .intact, .broken { margin: 0; padding: 5px 10px; border-radius: var(--radius); font-weight: 500; border: 1px solid; }
 .intact { color: var(--ok); background: var(--ok-wash); border-color: var(--ok); }
 .broken { color: var(--bad); background: var(--bad-wash); border-color: var(--bad); }
-.wrap { overflow: auto; border-top: 3px solid var(--ink); background: var(--surface); }
+.wrap { overflow: auto; border-top: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow); background: var(--surface); }
 .table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .table th { position: sticky; top: 0; background: var(--paper-deep); text-align: left; font-size: 12px; font-weight: 600; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
 .table td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }

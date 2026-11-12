@@ -42,7 +42,7 @@
 .swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
 
 /* Tables */
-.tableWrap { overflow: auto; border-top: 3px solid var(--ink); background: var(--surface); }
+.tableWrap { overflow: auto; border-top: 0; border-radius: var(--radius-lg); box-shadow: var(--shadow); background: var(--surface); }
 .table { width: 100%; border-collapse: collapse; font-size: 13px; }
 .table th { position: sticky; top: 0; background: var(--paper-deep); text-align: left; font-size: 12px; font-weight: 600; color: var(--ink-soft); padding: 8px 10px; border-bottom: 1px solid var(--line-strong); white-space: nowrap; }
 .table td { padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }

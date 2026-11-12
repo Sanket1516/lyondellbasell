@@ -30,7 +30,7 @@ input:focus-visible + .browse { box-shadow: var(--focus); }
 
 .reviewHead { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
 .sub { color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
-.note { font-size: 13px; padding: 8px 12px; border: 1.5px solid var(--line-strong); border-top-width: 4px; background: var(--surface); border-radius: 0; margin-bottom: 10px; }
+.note { font-size: 13px; padding: 8px 12px; border: 1.5px solid var(--line-strong); border-top-width: 4px; background: var(--surface); border-radius: var(--radius); margin-bottom: 10px; }
 .noteFixture { border-color: var(--warn); background: var(--warn-wash); color: var(--warn-ink); font-weight: 500; }
 
 .form { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
