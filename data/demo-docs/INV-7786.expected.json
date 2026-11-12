@@ -1,0 +1,30 @@
+{
+  "file": "INV-7786.pdf",
+  "purpose": "Price differs from both PO and contract",
+  "expectedVerdict": "flag",
+  "vendorName": "Girnar Logistics",
+  "vendorGstin": "24FICTG1006F1Z0",
+  "invoiceNumber": "INV-7786",
+  "invoiceDate": "2026-11-08",
+  "poNumber": "4500001246",
+  "lines": [
+    {
+      "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+      "qty": 12,
+      "unit": "trips",
+      "unitPrice": 19400,
+      "amount": 232800
+    },
+    {
+      "description": "Container detention charge",
+      "qty": 4,
+      "unit": "days",
+      "unitPrice": 2500,
+      "amount": 10000
+    }
+  ],
+  "subtotal": 242800,
+  "taxRatePct": 18,
+  "taxAmount": 43704,
+  "total": 286504
+}

@@ -1,0 +1,1285 @@
+[
+  {
+    "id": "INV-6101",
+    "vendorId": "V-1001",
+    "poId": "4500000801",
+    "invoiceDate": "2026-09-13",
+    "receivedOn": "2026-09-15",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 5000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxRatePct": 18,
+        "amount": 430000
+      }
+    ],
+    "subtotal": 430000,
+    "tax": 77400,
+    "total": 507400,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-09-28"
+  },
+  {
+    "id": "INV-6102",
+    "vendorId": "V-1002",
+    "poId": "4500000802",
+    "invoiceDate": "2026-09-17",
+    "receivedOn": "2026-09-19",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BAG-25",
+        "description": "PP woven bag 25 kg",
+        "qty": 5000,
+        "uom": "nos",
+        "unitPrice": 18,
+        "taxRatePct": 18,
+        "amount": 90000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 60,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxRatePct": 18,
+        "amount": 28800
+      }
+    ],
+    "subtotal": 118800,
+    "tax": 21384,
+    "total": 140184,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-02"
+  },
+  {
+    "id": "INV-6103",
+    "vendorId": "V-1003",
+    "poId": "4500000803",
+    "invoiceDate": "2026-09-21",
+    "receivedOn": "2026-09-23",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CO2-22",
+        "description": "Carbon dioxide, 22 kg cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 960,
+        "taxRatePct": 18,
+        "amount": 19200
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 200,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxRatePct": 18,
+        "amount": 104000
+      }
+    ],
+    "subtotal": 123200,
+    "tax": 22176,
+    "total": 145376,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-05"
+  },
+  {
+    "id": "INV-6104",
+    "vendorId": "V-1005",
+    "poId": "4500000804",
+    "invoiceDate": "2026-09-24",
+    "receivedOn": "2026-09-26",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 12,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxRatePct": 18,
+        "amount": 37200
+      }
+    ],
+    "subtotal": 37200,
+    "tax": 6696,
+    "total": 43896,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-08"
+  },
+  {
+    "id": "INV-6105",
+    "vendorId": "V-1006",
+    "poId": "4500000805",
+    "invoiceDate": "2026-09-28",
+    "receivedOn": "2026-09-29",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 12,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxRatePct": 18,
+        "amount": 222000
+      }
+    ],
+    "subtotal": 222000,
+    "tax": 39960,
+    "total": 261960,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-14"
+  },
+  {
+    "id": "INV-6106",
+    "vendorId": "V-1004",
+    "poId": "4500000806",
+    "invoiceDate": "2026-09-30",
+    "receivedOn": "2026-10-02",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxRatePct": 18,
+        "amount": 8600
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BV-2SS",
+        "description": "Ball valve 2 in SS316",
+        "qty": 24,
+        "uom": "nos",
+        "unitPrice": 3850,
+        "taxRatePct": 18,
+        "amount": 92400
+      }
+    ],
+    "subtotal": 101000,
+    "tax": 18180,
+    "total": 119180,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-15"
+  },
+  {
+    "id": "INV-6107",
+    "vendorId": "V-1001",
+    "poId": "4500000807",
+    "invoiceDate": "2026-10-04",
+    "receivedOn": "2026-10-05",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "SOL-55",
+        "description": "Solvent blend S-55",
+        "qty": 1000,
+        "uom": "L",
+        "unitPrice": 142,
+        "taxRatePct": 18,
+        "amount": 142000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "DR-200",
+        "description": "HDPE drum 200 L",
+        "qty": 30,
+        "uom": "nos",
+        "unitPrice": 1450,
+        "taxRatePct": 18,
+        "amount": 43500
+      }
+    ],
+    "subtotal": 185500,
+    "tax": 33390,
+    "total": 218890,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-20"
+  },
+  {
+    "id": "INV-6108",
+    "vendorId": "V-1002",
+    "poId": "4500000808",
+    "invoiceDate": "2026-10-06",
+    "receivedOn": "2026-10-08",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 100,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxRatePct": 18,
+        "amount": 48000
+      }
+    ],
+    "subtotal": 48000,
+    "tax": 8640,
+    "total": 56640,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-24"
+  },
+  {
+    "id": "INV-6109",
+    "vendorId": "V-1005",
+    "poId": "4500000809",
+    "invoiceDate": "2026-10-09",
+    "receivedOn": "2026-10-10",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 20,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxRatePct": 18,
+        "amount": 12800
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "PH-PR",
+        "description": "pH probe, glass electrode",
+        "qty": 6,
+        "uom": "nos",
+        "unitPrice": 7250,
+        "taxRatePct": 18,
+        "amount": 43500
+      }
+    ],
+    "subtotal": 56300,
+    "tax": 10134,
+    "total": 66434,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-24"
+  },
+  {
+    "id": "INV-6110",
+    "vendorId": "V-1006",
+    "poId": "4500000810",
+    "invoiceDate": "2026-10-12",
+    "receivedOn": "2026-10-13",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 10,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxRatePct": 18,
+        "amount": 185000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 3,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxRatePct": 18,
+        "amount": 7500
+      }
+    ],
+    "subtotal": 192500,
+    "tax": 34650,
+    "total": 227150,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-29"
+  },
+  {
+    "id": "INV-6111",
+    "vendorId": "V-1003",
+    "poId": "4500000811",
+    "invoiceDate": "2026-10-14",
+    "receivedOn": "2026-10-16",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 150,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxRatePct": 18,
+        "amount": 78000
+      }
+    ],
+    "subtotal": 78000,
+    "tax": 14040,
+    "total": 92040,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-28"
+  },
+  {
+    "id": "INV-6112",
+    "vendorId": "V-1004",
+    "poId": "4500000833",
+    "invoiceDate": "2026-10-15",
+    "receivedOn": "2026-10-17",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxRatePct": 18,
+        "amount": 8600
+      }
+    ],
+    "subtotal": 8600,
+    "tax": 1548,
+    "total": 10148,
+    "status": "approved",
+    "verdict": "flag",
+    "resolvedOn": "2026-10-21"
+  },
+  {
+    "id": "INV-6113",
+    "vendorId": "V-1002",
+    "poId": "4500000812",
+    "invoiceDate": "2026-10-17",
+    "receivedOn": "2026-10-19",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 100,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxRatePct": 18,
+        "amount": 48000
+      }
+    ],
+    "subtotal": 48000,
+    "tax": 8640,
+    "total": 56640,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-22"
+  },
+  {
+    "id": "INV-6114",
+    "vendorId": "V-1003",
+    "poId": "4500000827",
+    "invoiceDate": "2026-10-18",
+    "receivedOn": "2026-10-20",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AR-47",
+        "description": "Argon, 47 L cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 1160,
+        "taxRatePct": 18,
+        "amount": 23200
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 100,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxRatePct": 18,
+        "amount": 52000
+      }
+    ],
+    "subtotal": 75200,
+    "tax": 13536,
+    "total": 88736,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6115",
+    "vendorId": "V-1006",
+    "poId": "4500000835",
+    "invoiceDate": "2026-10-20",
+    "receivedOn": "2026-10-21",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 12,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxRatePct": 12,
+        "amount": 222000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 2,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxRatePct": 12,
+        "amount": 5000
+      }
+    ],
+    "subtotal": 227000,
+    "tax": 27240,
+    "total": 254240,
+    "status": "approved",
+    "verdict": "flag",
+    "resolvedOn": "2026-10-25"
+  },
+  {
+    "id": "INV-6116",
+    "vendorId": "V-1001",
+    "poId": "4500000813",
+    "invoiceDate": "2026-10-20",
+    "receivedOn": "2026-10-22",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxRatePct": 18,
+        "amount": 172000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "SOL-55",
+        "description": "Solvent blend S-55",
+        "qty": 2000,
+        "uom": "L",
+        "unitPrice": 142,
+        "taxRatePct": 18,
+        "amount": 284000
+      }
+    ],
+    "subtotal": 456000,
+    "tax": 82080,
+    "total": 538080,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-25"
+  },
+  {
+    "id": "INV-6117",
+    "vendorId": "V-1001",
+    "poId": "4500000836",
+    "invoiceDate": "2026-10-22",
+    "receivedOn": "2026-10-23",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2,
+        "uom": "MT",
+        "unitPrice": 86000,
+        "taxRatePct": 18,
+        "amount": 172000
+      }
+    ],
+    "subtotal": 172000,
+    "tax": 30960,
+    "total": 202960,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-25"
+  },
+  {
+    "id": "INV-6118",
+    "vendorId": "V-1002",
+    "poId": "4500000826",
+    "invoiceDate": "2026-10-22",
+    "receivedOn": "2026-10-24",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PAL-WD",
+        "description": "Wooden pallet 1200x1000",
+        "qty": 50,
+        "uom": "nos",
+        "unitPrice": 680,
+        "taxRatePct": 18,
+        "amount": 34000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 1000,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxRatePct": 18,
+        "amount": 62000
+      }
+    ],
+    "subtotal": 96000,
+    "tax": 17280,
+    "total": 113280,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6119",
+    "vendorId": "V-1005",
+    "poId": "4500000840",
+    "invoiceDate": "2026-10-23",
+    "receivedOn": "2026-10-24",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 6,
+        "uom": "bottles",
+        "unitPrice": 3320,
+        "taxRatePct": 18,
+        "amount": 19920
+      }
+    ],
+    "subtotal": 19920,
+    "tax": 3585.6,
+    "total": 23505.6,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6120",
+    "vendorId": "V-1004",
+    "poId": "4500001240",
+    "invoiceDate": "2026-10-14",
+    "receivedOn": "2026-10-15",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BV-2SS",
+        "description": "Ball valve 2 in SS316",
+        "qty": 24,
+        "uom": "nos",
+        "unitPrice": 3850,
+        "taxRatePct": 18,
+        "amount": 92400
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 60,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxRatePct": 18,
+        "amount": 12900
+      }
+    ],
+    "subtotal": 105300,
+    "tax": 18954,
+    "total": 124254,
+    "status": "paid",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-29"
+  },
+  {
+    "id": "INV-6121",
+    "vendorId": "V-1005",
+    "poId": "4500000814",
+    "invoiceDate": "2026-10-23",
+    "receivedOn": "2026-10-25",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PH-PR",
+        "description": "pH probe, glass electrode",
+        "qty": 6,
+        "uom": "nos",
+        "unitPrice": 7250,
+        "taxRatePct": 18,
+        "amount": 43500
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 30,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxRatePct": 18,
+        "amount": 19200
+      }
+    ],
+    "subtotal": 62700,
+    "tax": 11286,
+    "total": 73986,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-29"
+  },
+  {
+    "id": "INV-6122",
+    "vendorId": "V-1005",
+    "poId": "4500000830",
+    "invoiceDate": "2026-10-26",
+    "receivedOn": "2026-10-27",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 12,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxRatePct": 18,
+        "amount": 37200
+      }
+    ],
+    "subtotal": 37200,
+    "tax": 6696,
+    "total": 43896,
+    "status": "blocked",
+    "verdict": "block"
+  },
+  {
+    "id": "INV-6123",
+    "vendorId": "V-1002",
+    "poId": "4500000837",
+    "invoiceDate": "2026-10-26",
+    "receivedOn": "2026-10-28",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BAG-25",
+        "description": "PP woven bag 25 kg",
+        "qty": 80,
+        "uom": "box",
+        "unitPrice": 1800,
+        "taxRatePct": 18,
+        "amount": 144000
+      }
+    ],
+    "subtotal": 144000,
+    "tax": 25920,
+    "total": 169920,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-10-30"
+  },
+  {
+    "id": "INV-6124",
+    "vendorId": "V-1003",
+    "poId": "4500000815",
+    "invoiceDate": "2026-10-28",
+    "receivedOn": "2026-10-29",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CO2-22",
+        "description": "Carbon dioxide, 22 kg cylinder",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 960,
+        "taxRatePct": 18,
+        "amount": 38400
+      }
+    ],
+    "subtotal": 38400,
+    "tax": 6912,
+    "total": 45312,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-11-01"
+  },
+  {
+    "id": "INV-6125",
+    "vendorId": "V-1001",
+    "poId": "4500000825",
+    "invoiceDate": "2026-10-29",
+    "receivedOn": "2026-10-30",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AX-40",
+        "description": "Process additive AX-40",
+        "qty": 1000,
+        "uom": "kg",
+        "unitPrice": 412,
+        "taxRatePct": 18,
+        "amount": 412000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxRatePct": 18,
+        "amount": 172000
+      }
+    ],
+    "subtotal": 584000,
+    "tax": 105120,
+    "total": 689120,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6126",
+    "vendorId": "V-1002",
+    "poId": "4500000832",
+    "invoiceDate": "2026-10-30",
+    "receivedOn": "2026-10-31",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 1000,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxRatePct": 18,
+        "amount": 62000
+      }
+    ],
+    "subtotal": 62000,
+    "tax": 11160,
+    "total": 73160,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6127",
+    "vendorId": "V-1006",
+    "poId": "4500000816",
+    "invoiceDate": "2026-10-31",
+    "receivedOn": "2026-11-01",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 4,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxRatePct": 18,
+        "amount": 10000
+      }
+    ],
+    "subtotal": 10000,
+    "tax": 1800,
+    "total": 11800,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-11-05"
+  },
+  {
+    "id": "INV-6128",
+    "vendorId": "V-1003",
+    "poId": "4500000824",
+    "invoiceDate": "2026-11-01",
+    "receivedOn": "2026-11-02",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AR-47",
+        "description": "Argon, 47 L cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 1160,
+        "taxRatePct": 18,
+        "amount": 23200
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 100,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxRatePct": 18,
+        "amount": 52000
+      }
+    ],
+    "subtotal": 75200,
+    "tax": 13536,
+    "total": 88736,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6129",
+    "vendorId": "V-1004",
+    "poId": "4500000817",
+    "invoiceDate": "2026-11-01",
+    "receivedOn": "2026-11-03",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 120,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxRatePct": 18,
+        "amount": 25800
+      }
+    ],
+    "subtotal": 25800,
+    "tax": 4644,
+    "total": 30444,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-11-07"
+  },
+  {
+    "id": "INV-6130",
+    "vendorId": "V-1001",
+    "poId": "4500000838",
+    "invoiceDate": "2026-11-03",
+    "receivedOn": "2026-11-04",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 3,
+        "uom": "MT",
+        "unitPrice": 86000,
+        "taxRatePct": 18,
+        "amount": 258000
+      }
+    ],
+    "subtotal": 258000,
+    "tax": 46440,
+    "total": 304440,
+    "status": "approved",
+    "verdict": "approve",
+    "resolvedOn": "2026-11-06"
+  },
+  {
+    "id": "INV-6131",
+    "vendorId": "V-1006",
+    "poId": "4500000839",
+    "invoiceDate": "2026-11-03",
+    "receivedOn": "2026-11-05",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 12,
+        "uom": "trips",
+        "unitPrice": 19800,
+        "taxRatePct": 18,
+        "amount": 237600
+      }
+    ],
+    "subtotal": 237600,
+    "tax": 42768,
+    "total": 280368,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6132",
+    "vendorId": "V-1002",
+    "poId": "4500000823",
+    "invoiceDate": "2026-11-04",
+    "receivedOn": "2026-11-06",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PAL-WD",
+        "description": "Wooden pallet 1200x1000",
+        "qty": 80,
+        "uom": "nos",
+        "unitPrice": 680,
+        "taxRatePct": 18,
+        "amount": 54400
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 500,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxRatePct": 18,
+        "amount": 31000
+      }
+    ],
+    "subtotal": 85400,
+    "tax": 15372,
+    "total": 100772,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6133",
+    "vendorId": "V-1006",
+    "poId": "4500000829",
+    "invoiceDate": "2026-11-05",
+    "receivedOn": "2026-11-06",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 3,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxRatePct": 18,
+        "amount": 7500
+      }
+    ],
+    "subtotal": 7500,
+    "tax": 1350,
+    "total": 8850,
+    "status": "blocked",
+    "verdict": "block"
+  },
+  {
+    "id": "INV-6134",
+    "vendorId": "V-1001",
+    "poId": "4500000822",
+    "invoiceDate": "2026-11-06",
+    "receivedOn": "2026-11-07",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AX-40",
+        "description": "Process additive AX-40",
+        "qty": 1000,
+        "uom": "kg",
+        "unitPrice": 412,
+        "taxRatePct": 18,
+        "amount": 412000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxRatePct": 18,
+        "amount": 172000
+      }
+    ],
+    "subtotal": 584000,
+    "tax": 105120,
+    "total": 689120,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6135",
+    "vendorId": "V-1005",
+    "poId": "4500000804",
+    "invoiceDate": "2026-11-06",
+    "receivedOn": "2026-11-07",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 12,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxRatePct": 18,
+        "amount": 37200
+      }
+    ],
+    "subtotal": 37200,
+    "tax": 6696,
+    "total": 43896,
+    "status": "blocked",
+    "verdict": "block"
+  },
+  {
+    "id": "INV-6136",
+    "vendorId": "V-1001",
+    "poId": "4500000831",
+    "invoiceDate": "2026-11-06",
+    "receivedOn": "2026-11-08",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 3000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxRatePct": 18,
+        "amount": 258000
+      }
+    ],
+    "subtotal": 258000,
+    "tax": 46440,
+    "total": 304440,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6137",
+    "vendorId": "V-1005",
+    "poId": "4500000834",
+    "invoiceDate": "2026-11-07",
+    "receivedOn": "2026-11-09",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PH-PR",
+        "description": "pH probe, glass electrode",
+        "qty": 8,
+        "uom": "nos",
+        "unitPrice": 7250,
+        "taxRatePct": 12,
+        "amount": 58000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 30,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxRatePct": 12,
+        "amount": 19200
+      }
+    ],
+    "subtotal": 77200,
+    "tax": 9264,
+    "total": 86464,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6138",
+    "vendorId": "V-1001",
+    "poId": "4500000818",
+    "invoiceDate": "2026-11-09",
+    "receivedOn": "2026-11-10",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "DR-200",
+        "description": "HDPE drum 200 L",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 1450,
+        "taxRatePct": 18,
+        "amount": 58000
+      }
+    ],
+    "subtotal": 58000,
+    "tax": 10440,
+    "total": 68440,
+    "status": "pending_approval",
+    "verdict": "approve"
+  },
+  {
+    "id": "INV-6139",
+    "vendorId": "V-1002",
+    "poId": "4500000819",
+    "invoiceDate": "2026-11-10",
+    "receivedOn": "2026-11-11",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 500,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxRatePct": 18,
+        "amount": 31000
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 60,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxRatePct": 18,
+        "amount": 28800
+      }
+    ],
+    "subtotal": 59800,
+    "tax": 10764,
+    "total": 70564,
+    "status": "pending_approval",
+    "verdict": "approve"
+  },
+  {
+    "id": "INV-6140",
+    "vendorId": "V-1004",
+    "poId": "4500000821",
+    "invoiceDate": "2026-11-10",
+    "receivedOn": "2026-11-11",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FL-2",
+        "description": "Flange 2 in SS316 150#",
+        "qty": 50,
+        "uom": "nos",
+        "unitPrice": 1310,
+        "taxRatePct": 18,
+        "amount": 65500
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BV-2SS",
+        "description": "Ball valve 2 in SS316",
+        "qty": 30,
+        "uom": "nos",
+        "unitPrice": 3850,
+        "taxRatePct": 18,
+        "amount": 115500
+      }
+    ],
+    "subtotal": 181000,
+    "tax": 32580,
+    "total": 213580,
+    "status": "pending_owner",
+    "verdict": "flag"
+  },
+  {
+    "id": "INV-6141",
+    "vendorId": "V-1003",
+    "poId": "4500000828",
+    "invoiceDate": "2026-11-10",
+    "receivedOn": "2026-11-11",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CO2-22",
+        "description": "Carbon dioxide, 22 kg cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 960,
+        "taxRatePct": 18,
+        "amount": 19200
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 150,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxRatePct": 18,
+        "amount": 78000
+      }
+    ],
+    "subtotal": 97200,
+    "tax": 17496,
+    "total": 114696,
+    "status": "blocked",
+    "verdict": "block"
+  },
+  {
+    "id": "INV-6142",
+    "vendorId": "V-1005",
+    "poId": "4500000820",
+    "invoiceDate": "2026-11-10",
+    "receivedOn": "2026-11-12",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 12,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxRatePct": 18,
+        "amount": 37200
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 20,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxRatePct": 18,
+        "amount": 12800
+      }
+    ],
+    "subtotal": 50000,
+    "tax": 9000,
+    "total": 59000,
+    "status": "pending_approval",
+    "verdict": "approve"
+  }
+]

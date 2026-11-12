@@ -1,0 +1,30 @@
+{
+  "file": "INV-6120R.pdf",
+  "purpose": "Re-issue of paid INV-6120 with a changed number and date",
+  "expectedVerdict": "block",
+  "vendorName": "Deccan Valve & Fittings",
+  "vendorGstin": "29FICTD1004D1Z0",
+  "invoiceNumber": "INV-6120R",
+  "invoiceDate": "2026-11-09",
+  "poNumber": "4500001240",
+  "lines": [
+    {
+      "description": "Ball valve 2 in SS316",
+      "qty": 24,
+      "unit": "nos",
+      "unitPrice": 3850,
+      "amount": 92400
+    },
+    {
+      "description": "Gasket set PTFE 2 in",
+      "qty": 60,
+      "unit": "nos",
+      "unitPrice": 215,
+      "amount": 12900
+    }
+  ],
+  "subtotal": 105300,
+  "taxRatePct": 18,
+  "taxAmount": 18954,
+  "total": 124254
+}

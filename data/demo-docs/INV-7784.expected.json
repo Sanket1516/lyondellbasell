@@ -1,0 +1,30 @@
+{
+  "file": "INV-7784.pdf",
+  "purpose": "No goods receipt yet",
+  "expectedVerdict": "block",
+  "vendorName": "Sahyadri Industrial Gases",
+  "vendorGstin": "27FICTS1003C1Z0",
+  "invoiceNumber": "INV-7784",
+  "invoiceDate": "2026-11-09",
+  "poNumber": "4500001242",
+  "lines": [
+    {
+      "description": "Nitrogen, industrial grade, 47 L cylinder",
+      "qty": 150,
+      "unit": "nos",
+      "unitPrice": 520,
+      "amount": 78000
+    },
+    {
+      "description": "Carbon dioxide, 22 kg cylinder",
+      "qty": 40,
+      "unit": "nos",
+      "unitPrice": 960,
+      "amount": 38400
+    }
+  ],
+  "subtotal": 116400,
+  "taxRatePct": 18,
+  "taxAmount": 20952,
+  "total": 137352
+}

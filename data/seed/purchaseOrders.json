@@ -1,0 +1,1146 @@
+[
+  {
+    "id": "4500000801",
+    "vendorId": "V-1001",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-08-28",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 5000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000802",
+    "vendorId": "V-1002",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-03",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BAG-25",
+        "description": "PP woven bag 25 kg",
+        "qty": 5000,
+        "uom": "nos",
+        "unitPrice": 18,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 60,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000803",
+    "vendorId": "V-1003",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-06",
+    "contractId": "C-27",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CO2-22",
+        "description": "Carbon dioxide, 22 kg cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 960,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 200,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000804",
+    "vendorId": "V-1005",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-08-29",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 12,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000805",
+    "vendorId": "V-1006",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-07",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 12,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000806",
+    "vendorId": "V-1004",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-03",
+    "contractId": "C-31",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BV-2SS",
+        "description": "Ball valve 2 in SS316",
+        "qty": 24,
+        "uom": "nos",
+        "unitPrice": 3850,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000807",
+    "vendorId": "V-1001",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-14",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "SOL-55",
+        "description": "Solvent blend S-55",
+        "qty": 1000,
+        "uom": "L",
+        "unitPrice": 142,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "DR-200",
+        "description": "HDPE drum 200 L",
+        "qty": 30,
+        "uom": "nos",
+        "unitPrice": 1450,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000808",
+    "vendorId": "V-1002",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-15",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 100,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000809",
+    "vendorId": "V-1005",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-23",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 20,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "PH-PR",
+        "description": "pH probe, glass electrode",
+        "qty": 6,
+        "uom": "nos",
+        "unitPrice": 7250,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000810",
+    "vendorId": "V-1006",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-17",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 10,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 3,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000811",
+    "vendorId": "V-1003",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-27",
+    "contractId": "C-27",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 150,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000812",
+    "vendorId": "V-1002",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-22",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 100,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000813",
+    "vendorId": "V-1001",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-03",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "SOL-55",
+        "description": "Solvent blend S-55",
+        "qty": 2000,
+        "uom": "L",
+        "unitPrice": 142,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000814",
+    "vendorId": "V-1005",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-28",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PH-PR",
+        "description": "pH probe, glass electrode",
+        "qty": 6,
+        "uom": "nos",
+        "unitPrice": 7250,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 30,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000815",
+    "vendorId": "V-1003",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-14",
+    "contractId": "C-27",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CO2-22",
+        "description": "Carbon dioxide, 22 kg cylinder",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 960,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000816",
+    "vendorId": "V-1006",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-07",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 4,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000817",
+    "vendorId": "V-1004",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-18",
+    "contractId": "C-31",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 120,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000818",
+    "vendorId": "V-1001",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-19",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "DR-200",
+        "description": "HDPE drum 200 L",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 1450,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000819",
+    "vendorId": "V-1002",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-21",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 500,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 60,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000820",
+    "vendorId": "V-1005",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-24",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 12,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 20,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000821",
+    "vendorId": "V-1004",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-20",
+    "contractId": "C-31",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FL-2",
+        "description": "Flange 2 in SS316 150#",
+        "qty": 50,
+        "uom": "nos",
+        "unitPrice": 1240,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BV-2SS",
+        "description": "Ball valve 2 in SS316",
+        "qty": 30,
+        "uom": "nos",
+        "unitPrice": 3850,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000822",
+    "vendorId": "V-1001",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-19",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AX-40",
+        "description": "Process additive AX-40",
+        "qty": 1000,
+        "uom": "kg",
+        "unitPrice": 398,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000823",
+    "vendorId": "V-1002",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-12",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PAL-WD",
+        "description": "Wooden pallet 1200x1000",
+        "qty": 80,
+        "uom": "nos",
+        "unitPrice": 640,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 500,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000824",
+    "vendorId": "V-1003",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-03",
+    "contractId": "C-27",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AR-47",
+        "description": "Argon, 47 L cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 1100,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 100,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000825",
+    "vendorId": "V-1001",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-20",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AX-40",
+        "description": "Process additive AX-40",
+        "qty": 1000,
+        "uom": "kg",
+        "unitPrice": 398,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000826",
+    "vendorId": "V-1002",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-13",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PAL-WD",
+        "description": "Wooden pallet 1200x1000",
+        "qty": 50,
+        "uom": "nos",
+        "unitPrice": 640,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 1000,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000827",
+    "vendorId": "V-1003",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-28",
+    "contractId": "C-27",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AR-47",
+        "description": "Argon, 47 L cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 1100,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 100,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000828",
+    "vendorId": "V-1003",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-18",
+    "contractId": "C-27",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CO2-22",
+        "description": "Carbon dioxide, 22 kg cylinder",
+        "qty": 20,
+        "uom": "nos",
+        "unitPrice": 960,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 150,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000829",
+    "vendorId": "V-1006",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-15",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 3,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000830",
+    "vendorId": "V-1005",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-11",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 12,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000831",
+    "vendorId": "V-1001",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-18",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 3000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000832",
+    "vendorId": "V-1002",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-09",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 1000,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000833",
+    "vendorId": "V-1004",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-09-18",
+    "contractId": "C-31",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000834",
+    "vendorId": "V-1005",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-17",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PH-PR",
+        "description": "pH probe, glass electrode",
+        "qty": 8,
+        "uom": "nos",
+        "unitPrice": 7250,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 30,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000835",
+    "vendorId": "V-1006",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-26",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 12,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 2,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000836",
+    "vendorId": "V-1001",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-08",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 2000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000837",
+    "vendorId": "V-1002",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-28",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BAG-25",
+        "description": "PP woven bag 25 kg",
+        "qty": 8000,
+        "uom": "nos",
+        "unitPrice": 18,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000838",
+    "vendorId": "V-1001",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-07",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 3000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000839",
+    "vendorId": "V-1006",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-10",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 12,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500000840",
+    "vendorId": "V-1005",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-06",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "KF-500",
+        "description": "Karl Fischer reagent 500 mL",
+        "qty": 6,
+        "uom": "bottles",
+        "unitPrice": 3100,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500001234",
+    "vendorId": "V-1001",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-18",
+    "contractId": "C-22",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "AX-40",
+        "description": "Process additive AX-40",
+        "qty": 1000,
+        "uom": "kg",
+        "unitPrice": 398,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "C-12",
+        "description": "Catalyst carrier C-12",
+        "qty": 5000,
+        "uom": "kg",
+        "unitPrice": 86,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 3,
+        "itemCode": "DR-200",
+        "description": "HDPE drum 200 L",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 1450,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500001236",
+    "vendorId": "V-1002",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-28",
+    "contractId": "C-23",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "CTN-5P",
+        "description": "Corrugated carton 5-ply 40x30x25",
+        "qty": 500,
+        "uom": "nos",
+        "unitPrice": 62,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "WRAP-500",
+        "description": "Stretch wrap film 500 mm",
+        "qty": 60,
+        "uom": "rolls",
+        "unitPrice": 480,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500001240",
+    "vendorId": "V-1004",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-09-30",
+    "contractId": "C-31",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "BV-2SS",
+        "description": "Ball valve 2 in SS316",
+        "qty": 24,
+        "uom": "nos",
+        "unitPrice": 3850,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "GSK-2P",
+        "description": "Gasket set PTFE 2 in",
+        "qty": 60,
+        "uom": "nos",
+        "unitPrice": 215,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500001242",
+    "vendorId": "V-1003",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-30",
+    "contractId": "C-27",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "N2-47",
+        "description": "Nitrogen, industrial grade, 47 L cylinder",
+        "qty": 150,
+        "uom": "nos",
+        "unitPrice": 520,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "CO2-22",
+        "description": "Carbon dioxide, 22 kg cylinder",
+        "qty": 40,
+        "uom": "nos",
+        "unitPrice": 960,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500001244",
+    "vendorId": "V-1005",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-26",
+    "contractId": "C-29",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "PH-PR",
+        "description": "pH probe, glass electrode",
+        "qty": 6,
+        "uom": "nos",
+        "unitPrice": 7250,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "BUF-3",
+        "description": "Buffer solution set pH 4/7/10",
+        "qty": 20,
+        "uom": "sets",
+        "unitPrice": 640,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
+    "id": "4500001246",
+    "vendorId": "V-1006",
+    "buyer": "Meera Joshi",
+    "issuedOn": "2026-10-22",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 12,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      },
+      {
+        "lineNo": 2,
+        "itemCode": "DET-1",
+        "description": "Container detention charge",
+        "qty": 4,
+        "uom": "days",
+        "unitPrice": 2500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  }
+]

@@ -1,0 +1,180 @@
+[
+  {
+    "id": "C-22",
+    "vendorId": "V-1001",
+    "effectiveFrom": "2026-10-01",
+    "prices": [
+      {
+        "itemCode": "AX-40",
+        "uom": "kg",
+        "unitPrice": 412
+      },
+      {
+        "itemCode": "C-12",
+        "uom": "kg",
+        "unitPrice": 86
+      },
+      {
+        "itemCode": "DR-200",
+        "uom": "nos",
+        "unitPrice": 1450
+      },
+      {
+        "itemCode": "SOL-55",
+        "uom": "L",
+        "unitPrice": 142
+      }
+    ],
+    "history": [
+      {
+        "itemCode": "AX-40",
+        "unitPrice": 398,
+        "uom": "kg",
+        "effectiveFrom": "2026-04-01"
+      }
+    ]
+  },
+  {
+    "id": "C-23",
+    "vendorId": "V-1002",
+    "effectiveFrom": "2026-09-20",
+    "prices": [
+      {
+        "itemCode": "CTN-5P",
+        "uom": "nos",
+        "unitPrice": 62
+      },
+      {
+        "itemCode": "WRAP-500",
+        "uom": "rolls",
+        "unitPrice": 480
+      },
+      {
+        "itemCode": "BAG-25",
+        "uom": "nos",
+        "unitPrice": 18
+      },
+      {
+        "itemCode": "PAL-WD",
+        "uom": "nos",
+        "unitPrice": 680
+      }
+    ],
+    "history": [
+      {
+        "itemCode": "PAL-WD",
+        "unitPrice": 640,
+        "uom": "nos",
+        "effectiveFrom": "2026-04-01"
+      }
+    ]
+  },
+  {
+    "id": "C-27",
+    "vendorId": "V-1003",
+    "effectiveFrom": "2026-10-10",
+    "prices": [
+      {
+        "itemCode": "N2-47",
+        "uom": "nos",
+        "unitPrice": 520
+      },
+      {
+        "itemCode": "AR-47",
+        "uom": "nos",
+        "unitPrice": 1160
+      },
+      {
+        "itemCode": "CO2-22",
+        "uom": "nos",
+        "unitPrice": 960
+      }
+    ],
+    "history": [
+      {
+        "itemCode": "AR-47",
+        "unitPrice": 1100,
+        "uom": "nos",
+        "effectiveFrom": "2026-04-01"
+      }
+    ]
+  },
+  {
+    "id": "C-29",
+    "vendorId": "V-1005",
+    "effectiveFrom": "2026-07-01",
+    "prices": [
+      {
+        "itemCode": "PH-PR",
+        "uom": "nos",
+        "unitPrice": 7250
+      },
+      {
+        "itemCode": "BUF-3",
+        "uom": "sets",
+        "unitPrice": 640
+      },
+      {
+        "itemCode": "KF-500",
+        "uom": "bottles",
+        "unitPrice": 3100
+      }
+    ],
+    "history": []
+  },
+  {
+    "id": "C-31",
+    "vendorId": "V-1004",
+    "effectiveFrom": "2026-10-05",
+    "prices": [
+      {
+        "itemCode": "BV-2SS",
+        "uom": "nos",
+        "unitPrice": 3850
+      },
+      {
+        "itemCode": "GSK-2P",
+        "uom": "nos",
+        "unitPrice": 215
+      },
+      {
+        "itemCode": "FL-2",
+        "uom": "nos",
+        "unitPrice": 1310
+      }
+    ],
+    "history": [
+      {
+        "itemCode": "FL-2",
+        "unitPrice": 1240,
+        "uom": "nos",
+        "effectiveFrom": "2026-04-01"
+      }
+    ]
+  },
+  {
+    "id": "C-33",
+    "vendorId": "V-1006",
+    "effectiveFrom": "2026-08-01",
+    "prices": [
+      {
+        "itemCode": "FRT-20",
+        "uom": "trips",
+        "unitPrice": 18200
+      },
+      {
+        "itemCode": "DET-1",
+        "uom": "days",
+        "unitPrice": 2500
+      }
+    ],
+    "history": [
+      {
+        "itemCode": "FRT-20",
+        "unitPrice": 18500,
+        "uom": "trips",
+        "effectiveFrom": "2026-04-01"
+      }
+    ]
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "file": "INV-7782.pdf",
+  "purpose": "Clean match, total under Rs 1,00,000",
+  "expectedVerdict": "approve",
+  "vendorName": "Konkan Packaging Works",
+  "vendorGstin": "27FICTK1002B1Z0",
+  "invoiceNumber": "INV-7782",
+  "invoiceDate": "2026-11-09",
+  "poNumber": "4500001236",
+  "lines": [
+    {
+      "description": "Corrugated carton 5-ply 40x30x25",
+      "qty": 500,
+      "unit": "nos",
+      "unitPrice": 62,
+      "amount": 31000
+    },
+    {
+      "description": "Stretch wrap film 500 mm",
+      "qty": 60,
+      "unit": "rolls",
+      "unitPrice": 480,
+      "amount": 28800
+    }
+  ],
+  "subtotal": 59800,
+  "taxRatePct": 18,
+  "taxAmount": 10764,
+  "total": 70564
+}

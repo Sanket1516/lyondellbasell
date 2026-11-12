@@ -1,0 +1,20 @@
+[
+  {
+    "itemCode": "C-12",
+    "fromUom": "MT",
+    "toUom": "kg",
+    "factor": 1000
+  },
+  {
+    "itemCode": "BAG-25",
+    "fromUom": "box",
+    "toUom": "nos",
+    "factor": 100
+  },
+  {
+    "itemCode": "SOL-55",
+    "fromUom": "drum",
+    "toUom": "L",
+    "factor": 200
+  }
+]

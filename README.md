@@ -16,7 +16,9 @@ npm run dev          # http://localhost:3000, redirects to /login
 npm run build        # production build with type check
 npm start            # serve the production build
 npm test             # unit tests (vitest)
-npm run reset        # restore data/state.json from data/seed/
+npm run seed         # regenerate data/seed/ (deterministic) and reset data/state.json
+npm run reset        # restore data/state.json from data/seed/ only
+npm run docs:generate # regenerate the six demo invoices in data/demo-docs/
 ```
 
 Demo accounts (fictional, also shown on the login page):
@@ -28,6 +30,9 @@ Demo accounts (fictional, also shown on the login page):
 | priya.clerk | Clerk@2026 | AP Clerk |
 | neha.approver | ApproverL1@2026 | Approver L1 |
 | rajesh.approver | ApproverL2@2026 | Approver L2 |
+
+## Fictional data
+Everything in `data/seed/` and `data/demo-docs/` is invented: Plant X, the six vendors, GSTINs, POs, receipts and invoices. Nothing is real LYB data.
 
 Optional: set `SESSION_SECRET` in `.env` to change the cookie signing key.
 

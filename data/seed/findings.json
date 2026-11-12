@@ -1,0 +1,227 @@
+[
+  {
+    "lineNo": 1,
+    "kind": "quantity",
+    "verdict": "flag",
+    "message": "Invoice quantity 40 nos exceeds receipts of 30 nos.",
+    "rootCause": "Goods receipt under-posted",
+    "owner": "Warehouse",
+    "smallestFix": "Post the remaining 10 nos receipt if the delivery note confirms it.",
+    "id": "F-INV-6112-1",
+    "invoiceId": "INV-6112"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price is 5.45% above PO. Contract C-27 sets ₹1,160.",
+    "rootCause": "PO not updated after contract change",
+    "owner": "Buyer",
+    "smallestFix": "Update PO 4500000827 line 1 to ₹1,160; the invoice then passes.",
+    "id": "F-INV-6114-1",
+    "invoiceId": "INV-6114"
+  },
+  {
+    "kind": "tax",
+    "verdict": "flag",
+    "message": "Invoice bills GST 12%; PO tax code is GST 18%.",
+    "rootCause": "Invoice tax rate differs from PO tax code",
+    "owner": "Supplier",
+    "smallestFix": "Supplier to reissue the invoice at 18%, or Buyer to confirm the PO tax code.",
+    "id": "F-INV-6115-1",
+    "invoiceId": "INV-6115"
+  },
+  {
+    "lineNo": 1,
+    "kind": "uom",
+    "verdict": "approve",
+    "message": "Billed in MT; PO is in kg. 1 MT = 1,000 kg.",
+    "rootCause": "Unit of measure only",
+    "owner": "System",
+    "smallestFix": "None. Converted automatically.",
+    "id": "F-INV-6117-1",
+    "invoiceId": "INV-6117"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price is 6.25% above PO. Contract C-23 sets ₹680.",
+    "rootCause": "PO not updated after contract change",
+    "owner": "Buyer",
+    "smallestFix": "Update PO 4500000826 line 1 to ₹680; the invoice then passes.",
+    "id": "F-INV-6118-1",
+    "invoiceId": "INV-6118"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price ₹3,320 differs from PO ₹3,100 and contract ₹3,100.",
+    "rootCause": "Price differs from both PO and contract",
+    "owner": "Supplier",
+    "smallestFix": "Supplier to correct the price to contract ₹3,100.",
+    "id": "F-INV-6119-1",
+    "invoiceId": "INV-6119"
+  },
+  {
+    "kind": "missing_receipt",
+    "verdict": "block",
+    "message": "No goods receipt is posted against PO 4500000830.",
+    "rootCause": "Goods receipt not posted",
+    "owner": "Warehouse",
+    "smallestFix": "Post the goods receipt for PO 4500000830, or confirm the goods have not arrived.",
+    "id": "F-INV-6122-1",
+    "invoiceId": "INV-6122"
+  },
+  {
+    "lineNo": 1,
+    "kind": "uom",
+    "verdict": "approve",
+    "message": "Billed in box; PO is in nos. 1 box = 100 nos.",
+    "rootCause": "Unit of measure only",
+    "owner": "System",
+    "smallestFix": "None. Converted automatically.",
+    "id": "F-INV-6123-1",
+    "invoiceId": "INV-6123"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price is 3.52% above PO. Contract C-22 sets ₹412.",
+    "rootCause": "PO not updated after contract change",
+    "owner": "Buyer",
+    "smallestFix": "Update PO 4500000825 line 1 to ₹412; the invoice then passes.",
+    "id": "F-INV-6125-1",
+    "invoiceId": "INV-6125"
+  },
+  {
+    "lineNo": 1,
+    "kind": "quantity",
+    "verdict": "flag",
+    "message": "Invoice quantity 1000 nos exceeds receipts of 800 nos.",
+    "rootCause": "Goods receipt under-posted",
+    "owner": "Warehouse",
+    "smallestFix": "Post the remaining 200 nos receipt if the delivery note confirms it.",
+    "id": "F-INV-6126-1",
+    "invoiceId": "INV-6126"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price is 5.45% above PO. Contract C-27 sets ₹1,160.",
+    "rootCause": "PO not updated after contract change",
+    "owner": "Buyer",
+    "smallestFix": "Update PO 4500000824 line 1 to ₹1,160; the invoice then passes.",
+    "id": "F-INV-6128-1",
+    "invoiceId": "INV-6128"
+  },
+  {
+    "lineNo": 1,
+    "kind": "uom",
+    "verdict": "approve",
+    "message": "Billed in MT; PO is in kg. 1 MT = 1,000 kg.",
+    "rootCause": "Unit of measure only",
+    "owner": "System",
+    "smallestFix": "None. Converted automatically.",
+    "id": "F-INV-6130-1",
+    "invoiceId": "INV-6130"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price ₹19,800 differs from PO ₹18,500 and contract ₹18,200.",
+    "rootCause": "Price differs from both PO and contract",
+    "owner": "Supplier",
+    "smallestFix": "Supplier to correct the price to contract ₹18,200.",
+    "id": "F-INV-6131-1",
+    "invoiceId": "INV-6131"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price is 6.25% above PO. Contract C-23 sets ₹680.",
+    "rootCause": "PO not updated after contract change",
+    "owner": "Buyer",
+    "smallestFix": "Update PO 4500000823 line 1 to ₹680; the invoice then passes.",
+    "id": "F-INV-6132-1",
+    "invoiceId": "INV-6132"
+  },
+  {
+    "kind": "missing_receipt",
+    "verdict": "block",
+    "message": "No goods receipt is posted against PO 4500000829.",
+    "rootCause": "Goods receipt not posted",
+    "owner": "Warehouse",
+    "smallestFix": "Post the goods receipt for PO 4500000829, or confirm the goods have not arrived.",
+    "id": "F-INV-6133-1",
+    "invoiceId": "INV-6133"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price is 3.52% above PO. Contract C-22 sets ₹412.",
+    "rootCause": "PO not updated after contract change",
+    "owner": "Buyer",
+    "smallestFix": "Update PO 4500000822 line 1 to ₹412; the invoice then passes.",
+    "id": "F-INV-6134-1",
+    "invoiceId": "INV-6134"
+  },
+  {
+    "kind": "duplicate",
+    "verdict": "block",
+    "message": "Possible duplicate of paid INV-6104. Same vendor, PO, lines and amount.",
+    "rootCause": "Possible duplicate of a paid invoice",
+    "owner": "AP Clerk",
+    "smallestFix": "Confirm with the supplier. Release the block only if this is a new supply.",
+    "id": "F-INV-6135-1",
+    "invoiceId": "INV-6135"
+  },
+  {
+    "lineNo": 1,
+    "kind": "quantity",
+    "verdict": "flag",
+    "message": "Invoice quantity 3000 kg exceeds receipts of 2400 kg.",
+    "rootCause": "Goods receipt under-posted",
+    "owner": "Warehouse",
+    "smallestFix": "Post the remaining 600 kg receipt if the delivery note confirms it.",
+    "id": "F-INV-6136-1",
+    "invoiceId": "INV-6136"
+  },
+  {
+    "kind": "tax",
+    "verdict": "flag",
+    "message": "Invoice bills GST 12%; PO tax code is GST 18%.",
+    "rootCause": "Invoice tax rate differs from PO tax code",
+    "owner": "Supplier",
+    "smallestFix": "Supplier to reissue the invoice at 18%, or Buyer to confirm the PO tax code.",
+    "id": "F-INV-6137-1",
+    "invoiceId": "INV-6137"
+  },
+  {
+    "lineNo": 1,
+    "kind": "price",
+    "verdict": "flag",
+    "message": "Price is 5.65% above PO. Contract C-31 sets ₹1,310.",
+    "rootCause": "PO not updated after contract change",
+    "owner": "Buyer",
+    "smallestFix": "Update PO 4500000821 line 1 to ₹1,310; the invoice then passes.",
+    "id": "F-INV-6140-1",
+    "invoiceId": "INV-6140"
+  },
+  {
+    "kind": "missing_receipt",
+    "verdict": "block",
+    "message": "No goods receipt is posted against PO 4500000828.",
+    "rootCause": "Goods receipt not posted",
+    "owner": "Warehouse",
+    "smallestFix": "Post the goods receipt for PO 4500000828, or confirm the goods have not arrived.",
+    "id": "F-INV-6141-1",
+    "invoiceId": "INV-6141"
+  }
+]

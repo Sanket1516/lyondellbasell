@@ -1,0 +1,283 @@
+{
+  "kind": "image",
+  "fileName": "INV-7785.jpg",
+  "pages": [
+    {
+      "w": 595.28,
+      "h": 841.89
+    }
+  ],
+  "vendorName": {
+    "value": "Malabar Lab Instruments",
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.06551538771670475,
+      "y": 0.045141289242062475,
+      "w": 0.36125520763338265,
+      "h": 0.02651177707301429
+    },
+    "raw": "Malabar Lab Instruments"
+  },
+  "vendorGstin": {
+    "value": "32FICTM1005E1Z0",
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.12159354345090471,
+      "y": 0.09159510149782032,
+      "w": 0.12352724004593713,
+      "h": 0.01251945028447897
+    },
+    "raw": "32FICTM1005E1Z0"
+  },
+  "invoiceNumber": {
+    "value": "INV-7785",
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.2167047439860234,
+      "y": 0.130397082754279,
+      "w": 0.07297406262599113,
+      "h": 0.014728765040563495
+    },
+    "raw": "INV-7785"
+  },
+  "invoiceDate": {
+    "value": "2026-11-09",
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.2167047439860234,
+      "y": 0.15177754813574215,
+      "w": 0.08742104555839271,
+      "h": 0.014728765040563495
+    },
+    "raw": "09/11/2026"
+  },
+  "poNumber": {
+    "value": "4500001244",
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.2167047439860234,
+      "y": 0.1731580135172053,
+      "w": 0.09676118801236396,
+      "h": 0.014728765040563495
+    },
+    "raw": "4500001244"
+  },
+  "lines": [
+    {
+      "lineNo": 1,
+      "itemCode": {
+        "value": null,
+        "confidence": "low"
+      },
+      "description": {
+        "value": "pH probe, glass electrode",
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.11591183980647762,
+          "y": 0.26937010773378944,
+          "w": 0.1945135062491601,
+          "h": 0.014728765040563495
+        },
+        "raw": "pH probe, glass electrode"
+      },
+      "qty": {
+        "value": 6,
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.5735788200510684,
+          "y": 0.26937010773378944,
+          "w": 0.012699905926622767,
+          "h": 0.014728765040563495
+        },
+        "raw": "6"
+      },
+      "unit": {
+        "value": "nos",
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.6030775433409489,
+          "y": 0.26937010773378944,
+          "w": 0.030439457062222824,
+          "h": 0.014728765040563495
+        },
+        "raw": "nos"
+      },
+      "unitPrice": {
+        "value": 7250,
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.7224835371589841,
+          "y": 0.26937010773378944,
+          "w": 0.06874076065045022,
+          "h": 0.014728765040563495
+        },
+        "raw": "7,250.00"
+      },
+      "amount": {
+        "value": 43500,
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.8559333422927026,
+          "y": 0.26937010773378944,
+          "w": 0.07808090310442146,
+          "h": 0.014728765040563495
+        },
+        "raw": "43,500.00"
+      }
+    },
+    {
+      "lineNo": 2,
+      "itemCode": {
+        "value": null,
+        "confidence": "low"
+      },
+      "description": {
+        "value": "Buffer solution set pH 4/7/10",
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.11591183980647762,
+          "y": 0.2978773949090736,
+          "w": 0.21482327644133858,
+          "h": 0.014728765040563495
+        },
+        "raw": "Buffer solution set pH 4/7/10"
+      },
+      "qty": {
+        "value": 20,
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.5642386775970972,
+          "y": 0.2978773949090736,
+          "w": 0.022040048380594007,
+          "h": 0.014728765040563495
+        },
+        "raw": "20"
+      },
+      "unit": {
+        "value": "sets",
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.6030775433409489,
+          "y": 0.2978773949090736,
+          "w": 0.03416879451686601,
+          "h": 0.014728765040563495
+        },
+        "raw": "sets"
+      },
+      "unitPrice": {
+        "value": 640,
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.736493750839941,
+          "y": 0.2978773949090736,
+          "w": 0.054730546969493345,
+          "h": 0.014728765040563495
+        },
+        "raw": "640.00"
+      },
+      "amount": {
+        "value": 12800,
+        "confidence": "medium",
+        "bbox": {
+          "page": 0,
+          "x": 0.8559333422927026,
+          "y": 0.2978773949090736,
+          "w": 0.07808090310442146,
+          "h": 0.014728765040563495
+        },
+        "raw": "12,800.00"
+      }
+    }
+  ],
+  "subtotal": {
+    "value": 56300,
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.8559333422927026,
+      "y": 0.34538954020121393,
+      "w": 0.07808090310442146,
+      "h": 0.014728765040563495
+    }
+  },
+  "taxRatePct": {
+    "value": 12,
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.6198763607042065,
+      "y": 0.36558220195037355,
+      "w": 0.08085270796935895,
+      "h": 0.014728765040563474
+    }
+  },
+  "taxAmount": {
+    "value": 6756,
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.865273484746674,
+      "y": 0.36558220195037355,
+      "w": 0.0687407606504502,
+      "h": 0.014728765040563474
+    }
+  },
+  "total": {
+    "value": 63056,
+    "confidence": "medium",
+    "bbox": {
+      "page": 0,
+      "x": 0.8484612283295256,
+      "y": 0.3855111712931618,
+      "w": 0.08555301706759844,
+      "h": 0.016201641544619845
+    }
+  },
+  "checks": [
+    {
+      "id": "line-1",
+      "label": "Line 1: quantity x rate = amount",
+      "ok": true,
+      "detail": "Matches."
+    },
+    {
+      "id": "line-2",
+      "label": "Line 2: quantity x rate = amount",
+      "ok": true,
+      "detail": "Matches."
+    },
+    {
+      "id": "sum",
+      "label": "Line amounts add up to the subtotal",
+      "ok": true,
+      "detail": "Matches."
+    },
+    {
+      "id": "tax",
+      "label": "Tax rate x subtotal = tax",
+      "ok": true,
+      "detail": "Matches."
+    },
+    {
+      "id": "total",
+      "label": "Subtotal + tax = total",
+      "ok": true,
+      "detail": "Matches."
+    }
+  ],
+  "notes": []
+}

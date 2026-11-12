@@ -1,0 +1,30 @@
+{
+  "file": "INV-7785.jpg",
+  "purpose": "Scanned image; GST 12% billed against PO tax code 18%",
+  "expectedVerdict": "flag",
+  "vendorName": "Malabar Lab Instruments",
+  "vendorGstin": "32FICTM1005E1Z0",
+  "invoiceNumber": "INV-7785",
+  "invoiceDate": "2026-11-09",
+  "poNumber": "4500001244",
+  "lines": [
+    {
+      "description": "pH probe, glass electrode",
+      "qty": 6,
+      "unit": "nos",
+      "unitPrice": 7250,
+      "amount": 43500
+    },
+    {
+      "description": "Buffer solution set pH 4/7/10",
+      "qty": 20,
+      "unit": "sets",
+      "unitPrice": 640,
+      "amount": 12800
+    }
+  ],
+  "subtotal": 56300,
+  "taxRatePct": 12,
+  "taxAmount": 6756,
+  "total": 63056
+}

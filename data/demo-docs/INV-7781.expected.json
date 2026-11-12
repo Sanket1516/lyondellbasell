@@ -1,0 +1,40 @@
+{
+  "file": "INV-7781.pdf",
+  "purpose": "Golden: 3 lines, 3 different findings",
+  "expectedVerdict": "flag",
+  "vendorName": "Vihar Chem Supplies",
+  "vendorGstin": "27FICTV1001A1Z0",
+  "invoiceNumber": "INV-7781",
+  "invoiceDate": "2026-11-10",
+  "poNumber": "4500001234",
+  "lines": [
+    {
+      "itemCode": "AX-40",
+      "description": "Process additive AX-40",
+      "qty": 1000,
+      "unit": "kg",
+      "unitPrice": 412,
+      "amount": 412000
+    },
+    {
+      "itemCode": "C-12",
+      "description": "Catalyst carrier C-12",
+      "qty": 5,
+      "unit": "MT",
+      "unitPrice": 86000,
+      "amount": 430000
+    },
+    {
+      "itemCode": "DR-200",
+      "description": "HDPE drum 200 L",
+      "qty": 40,
+      "unit": "nos",
+      "unitPrice": 1450,
+      "amount": 58000
+    }
+  ],
+  "subtotal": 900000,
+  "taxRatePct": 18,
+  "taxAmount": 162000,
+  "total": 1062000
+}

@@ -1,0 +1,31 @@
+.viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #e9e7df;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px;
+}
+.page {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--line-strong);
+}
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.mark {
+  position: absolute;
+  border: 2px solid var(--accent);
+  background: rgba(15, 92, 99, 0.16);
+  border-radius: 2px;
+  pointer-events: none;
+}
+.status {
+  color: var(--ink-soft);
+  font-size: 13px;
+}

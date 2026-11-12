@@ -60,6 +60,8 @@ export interface Contract {
   vendorId: string;
   effectiveFrom: string;
   prices: { itemCode: string; unitPrice: number; uom: string }[];
+  /** Earlier prices, newest first. The current price is in `prices`. */
+  history?: { itemCode: string; unitPrice: number; uom: string; effectiveFrom: string }[];
 }
 
 export interface DeliveryNote {
@@ -112,7 +114,14 @@ export interface Invoice {
   total: number;
   status: InvoiceStatus;
   verdict?: Verdict;
+  /** Where the original document is served from, e.g. "demo:INV-7781.pdf" or "upload:<file>". */
   sourceFile?: string;
+  /** Vendor name and GSTIN as printed on the document. Set when the vendor is not in the master ("UNKNOWN"). */
+  printedVendor?: { name: string; gstin?: string };
+  /** Date the exception was closed or the invoice was paid. Used for ageing. */
+  resolvedOn?: string;
+  /** Username that submitted it (a supplier login may submit on behalf of the vendor on the document). */
+  submittedBy?: string;
 }
 
 export type FindingKind =

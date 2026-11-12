@@ -1,0 +1,38 @@
+[
+  {
+    "id": "V-1001",
+    "name": "Vihar Chem Supplies",
+    "gstin": "27FICTV1001A1Z0",
+    "active": true
+  },
+  {
+    "id": "V-1002",
+    "name": "Konkan Packaging Works",
+    "gstin": "27FICTK1002B1Z0",
+    "active": true
+  },
+  {
+    "id": "V-1003",
+    "name": "Sahyadri Industrial Gases",
+    "gstin": "27FICTS1003C1Z0",
+    "active": true
+  },
+  {
+    "id": "V-1004",
+    "name": "Deccan Valve & Fittings",
+    "gstin": "29FICTD1004D1Z0",
+    "active": true
+  },
+  {
+    "id": "V-1005",
+    "name": "Malabar Lab Instruments",
+    "gstin": "32FICTM1005E1Z0",
+    "active": true
+  },
+  {
+    "id": "V-1006",
+    "name": "Girnar Logistics",
+    "gstin": "24FICTG1006F1Z0",
+    "active": true
+  }
+]

@@ -1,0 +1,71 @@
+.uploadGrid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 20px; }
+@media (max-width: 900px) { .uploadGrid { grid-template-columns: 1fr; } }
+
+.drop {
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  padding: 28px 20px;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+}
+.dropOver { border-color: var(--accent); background: var(--accent-wash); }
+.dropTitle { font-weight: 600; }
+.dropHint { color: var(--ink-soft); margin-bottom: 10px; }
+.browse {
+  display: inline-flex; align-items: center; height: 32px; padding: 0 14px;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface);
+  font-weight: 500; cursor: pointer;
+}
+.browse:hover { background: var(--neutral-wash); }
+.browseOff { opacity: 0.55; pointer-events: none; }
+input:focus-visible + .browse { box-shadow: var(--focus); }
+
+.demoBox { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.demoBox > div { width: 100%; }
+.demoNote { color: var(--ink-soft); font-size: 12px; }
+
+.error { color: var(--bad); margin-top: 10px; font-weight: 500; }
+.doneText { margin-bottom: 12px; }
+.actions { display: flex; align-items: center; gap: 14px; margin-top: 4px; }
+
+.reviewHead { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.sub { color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
+.note { font-size: 13px; padding: 8px 12px; border: 1px solid var(--line-strong); border-left-width: 3px; background: var(--surface); border-radius: var(--radius); margin-bottom: 10px; }
+.noteFixture { border-color: var(--warn); background: var(--warn-wash); color: var(--warn-ink); font-weight: 500; }
+
+.form { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+.row { display: grid; grid-template-columns: 120px minmax(0, 1fr) 64px; gap: 10px; align-items: center; padding: 4px 0; border-radius: var(--radius); }
+.rowActive { background: var(--accent-wash); }
+.rowLabel { font-size: 12.5px; font-weight: 500; color: var(--ink-soft); padding-left: 4px; }
+.input {
+  font: inherit; height: 32px; padding: 0 8px; width: 100%;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink);
+}
+.inputCheck { border-color: var(--bad); border-style: dashed; }
+
+/* confidence: text label always present, colour is secondary */
+.conf { font-size: 11.5px; font-weight: 600; padding: 1px 6px; border-radius: var(--radius); border: 1px solid var(--line-strong); text-align: center; white-space: nowrap; }
+.conf_high { color: var(--neutral-ink); background: var(--neutral-wash); }
+.conf_medium { color: var(--warn-ink); background: var(--warn-wash); border-color: var(--warn); }
+.conf_low { color: var(--bad); background: var(--bad-wash); border-color: var(--bad); }
+.confEdited { color: var(--accent); background: var(--accent-wash); border-color: var(--accent); }
+
+.lineBlock { border: 1px solid var(--line); border-radius: var(--radius); margin: 0 0 10px; padding: 6px 10px 10px; min-width: 0; }
+.lineLegend { font-size: 12px; font-weight: 600; color: var(--ink-soft); padding: 0 6px; }
+.lineTop { display: grid; grid-template-columns: 92px minmax(0, 1fr) 64px; gap: 10px; align-items: end; margin-bottom: 8px; }
+.lineNums { display: grid; grid-template-columns: 1fr 70px 1.2fr 1.4fr; gap: 10px; }
+.lf { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.lfLabel { font-size: 11.5px; color: var(--ink-soft); font-weight: 500; }
+.cell {
+  font: inherit; font-size: 13px; width: 100%; height: 30px; padding: 0 8px;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); color: var(--ink);
+}
+.cellActive { border-color: var(--accent); background: var(--accent-wash); }
+.cellNum { text-align: right; }
+
+.checks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.checkMark { display: inline-block; min-width: 52px; font-size: 11.5px; font-weight: 600; color: var(--ok); }
+.checkFail { color: var(--ink); }
+.checkFail .checkMark { color: var(--bad); }
+.checkDetail { color: var(--ink-soft); }
