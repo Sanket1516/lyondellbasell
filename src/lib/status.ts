@@ -11,5 +11,7 @@ export const STATUS_VIEW: Record<InvoiceStatus, { kind: ChipKind; label: string 
   pending_approval: { kind: "pending", label: "Awaiting approval" },
   approved: { kind: "approve", label: "Approved" },
   blocked: { kind: "block", label: "On hold" },
+  sent_back: { kind: "pending", label: "Under review" },
+  rejected: { kind: "block", label: "Not approved" },
   paid: { kind: "paid", label: "Paid" },
 };

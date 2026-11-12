@@ -10,3 +10,11 @@ export async function requireRole(role: Role): Promise<User> {
   if (user.role !== role) redirect("/no-access");
   return user;
 }
+
+/** For screens shared by several roles, such as the audit trail. */
+export async function requireAnyRole(roles: Role[]): Promise<User> {
+  const user = await getSessionUser();
+  if (!user) redirect("/login");
+  if (!roles.includes(user.role)) redirect("/no-access");
+  return user;
+}

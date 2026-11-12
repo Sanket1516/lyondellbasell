@@ -1,24 +1,39 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Button, Panel, SplitView, StatusChip, Table, useToast } from "@/components/ui";
+import { Button, Panel, SplitView, StatusChip, Table, useToast, type ChipKind } from "@/components/ui";
 import { DocumentViewer } from "@/components/DocumentViewer";
 import { ENGINE_CONFIG } from "@/engine/config";
 import type { BBox, PageSize } from "@/lib/extract/types";
 import { fmtDate, fmtInr } from "@/lib/format";
 import { STATUS_VIEW } from "@/lib/status";
 import type { EvidenceRef, FindingKind, Invoice, InvoiceStatus, Verdict } from "@/lib/types";
-import { decideDuplicate, rerunMatch } from "../../actions";
+import { decideDuplicate, releaseAction, reopenAction, requestFixAction, rerunMatch, simulateErpAction } from "../../actions";
 import s from "./Review.module.css";
 
+export interface TaskView {
+  id: string; owner: string; status: "requested" | "done"; dueOn: string; resolution?: string;
+  /** "erp": the demo control can apply the fix. "supplier": waits for a corrected invoice. "none": the owner acts outside this system. */
+  simulate: "erp" | "supplier" | "none";
+}
 export interface FindingView {
   id: string; lineNo?: number; kind: FindingKind; kindLabel: string; verdict: Verdict; message: string; rootCause: string; owner: string;
   smallestFix: string; expected?: string; actual?: string; evidence: EvidenceRef[]; box: BBox | null;
+  task: TaskView | null; canRequest: boolean;
+}
+export interface FlowView {
+  /** Plain-language routing line, shown once the invoice is clean. */
+  route: string | null;
+  canRelease: boolean;
+  canReopen: boolean;
+  /** Reason a rejection or send-back was recorded. */
+  note: string | null;
+  approvedNote: string | null;
 }
 export interface LineView { lineNo: number; itemCode?: string; description: string; qty: number; uom: string; unitPrice: number; amount: number; verdict: Verdict }
 export interface ReviewProps {
   id: string; vendor: string; poId: string; invoiceDate: string; receivedOn: string; subtotal: number; tax: number; total: number;
-  status: InvoiceStatus; verdict: Verdict | null; summary: string; lines: LineView[]; findings: FindingView[];
+  statusView: { kind: ChipKind; label: string }; verdict: Verdict | null; summary: string; lines: LineView[]; findings: FindingView[]; flow: FlowView;
   doc: { src: string; kind: "pdf" | "image"; pages: PageSize[]; fixture: boolean } | null;
   hasSource: boolean;
   duplicate: { matched: { id: string; invoiceDate: string; poId: string; total: number; status: InvoiceStatus; resolvedOn?: string; lines: { description: string; qty: number; uom: string; unitPrice: number }[] }; fields: string } | null;
@@ -35,9 +50,17 @@ export function ReviewView(p: ReviewProps) {
   const [busy, setBusy] = useState(false);
   const activeFinding = p.findings.find((f) => f.id === active);
   const highlight = activeFinding?.box ?? null;
-  const st = STATUS_VIEW[p.status];
+  const st = p.statusView;
 
   const toggle = (id: string) => setOpen((cur) => { const n = new Set(cur); if (n.has(id)) n.delete(id); else n.add(id); return n; });
+
+  async function run<T extends { ok: boolean }>(call: () => Promise<T>, done: (r: T & { ok: true }) => string) {
+    setBusy(true);
+    const r = await call().catch(() => ({ ok: false, error: "That did not work. Try again." }) as unknown as T);
+    setBusy(false);
+    toast.show(r.ok ? done(r as T & { ok: true }) : (r as unknown as { error: string }).error);
+    router.refresh();
+  }
 
   async function rerun() {
     setBusy(true);
@@ -70,6 +93,8 @@ export function ReviewView(p: ReviewProps) {
       <p className={s.assump}>
         Rules used (assumptions): price within ±{ENGINE_CONFIG.pricePct}% of the PO, quantity up to {ENGINE_CONFIG.qtyPct}% above cumulative receipts, tax rate equal to the PO tax code.
       </p>
+
+      <FlowPanel p={p} busy={busy} run={run} />
 
       <SplitView
         left={
@@ -136,6 +161,7 @@ export function ReviewView(p: ReviewProps) {
                         )}
                       </>
                     )}
+                    <TaskLine f={f} invoiceId={p.id} busy={busy} run={run} />
                   </li>
                 ))}
               </ol>
@@ -219,5 +245,61 @@ function DuplicateView({ id, lines, total, invoiceDate, poId, dup, decision, onD
         )}
       </Panel>
     </div>
+  );
+}
+
+type Run = <T extends { ok: boolean }>(call: () => Promise<T>, done: (r: T & { ok: true }) => string) => Promise<void>;
+
+function TaskLine({ f, invoiceId, busy, run }: { f: FindingView; invoiceId: string; busy: boolean; run: Run }) {
+  const k = f.task;
+  if (!k && !f.canRequest) return null;
+  if (!k) {
+    return (
+      <div className={s.taskRow}>
+        <Button type="button" disabled={busy} onClick={() => run(() => requestFixAction(invoiceId, f.id), () => `Fix requested from ${f.owner}`)}>Request fix from {f.owner}</Button>
+      </div>
+    );
+  }
+  return (
+    <div className={s.taskRow}>
+      <p className={s.taskMeta}>
+        <span className="mono">{k.id}</span> · {k.owner} · due {fmtDate(k.dueOn)} · <strong>{k.status === "done" ? "Done" : "Requested"}</strong>
+        {k.status === "done" && k.resolution ? `. ${k.resolution}` : ""}
+      </p>
+      {k.status === "requested" && k.simulate === "erp" && (
+        <Button type="button" disabled={busy} onClick={() => run(() => simulateErpAction(k.id), (r) => `${r.summary} ${r.verdict === "approve" ? "The invoice now matches." : "Re-matched: still has open findings."}`)}>
+          Demo: simulate ERP update by {k.owner}
+        </Button>
+      )}
+      {k.status === "requested" && k.simulate === "supplier" && <p className={s.taskNote}>Waiting for supplier. They see exactly what to correct; their corrected invoice closes this task.</p>}
+      {k.status === "requested" && k.simulate === "none" && <p className={s.taskNote}>No simulated update exists for this fix. {k.owner} acts outside this system.</p>}
+    </div>
+  );
+}
+
+function FlowPanel({ p, busy, run }: { p: ReviewProps; busy: boolean; run: Run }) {
+  const [reason, setReason] = useState("");
+  const f = p.flow;
+  if (!f.route && !f.canReopen && !f.approvedNote && !f.note) return null;
+  return (
+    <section className={s.flow} aria-label="Next step">
+      {f.approvedNote && <p className={s.flowText}>{f.approvedNote}</p>}
+      {f.note && <p className={s.flowText}>{f.note}</p>}
+      {f.route && (
+        <div className={s.flowRow}>
+          <p className={s.flowText}>{f.route}</p>
+          {f.canRelease && <Button variant="primary" disabled={busy} onClick={() => run(() => releaseAction(p.id), () => "Released. Marked ready for payment.")}>Release</Button>}
+        </div>
+      )}
+      {f.canReopen && (
+        <form className={s.decide} onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor="reopen-reason" className={s.decideLabel}>Reason for returning it to approval (required)</label>
+          <textarea id="reopen-reason" className={s.textarea} rows={2} value={reason} onChange={(e) => setReason(e.target.value)} placeholder="For example: price evidence attached, buyer confirmed" />
+          <div className={s.decideBtns}>
+            <Button type="button" disabled={busy} onClick={() => run(() => reopenAction(p.id, reason), () => "Returned to the matching and approval queue")}>Return to approval</Button>
+          </div>
+        </form>
+      )}
+    </section>
   );
 }

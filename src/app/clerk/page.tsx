@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { DEMO_TODAY } from "@/lib/constants";
 import { getState } from "@/lib/store";
+import { workflowView } from "@/lib/workflow-status";
 import type { Finding, Verdict } from "@/lib/types";
 import { QueueTable, type QueueRow } from "./QueueTable";
 import s from "./Clerk.module.css";
@@ -28,7 +29,7 @@ export default async function ClerkHome({ searchParams }: { searchParams: Promis
       return {
         id: i.id, vendor: nameOf(i.vendorId, i.printedVendor?.name), total: i.total, verdict: i.verdict,
         cause: t?.rootCause ?? (i.verdict ? "No issues" : "Waiting to be matched"), owner: t?.owner ?? "None",
-        ageDays: days(i.receivedOn, DEMO_TODAY), receivedOn: i.receivedOn, status: i.status,
+        ageDays: days(i.receivedOn, DEMO_TODAY), receivedOn: i.receivedOn, status: workflowView(i, state.tasks.filter((x) => x.invoiceId === i.id)),
       };
     })
     .sort((a, b) => b.ageDays - a.ageDays || (a.id < b.id ? -1 : 1));

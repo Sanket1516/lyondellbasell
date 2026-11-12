@@ -19,6 +19,8 @@ export interface Vendor {
   name: string;
   gstin: string;
   active: boolean;
+  /** Payment terms in days from the invoice date. Absent means the default (45 days, an assumption). */
+  paymentTermsDays?: number;
 }
 
 export interface PoLine {
@@ -88,6 +90,8 @@ export type InvoiceStatus =
   | "pending_approval"
   | "approved"
   | "blocked"
+  | "sent_back"
+  | "rejected"
   | "paid";
 
 export interface InvoiceLine {
@@ -124,6 +128,12 @@ export interface Invoice {
   duplicateDecision?: { decision: "duplicate" | "not_duplicate"; matchedInvoiceId: string; by: string; reason: string; at: string };
   /** Username that submitted it (a supplier login may submit on behalf of the vendor on the document). */
   submittedBy?: string;
+  /** Usernames that edited, released, raised tasks on or decided a duplicate for this invoice. Used for segregation of duties. */
+  touchedBy?: string[];
+  /** Approvers who rejected it in the current cycle. A resubmission by the supplier starts a new cycle. */
+  rejectedBy?: string[];
+  /** The latest approval-side decision, with the reason when one was required. */
+  decision?: { outcome: "released" | "approved" | "rejected" | "sent_back"; by: string; level?: ApproverLevel; at: string; reason?: string };
 }
 
 export type FindingKind =
@@ -164,26 +174,47 @@ export interface Finding {
   matchedInvoiceId?: string;
 }
 
-export type TaskStatus = "open" | "done";
+export type TaskStatus = "requested" | "done";
+
+/** What the "simulated ERP update" does for a task. Absent: no simulation exists for that fix. */
+export type ErpFix =
+  | { type: "po_price"; poId: string; poLineNo: number; itemCode: string; from: number; to: number }
+  | { type: "post_receipt"; poId: string; poLineNo: number; itemCode: string; qty: number; uom: string }
+  | { type: "supplier" };
 
 export interface Task {
   id: string;
   invoiceId: string;
+  /** Finding ids are regenerated on every match, so the finding is also identified by kind, line and root cause. */
   findingId?: string;
+  kind: FindingKind;
+  lineNo?: number;
+  rootCause: string;
   owner: string;
   title: string;
   status: TaskStatus;
+  dueOn: string;
   createdAt: string;
+  createdBy: string;
   completedAt?: string;
+  completedBy?: string;
+  fix?: ErpFix;
+  /** What was done, in one sentence. */
+  resolution?: string;
 }
 
 export interface AuditEvent {
   seq: number;
   at: string; // ISO timestamp
   actor: string; // username or "system"
+  role?: string; // supplier, clerk, approver or system
   action: string;
   invoiceId?: string;
   detail: string;
+  /** Short summaries of the state before and after the change, when there was one. */
+  before?: string;
+  after?: string;
+  reason?: string;
   prevHash: string;
   hash: string;
 }

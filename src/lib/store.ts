@@ -1,7 +1,7 @@
 import "server-only";
 import fs from "node:fs";
 import path from "node:path";
-import type { AppState } from "./types";
+import type { AppState, AuditEvent } from "./types";
 
 const ROOT = process.cwd();
 export const STATE_FILE = path.join(ROOT, "data", "state.json");
@@ -63,4 +63,10 @@ export function resetState(): AppState {
   g.__plantXState = loadSeed();
   persist(g.__plantXState);
   return g.__plantXState;
+}
+
+/** The audit records as saved on disk, for "Verify chain". Reading the file (not memory) is what catches an edited record. */
+export function readSavedAuditEvents(): AuditEvent[] {
+  if (!fs.existsSync(STATE_FILE)) return getState().auditEvents;
+  return (JSON.parse(fs.readFileSync(STATE_FILE, "utf8")) as AppState).auditEvents;
 }

@@ -46,6 +46,15 @@ describe("seed dataset", () => {
     expect(po.lines.map((l) => [l.qty, l.unitPrice])).toEqual([[1000, 398], [5000, 86], [40, 1450]]);
   });
 
+  it("has a clean, matched invoice above Rs 15,00,000 so the top approval band can be demonstrated", () => {
+    const big = invoices.find((i) => i.id === "INV-6150")!;
+    expect(big).toMatchObject({ vendorId: "V-1006", status: "pending_approval", verdict: "approve", total: 1964700 });
+    expect(big.total).toBeGreaterThan(1500000);
+    const po = pos.find((p) => p.id === big.poId)!;
+    expect(po.lines[0]).toMatchObject({ qty: 90, unitPrice: 18500 });
+    expect(findings.filter((f) => f.invoiceId === "INV-6150")).toHaveLength(0);
+  });
+
   it("keeps every reference valid", () => {
     const ids = new Set(pos.map((p) => p.id));
     for (const g of read<{ poId: string }[]>("goodsReceipts")) expect(ids.has(g.poId)).toBe(true);

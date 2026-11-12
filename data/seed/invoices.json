@@ -1281,5 +1281,30 @@
     "total": 59000,
     "status": "pending_approval",
     "verdict": "approve"
+  },
+  {
+    "id": "INV-6150",
+    "vendorId": "V-1006",
+    "poId": "4500000990",
+    "invoiceDate": "2026-11-10",
+    "receivedOn": "2026-11-11",
+    "currency": "INR",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 90,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxRatePct": 18,
+        "amount": 1665000
+      }
+    ],
+    "subtotal": 1665000,
+    "tax": 299700,
+    "total": 1964700,
+    "status": "pending_approval",
+    "verdict": "approve"
   }
 ]

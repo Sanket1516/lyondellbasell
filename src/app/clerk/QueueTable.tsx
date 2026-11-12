@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
-import { Badge, EmptyState, StatusChip, Table } from "@/components/ui";
+import { Badge, EmptyState, StatusChip, Table, type ChipKind } from "@/components/ui";
 import { fmtDate, fmtInr } from "@/lib/format";
-import { STATUS_VIEW } from "@/lib/status";
-import type { InvoiceStatus, Verdict } from "@/lib/types";
+import type { Verdict } from "@/lib/types";
 
 export interface QueueRow {
   id: string;
@@ -14,7 +13,7 @@ export interface QueueRow {
   owner: string;
   ageDays: number;
   receivedOn: string;
-  status: InvoiceStatus;
+  status: { kind: ChipKind; label: string };
 }
 
 export function QueueTable({ rows }: { rows: QueueRow[] }) {
@@ -32,7 +31,7 @@ export function QueueTable({ rows }: { rows: QueueRow[] }) {
         { header: "Owner", render: (r) => r.owner },
         { header: "Received", render: (r) => fmtDate(r.receivedOn) },
         { header: "Age", render: (r) => <Badge days={r.ageDays} /> },
-        { header: "Status", render: (r) => <StatusChip kind={STATUS_VIEW[r.status].kind} label={STATUS_VIEW[r.status].label} /> },
+        { header: "Status", render: (r) => <StatusChip kind={r.status.kind} label={r.status.label} /> },
       ]}
     />
   );

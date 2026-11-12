@@ -73,7 +73,7 @@ describe("matchInState", () => {
     const inv = state.invoices.find((i) => i.id === "INV-7781")!;
     expect(inv).toMatchObject({ verdict: "approve", status: "pending_approval" });
     expect(state.findings.filter((f) => f.invoiceId === "INV-7781").map((f) => f.kind)).toEqual(["uom"]);
-    expect(state.auditEvents.map((e) => e.action)).toEqual(["match_run", "rematch"]);
+    expect(state.auditEvents.map((e) => e.action)).toEqual(["match_run", "rematch", "routed"]);
   });
 
   it("never moves an approved or paid invoice backwards", () => {

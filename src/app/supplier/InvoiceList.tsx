@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { EmptyState, StatusChip, Table } from "@/components/ui";
 import { fmtDate, fmtInr } from "@/lib/format";
 import { STATUS_VIEW } from "@/lib/status";
@@ -23,7 +24,7 @@ export function InvoiceList({ rows, showVendor }: { rows: InvoiceRow[]; showVend
       rows={rows}
       rowKey={(r) => r.id}
       columns={[
-        { header: "Invoice", render: (r) => <span className="mono">{r.id}</span> },
+        { header: "Invoice", render: (r) => <Link href={`/supplier/invoices/${encodeURIComponent(r.id)}`} className="mono" style={{ whiteSpace: "nowrap" }}>{r.id}</Link> },
         ...(showVendor ? [{ header: "Vendor", render: (r: InvoiceRow) => r.vendor }] : []),
         { header: "Invoice date", render: (r) => fmtDate(r.invoiceDate) },
         { header: "Submitted", render: (r) => fmtDate(r.receivedOn) },

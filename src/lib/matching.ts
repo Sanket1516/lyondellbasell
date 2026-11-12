@@ -3,12 +3,13 @@
 import { matchInvoice } from "../engine/match";
 import { appendAudit } from "./audit";
 import { DEMO_TODAY } from "./constants";
+import { bandFor, routeText } from "./routing";
 import { updateState } from "./store";
 import type { AppState, Finding, InvoiceStatus, Verdict } from "./types";
 
 /** Status an invoice takes after matching. Approved and paid invoices are never moved backwards. */
 export const STATUS_AFTER_MATCH: Record<Verdict, InvoiceStatus> = {
-  approve: "pending_approval", // clean: waiting for release or approval (T4)
+  approve: "pending_approval", // clean: waiting for the clerk's release or an approver, by amount (see routing.ts)
   flag: "pending_owner",
   block: "blocked",
 };
@@ -27,6 +28,7 @@ export function matchInState(s: AppState, invoiceId: string, actor = "system"): 
 
   s.findings = s.findings.filter((f) => f.invoiceId !== invoiceId).concat(result.findings);
   inv.verdict = result.verdict;
+  const wasStatus = inv.status;
   if (MOVABLE.includes(inv.status)) inv.status = STATUS_AFTER_MATCH[result.verdict];
 
   if (changed) {
@@ -35,6 +37,14 @@ export function matchInState(s: AppState, invoiceId: string, actor = "system"): 
       action: first ? "match_run" : "rematch",
       invoiceId,
       detail: `${first ? "Matched" : "Re-matched"} against PO, receipts, contract and delivery note: ${result.summary}`,
+    });
+  }
+  // A clean invoice is routed by amount; say who has to act, once, when it first becomes clean.
+  if (inv.status === "pending_approval" && wasStatus !== "pending_approval") {
+    const band = bandFor(inv.total);
+    appendAudit(s, {
+      actor, action: "routed", invoiceId, detail: `Clean match. ${routeText(inv.total)}.`,
+      before: "Not routed", after: band === "clerk" ? "Awaiting clerk release" : `Awaiting Approver ${band}`,
     });
   }
   return { verdict: result.verdict, changed };
@@ -58,9 +68,11 @@ export function applyDuplicateDecision(
   const why = reason.trim();
   if (why.length < 8) return { ok: false, error: "Give a reason of at least a few words. It is saved in the audit trail." };
   inv.duplicateDecision = { decision, matchedInvoiceId: dup.matchedInvoiceId, by: actor, reason: why.slice(0, 400), at };
+  inv.touchedBy = [...new Set([...(inv.touchedBy ?? []), actor])];
   appendAudit(s, {
     actor, action: decision === "duplicate" ? "duplicate_confirmed" : "duplicate_dismissed", invoiceId,
     detail: `${decision === "duplicate" ? "Confirmed duplicate of" : "Not a duplicate of"} ${dup.matchedInvoiceId}. Reason: ${why.slice(0, 400)}`,
+    before: "Possible duplicate", after: decision === "duplicate" ? "Confirmed duplicate" : "Not a duplicate", reason: why.slice(0, 400),
   }, at);
   matchInState(s, invoiceId, actor);
   return { ok: true };

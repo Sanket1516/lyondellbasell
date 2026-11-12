@@ -1,10 +1,13 @@
 "use server";
 import { resolveSource } from "@/lib/demo-docs";
 import { DEMO_TODAY } from "@/lib/constants";
+import { fmtRupees } from "@/lib/format";
+import { appendAudit } from "@/lib/audit";
 import { matchInState } from "@/lib/matching";
 import { getSessionUser } from "@/lib/session";
 import { getState, updateState } from "@/lib/store";
 import { UNKNOWN_VENDOR } from "@/lib/status";
+import { closeSupplierTasks } from "@/lib/workflow";
 import type { Invoice, InvoiceLine } from "@/lib/types";
 
 export interface SubmitLine { itemCode?: string; description: string; qty: number; unit: string; unitPrice: number; amount: number }
@@ -48,8 +51,10 @@ export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
 
   return updateState<SubmitResult>((s) => {
     const existing = s.invoices.find((i) => i.id === id);
-    // A supplier may correct their own submission until the workflow has started on it (tasks, approval, payment).
-    const replaceable = existing && existing.submittedBy && ["received", "matched", "pending_owner", "pending_approval", "blocked"].includes(existing.status) && !s.tasks.some((t) => t.invoiceId === id);
+    // A supplier may correct their own submission until internal work has started on it (an owner task, approval or payment).
+    // Tasks waiting on the supplier do not count: sending the corrected invoice is how they get done.
+    const replaceable = existing && existing.submittedBy && ["received", "matched", "pending_owner", "pending_approval", "blocked"].includes(existing.status)
+      && !s.tasks.some((t) => t.invoiceId === id && (t.status === "done" || t.owner !== "Supplier"));
     if (existing && !replaceable) return { ok: false, error: `Invoice ${id} has already been submitted and is ${existing.status.replace("_", " ")}.` };
 
     const gstin = text(p.vendorGstin, 15).toUpperCase();
@@ -85,6 +90,12 @@ export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
     if (existing) s.invoices[s.invoices.indexOf(existing)] = inv;
     else s.invoices.push(inv);
     s.findings = s.findings.filter((f) => f.invoiceId !== id);
+    appendAudit(s, {
+      actor: user.username, action: existing ? "invoice_resubmitted" : "invoice_submitted", invoiceId: id,
+      detail: `${existing ? "Corrected invoice" : "Invoice"} submitted${source ? ` from ${source.replace(/^(demo|upload):/, "")}` : ""}, total ${fmtRupees(p.total)}.`,
+      before: existing ? `${existing.status.replace("_", " ")}` : "Not on file", after: "Submitted",
+    });
+    if (existing) closeSupplierTasks(s, id, user.username);
     matchInState(s, id, user.username);
     return { ok: true, invoiceId: id };
   });

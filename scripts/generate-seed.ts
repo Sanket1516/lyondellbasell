@@ -287,11 +287,34 @@ const d6120 = DEMO_INVOICES.find((d) => d.invoiceNo === "INV-6120R")!;
   });
 }
 
-// Number the history in date order, skipping 6120 (reserved).
+// A fixed anchor for the top approval band: a clean, matched freight invoice above Rs 15,00,000 (needs Approver L2).
+// Built without the random generator, so adding it does not move any other seeded record.
+{
+  const lines: InvoiceLine[] = [{ lineNo: 1, itemCode: "FRT-20", description: catalogItem("V-1006", "FRT-20").description, qty: 90, uom: "trips", unitPrice: 18500, taxRatePct: 18, amount: r2(90 * 18500) }];
+  const t = computeTotals(lines, 18);
+  assertTotals("INV-6150", lines, 18, t);
+  assert.equal(t.total, 1964700, "INV-6150 must total Rs 19,64,700 (above the Rs 15,00,000 L1 limit)");
+  const po: PurchaseOrder = {
+    id: "4500000990", vendorId: "V-1006", buyer: BUYERS[0], issuedOn: "2026-10-20", contractId: "C-33",
+    lines: [{ lineNo: 1, itemCode: "FRT-20", description: lines[0].description, qty: 90, uom: "trips", unitPrice: 18500, taxCode: "GST18", taxRatePct: 18 }],
+  };
+  purchaseOrders.push(po);
+  goodsReceipts.push({ id: "5000008990", poId: po.id, receivedOn: "2026-11-08", receivedBy: RECEIVERS[0], lines: [{ lineNo: 1, qtyReceived: 90, uom: "trips" }] });
+  drafts.push({
+    spec: S("clean_pending", "V-1006", 1),
+    build: {
+      po,
+      inv: { id: "INV-6150", vendorId: "V-1006", poId: po.id, invoiceDate: "2026-11-10", receivedOn: "2026-11-11", currency: "INR", lines, subtotal: t.subtotal, tax: t.tax, total: t.total, status: "pending_approval", verdict: "approve" },
+    },
+    fin: [],
+  });
+}
+
+// Number the history in date order, skipping the fixed anchors (INV-6120, INV-6150).
 drafts.sort((a, b) => (a.build.inv.receivedOn < b.build.inv.receivedOn ? -1 : a.build.inv.receivedOn > b.build.inv.receivedOn ? 1 : 0));
 let seq = 6100;
 for (const d of drafts) {
-  if (d.build.inv.id === "INV-6120") continue;
+  if (d.build.inv.id) continue; // fixed anchors keep their numbers
   seq++;
   if (seq === 6120) seq++;
   d.build.inv.id = `INV-${seq}`;

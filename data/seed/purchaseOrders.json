@@ -960,6 +960,25 @@
     ]
   },
   {
+    "id": "4500000990",
+    "vendorId": "V-1006",
+    "buyer": "Anand Deshpande",
+    "issuedOn": "2026-10-20",
+    "contractId": "C-33",
+    "lines": [
+      {
+        "lineNo": 1,
+        "itemCode": "FRT-20",
+        "description": "Road freight Taloja to Nhava Sheva, 20 ft container",
+        "qty": 90,
+        "uom": "trips",
+        "unitPrice": 18500,
+        "taxCode": "GST18",
+        "taxRatePct": 18
+      }
+    ]
+  },
+  {
     "id": "4500001234",
     "vendorId": "V-1001",
     "buyer": "Anand Deshpande",

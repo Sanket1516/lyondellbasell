@@ -576,6 +576,19 @@
     ]
   },
   {
+    "id": "5000008990",
+    "poId": "4500000990",
+    "receivedOn": "2026-11-08",
+    "receivedBy": "Sunil Patil (Stores)",
+    "lines": [
+      {
+        "lineNo": 1,
+        "qtyReceived": 90,
+        "uom": "trips"
+      }
+    ]
+  },
+  {
     "id": "5000009001",
     "poId": "4500001234",
     "receivedOn": "2026-11-02",

@@ -54,7 +54,7 @@ const poEv = (po: PurchaseOrder, l: PoLine) =>
 
 // ---------------------------------------------------------------- unit conversion
 /** Multiply an amount in `from` by this to get `to`, or undefined if no rule covers it. */
-function uomFactor(rules: UomRule[], itemCode: string, from: string, to: string): { factor: number; rule?: UomRule } | undefined {
+export function uomFactor(rules: UomRule[], itemCode: string, from: string, to: string): { factor: number; rule?: UomRule } | undefined {
   if (from.toLowerCase() === to.toLowerCase()) return { factor: 1 };
   const fwd = rules.find((r) => r.itemCode === itemCode && r.fromUom.toLowerCase() === from.toLowerCase() && r.toUom.toLowerCase() === to.toLowerCase());
   if (fwd) return { factor: fwd.factor, rule: fwd };
