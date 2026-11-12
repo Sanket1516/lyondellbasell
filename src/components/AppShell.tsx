@@ -7,9 +7,9 @@ import NavLinks from "./NavLinks";
 import s from "./AppShell.module.css";
 
 const NAV: Record<User["role"], { href: string; label: string }[]> = {
-  supplier: [{ href: "/supplier", label: "My invoices" }],
-  clerk: [{ href: "/clerk", label: "Invoice queue" }, { href: "/dashboard", label: "Exceptions dashboard" }, { href: "/audit", label: "Audit trail" }, { href: "/audit/report", label: "Controls report" }],
-  approver: [{ href: "/approver", label: "Approvals" }, { href: "/dashboard", label: "Exceptions dashboard" }, { href: "/audit", label: "Audit trail" }, { href: "/audit/report", label: "Controls report" }],
+  supplier: [{ href: "/supplier", label: "My invoices" }, { href: "/supplier/passport", label: "Payment readiness" }],
+  clerk: [{ href: "/clerk", label: "Invoice queue" }, { href: "/plantpay", label: "PlantPay engine" }, { href: "/plantpay/journey", label: "Golden Journey" }, { href: "/plantpay/predictions", label: "Predictions" }, { href: "/plantpay/suppliers", label: "Supplier scores" }, { href: "/plantpay/process", label: "Process twin" }, { href: "/dashboard", label: "Exceptions dashboard" }, { href: "/audit", label: "Audit trail" }, { href: "/audit/report", label: "Controls report" }, { href: "/foundation", label: "Match foundation" }],
+  approver: [{ href: "/approver", label: "Approvals" }, { href: "/plantpay", label: "PlantPay engine" }, { href: "/plantpay/journey", label: "Golden Journey" }, { href: "/plantpay/predictions", label: "Predictions" }, { href: "/plantpay/suppliers", label: "Supplier scores" }, { href: "/plantpay/process", label: "Process twin" }, { href: "/dashboard", label: "Exceptions dashboard" }, { href: "/audit", label: "Audit trail" }, { href: "/audit/report", label: "Controls report" }, { href: "/foundation", label: "Match foundation" }],
 };
 
 export default function AppShell({ user, children }: { user: User; children: ReactNode }) {

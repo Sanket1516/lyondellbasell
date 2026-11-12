@@ -1,0 +1,1831 @@
+{
+ "version": 1,
+ "mode": "fallback",
+ "builtAt": "2026-11-12T18:04:25.631Z",
+ "today": "2026-11-12",
+ "hero": "INV-7781",
+ "heroSupplier": "Vihar Chem Supplies",
+ "steps": {
+  "1": {
+   "counts": {
+    "total": 650,
+    "demo": 25,
+    "pass": 527,
+    "review": 98,
+    "block": 25,
+    "incomplete": 0
+   },
+   "sources": [
+    {
+     "id": "procurement",
+     "label": "Procurement DB",
+     "holds": "Purchase orders, contracts, agreed prices",
+     "status": "up",
+     "records": 547,
+     "lastSync": "2026-11-12T09:00:00.000Z",
+     "contributed": [
+      "PO 4500001234: 3 line(s), issued 2026-09-18",
+      "Contract C-22 with 1 amendment(s)"
+     ]
+    },
+    {
+     "id": "warehouse",
+     "label": "Warehouse DB",
+     "holds": "Goods receipts, delivered quantities, stock records",
+     "status": "up",
+     "records": 619,
+     "lastSync": "2026-11-12T09:00:00.000Z",
+     "contributed": [
+      "2 goods receipt(s): 5000009001, 5000009002",
+      "1 delivery note(s)",
+      "4 stock ledger entries"
+     ]
+    },
+    {
+     "id": "quality",
+     "label": "Quality DB",
+     "holds": "Inspection reports, accepted and rejected quantities",
+     "status": "up",
+     "records": 619,
+     "lastSync": "2026-11-12T09:00:00.000Z",
+     "contributed": [
+      "QI-5000009001: 5632 accepted, 0 rejected; QI-5000009002: 400 accepted, 0 rejected"
+     ]
+    },
+    {
+     "id": "finance",
+     "label": "Finance DB",
+     "holds": "Invoices, payment status, amounts, approvals",
+     "status": "up",
+     "records": 650,
+     "lastSync": "2026-11-12T09:00:00.000Z",
+     "contributed": [
+      "Invoice INV-7781: 3 line(s), total ₹10,62,000"
+     ]
+    },
+    {
+     "id": "logistics",
+     "label": "Logistics DB",
+     "holds": "Gate entry, shipment tracking, weighbridge records",
+     "status": "up",
+     "records": 619,
+     "lastSync": "2026-11-12T09:00:00.000Z",
+     "contributed": [
+      "Shipment SHP-00039: delivered",
+      "2 gate entries"
+     ]
+    },
+    {
+     "id": "supplier",
+     "label": "Supplier DB",
+     "holds": "Supplier identity, contacts, verified bank details",
+     "status": "up",
+     "records": 30,
+     "lastSync": "2026-11-12T09:00:00.000Z",
+     "contributed": [
+      "Vihar Chem Supplies (27FICTV1001A1Z0), 1 bank account(s) on file"
+     ]
+    }
+   ],
+   "openWork": [
+    {
+     "department": "Finance",
+     "open": 48
+    },
+    {
+     "department": "Procurement",
+     "open": 29
+    },
+    {
+     "department": "Warehouse",
+     "open": 29
+    },
+    {
+     "department": "Logistics",
+     "open": 12
+    },
+    {
+     "department": "Quality",
+     "open": 7
+    },
+    {
+     "department": "Supplier master data",
+     "open": 4
+    }
+   ],
+   "integrity": {
+    "ok": true,
+    "auditEntries": 6069,
+    "workflowEvents": 6018
+   },
+   "story": [
+    {
+     "story": "INV-2044 (hero)",
+     "actual": "INV-7781",
+     "supplier": "Vihar Chem Supplies",
+     "note": "Price 412 vs PO 398 vs contract 412, unit difference, receipt shortfall"
+    },
+    {
+     "story": "INV-1001 and INV-1001A (duplicate)",
+     "actual": "INV-6120 and INV-6120R",
+     "supplier": "Deccan Valve & Fittings",
+     "note": "A paid invoice re-issued under a new number and date"
+    },
+    {
+     "story": "INV-3001 to INV-3003 (splitting)",
+     "actual": "IG20/26-27/0910 to 0912",
+     "supplier": "Indore Gaskets",
+     "note": "Three invoices, one PO, each just under Rs 1,00,000"
+    },
+    {
+     "story": "Bank-account change",
+     "actual": "CB21/26-27/0908",
+     "supplier": "Chennai Bearings",
+     "note": "Remittance account differs from the verified account on file"
+    },
+    {
+     "story": "Account shared with XYZ Traders",
+     "actual": "CM23/26-27/0909",
+     "supplier": "Coimbatore Motors",
+     "note": "Same account is on file for Kolhapur Castings"
+    }
+   ]
+  },
+  "2": {
+   "invoice": {
+    "id": "INV-7781",
+    "supplier": "Vihar Chem Supplies",
+    "vendorId": "V-1001",
+    "po": "4500001234",
+    "invoiceDate": "2026-11-10",
+    "receivedOn": "2026-11-11",
+    "totalInr": 1062000,
+    "file": "demo:INV-7781.pdf",
+    "lines": [
+     {
+      "lineNo": 1,
+      "description": "Process additive AX-40",
+      "qty": 1000,
+      "uom": "kg",
+      "unitPrice": 412,
+      "amount": 412000
+     },
+     {
+      "lineNo": 2,
+      "description": "Catalyst carrier C-12",
+      "qty": 5,
+      "uom": "MT",
+      "unitPrice": 86000,
+      "amount": 430000
+     },
+     {
+      "lineNo": 3,
+      "description": "HDPE drum 200 L",
+      "qty": 40,
+      "uom": "nos",
+      "unitPrice": 1450,
+      "amount": 58000
+     }
+    ]
+   },
+   "passport": {
+    "invoiceNumber": "INV-7781",
+    "invoiceDate": "2026-11-10",
+    "amountInr": 1062000,
+    "poNumber": "4500001234",
+    "asOf": "2026-11-12",
+    "headline": "2 items are holding this invoice. The responsible teams have been asked to act.",
+    "tone": "problem",
+    "milestones": [
+     {
+      "id": "uploaded",
+      "label": "Invoice uploaded",
+      "state": "done",
+      "note": "Received on 11-Nov-2026.",
+      "date": "2026-11-11"
+     },
+     {
+      "id": "extracted",
+      "label": "Invoice data extracted",
+      "state": "done",
+      "note": "Invoice details were read and entered for checking."
+     },
+     {
+      "id": "po",
+      "label": "Purchase order matched",
+      "state": "done",
+      "note": "The invoice matches a purchase order."
+     },
+     {
+      "id": "receipt",
+      "label": "Goods receipt confirmed",
+      "state": "blocked",
+      "note": "Waiting for the plant to confirm the goods received."
+     },
+     {
+      "id": "procurement",
+      "label": "Procurement confirmation",
+      "state": "blocked",
+      "note": "Procurement is confirming price, tax or terms."
+     },
+     {
+      "id": "approval",
+      "label": "Final approval",
+      "state": "upcoming",
+      "note": "Starts when the checks above are complete."
+     },
+     {
+      "id": "payment",
+      "label": "Payment",
+      "state": "upcoming",
+      "note": "Due on 25-Dec-2026."
+     }
+    ],
+    "blockers": [
+     {
+      "id": "price",
+      "title": "Price confirmation",
+      "detail": "The invoice price is being confirmed against the purchase order and contract.",
+      "team": "Procurement"
+     },
+     {
+      "id": "quantity",
+      "title": "Goods receipt",
+      "detail": "We are confirming the quantity received at the plant against the quantity invoiced.",
+      "team": "Warehouse"
+     }
+    ],
+    "actions": [
+     {
+      "team": "Procurement",
+      "action": "Confirm the price against the purchase order and contract",
+      "waitingSince": "2026-11-11",
+      "waitingDays": 1
+     },
+     {
+      "team": "Warehouse",
+      "action": "Post or confirm the goods receipt",
+      "waitingSince": "2026-11-12",
+      "waitingDays": 0
+     }
+    ],
+    "paymentTermsDays": 45,
+    "dueDate": "2026-12-25",
+    "daysToDue": 43,
+    "atRisk": {
+     "flag": false,
+     "reason": "On track for the due date."
+    }
+   },
+   "supplierNote": "This is the only view a supplier gets: milestones, what is holding the invoice, which team has to act and the due date. Internal findings, risk signals and scores are never shown."
+  },
+  "3": {
+   "invoiceId": "INV-7781",
+   "evidence": [
+    {
+     "source": "procurement",
+     "label": "Procurement DB",
+     "status": "ok",
+     "facts": [
+      "PO 4500001234 to Vihar Chem Supplies, buyer Anand Deshpande",
+      "PO line 1: Process additive AX-40, 1000 kg at ₹398",
+      "PO line 2: Catalyst carrier C-12, 5000 kg at ₹86",
+      "PO line 3: HDPE drum 200 L, 40 nos at ₹1,450",
+      "Contract C-22: AX-40 at ₹412 per kg, valid 2026-04-01 to 2027-03-31",
+      "Amendment: AX-40 ₹398 to ₹412, effective 2026-10-01, signed 2026-09-17"
+     ]
+    },
+    {
+     "source": "warehouse",
+     "label": "Warehouse DB",
+     "status": "ok",
+     "facts": [
+      "GRN 5000009001 on 2026-11-02: line 1 600 kg, line 2 5000 kg, line 3 32 nos",
+      "GRN 5000009002 on 2026-11-03: line 1 400 kg",
+      "Delivery note DN-5521: 1000 kg AX-40, 5000 kg C-12, 40 nos DR-200"
+     ]
+    },
+    {
+     "source": "quality",
+     "label": "Quality DB",
+     "status": "ok",
+     "facts": [
+      "Inspection QI-5000009001 on 2026-11-03: line 1 accepted 600 of 600; line 2 accepted 5000 of 5000; line 3 accepted 32 of 32",
+      "Inspection QI-5000009002 on 2026-11-03: line 1 accepted 400 of 400"
+     ]
+    },
+    {
+     "source": "finance",
+     "label": "Finance DB",
+     "status": "ok",
+     "facts": [
+      "Invoice INV-7781 dated 2026-11-10, total ₹10,62,000, first line 1000 kg at ₹412"
+     ]
+    },
+    {
+     "source": "logistics",
+     "label": "Logistics DB",
+     "status": "ok",
+     "facts": [
+      "Shipment SHP-00039: delivered, delivered 2026-11-02",
+      "Gate entry GE-00039, vehicle MH47NN2443, 2026-11-02",
+      "Gate entry GE-00040, vehicle MH43OU2480, 2026-11-03"
+     ]
+    },
+    {
+     "source": "supplier",
+     "label": "Supplier DB",
+     "status": "ok",
+     "facts": [
+      "Vihar Chem Supplies, GSTIN 27FICTV1001A1Z0",
+      "Bank account 50100007959330 (verified) at Deccan Union Bank"
+     ]
+    }
+   ],
+   "outage": {
+    "source": "logistics",
+    "label": "Logistics DB",
+    "online": {
+     "status": "review",
+     "summary": "Review: 2 discrepancies (PO not updated after contract change; Goods receipt under-posted).",
+     "notEvaluated": [],
+     "unavailable": []
+    },
+    "offline": {
+     "status": "review",
+     "summary": "Review: 2 discrepancies (PO not updated after contract change; Goods receipt under-posted). Not evaluated: Logistics DB unavailable.",
+     "notEvaluated": [
+      "weighbridge"
+     ],
+     "unavailable": [
+      "Logistics DB"
+     ]
+    },
+    "restored": {
+     "status": "review",
+     "summary": "Review: 2 discrepancies (PO not updated after contract change; Goods receipt under-posted).",
+     "notEvaluated": [],
+     "unavailable": []
+    },
+    "affectedChecks": [
+     "weighbridge"
+    ],
+    "explanation": "While Logistics DB is down, the checks that need it show \"not evaluated\", no false finding is raised and the invoice is never passed on partial evidence. When it returns, the same checks run again and the original result comes back."
+   }
+  },
+  "4": {
+   "invoiceId": "INV-7781",
+   "status": "review",
+   "summary": "Review: 2 discrepancies (PO not updated after contract change; Goods receipt under-posted).",
+   "checks": [
+    {
+     "check": "vendor",
+     "label": "Vendor on master and active",
+     "passed": true,
+     "detail": "Vendor is on the master and active."
+    },
+    {
+     "check": "purchase_order",
+     "label": "PO exists, belongs to vendor, lines on PO",
+     "passed": true,
+     "detail": "PO found and all invoice lines are on it."
+    },
+    {
+     "check": "duplicate",
+     "label": "No earlier look-alike invoice",
+     "passed": true,
+     "detail": "No earlier invoice with the same fingerprint."
+    },
+    {
+     "check": "price",
+     "label": "Price within 2% of PO (and contract)",
+     "passed": false,
+     "detail": "Price ₹412.00 is 3.5% above PO ₹398.00. Contract C-22 (01-Oct-2026) sets ₹412.00, so the PO looks outdated."
+    },
+    {
+     "check": "quantity",
+     "label": "Quantity within 5% of cumulative goods receipts",
+     "passed": false,
+     "detail": "Invoice quantity 40 nos is above receipts of 32 nos. Delivery note DN-5521 shows 40 nos delivered."
+    },
+    {
+     "check": "unit_of_measure",
+     "label": "Units convertible to the PO unit",
+     "passed": true,
+     "detail": "Billed 5 MT at ₹86,000.00; that is 5,000 kg at ₹86.00, the same as the PO and receipts."
+    },
+    {
+     "check": "tax",
+     "label": "Tax rate equals PO tax code",
+     "passed": true,
+     "detail": "Tax rate agrees with the PO."
+    },
+    {
+     "check": "arithmetic",
+     "label": "Line, subtotal, tax and total arithmetic",
+     "passed": true,
+     "detail": "Arithmetic is consistent."
+    },
+    {
+     "check": "quality",
+     "label": "Billed quantity is covered by quantity accepted at inspection",
+     "passed": true,
+     "detail": "Inspection accepted the billed quantity (0 rejected in total on this PO)."
+    },
+    {
+     "check": "weighbridge",
+     "label": "Weighbridge weight agrees with GRN and invoice",
+     "passed": true,
+     "detail": "No weighbridge record for this delivery (goods are counted, not weighed)."
+    },
+    {
+     "check": "contract",
+     "label": "Contract terms are in force and the prices agree with the contract",
+     "passed": true,
+     "detail": "Contract C-22 is valid 01-Apr-2026 to 31-Mar-2027 and was in force on 02-Nov-2026; 2 of 3 line(s) agree with the contract, the rest are reported by the price check."
+    },
+    {
+     "check": "inventory",
+     "label": "Quantities reconcile with receipts, returns and earlier invoices",
+     "passed": true,
+     "detail": "Receipts, returns and earlier invoices were reconciled for 3 line(s); the quantity check reports the remaining difference."
+    },
+    {
+     "check": "bank_and_account_risk",
+     "label": "Bank details, shared account and splitting warnings",
+     "passed": true,
+     "detail": "No bank-detail, shared-account or splitting warnings."
+    }
+   ],
+   "validation": {
+    "threeWay": {
+     "state": "review",
+     "headline": "2 discrepancies against the PO and receipts.",
+     "issues": [
+      "Price ₹412.00 is 3.5% above PO ₹398.00. Contract C-22 (01-Oct-2026) sets ₹412.00, so the PO looks outdated.",
+      "Invoice quantity 40 nos is above receipts of 32 nos. Delivery note DN-5521 shows 40 nos delivered."
+     ]
+    },
+    "contract": {
+     "state": "pass",
+     "headline": "Contract C-22 is valid 01-Apr-2026 to 31-Mar-2027 and was in force on 02-Nov-2026; 2 of 3 line(s) agree with the contract, the rest are reported by the price check.",
+     "issues": [],
+     "terms": [
+      "Line 1 AX-40: invoice ₹412, PO ₹398, contract ₹412 per kg, amendment ₹398 to ₹412 effective 2026-10-01",
+      "Line 2 C-12: invoice ₹86, PO ₹86, contract ₹86 per kg",
+      "Line 3 DR-200: invoice ₹1,450, PO ₹1,450, contract ₹1,450 per nos"
+     ]
+    },
+    "inventory": {
+     "state": "pass",
+     "headline": "Receipts, returns and earlier invoices were reconciled for 3 line(s); the quantity check reports the remaining difference.",
+     "issues": [],
+     "rows": [
+      "Line 1 AX-40: received 1000, returned 0, net 1000, billed earlier 0, this invoice 1000, still billable 1000 kg",
+      "Line 2 C-12: received 5000, returned 0, net 5000, billed earlier 0, this invoice 5000, still billable 5000 kg",
+      "Line 3 DR-200: received 32, returned 0, net 32, billed earlier 0, this invoice 40, still billable 32 nos"
+     ]
+    }
+   },
+   "priceTrio": {
+    "invoice": 412,
+    "po": 398,
+    "contract": 412,
+    "unit": "kg",
+    "description": "Line 1, AX-40"
+   },
+   "normalisations": [
+    {
+     "invoiceId": "PPT08/26-27/0903",
+     "supplier": "Pune Polymer Traders",
+     "text": "Line 1 is billed as 5 MT at ₹25,000.00 per MT. That is 5,000 kg at ₹25.00 per kg, the same quantity and price as PO 4600009003 (5,000 kg at ₹25.00). Unit-equivalent quantities are normalised, not treated as a mismatch.",
+     "evidence": [
+      "Unit table: 1 MT = 1,000 kg for CAL-CO3",
+      "PO 4600009003 line 1 (issued 23-Oct-2026): CAL-CO3, 5,000 kg at ₹25.00, tax 18%",
+      "Invoice PPT08/26-27/0903 line 1: CAL-CO3, 5 MT at ₹25,000.00"
+     ],
+     "purpose": "Billed in tonnes, ordered and received in kilograms: normalised, so it is not an exception."
+    }
+   ],
+   "qualityCase": {
+    "invoiceId": "AF14/26-27/0913",
+    "supplier": "Aurangabad Fasteners",
+    "statement": "Billed 80 rolls of LBL-RL (received), but only 68 rolls passed inspection (12 rolls rejected: Moisture above specification).",
+    "evidence": [
+     "Inspection QI-5100000549 on 05-Nov-2026: 68 accepted, 12 rejected of 80 rolls, Moisture above specification",
+     "Goods receipt 5100000549 on 04-Nov-2026: line 1 80 rolls",
+     "Invoice AF14/26-27/0913 line 1: LBL-RL, 80 rolls at ₹313.00"
+    ]
+   }
+  },
+  "5": {
+   "invoiceId": "INV-7781",
+   "resolutions": [
+    {
+     "id": "price:1:amendment_not_in_po",
+     "invoiceId": "INV-7781",
+     "lineNo": 1,
+     "check": "price",
+     "severity": "flag",
+     "problem": "Line 1 (AX-40, Process additive AX-40): invoice price ₹412.00 per kg is 3.5% above the PO price ₹398.00.",
+     "rule": "amendment_not_in_po",
+     "rootCause": "Contract amendment not reflected in the PO",
+     "evidenceStatus": "supported_by_evidence",
+     "evidence": [
+      {
+       "source": "procurement",
+       "ref": "Contract C-22 amendment",
+       "text": "Contract C-22 amendment effective 01-Oct-2026: AX-40 price changed from ₹398.00 to ₹412.00 (signed 17-Sep-2026)"
+      },
+      {
+       "source": "procurement",
+       "ref": "PO 4500001234",
+       "text": "PO 4500001234 line 1 (issued 18-Sep-2026): AX-40, 1,000 kg at ₹398.00, tax 18%"
+      },
+      {
+       "source": "procurement",
+       "ref": "PO 4500001234 history",
+       "text": "No price change is recorded on PO 4500001234 line 1 since it was issued, so it still pre-dates the amendment of 01-Oct-2026"
+      },
+      {
+       "source": "warehouse",
+       "ref": "receipts",
+       "text": "Goods were received from 02-Nov-2026, on or after the amendment date 01-Oct-2026 (5000009001, 5000009002)"
+      },
+      {
+       "source": "finance",
+       "ref": "Invoice INV-7781",
+       "text": "Invoice INV-7781 line 1: AX-40, 1,000 kg at ₹412.00, equal to the amended contract price"
+      },
+      {
+       "source": "procurement",
+       "ref": "Contract C-22 terms",
+       "text": "Contract C-22 is valid 01-Apr-2026 to 31-Mar-2027; it was in force on the delivery date 02-Nov-2026."
+      }
+     ],
+     "responsible": {
+      "department": "Procurement",
+      "role": "Buyer",
+      "person": "Anand Deshpande"
+     },
+     "correction": "Buyer amends PO 4500001234 line 1 unit price from ₹398.00 to ₹412.00.",
+     "counterfactual": "This invoice line would pass the price check if PO 4500001234 line 1 price were updated to ₹412.00, per amendment of contract C-22 effective 01-Oct-2026, assuming all other checks pass.",
+     "corrections": [
+      {
+       "kind": "amend_po_price",
+       "poId": "4500001234",
+       "lineNo": 1,
+       "from": 398,
+       "to": 412,
+       "reason": "Aligned to contract C-22 amendment effective 2026-10-01"
+      }
+     ]
+    },
+    {
+     "id": "quantity:3:goods_receipt_under_posted",
+     "invoiceId": "INV-7781",
+     "lineNo": 3,
+     "check": "quantity",
+     "severity": "flag",
+     "problem": "Invoice quantity 40 nos is above receipts of 32 nos. Delivery note DN-5521 shows 40 nos delivered.",
+     "rule": "goods_receipt_under_posted",
+     "rootCause": "Goods receipt under-posted: the delivery note shows more than was receipted",
+     "evidenceStatus": "supported_by_evidence",
+     "evidence": [
+      {
+       "source": "warehouse",
+       "ref": "GRN 5000009001",
+       "text": "Goods receipt 5000009001 on 02-Nov-2026: line 1 600 kg, line 2 5,000 kg, line 3 32 nos"
+      },
+      {
+       "source": "warehouse",
+       "ref": "GRN 5000009002",
+       "text": "Goods receipt 5000009002 on 03-Nov-2026: line 1 400 kg"
+      },
+      {
+       "source": "warehouse",
+       "ref": "Delivery note DN-5521",
+       "text": "Delivery note DN-5521 on 02-Nov-2026: AX-40 1,000 kg, C-12 5,000 kg, DR-200 40 nos"
+      },
+      {
+       "source": "finance",
+       "ref": "Invoice INV-7781",
+       "text": "Invoice INV-7781 line 3: DR-200, 40 nos at ₹1,450.00"
+      }
+     ],
+     "responsible": {
+      "department": "Warehouse",
+      "role": "Warehouse executive"
+     },
+     "correction": "Warehouse posts the missing 8 nos receipt for PO line 3.",
+     "counterfactual": "This invoice line would pass the quantity check if the goods receipt for PO 4500001234 line 3 were increased by 8 nos to 40 nos, per the delivery note (40 nos delivered), assuming all other checks pass.",
+     "corrections": [
+      {
+       "kind": "post_goods_receipt",
+       "poId": "4500001234",
+       "lines": [
+        {
+         "lineNo": 3,
+         "qty": 8,
+         "uom": "nos"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "rag": [
+    {
+     "question": "Why is invoice INV-7781 on hold?",
+     "answer": "1. Price ₹412.00 is 3.5% above PO ₹398.00. Contract C-22 (01-Oct-2026) sets ₹412.00, so the PO looks outdated. Likely cause: PO not updated after contract change (supported by evidence). Smallest fix: Passes if the PO price is amended to ₹412.00 per C-22.\n2. Invoice quantity 40 nos is above receipts of 32 nos. Delivery note DN-5521 shows 40 nos delivered. Likely cause: Goods receipt under-posted (supported by evidence). Smallest fix: Passes if Warehouse posts the missing 8 nos receipt (DN-5521 shows 40 nos delivered).\nWhat the documents say: Goods are payable only for the quantity accepted at inspection. If part of a delivery is rejected, the supplier must issue a credit note or corrected invoice for the rejected quantity, or Quality must record a documented concession. The invoiced quantity may not exceed the accepted quantity by more than 5 percent. Goods received but not yet inspected are held until inspection is recorded. [POL-AP-02, §1] Amendment to contract C-22 with Vihar Chem Supplies: price of AX-40 changed from ₹398.00 to ₹412.00, effective 2026-10-01, signed 2026-09-17. Annual price revision Purchase orders raised before 2026-10-01 keep the old price until the buyer amends them. [Contract C-22, amendment effective 2026-10-01] For materials bought by weight, the weighbridge net weight must agree with the goods receipt weight within 1 percent. If the weighbridge shows less than the goods receipt or the invoice, Logistics confirms a re-weigh and the goods receipt or invoice is corrected before payment. [POL-AP-03, §1]",
+     "grounded": true,
+     "citations": [
+      {
+       "id": "Evaluation of INV-7781",
+       "kind": "evaluation",
+       "title": "Evaluation of INV-7781",
+       "ref": "check: price",
+       "text": "Price ₹412.00 is 3.5% above PO ₹398.00. Contract C-22 (01-Oct-2026) sets ₹412.00, so the PO looks outdated."
+      },
+      {
+       "id": "Evaluation of INV-7781",
+       "kind": "evaluation",
+       "title": "Evaluation of INV-7781",
+       "ref": "check: quantity",
+       "text": "Invoice quantity 40 nos is above receipts of 32 nos. Delivery note DN-5521 shows 40 nos delivered."
+      },
+      {
+       "id": "POL-AP-02",
+       "kind": "policy",
+       "title": "Quality acceptance policy",
+       "ref": "§1",
+       "text": "Goods are payable only for the quantity accepted at inspection. If part of a delivery is rejected, the supplier must issue a credit note or corrected invoice for the rejected quantity, or Quality must record a documented concession. The invoiced quantity may not exceed the accepted quantity by more than 5 percent. Goods received but not yet inspected are held until inspection is recorded."
+      }
+     ],
+     "notes": []
+    },
+    {
+     "question": "What does contract C-22 say about the price of process additive AX-40?",
+     "answer": "What the documents say: Amendment to contract C-22 with Vihar Chem Supplies: price of AX-40 changed from ₹398.00 to ₹412.00, effective 2026-10-01, signed 2026-09-17. Annual price revision Purchase orders raised before 2026-10-01 keep the old price until the buyer amends them. [Contract C-22, amendment effective 2026-10-01] Contract C-22 with supplier Vihar Chem Supplies, valid 2026-04-01 to 2027-03-31. Agreed prices: AX-40: current price ₹412.00 per kg from 2026-10-01, earlier price ₹398.00 per kg from 2026-04-01; C-12: current price ₹86.00 per kg from 2026-04-01; DR-200: current price ₹1,450.00 per nos from 2026-04-01; SOL-55: current price ₹142.00 per L from 2026-04-01. [Contract C-22, price schedule]",
+     "grounded": true,
+     "citations": [
+      {
+       "id": "Contract C-22",
+       "kind": "amendment",
+       "title": "Contract C-22 amendment, Vihar Chem Supplies",
+       "ref": "amendment effective 2026-10-01",
+       "text": "Amendment to contract C-22 with Vihar Chem Supplies: price of AX-40 changed from ₹398.00 to ₹412.00, effective 2026-10-01, signed 2026-09-17. Annual price revision Purchase orders raised before 2026-10-01 keep the old price until the buyer amends them."
+      },
+      {
+       "id": "Contract C-22",
+       "kind": "contract",
+       "title": "Contract C-22 with Vihar Chem Supplies",
+       "ref": "price schedule",
+       "text": "Contract C-22 with supplier Vihar Chem Supplies, valid 2026-04-01 to 2027-03-31. Agreed prices: AX-40: current price ₹412.00 per kg from 2026-10-01, earlier price ₹398.00 per kg from 2026-04-01; C-12: current price ₹86.00 per kg from 2026-04-01; DR-200: current price ₹1,450.00 per nos from 2026-04-01; SOL-55: current price ₹142.00 per L from 2026-04-01."
+      }
+     ],
+     "notes": []
+    }
+   ],
+   "tasks": [
+    {
+     "department": "Procurement",
+     "title": "Price ₹412.00 is 3.5% above PO ₹398.00. Contract C-22 (01-Oct-2026) sets ₹412.00, so the PO looks outdated.",
+     "status": "open",
+     "owner": "Anand Deshpande"
+    },
+    {
+     "department": "Warehouse",
+     "title": "Invoice quantity 40 nos is above receipts of 32 nos. Delivery note DN-5521 shows 40 nos delivered.",
+     "status": "open",
+     "owner": "Warehouse executive"
+    }
+   ],
+   "fix": {
+    "steps": [
+     "Buyer amends PO 4500001234 line 1 from ₹398 to ₹412, citing the signed contract amendment",
+     "Warehouse posts the missing goods receipt against PO 4500001234",
+     "Quality records the inspection result for the new receipt"
+    ],
+    "before": {
+     "status": "review",
+     "summary": "Review: 2 discrepancies (PO not updated after contract change; Goods receipt under-posted)."
+    },
+    "after": {
+     "status": "pass",
+     "summary": "Pass: all evaluated checks agree across the sources. Skipped inventory: the stock ledger has no entries for GRN 5200000001, so receipt quantities, returns and earlier allocations could not be verified."
+    },
+    "passes": true,
+    "events": [
+     {
+      "at": "2026-11-12T10:00:04.000Z",
+      "type": "exception_resolved",
+      "department": "Procurement",
+      "note": "Exception resolved (price check)"
+     },
+     {
+      "at": "2026-11-12T10:00:04.000Z",
+      "type": "exception_resolved",
+      "department": "Warehouse",
+      "note": "Exception resolved (quantity check)"
+     },
+     {
+      "at": "2026-11-12T10:00:04.000Z",
+      "type": "exception_raised",
+      "department": "Finance",
+      "note": "Exception raised (quality check)"
+     },
+     {
+      "at": "2026-11-12T10:00:04.000Z",
+      "type": "department_assigned",
+      "department": "Quality",
+      "note": "Routed to the department (quality check)"
+     },
+     {
+      "at": "2026-11-12T10:00:10.000Z",
+      "type": "exception_resolved",
+      "department": "Quality",
+      "note": "Exception resolved (quality check)"
+     },
+     {
+      "at": "2026-11-12T10:00:10.000Z",
+      "type": "review_completed",
+      "department": "Finance",
+      "note": "Automated review completed (pass)"
+     }
+    ],
+    "auditEntriesAdded": 17,
+    "remaining": []
+   }
+  },
+  "6": {
+   "duplicate": {
+    "detector": "duplicate",
+    "title": "Duplicate fingerprint",
+    "subject": "INV-6120R",
+    "flag": true,
+    "score": 95,
+    "label": "warning, not proof",
+    "reasons": [
+     "same total ₹1,24,254.00 (+22)",
+     "same PO 4500001240 (+14)",
+     "100% of line items and quantities overlap (+18)",
+     "identical quantities on every line (+6)",
+     "same tax ₹18,954.00 (+6)",
+     "invoice dates 26 days apart (+4)",
+     "invoice numbers INV-6120R and INV-6120 differ only by a re-issue marker (+15)",
+     "100% of the description wording is the same (+10)"
+    ],
+    "recommendedAction": "Compare this invoice with INV-6120 side by side. If it is a second bill for the same delivery, reject it; if it is a genuine separate bill, record the reason so the decision is on file.",
+    "requiresIndependentVerification": false,
+    "supporting": [
+     "Finance, invoice INV-6120: INV-6120: ₹1,24,254.00, dated 2026-10-14, PO 4500001240, paid; similarity 95 of 100"
+    ],
+    "original": "INV-6120",
+    "copy": "INV-6120R"
+   },
+   "splitting": {
+    "detector": "splitting",
+    "title": "Threshold splitting",
+    "subject": "IG20/26-27/0910",
+    "flag": true,
+    "score": 90,
+    "label": "warning, not proof",
+    "reasons": [
+     "3 invoices from this supplier within 1 day(s) of each other are each under the ₹1,00,000 approval threshold (₹96,465.00 to ₹96,979.48).",
+     "Combined total ₹2,90,166.72, which is above the threshold. Approved separately, they would not need the higher approval level.",
+     "All 3 are on PO 4600009011."
+    ],
+    "recommendedAction": "Check whether these invoices are one staged delivery. If so, approve them together at the approval level for ₹2,90,166.72. If they are separate purchases, note why.",
+    "requiresIndependentVerification": false,
+    "supporting": [
+     "Finance, invoice IG20/26-27/0910: IG20/26-27/0910: ₹96,979.48, dated 2026-11-09, PO 4600009011",
+     "Finance, invoice IG20/26-27/0911: IG20/26-27/0911: ₹96,722.24, dated 2026-11-09, PO 4600009011",
+     "Finance, invoice IG20/26-27/0912: IG20/26-27/0912: ₹96,465.00, dated 2026-11-09, PO 4600009011"
+    ],
+    "invoices": [
+     {
+      "id": "IG20/26-27/0910",
+      "totalInr": 96979.48,
+      "date": "2026-11-09"
+     },
+     {
+      "id": "IG20/26-27/0911",
+      "totalInr": 96722.24,
+      "date": "2026-11-09"
+     },
+     {
+      "id": "IG20/26-27/0912",
+      "totalInr": 96465,
+      "date": "2026-11-09"
+     }
+    ],
+    "combinedInr": 290166.72
+   },
+   "bank": {
+    "detector": "vendor",
+    "title": "Vendor master red flags",
+    "subject": "CB21/26-27/0908",
+    "flag": true,
+    "score": 90,
+    "label": "warning, not proof",
+    "reasons": [
+     "The account on the invoice (60410000771205) is new and still pending verification (valid from 2026-11-03).",
+     "Changes to payment details are a common route for payment redirection, so they are always verified independently before payment."
+    ],
+    "recommendedAction": "Do not pay until the change is verified. Call a contact already on file, using a telephone number you already hold (not the number or e-mail on the invoice or the change request), and record the verification.",
+    "requiresIndependentVerification": true,
+    "supporting": [
+     "Finance, invoice CB21/26-27/0908: Remittance account 60410000771205 (FICB0554321)",
+     "Supplier master, bank account 50100166341670: Deccan Union Bank, closed, closed 2026-11-03, verified 2025-04-05. Closed at the supplier's request by e-mail (not independently verified).",
+     "Supplier master, bank account 60410000771205: Western Trust Bank, pending_verification, from 2026-11-03. Change requested by e-mail on 2026-11-03; call-back verification not done."
+    ],
+    "task": "Verify the bank-detail change independently: call a contact already on the supplier master before any payment",
+    "supplier": "Chennai Bearings"
+   },
+   "graph": {
+    "detector": "graph",
+    "title": "Relationship graph",
+    "subject": "CM23/26-27/0909",
+    "flag": true,
+    "score": 60,
+    "label": "warning, not proof",
+    "reasons": [
+     "Kolhapur Castings (V-1015) and Coimbatore Motors (V-1023) share bank account 50100118826968. Shared accounts can be legitimate; a person should confirm the relationship.",
+     "This vendor is in a linked group of 2: Kolhapur Castings, Coimbatore Motors."
+    ],
+    "recommendedAction": "Ask Supplier master data to confirm the relationship and record it. Open the graph to see the connection.",
+    "requiresIndependentVerification": false,
+    "supporting": [
+     "Supplier master, shared bank account: Kolhapur Castings: account 50100118826968 at First India Commerce Bank",
+     "Supplier master, shared bank account: Coimbatore Motors: account 50100118826968 at First India Commerce Bank"
+    ],
+    "vendorA": "Kolhapur Castings",
+    "vendorB": "Coimbatore Motors",
+    "account": "50100118826968",
+    "confirmedLegitimate": false,
+    "edges": [
+     {
+      "from": "Kolhapur Castings",
+      "to": "account 50100118826968",
+      "kind": "holds account"
+     },
+     {
+      "from": "Coimbatore Motors",
+      "to": "account 50100118826968",
+      "kind": "holds account"
+     }
+    ],
+    "supplierNote": "A shared account can be legitimate (a group company, a trading arm). This is a prompt for a person to look, never an accusation."
+   },
+   "label": "warning, not proof"
+  },
+  "7": {
+   "suppliers": [
+    {
+     "vendorId": "V-1001",
+     "name": "Vihar Chem Supplies",
+     "relationship": {
+      "score": 75,
+      "band": "High",
+      "summary": "High relationship strength (75). Main strongest: quality (100% of inspected goods accepted)."
+     },
+     "criticality": {
+      "score": 99,
+      "band": "High",
+      "summary": "High supply criticality (99). Main driver: material criticality (what they supply is 98% on the plant's criticality scale)."
+     },
+     "risk": {
+      "score": 31,
+      "band": "Low",
+      "summary": "Low supplier risk (31). Main driver: invoice disputes (30% of invoices needed an exception resolved)."
+     },
+     "materials": "Catalyst carrier C-12 (sole source); Process additive AX-40 (sole source)",
+     "priority": {
+      "score": 42,
+      "band": "Investigate soon",
+      "explanation": "Investigate soon (priority 42 of 100). Supplier scores: criticality 99, risk 31, relationship 75; Invoice value: ₹10,62,000; Contract obligations: 1.5% a month interest on late payment."
+     }
+    },
+    {
+     "vendorId": "V-1002",
+     "name": "Konkan Packaging Works",
+     "relationship": {
+      "score": 73,
+      "band": "High",
+      "summary": "High relationship strength (73). Main strongest: quality (100% of inspected goods accepted)."
+     },
+     "criticality": {
+      "score": 73,
+      "band": "High",
+      "summary": "High supply criticality (73). Main driver: few alternatives (no other approved supplier for most of their materials)."
+     },
+     "risk": {
+      "score": 34,
+      "band": "Low",
+      "summary": "Low supplier risk (34). Main driver: invoice disputes (33% of invoices needed an exception resolved)."
+     },
+     "materials": "PP woven bag 25 kg (sole source); Corrugated carton 5-ply 40x30x25 (sole source)",
+     "priority": {
+      "score": 36,
+      "band": "Routine",
+      "explanation": "Routine (priority 36 of 100). Supplier scores: criticality 73, risk 34, relationship 73; Invoice value: ₹1,13,280; Due date: due in 24 day(s)."
+     }
+    },
+    {
+     "vendorId": "V-1009",
+     "name": "Nashik Pallet Co",
+     "relationship": {
+      "score": 91,
+      "band": "High",
+      "summary": "High relationship strength (91). Main strongest: delivery reliability (100% of deliveries on time)."
+     },
+     "criticality": {
+      "score": 47,
+      "band": "Medium",
+      "summary": "Medium supply criticality (47). Main driver: material criticality (what they supply is 56% on the plant's criticality scale)."
+     },
+     "risk": {
+      "score": 6,
+      "band": "Low",
+      "summary": "Low supplier risk (6). Main driver: exception trend (exception rate steady)."
+     },
+     "materials": "Lube oil ISO VG 68; EP-2 lithium grease",
+     "priority": {
+      "score": 55,
+      "band": "Investigate soon",
+      "explanation": "Investigate soon (priority 55 of 100). Due date: payment is 18 day(s) overdue; Supplier scores: criticality 47, risk 6, relationship 91; Contract obligations: the contract fixes the payment date and charges 1.5% a month if missed."
+     }
+    }
+   ],
+   "priorityNote": "This ranks which invoices a person should look at first. It does not set the payment order: final payment order must respect contracts and financial policy.",
+   "invoiceId": "INV-7781",
+   "disclaimer": "Predictions are estimates from a model trained on synthetic history. The deterministic checks decide whether an invoice passes; a prediction never overrides them. Predicted causes are unverified unless a record backs them.",
+   "predictions": [
+    {
+     "key": "A",
+     "title": "Exception probability",
+     "question": "Will a person need to resolve something on this invoice?",
+     "probability": 0.9737474098332225,
+     "level": "High",
+     "model": "gradient boosting",
+     "auc": 0.7773,
+     "trainedOn": "8,000 synthetic invoices",
+     "factors": [
+      {
+       "label": "Contract price amended after the PO",
+       "value": "the contract price changed after the PO was issued",
+       "effectPoints": 23.7,
+       "direction": "raises"
+      },
+      {
+       "label": "Share of billed quantity received",
+       "value": "80% of the billed quantity received",
+       "effectPoints": 14.7,
+       "direction": "raises"
+      },
+      {
+       "label": "Unit differs from the PO",
+       "value": "billed in a different unit than ordered",
+       "effectPoints": 14.4,
+       "direction": "raises"
+      },
+      {
+       "label": "Days from PO to invoice",
+       "value": "53 days",
+       "effectPoints": 13.7,
+       "direction": "raises"
+      }
+     ]
+    },
+    {
+     "key": "B",
+     "title": "Likely root cause",
+     "question": "If an exception occurs, what is the most likely cause?",
+     "probability": 0.40825799561441295,
+     "level": "Price differs from the PO or contract",
+     "model": "gradient boosting",
+     "trainedOn": "1,576 synthetic invoices",
+     "factors": [
+      {
+       "label": "Contract price amended after the PO",
+       "value": "the contract price changed after the PO was issued",
+       "effectPoints": 42.1,
+       "direction": "raises"
+      },
+      {
+       "label": "Partial delivery",
+       "value": "delivery is partial",
+       "effectPoints": -13.3,
+       "direction": "lowers"
+      },
+      {
+       "label": "Unit differs from the PO",
+       "value": "billed in a different unit than ordered",
+       "effectPoints": -12.3,
+       "direction": "lowers"
+      }
+     ]
+    },
+    {
+     "key": "C",
+     "title": "Payment delay risk",
+     "question": "Will payment go past the due date?",
+     "probability": 0.8121204138395353,
+     "level": "High",
+     "model": "logistic regression",
+     "auc": 0.754,
+     "trainedOn": "8,000 synthetic invoices",
+     "factors": [
+      {
+       "label": "Awaiting approval",
+       "value": "no approval recorded yet",
+       "effectPoints": 16.7,
+       "direction": "raises"
+      },
+      {
+       "label": "Invoice value",
+       "value": "₹10,62,000",
+       "effectPoints": 13,
+       "direction": "raises"
+      },
+      {
+       "label": "Early-payment discount",
+       "value": "none",
+       "effectPoints": 12,
+       "direction": "raises"
+      },
+      {
+       "label": "Contract price amended after the PO",
+       "value": "the contract price changed after the PO was issued",
+       "effectPoints": 9.4,
+       "direction": "raises"
+      }
+     ]
+    },
+    {
+     "key": "D",
+     "title": "Supplier disruption risk",
+     "question": "Will Vihar Chem Supplies disrupt supply within 90 days?",
+     "probability": 0.3084041731377785,
+     "level": "Medium",
+     "model": "logistic regression",
+     "auc": 0.7601,
+     "trainedOn": "2,400 synthetic supplier-months",
+     "factors": [
+      {
+       "label": "Invoice dispute rate",
+       "value": "30%",
+       "effectPoints": 10.2,
+       "direction": "raises"
+      },
+      {
+       "label": "On-time delivery rate",
+       "value": "60%",
+       "effectPoints": 9.9,
+       "direction": "raises"
+      },
+      {
+       "label": "Lead-time variability",
+       "value": "12.4 days",
+       "effectPoints": 7.1,
+       "direction": "raises"
+      },
+      {
+       "label": "Plant dependency",
+       "value": "100%",
+       "effectPoints": 6.4,
+       "direction": "raises"
+      }
+     ]
+    }
+   ],
+   "causes": [
+    {
+     "label": "Price differs from the PO or contract",
+     "probabilityIfException": 0.40825799561441295,
+     "evidenceStatus": "evidence_supported",
+     "evidence": [
+      "Contract C-22 amendment effective 01-Oct-2026 moved AX-40 from ₹398 to ₹412; PO 4500001234 was issued 18-Sept-2026 at ₹398 and the invoice bills ₹412."
+     ]
+    },
+    {
+     "label": "Quantity billed differs from quantity received",
+     "probabilityIfException": 0.32019091803672733,
+     "evidenceStatus": "evidence_supported",
+     "evidence": [
+      "Line 3 (DR-200): 40 nos billed but 32 received on GRN 5000009001, GRN 5000009002."
+     ]
+    },
+    {
+     "label": "Unit of measure differs between invoice and PO",
+     "probabilityIfException": 0.15148338617915155,
+     "evidenceStatus": "evidence_supported",
+     "evidence": [
+      "Line 2 (C-12) is billed in MT but ordered in kg; a conversion rule is on file."
+     ]
+    }
+   ],
+   "priority": {
+    "score": 42,
+    "band": "Investigate soon",
+    "explanation": "Investigate soon (priority 42 of 100). Supplier scores: criticality 99, risk 31, relationship 75; Invoice value: ₹10,62,000; Contract obligations: 1.5% a month interest on late payment.",
+    "contributions": [
+     {
+      "label": "Due date",
+      "points": 1.3,
+      "why": "due in 43 day(s)"
+     },
+     {
+      "label": "Invoice value",
+      "points": 13.2,
+      "why": "₹10,62,000"
+     },
+     {
+      "label": "Supplier scores",
+      "points": 21.1,
+      "why": "criticality 99, risk 31, relationship 75"
+     },
+     {
+      "label": "Early-payment discount",
+      "points": 0,
+      "why": "no discount available"
+     },
+     {
+      "label": "Pending approvals",
+      "points": 2.7,
+      "why": "1 pending"
+     },
+     {
+      "label": "Contract obligations",
+      "points": 3.6,
+      "why": "1.5% a month interest on late payment"
+     }
+    ]
+   },
+   "history": [
+    "Contract price amended after the PO (the contract price changed after the PO was issued): of 1,029 similar invoices in the training history, 41% had an exception, against 20% overall.",
+    "Unit differs from the PO (billed in a different unit than ordered): of 371 similar invoices in the training history, 47% had an exception, against 20% overall."
+   ]
+  },
+  "8": {
+   "invoiceId": "INV-7781",
+   "asOf": "2026-11-12T18:00:00.000Z",
+   "expected": [
+    "Intake",
+    "AP review",
+    "Approval",
+    "Payment"
+   ],
+   "actual": {
+    "invoiceId": "INV-7781",
+    "stations": [
+     "Intake",
+     "AP review",
+     "Procurement",
+     "AP review",
+     "Warehouse"
+    ],
+    "segments": [
+     {
+      "station": "Intake",
+      "phase": "waiting",
+      "from": "2026-11-11T10:53:00.000Z",
+      "to": "2026-11-11T10:55:00.000Z",
+      "hours": 0.03333333333333333,
+      "open": false
+     },
+     {
+      "station": "AP review",
+      "phase": "waiting",
+      "from": "2026-11-11T10:55:00.000Z",
+      "to": "2026-11-11T11:30:00.000Z",
+      "hours": 0.5833333333333334,
+      "open": false
+     },
+     {
+      "station": "AP review",
+      "phase": "working",
+      "from": "2026-11-11T11:30:00.000Z",
+      "to": "2026-11-11T12:12:00.000Z",
+      "hours": 0.7,
+      "open": false
+     },
+     {
+      "station": "Procurement",
+      "phase": "waiting",
+      "from": "2026-11-11T12:12:00.000Z",
+      "to": "2026-11-11T14:20:00.000Z",
+      "hours": 2.1333333333333333,
+      "open": false
+     },
+     {
+      "station": "Procurement",
+      "phase": "working",
+      "from": "2026-11-11T14:20:00.000Z",
+      "to": "2026-11-11T16:45:00.000Z",
+      "hours": 2.4166666666666665,
+      "open": false
+     },
+     {
+      "station": "Procurement",
+      "phase": "waiting",
+      "from": "2026-11-11T16:45:00.000Z",
+      "to": "2026-11-11T16:47:00.000Z",
+      "hours": 0.03333333333333333,
+      "open": false
+     },
+     {
+      "station": "AP review",
+      "phase": "waiting",
+      "from": "2026-11-11T16:47:00.000Z",
+      "to": "2026-11-12T09:20:00.000Z",
+      "hours": 16.55,
+      "open": false
+     },
+     {
+      "station": "AP review",
+      "phase": "working",
+      "from": "2026-11-12T09:20:00.000Z",
+      "to": "2026-11-12T09:50:00.000Z",
+      "hours": 0.5,
+      "open": false
+     },
+     {
+      "station": "Warehouse",
+      "phase": "waiting",
+      "from": "2026-11-12T09:50:00.000Z",
+      "to": "2026-11-12T18:00:00.000Z",
+      "hours": 8.166666666666666,
+      "open": true
+     }
+    ],
+    "completed": false,
+    "startedAt": "2026-11-11T10:53:00.000Z",
+    "endedAt": "2026-11-12T18:00:00.000Z",
+    "cycleHours": 31.116666666666667,
+    "loops": [
+     {
+      "from": "AP review",
+      "via": "Procurement",
+      "sequence": [
+       "AP review",
+       "Procurement",
+       "AP review"
+      ]
+     }
+    ],
+    "exceptions": [
+     {
+      "check": "price",
+      "department": "Procurement",
+      "raisedAt": "2026-11-11T12:10:00.000Z",
+      "hours": 29.833333333333332,
+      "open": true
+     },
+     {
+      "check": "quantity",
+      "department": "Warehouse",
+      "raisedAt": "2026-11-12T09:48:00.000Z",
+      "hours": 8.2,
+      "open": true
+     }
+    ],
+    "conformance": "rework",
+    "deviations": [
+     "Rework loop: AP review → Procurement → AP review",
+     "Extra stations outside the expected path: Procurement, Warehouse"
+    ]
+   },
+   "stations": [
+    {
+     "station": "Approval",
+     "invoices": 533,
+     "visits": 533,
+     "waitHours": 137627.89999999997,
+     "workHours": 0,
+     "totalHours": 137627.89999999997,
+     "avgHoursPerVisit": 258.2136960600375,
+     "expectedHours": 24,
+     "sharePct": 35.01001521838348
+    },
+    {
+     "station": "AP review",
+     "invoices": 650,
+     "visits": 824,
+     "waitHours": 19232.816666666655,
+     "workHours": 75798.99999999993,
+     "totalHours": 95031.81666666658,
+     "avgHoursPerVisit": 115.32987459546915,
+     "expectedHours": 24,
+     "sharePct": 24.174352349564487
+    },
+    {
+     "station": "Warehouse",
+     "invoices": 55,
+     "visits": 56,
+     "waitHours": 1243.2166666666667,
+     "workHours": 76024.93333333338,
+     "totalHours": 77268.15000000004,
+     "avgHoursPerVisit": 1379.7883928571434,
+     "sharePct": 19.65560113462706
+    },
+    {
+     "station": "Procurement",
+     "invoices": 108,
+     "visits": 117,
+     "waitHours": 2624.683333333332,
+     "workHours": 27963.983333333348,
+     "totalHours": 30588.66666666668,
+     "avgHoursPerVisit": 261.44159544159555,
+     "sharePct": 7.781196149255057
+    },
+    {
+     "station": "Quality",
+     "invoices": 50,
+     "visits": 52,
+     "waitHours": 1178.7500000000002,
+     "workHours": 20486.283333333333,
+     "totalHours": 21665.033333333333,
+     "avgHoursPerVisit": 416.6352564102564,
+     "sharePct": 5.511187387926325
+    },
+    {
+     "station": "Payment",
+     "invoices": 528,
+     "visits": 528,
+     "waitHours": 15099.95,
+     "workHours": 727,
+     "totalHours": 15826.95,
+     "avgHoursPerVisit": 29.975284090909092,
+     "expectedHours": 48,
+     "sharePct": 4.026085992452072
+    },
+    {
+     "station": "Logistics",
+     "invoices": 6,
+     "visits": 6,
+     "waitHours": 130.54999999999998,
+     "workHours": 14494.749999999998,
+     "totalHours": 14625.299999999997,
+     "avgHoursPerVisit": 2437.5499999999997,
+     "sharePct": 3.720408257144256
+    },
+    {
+     "station": "Intake",
+     "invoices": 650,
+     "visits": 650,
+     "waitHours": 287.3666666666667,
+     "workHours": 0,
+     "totalHours": 287.3666666666667,
+     "avgHoursPerVisit": 0.4421025641025641,
+     "expectedHours": 2,
+     "sharePct": 0.07310081294022604
+    },
+    {
+     "station": "Supplier master data",
+     "invoices": 2,
+     "visits": 2,
+     "waitHours": 44.96666666666667,
+     "workHours": 143.93333333333334,
+     "totalHours": 188.9,
+     "avgHoursPerVisit": 94.45,
+     "sharePct": 0.04805269770702482
+    }
+   ],
+   "edges": [
+    {
+     "from": "Intake",
+     "to": "AP review",
+     "count": 650,
+     "avgGapHours": 0.4421025641025641,
+     "rework": false
+    },
+    {
+     "from": "AP review",
+     "to": "Warehouse",
+     "count": 56,
+     "avgGapHours": 3.9630952380952382,
+     "rework": false
+    },
+    {
+     "from": "AP review",
+     "to": "Quality",
+     "count": 52,
+     "avgGapHours": 5.239743589743587,
+     "rework": false
+    },
+    {
+     "from": "Quality",
+     "to": "AP review",
+     "count": 46,
+     "avgGapHours": 74.7076086956522,
+     "rework": true
+    },
+    {
+     "from": "AP review",
+     "to": "Approval",
+     "count": 533,
+     "avgGapHours": 30.228298936835508,
+     "rework": false
+    },
+    {
+     "from": "Approval",
+     "to": "Payment",
+     "count": 528,
+     "avgGapHours": 260.309154040404,
+     "rework": false
+    },
+    {
+     "from": "AP review",
+     "to": "Procurement",
+     "count": 117,
+     "avgGapHours": 5.9970085470085435,
+     "rework": false
+    },
+    {
+     "from": "Procurement",
+     "to": "AP review",
+     "count": 96,
+     "avgGapHours": 69.58628472222225,
+     "rework": true
+    },
+    {
+     "from": "Warehouse",
+     "to": "AP review",
+     "count": 30,
+     "avgGapHours": 71.1888888888889,
+     "rework": true
+    },
+    {
+     "from": "AP review",
+     "to": "Logistics",
+     "count": 6,
+     "avgGapHours": 1.252777777777778,
+     "rework": false
+    },
+    {
+     "from": "AP review",
+     "to": "Supplier master data",
+     "count": 2,
+     "avgGapHours": 1.3666666666666667,
+     "rework": false
+    },
+    {
+     "from": "Supplier master data",
+     "to": "AP review",
+     "count": 2,
+     "avgGapHours": 94.45,
+     "rework": true
+    }
+   ],
+   "bottlenecks": [
+    {
+     "station": "Logistics",
+     "invoices": 6,
+     "visits": 6,
+     "waitHours": 130.54999999999998,
+     "workHours": 14494.749999999998,
+     "totalHours": 14625.299999999997,
+     "avgHoursPerVisit": 2437.5499999999997,
+     "sharePct": 3.720408257144256
+    },
+    {
+     "station": "Warehouse",
+     "invoices": 55,
+     "visits": 56,
+     "waitHours": 1243.2166666666667,
+     "workHours": 76024.93333333338,
+     "totalHours": 77268.15000000004,
+     "avgHoursPerVisit": 1379.7883928571434,
+     "sharePct": 19.65560113462706
+    },
+    {
+     "station": "Quality",
+     "invoices": 50,
+     "visits": 52,
+     "waitHours": 1178.7500000000002,
+     "workHours": 20486.283333333333,
+     "totalHours": 21665.033333333333,
+     "avgHoursPerVisit": 416.6352564102564,
+     "sharePct": 5.511187387926325
+    }
+   ],
+   "loops": [
+    {
+     "sequence": "AP review → Procurement → AP review",
+     "via": "Procurement",
+     "invoices": 87,
+     "occurrences": 96,
+     "extraDays": 276.8
+    },
+    {
+     "sequence": "AP review → Quality → AP review",
+     "via": "Quality",
+     "invoices": 44,
+     "occurrences": 46,
+     "extraDays": 140.1
+    },
+    {
+     "sequence": "AP review → Warehouse → AP review",
+     "via": "Warehouse",
+     "invoices": 29,
+     "occurrences": 30,
+     "extraDays": 86.8
+    },
+    {
+     "sequence": "Procurement → AP review → Procurement",
+     "via": "AP review",
+     "invoices": 9,
+     "occurrences": 9,
+     "extraDays": 9.1
+    }
+   ],
+   "variants": [
+    {
+     "key": "Intake → AP review → Approval → Payment",
+     "stations": [
+      "Intake",
+      "AP review",
+      "Approval",
+      "Payment"
+     ],
+     "invoices": 392,
+     "sharePct": 60.30769230769231,
+     "completed": 364,
+     "avgCycleDays": 14.3,
+     "conformance": "conforming",
+     "hasLoop": false,
+     "example": "AF14/25-26/0288"
+    },
+    {
+     "key": "Intake → AP review",
+     "stations": [
+      "Intake",
+      "AP review"
+     ],
+     "invoices": 58,
+     "sharePct": 8.923076923076923,
+     "completed": 0,
+     "avgCycleDays": 55.8,
+     "conformance": "on_track",
+     "hasLoop": false,
+     "example": "AF14/26-27/0384"
+    },
+    {
+     "key": "Intake → AP review → Procurement → AP review → Approval → Payment",
+     "stations": [
+      "Intake",
+      "AP review",
+      "Procurement",
+      "AP review",
+      "Approval",
+      "Payment"
+     ],
+     "invoices": 58,
+     "sharePct": 8.923076923076923,
+     "completed": 49,
+     "avgCycleDays": 14.6,
+     "conformance": "rework",
+     "hasLoop": true,
+     "example": "AF14/26-27/0174"
+    },
+    {
+     "key": "Intake → AP review → Warehouse",
+     "stations": [
+      "Intake",
+      "AP review",
+      "Warehouse"
+     ],
+     "invoices": 25,
+     "sharePct": 3.8461538461538463,
+     "completed": 0,
+     "avgCycleDays": 125.3,
+     "conformance": "extra_steps",
+     "hasLoop": false,
+     "example": "AF14/26-27/0128"
+    },
+    {
+     "key": "Intake → AP review → Quality → AP review → Approval → Payment",
+     "stations": [
+      "Intake",
+      "AP review",
+      "Quality",
+      "AP review",
+      "Approval",
+      "Payment"
+     ],
+     "invoices": 24,
+     "sharePct": 3.6923076923076925,
+     "completed": 23,
+     "avgCycleDays": 15.3,
+     "conformance": "rework",
+     "hasLoop": true,
+     "example": "BPH11/26-27/0202"
+    }
+   ],
+   "totals": {
+    "invoices": 650,
+    "reworkPct": 21.23076923076923,
+    "reworkInvoices": 138,
+    "avgCycleDays": 25.2,
+    "conformingPct": 56.00000000000001
+   }
+  },
+  "9": {
+   "integrity": {
+    "ok": true,
+    "auditEntries": 6092,
+    "workflowEvents": 6026
+   },
+   "tamper": [
+    {
+     "label": "Untouched audit trail",
+     "ok": true,
+     "reason": "Chain intact: 6092 audit entries and 6026 workflow events verified."
+    },
+    {
+     "label": "Someone edits the text of audit record 3046",
+     "ok": false,
+     "position": 3046,
+     "reason": "Record 3046 (wf_review_started) has been changed since it was written."
+    },
+    {
+     "label": "Someone deletes audit record 3046",
+     "ok": false,
+     "position": 3047,
+     "reason": "Record 3047 follows record 3045: a record is missing or out of order."
+    },
+    {
+     "label": "Someone edits a workflow event (changes who approved)",
+     "ok": false,
+     "position": 171,
+     "reason": "Workflow event 170 (approval_granted on NPC09/25-26/0453) has been changed since it was recorded; it no longer matches audit record 171."
+    }
+   ],
+   "passport": {
+    "invoiceNumber": "INV-7781",
+    "invoiceDate": "2026-11-10",
+    "amountInr": 1062000,
+    "poNumber": "4500001234",
+    "asOf": "2026-11-12",
+    "headline": "Approved. Payment is scheduled.",
+    "tone": "good",
+    "milestones": [
+     {
+      "id": "uploaded",
+      "label": "Invoice uploaded",
+      "state": "done",
+      "note": "Received on 11-Nov-2026.",
+      "date": "2026-11-11"
+     },
+     {
+      "id": "extracted",
+      "label": "Invoice data extracted",
+      "state": "done",
+      "note": "Invoice details were read and entered for checking."
+     },
+     {
+      "id": "po",
+      "label": "Purchase order matched",
+      "state": "done",
+      "note": "The invoice matches a purchase order."
+     },
+     {
+      "id": "receipt",
+      "label": "Goods receipt confirmed",
+      "state": "done",
+      "note": "The plant has confirmed the goods received."
+     },
+     {
+      "id": "procurement",
+      "label": "Procurement confirmation",
+      "state": "done",
+      "note": "Price, tax and terms are confirmed."
+     },
+     {
+      "id": "approval",
+      "label": "Final approval",
+      "state": "done",
+      "note": "Approved on 12-Nov-2026.",
+      "date": "2026-11-12"
+     },
+     {
+      "id": "payment",
+      "label": "Payment",
+      "state": "current",
+      "note": "Approved. Payment is released in the payment run on or before 25-Dec-2026."
+     }
+    ],
+    "blockers": [],
+    "actions": [
+     {
+      "team": "Accounts Payable",
+      "action": "Release payment in the next payment run"
+     }
+    ],
+    "paymentTermsDays": 45,
+    "dueDate": "2026-12-25",
+    "daysToDue": 43,
+    "atRisk": {
+     "flag": false,
+     "reason": "On track for the due date."
+    }
+   },
+   "readyForPayment": true,
+   "approvalNote": "Priya Nair approved ₹10,62,000 after the checks cleared. Approval is a person's decision, recorded in the audit trail.",
+   "checklist": [
+    {
+     "feature": "Root-Cause Resolver",
+     "step": 5,
+     "evidence": "Contract amendment not reflected in the PO (supported by evidence)"
+    },
+    {
+     "feature": "Counterfactual Explanation",
+     "step": 5,
+     "evidence": "This invoice line would pass the price check if PO 4500001234 line 1 price were updated to ₹412.00, per amendment of contract C-22 effective 01-Oct-2026, assuming all other checks pass."
+    },
+    {
+     "feature": "Contract-Aware matching",
+     "step": 4,
+     "evidence": "Contract C-22 is valid 01-Apr-2026 to 31-Mar-2027 and was in force on 02-Nov-2026; 2 of 3 line(s) agree with the contract, the rest are reported by the price check."
+    },
+    {
+     "feature": "Inventory-Aware verification",
+     "step": 4,
+     "evidence": "Receipts, returns and earlier invoices were reconciled for 3 line(s); the quantity check reports the remaining difference."
+    },
+    {
+     "feature": "Duplicate Fingerprint",
+     "step": 6,
+     "evidence": "INV-6120R scored 95 of 100 against INV-6120: warning, not proof"
+    },
+    {
+     "feature": "Threshold-Splitting detector",
+     "step": 6,
+     "evidence": "3 invoices, ₹2,90,166.72 combined: warning, not proof"
+    },
+    {
+     "feature": "Vendor Red Flags",
+     "step": 6,
+     "evidence": "Chennai Bearings: The account on the invoice (60410000771205) is new and still pending verification (valid from 2026-11-03)."
+    },
+    {
+     "feature": "Relationship Graph",
+     "step": 6,
+     "evidence": "Kolhapur Castings and Coimbatore Motors both hold account 50100118826968"
+    },
+    {
+     "feature": "Supplier Intelligence",
+     "step": 7,
+     "evidence": "3 suppliers scored on relationship strength, criticality and risk"
+    },
+    {
+     "feature": "Predictive Model A: exception",
+     "step": 7,
+     "evidence": "97% (High), gradient boosting, AUC 0.78"
+    },
+    {
+     "feature": "Predictive Model B: root cause",
+     "step": 7,
+     "evidence": "Price differs from the PO or contract, evidence-supported"
+    },
+    {
+     "feature": "Predictive Model C: payment delay",
+     "step": 7,
+     "evidence": "81% (High), logistic regression, AUC 0.75"
+    },
+    {
+     "feature": "Predictive Model D: supplier disruption",
+     "step": 7,
+     "evidence": "31% (Medium), logistic regression, AUC 0.76"
+    },
+    {
+     "feature": "Payment Readiness Passport",
+     "step": 9,
+     "evidence": "Approved. Payment is scheduled."
+    },
+    {
+     "feature": "Process-Mining Twin",
+     "step": 8,
+     "evidence": "Intake to AP review to Procurement to AP review to Warehouse, 1 rework loop"
+    },
+    {
+     "feature": "Hash-Chained Audit Trail",
+     "step": 9,
+     "evidence": "Tamper detected at record 3046"
+    },
+    {
+     "feature": "Six-source integration",
+     "step": 3,
+     "evidence": "6 of 6 sources contributed; Logistics outage handled without a guess"
+    },
+    {
+     "feature": "RAG with citations",
+     "step": 5,
+     "evidence": "2 answers, 5 cited passages"
+    }
+   ]
+  }
+ }
+}

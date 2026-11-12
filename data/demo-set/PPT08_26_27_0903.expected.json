@@ -1,0 +1,29 @@
+{
+  "file": "PPT08_26_27_0903.pdf",
+  "purpose": "Unit mismatch: billed 5 MT against a PO of 5000 kg, passes after normalisation",
+  "expectedVerdict": "approve",
+  "layout": "compact",
+  "amountFormat": "rs_dash",
+  "dateFormat": "ymd_slash",
+  "vendorName": "Pune Polymer Traders",
+  "vendorGstin": "27FICTP1008B1Z0",
+  "invoiceNumber": "PPT08/26-27/0903",
+  "invoiceDate": "2026-11-08",
+  "poNumber": "4600009003",
+  "lines": [
+    {
+      "itemCode": "CAL-CO3",
+      "description": "Calcium carbonate filler, coated",
+      "qty": 5,
+      "unit": "MT",
+      "unitPrice": 25000,
+      "amount": 125000
+    }
+  ],
+  "subtotal": 125000,
+  "taxRatePct": 18,
+  "taxAmount": 22500,
+  "total": 147500,
+  "remittanceAccount": "50100063393149",
+  "remittanceIfsc": "FICB0100296"
+}

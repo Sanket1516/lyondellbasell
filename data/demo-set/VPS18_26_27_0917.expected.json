@@ -1,0 +1,29 @@
+{
+  "file": "VPS18_26_27_0917.pdf",
+  "purpose": "Over-allocated quantity: an earlier invoice (VPS18/26-27/0480) already bills the whole receipt, this one bills 480 more",
+  "expectedVerdict": "approve",
+  "layout": "compact",
+  "amountFormat": "plain",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Vadodara Pumps & Seals",
+  "vendorGstin": "24FICTV1018L1Z0",
+  "invoiceNumber": "VPS18/26-27/0917",
+  "invoiceDate": "2026-11-09",
+  "poNumber": "4600009016",
+  "lines": [
+    {
+      "itemCode": "ANT-FRZ",
+      "description": "Coolant concentrate",
+      "qty": 480,
+      "unit": "L",
+      "unitPrice": 137,
+      "amount": 65760
+    }
+  ],
+  "subtotal": 65760,
+  "taxRatePct": 18,
+  "taxAmount": 11836.8,
+  "total": 77596.8,
+  "remittanceAccount": "50100142584319",
+  "remittanceIfsc": "FICB0100666"
+}

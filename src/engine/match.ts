@@ -140,10 +140,26 @@ export function matchInvoice(invoice: Invoice, data: MatchData, today: string, c
   }
 
   // 2. Duplicate fingerprint ---------------------------------------------------
+  /** True when this invoice plus every other invoice on the PO bills more of some line than the goods receipts cover. */
+  const billedBeyondReceipts = (): boolean => {
+    if (!po) return true;
+    return invoice.lines.some((l) => {
+      const pl = po.lines.find((p) => p.itemCode === l.itemCode);
+      if (!pl) return true;
+      const toPo = (itemCode: string | undefined, q: number, uom: string) => q * (uomFactor(data.uomRules, itemCode ?? pl.itemCode, uom, pl.uom)?.factor ?? 1);
+      const received = data.goodsReceipts.filter((g) => g.poId === po.id).flatMap((g) => g.lines.filter((x) => x.lineNo === pl.lineNo)).reduce((a, x) => a + x.qtyReceived, 0);
+      const billed = data.invoices.filter((x) => x.poId === po.id && x.id !== invoice.id && x.vendorId === invoice.vendorId)
+        .flatMap((x) => x.lines.filter((y) => y.itemCode === l.itemCode)).reduce((a, y) => a + toPo(y.itemCode, y.qty, y.uom), 0);
+      return billed + toPo(l.itemCode, l.qty, l.uom) > received * (1 + cfg.qtyPct / 100) + EPS;
+    });
+  };
   if (vendor) {
     const key = normaliseInvoiceNo(invoice.id);
     const hits = data.invoices
-      .filter((o) => o.id !== invoice.id && o.vendorId === invoice.vendorId && normaliseInvoiceNo(o.id) === key)
+      .filter((o) => o.id !== invoice.id && o.vendorId === invoice.vendorId)
+      // Same number apart from a prefix/suffix, OR a different number but the same PO and the same lines (a re-keyed copy).
+      // A re-keyed copy only counts when the PO's receipts cannot cover both bills; two halves of a staged delivery are legitimate.
+      .filter((o) => normaliseInvoiceNo(o.id) === key || (!!invoice.poId && o.poId === invoice.poId && sameLines(o.lines, invoice.lines) && billedBeyondReceipts()))
       .filter((o) => Math.abs(o.total - invoice.total) <= cfg.duplicateAmountInr + EPS)
       .filter((o) => Math.abs(day(o.invoiceDate) - day(invoice.invoiceDate)) <= cfg.duplicateDays)
       .filter((o) => o.poId === invoice.poId || sameLines(o.lines, invoice.lines))
@@ -154,7 +170,7 @@ export function matchInvoice(invoice: Invoice, data: MatchData, today: string, c
       const state = hit.status === "paid" ? `paid ${fmtDate(hit.resolvedOn)}`.trim() : `still open, ${hit.status.replace("_", " ")}`;
       const matched = [
         `same supplier`,
-        `invoice number differs only by a prefix or suffix (${invoice.id} and ${hit.id})`,
+        normaliseInvoiceNo(hit.id) === key ? `invoice number differs only by a prefix or suffix (${invoice.id} and ${hit.id})` : `different invoice numbers (${invoice.id} and ${hit.id}) for the same PO and lines`,
         `total ${inr(invoice.total)} against ${inr(hit.total)}`,
         `dates ${Math.round(Math.abs(day(hit.invoiceDate) - day(invoice.invoiceDate)))} days apart`,
         ...(hit.poId === invoice.poId ? [`same PO ${invoice.poId}`] : []),

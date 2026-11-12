@@ -1,0 +1,45 @@
+{
+  "file": "TL10_26_27_0901.pdf",
+  "purpose": "Clean match, three lines, Indian digit grouping",
+  "expectedVerdict": "approve",
+  "layout": "classic",
+  "amountFormat": "rs_lakh",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Thane Lubricants",
+  "vendorGstin": "27FICTT1010D1Z0",
+  "invoiceNumber": "TL10/26-27/0901",
+  "invoiceDate": "2026-11-07",
+  "poNumber": "4600009001",
+  "lines": [
+    {
+      "itemCode": "ANT-FRZ",
+      "description": "Coolant concentrate",
+      "qty": 400,
+      "unit": "L",
+      "unitPrice": 134,
+      "amount": 53600
+    },
+    {
+      "itemCode": "BRG-6205",
+      "description": "Deep groove bearing 6205",
+      "qty": 50,
+      "unit": "nos",
+      "unitPrice": 422,
+      "amount": 21100
+    },
+    {
+      "itemCode": "BLT-V38",
+      "description": "V-belt B-38",
+      "qty": 40,
+      "unit": "nos",
+      "unitPrice": 286,
+      "amount": 11440
+    }
+  ],
+  "subtotal": 86140,
+  "taxRatePct": 18,
+  "taxAmount": 15505.2,
+  "total": 101645.2,
+  "remittanceAccount": "50100079231383",
+  "remittanceIfsc": "FICB0100370"
+}

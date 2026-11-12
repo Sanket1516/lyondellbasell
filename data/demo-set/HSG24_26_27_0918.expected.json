@@ -1,0 +1,29 @@
+{
+  "file": "HSG24_26_27_0918.pdf",
+  "purpose": "Returned goods: 30% of the received quantity went back to the supplier, but the full quantity is billed",
+  "expectedVerdict": "approve",
+  "layout": "letterhead",
+  "amountFormat": "rs_dash",
+  "dateFormat": "ymd_slash",
+  "vendorName": "Hyderabad Safety Gear",
+  "vendorGstin": "36FICTH1024R1Z0",
+  "invoiceNumber": "HSG24/26-27/0918",
+  "invoiceDate": "2026-11-08",
+  "poNumber": "4600009017",
+  "lines": [
+    {
+      "itemCode": "CAL-CO3",
+      "description": "Calcium carbonate filler, coated",
+      "qty": 10000,
+      "unit": "kg",
+      "unitPrice": 24,
+      "amount": 240000
+    }
+  ],
+  "subtotal": 240000,
+  "taxRatePct": 18,
+  "taxAmount": 43200,
+  "total": 283200,
+  "remittanceAccount": "50100190099021",
+  "remittanceIfsc": "FICB0100888"
+}

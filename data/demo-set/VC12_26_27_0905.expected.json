@@ -1,0 +1,29 @@
+{
+  "file": "VC12_26_27_0905.pdf",
+  "purpose": "Quantity billed above goods receipt (delivery note shows full quantity)",
+  "expectedVerdict": "flag",
+  "layout": "letterhead",
+  "amountFormat": "rs_lakh",
+  "dateFormat": "d_mon_y",
+  "vendorName": "Vasai Chemicals",
+  "vendorGstin": "27FICTV1012F1Z0",
+  "invoiceNumber": "VC12/26-27/0905",
+  "invoiceDate": "2026-11-07",
+  "poNumber": "4600009005",
+  "lines": [
+    {
+      "itemCode": "HLM-SF",
+      "description": "Safety helmet, ISI",
+      "qty": 50,
+      "unit": "nos",
+      "unitPrice": 378,
+      "amount": 18900
+    }
+  ],
+  "subtotal": 18900,
+  "taxRatePct": 18,
+  "taxAmount": 3402,
+  "total": 22302,
+  "remittanceAccount": "50100095069617",
+  "remittanceIfsc": "FICB0100444"
+}

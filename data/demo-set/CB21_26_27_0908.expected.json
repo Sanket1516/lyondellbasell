@@ -1,0 +1,37 @@
+{
+  "file": "CB21_26_27_0908.pdf",
+  "purpose": "Bank-detail change: remittance account differs from the verified account on file",
+  "expectedVerdict": "approve",
+  "layout": "modern",
+  "amountFormat": "inr_western",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Chennai Bearings",
+  "vendorGstin": "33FICTC1021O1Z0",
+  "invoiceNumber": "CB21/26-27/0908",
+  "invoiceDate": "2026-11-08",
+  "poNumber": "4600009012",
+  "lines": [
+    {
+      "itemCode": "PMP-IMP",
+      "description": "Pump impeller SS304",
+      "qty": 10,
+      "unit": "nos",
+      "unitPrice": 9345,
+      "amount": 93450
+    },
+    {
+      "itemCode": "BOLT-M16",
+      "description": "Hex bolt set M16 HT",
+      "qty": 40,
+      "unit": "sets",
+      "unitPrice": 530,
+      "amount": 21200
+    }
+  ],
+  "subtotal": 114650,
+  "taxRatePct": 18,
+  "taxAmount": 20637,
+  "total": 135287,
+  "remittanceAccount": "60410000771205",
+  "remittanceIfsc": "FICB0554321"
+}

@@ -1,0 +1,29 @@
+{
+  "file": "AF19_26_27_0907.pdf",
+  "purpose": "Contract amendment handled: PO amended to the new contract price, invoice matches",
+  "expectedVerdict": "approve",
+  "layout": "ledger",
+  "amountFormat": "inr_western",
+  "dateFormat": "d_mon_y",
+  "vendorName": "Ahmedabad Filters",
+  "vendorGstin": "24FICTA1019M1Z0",
+  "invoiceNumber": "AF19/26-27/0907",
+  "invoiceDate": "2026-11-05",
+  "poNumber": "4600009010",
+  "lines": [
+    {
+      "itemCode": "FLT-OIL",
+      "description": "Hydraulic oil filter element",
+      "qty": 20,
+      "unit": "nos",
+      "unitPrice": 784,
+      "amount": 15680
+    }
+  ],
+  "subtotal": 15680,
+  "taxRatePct": 18,
+  "taxAmount": 2822.4,
+  "total": 18502.4,
+  "remittanceAccount": "50100150503436",
+  "remittanceIfsc": "FICB0100703"
+}

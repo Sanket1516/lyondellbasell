@@ -1,0 +1,29 @@
+{
+  "file": "MFL26_26_27_0916.pdf",
+  "purpose": "Contract expired: goods were delivered after the contract's end date",
+  "expectedVerdict": "approve",
+  "layout": "classic",
+  "amountFormat": "inr_western",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Mundra Freight Lines",
+  "vendorGstin": "24FICTM1026T1Z0",
+  "invoiceNumber": "MFL26/26-27/0916",
+  "invoiceDate": "2026-11-07",
+  "poNumber": "4600009015",
+  "lines": [
+    {
+      "itemCode": "ANT-FRZ",
+      "description": "Coolant concentrate",
+      "qty": 1200,
+      "unit": "L",
+      "unitPrice": 139,
+      "amount": 166800
+    }
+  ],
+  "subtotal": 166800,
+  "taxRatePct": 18,
+  "taxAmount": 30024,
+  "total": 196824,
+  "remittanceAccount": "50100205937255",
+  "remittanceIfsc": "FICB0100962"
+}

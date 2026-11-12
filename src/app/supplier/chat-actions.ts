@@ -9,8 +9,9 @@ const INTENTS: Intent[] = ["status", "why_held", "needs", "due", "late"];
 export async function askPayment(input: { intent?: string; text?: string; invoiceId?: string }): Promise<ChatAnswer | { error: string }> {
   const u = await getSessionUser();
   if (!u || u.role !== "supplier") return { error: "Please sign in as a supplier." };
-  const text = String(input.text ?? "").slice(0, 200);
+  if (!input || typeof input !== "object") input = {};
+  const text = typeof input.text === "string" ? input.text.slice(0, 200) : "";
   const intent = INTENTS.find((i) => i === input.intent) ?? intentFromText(text);
-  const invoiceId = (input.invoiceId ? String(input.invoiceId).slice(0, 40) : undefined) ?? invoiceIdFromText(text);
+  const invoiceId = (typeof input.invoiceId === "string" && input.invoiceId ? input.invoiceId.slice(0, 40) : undefined) ?? invoiceIdFromText(text);
   return answer(getState(), { username: u.username, vendorId: u.vendorId }, intent, invoiceId, text || undefined);
 }

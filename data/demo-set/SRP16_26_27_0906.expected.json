@@ -1,0 +1,37 @@
+{
+  "file": "SRP16_26_27_0906.pdf",
+  "purpose": "Stale PO price: contract amendment raised the price after the PO",
+  "expectedVerdict": "flag",
+  "layout": "modern",
+  "amountFormat": "rs_dash",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Satara Rubber Products",
+  "vendorGstin": "27FICTS1016J1Z0",
+  "invoiceNumber": "SRP16/26-27/0906",
+  "invoiceDate": "2026-11-03",
+  "poNumber": "4600009006",
+  "lines": [
+    {
+      "itemCode": "CAL-CO3",
+      "description": "Calcium carbonate filler, coated",
+      "qty": 20000,
+      "unit": "kg",
+      "unitPrice": 24,
+      "amount": 480000
+    },
+    {
+      "itemCode": "ZN-ST",
+      "description": "Zinc stearate powder",
+      "qty": 2000,
+      "unit": "kg",
+      "unitPrice": 188,
+      "amount": 376000
+    }
+  ],
+  "subtotal": 856000,
+  "taxRatePct": 18,
+  "taxAmount": 154080,
+  "total": 1010080,
+  "remittanceAccount": "50100126746085",
+  "remittanceIfsc": "FICB0100592"
+}

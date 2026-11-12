@@ -1,0 +1,29 @@
+{
+  "file": "RR07_26_27_0914.pdf",
+  "purpose": "Logistics: weighbridge net weight is about 8% below the GRN and the invoice",
+  "expectedVerdict": "approve",
+  "layout": "classic",
+  "amountFormat": "inr_western",
+  "dateFormat": "d_mon_y",
+  "vendorName": "Ratnagiri Resins",
+  "vendorGstin": "27FICTR1007A1Z0",
+  "invoiceNumber": "RR07/26-27/0914",
+  "invoiceDate": "2026-11-07",
+  "poNumber": "4600009008",
+  "lines": [
+    {
+      "itemCode": "PP-GR",
+      "description": "Polypropylene granules, injection grade",
+      "qty": 2000,
+      "unit": "kg",
+      "unitPrice": 114,
+      "amount": 228000
+    }
+  ],
+  "subtotal": 228000,
+  "taxRatePct": 18,
+  "taxAmount": 41040,
+  "total": 269040,
+  "remittanceAccount": "50100055474032",
+  "remittanceIfsc": "FICB0100259"
+}

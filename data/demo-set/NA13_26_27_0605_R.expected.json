@@ -1,0 +1,29 @@
+{
+  "file": "NA13_26_27_0605_R.pdf",
+  "purpose": "Re-submission of paid NA13/26-27/0605 with a changed number and date",
+  "expectedVerdict": "block",
+  "layout": "classic",
+  "amountFormat": "plain",
+  "dateFormat": "ymd_slash",
+  "vendorName": "Nagpur Abrasives",
+  "vendorGstin": "27FICTN1013G1Z0",
+  "invoiceNumber": "NA13/26-27/0605-R",
+  "invoiceDate": "2026-11-08",
+  "poNumber": "4600009009",
+  "lines": [
+    {
+      "itemCode": "ABR-DSC",
+      "description": "Abrasive cutting disc 4 in",
+      "qty": 200,
+      "unit": "nos",
+      "unitPrice": 74,
+      "amount": 14800
+    }
+  ],
+  "subtotal": 14800,
+  "taxRatePct": 18,
+  "taxAmount": 2664,
+  "total": 17464,
+  "remittanceAccount": "50100102988734",
+  "remittanceIfsc": "FICB0100481"
+}

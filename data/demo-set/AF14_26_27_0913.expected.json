@@ -1,0 +1,29 @@
+{
+  "file": "AF14_26_27_0913.pdf",
+  "purpose": "Quality: 15% of the received quantity was rejected at inspection but the full quantity is billed",
+  "expectedVerdict": "approve",
+  "layout": "ledger",
+  "amountFormat": "rs_dash",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Aurangabad Fasteners",
+  "vendorGstin": "27FICTA1014H1Z0",
+  "invoiceNumber": "AF14/26-27/0913",
+  "invoiceDate": "2026-11-07",
+  "poNumber": "4600009007",
+  "lines": [
+    {
+      "itemCode": "LBL-RL",
+      "description": "Thermal label roll 100x150",
+      "qty": 80,
+      "unit": "rolls",
+      "unitPrice": 313,
+      "amount": 25040
+    }
+  ],
+  "subtotal": 25040,
+  "taxRatePct": 18,
+  "taxAmount": 4507.2,
+  "total": 29547.2,
+  "remittanceAccount": "50100110907851",
+  "remittanceIfsc": "FICB0100518"
+}

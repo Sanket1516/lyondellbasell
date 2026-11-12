@@ -22,3 +22,6 @@ data/uploads/
 public/pdf.worker.min.mjs
 data/plantx.db
 data/plantx.db-*
+data/foundation.db*
+data/sources/
+data/plantpay-integration.db*

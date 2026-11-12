@@ -1,0 +1,29 @@
+{
+  "file": "IG20_26_27_0912.pdf",
+  "purpose": "Threshold splitting, part 3 of 3: same PO, same day, each under Rs 1,00,000 (C)",
+  "expectedVerdict": "approve",
+  "layout": "compact",
+  "amountFormat": "rs_lakh",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Indore Gaskets",
+  "vendorGstin": "23FICTI1020N1Z0",
+  "invoiceNumber": "IG20/26-27/0912",
+  "invoiceDate": "2026-11-09",
+  "poNumber": "4600009011",
+  "lines": [
+    {
+      "itemCode": "CBL-4C",
+      "description": "Armoured cable 4 core 16 sq mm",
+      "qty": 375,
+      "unit": "m",
+      "unitPrice": 218,
+      "amount": 81750
+    }
+  ],
+  "subtotal": 81750,
+  "taxRatePct": 18,
+  "taxAmount": 14715,
+  "total": 96465,
+  "remittanceAccount": "50100158422553",
+  "remittanceIfsc": "FICB0100740"
+}

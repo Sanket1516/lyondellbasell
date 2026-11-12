@@ -1,0 +1,29 @@
+{
+  "file": "SD17_26_27_0915.pdf",
+  "purpose": "Contract price: invoice and PO agree with each other but are about 6% above the contract price",
+  "expectedVerdict": "approve",
+  "layout": "modern",
+  "amountFormat": "rs_lakh",
+  "dateFormat": "d_mon_y",
+  "vendorName": "Surat Dyestuffs",
+  "vendorGstin": "24FICTS1017K1Z0",
+  "invoiceNumber": "SD17/26-27/0915",
+  "invoiceDate": "2026-11-08",
+  "poNumber": "4600009014",
+  "lines": [
+    {
+      "itemCode": "GRS-EP2",
+      "description": "EP-2 lithium grease",
+      "qty": 200,
+      "unit": "kg",
+      "unitPrice": 353,
+      "amount": 70600
+    }
+  ],
+  "subtotal": 70600,
+  "taxRatePct": 18,
+  "taxAmount": 12708,
+  "total": 83308,
+  "remittanceAccount": "50100134665202",
+  "remittanceIfsc": "FICB0100629"
+}

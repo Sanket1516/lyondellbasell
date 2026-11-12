@@ -1,0 +1,37 @@
+{
+  "file": "CM23_26_27_0909.pdf",
+  "purpose": "Remittance account is also on file for an unrelated vendor",
+  "expectedVerdict": "approve",
+  "layout": "letterhead",
+  "amountFormat": "rs_dash",
+  "dateFormat": "d_mon_y",
+  "vendorName": "Coimbatore Motors",
+  "vendorGstin": "33FICTC1023Q1Z0",
+  "invoiceNumber": "CM23/26-27/0909",
+  "invoiceDate": "2026-11-07",
+  "poNumber": "4600009013",
+  "lines": [
+    {
+      "itemCode": "PP-GR",
+      "description": "Polypropylene granules, injection grade",
+      "qty": 10000,
+      "unit": "kg",
+      "unitPrice": 119,
+      "amount": 1190000
+    },
+    {
+      "itemCode": "PE-MB",
+      "description": "Masterbatch blue, 40% loading",
+      "qty": 2000,
+      "unit": "kg",
+      "unitPrice": 260,
+      "amount": 520000
+    }
+  ],
+  "subtotal": 1710000,
+  "taxRatePct": 18,
+  "taxAmount": 307800,
+  "total": 2017800,
+  "remittanceAccount": "50100118826968",
+  "remittanceIfsc": "FICB0100555"
+}

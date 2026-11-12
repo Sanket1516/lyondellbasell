@@ -1,0 +1,29 @@
+{
+  "file": "NPC09_26_27_0902.pdf",
+  "purpose": "Clean match, single line, western digit grouping",
+  "expectedVerdict": "approve",
+  "layout": "modern",
+  "amountFormat": "inr_western",
+  "dateFormat": "d_mon_y",
+  "vendorName": "Nashik Pallet Co",
+  "vendorGstin": "27FICTN1009C1Z0",
+  "invoiceNumber": "NPC09/26-27/0902",
+  "invoiceDate": "2026-11-08",
+  "poNumber": "4600009002",
+  "lines": [
+    {
+      "itemCode": "LUB-68",
+      "description": "Lube oil ISO VG 68",
+      "qty": 2000,
+      "unit": "L",
+      "unitPrice": 176,
+      "amount": 352000
+    }
+  ],
+  "subtotal": 352000,
+  "taxRatePct": 18,
+  "taxAmount": 63360,
+  "total": 415360,
+  "remittanceAccount": "50100071312266",
+  "remittanceIfsc": "FICB0100333"
+}

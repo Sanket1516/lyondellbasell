@@ -1,0 +1,29 @@
+{
+  "file": "BPH11_26_27_0904.pdf",
+  "purpose": "Price about 7% above PO and contract",
+  "expectedVerdict": "flag",
+  "layout": "ledger",
+  "amountFormat": "plain",
+  "dateFormat": "dmy_dash",
+  "vendorName": "Bhiwandi Packaging Hub",
+  "vendorGstin": "27FICTB1011E1Z0",
+  "invoiceNumber": "BPH11/26-27/0904",
+  "invoiceDate": "2026-11-07",
+  "poNumber": "4600009004",
+  "lines": [
+    {
+      "itemCode": "SEAL-MS",
+      "description": "Mechanical seal 35 mm",
+      "qty": 10,
+      "unit": "nos",
+      "unitPrice": 6052,
+      "amount": 60520
+    }
+  ],
+  "subtotal": 60520,
+  "taxRatePct": 18,
+  "taxAmount": 10893.6,
+  "total": 71413.6,
+  "remittanceAccount": "50100087150500",
+  "remittanceIfsc": "FICB0100407"
+}

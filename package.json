@@ -9,10 +9,20 @@
     "test": "vitest run",
     "seed": "tsx scripts/generate-seed.ts && tsx scripts/seed.ts",
     "reset": "tsx scripts/seed.ts",
+    "seed:foundation": "tsx scripts/seed-foundation.ts",
+    "seed:sources": "tsx scripts/seed-sources.ts",
+    "train:models": "tsx scripts/train-models.ts",
+    "demo-set:generate": "tsx scripts/generate-demo-set.ts",
     "docs:generate": "tsx scripts/generate-docs.ts",
     "predev": "node scripts/copy-pdf-worker.mjs",
     "prebuild": "node scripts/copy-pdf-worker.mjs",
-    "audit:tamper": "tsx scripts/tamper-audit.ts"
+    "audit:tamper": "tsx scripts/tamper-audit.ts",
+    "audit:tamper:plantpay": "tsx scripts/tamper-plantpay.ts",
+    "journey:fallback": "tsx scripts/build-journey-fallback.ts",
+    "setup": "npm run reset && npm run seed:foundation && npm run train:models && npm run seed:sources",
+    "demo": "npm run build && next start",
+    "smoke": "tsx scripts/smoke/smoke.ts",
+    "test:journey": "vitest run src/plantpay/journey && vitest run src/plantpay/journey && vitest run src/plantpay/journey"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

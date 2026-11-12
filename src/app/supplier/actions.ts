@@ -33,14 +33,16 @@ const text = (s: unknown, max = 200) => (typeof s === "string" ? s.trim().slice(
 export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
   const user = await getSessionUser();
   if (!user || user.role !== "supplier") return { ok: false, error: "Please sign in as a supplier." };
+  if (!p || typeof p !== "object") return { ok: false, error: "The invoice details were not received. Please try again." };
 
   const id = text(p.invoiceNumber, 40);
   if (!/^[A-Za-z0-9][A-Za-z0-9\/\-]{2,39}$/.test(id)) return { ok: false, error: "Enter a valid invoice number (letters, digits, - or /)." };
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(p.invoiceDate ?? "") || Number.isNaN(Date.parse(p.invoiceDate))) return { ok: false, error: "Enter the invoice date as DD-MM-YYYY." };
+  if (typeof p.invoiceDate !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(p.invoiceDate) || Number.isNaN(Date.parse(p.invoiceDate))) return { ok: false, error: "Enter the invoice date as DD-MM-YYYY." };
   const po = text(p.poNumber, 20);
   if (!/^\d{6,12}$/.test(po)) return { ok: false, error: "Enter the PO number (digits only)." };
   if (!Array.isArray(p.lines) || p.lines.length === 0 || p.lines.length > 50) return { ok: false, error: "The invoice needs at least one line item." };
   for (const [i, l] of p.lines.entries()) {
+    if (!l || typeof l !== "object") return { ok: false, error: `Line ${i + 1}: the line details are missing.` };
     if (!text(l.description) || !text(l.unit, 12)) return { ok: false, error: `Line ${i + 1}: description and unit are required.` };
     if (!isNum(l.qty) || l.qty <= 0 || !isNum(l.unitPrice) || !isNum(l.amount)) return { ok: false, error: `Line ${i + 1}: quantity, rate and amount must be numbers.` };
   }

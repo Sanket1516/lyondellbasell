@@ -1,0 +1,42 @@
+Stage 6 model evaluation (seed 20261112; 8000 historical invoices, 200 suppliers, 2400 supplier-months)
+
+== Invoice exception probability: Will this invoice need an exception resolved by a person?
+   data: 8000 rows (4800 train / 1600 validation / 1600 test), positive rate 19.7%
+   split: chronological split by invoice date: oldest 60% train, next 20% validation, newest 20% test (2025-01-01 to 2026-10-30; 8000 rows)
+   algorithm       val logloss   test: AUC    acc    F1     precision recall  logloss brier  threshold
+   logistic        0.3811        0.803   0.791   0.480   0.477   0.483   0.398   0.125   0.320  
+   forest          0.3915        0.779   0.802   0.450   0.506   0.404   0.417   0.132   0.370  
+   boosting *      0.3783        0.777   0.784   0.484   0.462   0.508   0.417   0.132   0.300    90 rounds (early stopping on validation)
+   (* = chosen on validation log-loss; decision threshold chosen on validation to maximise F1; majority-class baseline accuracy on test = 0.8006)
+   top features (permutation importance): amendedAfterPo 0.031, receiptCoverage 0.029, supplierExceptionRate 0.026, unitConversion 0.016, receiptLagDays 0.011
+
+== Likely root cause: If this invoice has an exception, what is the most likely cause?
+   data: 1576 rows (945 train / 315 validation / 316 test)
+   split: chronological split by invoice date: oldest 60% train, next 20% validation, newest 20% test (2025-01-01 to 2026-10-30; 1576 rows); trained on exception invoices only
+   algorithm       val logloss   test: acc    macroF1  top2   logloss
+   logistic        1.1731        0.608   0.397   0.759   1.221  
+   forest          1.1815        0.585   0.365   0.794   1.196  
+   boosting *      1.1560        0.592   0.376   0.797   1.167    20 rounds (early stopping on validation)
+   (* = chosen on validation log-loss; decision threshold chosen on validation to maximise F1; majority-class baseline accuracy on test = 0.3481)
+   top features (permutation importance): amendedAfterPo 0.212, partialDelivery 0.106, receiptLagDays 0.092, unitConversion 0.073, receiptCoverage 0.058
+
+== Payment delay risk: Will payment be made after the due date?
+   data: 8000 rows (4800 train / 1600 validation / 1600 test), positive rate 22.0%
+   split: chronological split by invoice date: oldest 60% train, next 20% validation, newest 20% test (2025-01-01 to 2026-10-30; 8000 rows)
+   algorithm       val logloss   test: AUC    acc    F1     precision recall  logloss brier  threshold
+   logistic *      0.4604        0.754   0.669   0.485   0.373   0.696   0.459   0.148   0.210  
+   forest          0.4758        0.733   0.643   0.479   0.356   0.733   0.472   0.153   0.210  
+   boosting        0.4704        0.742   0.701   0.479   0.393   0.613   0.467   0.151   0.240    80 rounds (early stopping on validation)
+   (* = chosen on validation log-loss; decision threshold chosen on validation to maximise F1; majority-class baseline accuracy on test = 0.7756)
+   top features (permutation importance): approvalPending 0.020, logValue 0.020, monthEnd 0.014, approvalLevel 0.011, hasDiscount 0.011
+
+== Supplier disruption risk: Will this supplier disrupt supply (late or failed deliveries) within 90 days?
+   data: 2400 rows (1440 train / 480 validation / 480 test), positive rate 14.0%
+   split: grouped by supplier: 60% of suppliers train, 20% validation, 20% test (200 suppliers x 12 monthly snapshots); no supplier is in two parts
+   algorithm       val logloss   test: AUC    acc    F1     precision recall  logloss brier  threshold
+   logistic *      0.2639        0.760   0.765   0.426   0.342   0.568   0.371   0.112   0.240  
+   forest          0.2778        0.773   0.844   0.419   0.491   0.365   0.362   0.109   0.420  
+   boosting        0.2734        0.761   0.821   0.419   0.419   0.419   0.368   0.111   0.380    40 rounds (early stopping on validation)
+   (* = chosen on validation log-loss; decision threshold chosen on validation to maximise F1; majority-class baseline accuracy on test = 0.8458)
+   top features (permutation importance): disputeRate 0.031, redFlags 0.024, onTimeRate 0.014, rejectRate 0.007, dependency 0.007
+
