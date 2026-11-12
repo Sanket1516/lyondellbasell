@@ -7,7 +7,7 @@ Testers (Lokesh on Antigravity, Utkarsh on Codex): your job is prompts/05_TEST_P
 - Problem statement: announced Day 1 at 11:00 AM. NOTE: the Round 2 statements PDF is already in `data/` and summarised in `context/problem_statements.md` (4 options: Circular Plastics Exchange, SafeSite, Order-to-Delivery Control Tower, Smart Procure-to-Pay). Team chose PS4: Smart Procure-to-Pay Assistant (SafeSite research archived in research/_archive_safesite/).
 - **Golden rule: ONE app, ONE golden user journey.**
 - Synthetic data only. No real LYB data, credentials or systems. Never commit secrets (`.env` is git-ignored; use `.env.example`).
-- Stack: decide after the problem statement is chosen.
+- **Locked scope (PS4):** only the 5 core items + 3 listed bonus items (duplicates, chatbot, controls report). Prototype demo on predefined documents, not a full website. Stack: Next.js + TypeScript + CSS Modules. No runtime AI in the decision path. UI must not look AI-generated. Plan and tickets: plan/tickets/00_PLAN.md, T1-T5.
 - Scoring/rules (see `context/problem_statements.md`): working prototype 20 pts, impact 15 pts; GenAI use must be declared (undeclared = −10); every member must be able to explain all code.
 
 ## 2. Team, roles, workflow

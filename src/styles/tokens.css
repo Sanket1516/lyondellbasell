@@ -1,0 +1,85 @@
+:root {
+  --paper: #f6f5f1;
+  --surface: #ffffff;
+  --ink: #1b2330;
+  --ink-soft: #4a5362;
+  --line: #d9d6cc;
+  --line-strong: #bdb9ac;
+  --accent: #0f5c63;
+  --accent-ink: #ffffff;
+  --accent-wash: #e3eeee;
+
+  --ok: #2e7d4f;
+  --ok-wash: #e4f1e8;
+  --warn: #b7791f;
+  --warn-ink: #7a4f0d;
+  --warn-wash: #f8eed8;
+  --bad: #b3372f;
+  --bad-wash: #f7e3e1;
+  --neutral: #6b7280;
+  --neutral-ink: #4b5260;
+  --neutral-wash: #ecebe6;
+
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+
+  --radius: 4px;
+  --rail-w: 208px;
+  --bar-h: 48px;
+  --focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.25;
+}
+h1 { font-size: 20px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+p { margin: 0; }
+
+a {
+  color: var(--accent);
+  text-underline-offset: 2px;
+}
+
+.num,
+.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.num { text-align: right; }
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+  border-radius: var(--radius);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

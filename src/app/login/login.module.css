@@ -1,0 +1,27 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 380px minmax(0, 560px);
+  gap: 32px;
+  justify-content: center;
+  align-content: center;
+  padding: 24px;
+}
+@media (max-width: 1000px) { .page { grid-template-columns: minmax(0, 560px); } }
+.card, .demo {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.demo { background: transparent; border-style: dashed; border-color: var(--line-strong); }
+.sub { color: var(--ink-soft); margin: 4px 0 16px; }
+.form { display: flex; flex-direction: column; gap: 14px; }
+.error { color: var(--bad); font-weight: 500; }
+.table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.table th { text-align: left; font-size: 12px; color: var(--ink-soft); padding: 4px 8px 6px 0; border-bottom: 1px solid var(--line-strong); }
+.table td { padding: 7px 8px 7px 0; border-bottom: 1px solid var(--line); }
+.fill {
+  font: inherit; background: none; border: 0; padding: 0; cursor: pointer;
+  color: var(--accent); text-decoration: underline; text-underline-offset: 2px;
+}

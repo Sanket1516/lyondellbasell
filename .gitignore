@@ -11,3 +11,8 @@ __pycache__
 .vscode/*
 !.vscode/settings.json
 coverage
+
+.next
+next-env.d.ts
+*.tsbuildinfo
+data/state.json
