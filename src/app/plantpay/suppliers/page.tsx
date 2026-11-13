@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AiLabel } from "@/components/Info";
 import { plantpay } from "@/plantpay/runtime";
 import { supplierTable } from "@/predict/service";
 import { Level } from "../PredictParts";
@@ -19,6 +20,7 @@ export default async function SuppliersHome({ searchParams }: { searchParams: Pr
   return (
     <>
       <h1 style={{ marginBottom: 6 }}>Supplier relationship scores</h1>
+      <div style={{ display: "flex", gap: 8, margin: "0 0 12px" }}><><AiLabel kind="rule" /> <AiLabel kind="ai" /></></div>
       <p className={s.lead}>Three separate scores for each supplier, calculated from the six department systems: how strong the relationship is, how critical the supplier is to production, and how risky the supplier is. A supplier can be strong, critical and risky at once, so they are never merged into one number.</p>
       <p className={s.ok}>Scores order human review work. They do not set the payment order: final payment order must respect contracts and financial policy.</p>
       <p className={`${p.small} ${p.sort}`}>Sort by: {(Object.keys(SORTS) as SortKey[]).map((k) => k === sort ? <strong key={k} style={{ marginRight: 12 }}>{SORTS[k]}</strong> : <Link key={k} href={`/plantpay/suppliers?sort=${k}`}>{SORTS[k]}</Link>)}</p>

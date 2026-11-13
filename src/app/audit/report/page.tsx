@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ImpactPanel } from "@/components/Info";
+import { buildImpact } from "@/lib/impact";
 import { StatusChip } from "@/components/ui";
 import { buildControlsReport } from "@/lib/controls";
 import { PLANT } from "@/lib/constants";
@@ -24,6 +26,11 @@ export default function ControlsReportPage() {
       <p className={s.scope}>
         Scope: {r.scope.invoices} invoices, {r.scope.matched} matched, {r.scope.approvedOrPaid} approved or paid, {r.scope.auditRecords} audit records. Synthetic data for a prototype; no payment is made by this system.
       </p>
+
+      <section aria-labelledby="impact">
+        <h2 id="impact">Impact summary</h2>
+        <ImpactPanel m={buildImpact(getState())} compact />
+      </section>
 
       <section aria-labelledby="tested">
         <h2 id="tested">Controls tested</h2>

@@ -104,7 +104,8 @@ function visible(html: string): string {
   return html.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
 }
-const mainText = (html: string) => { const m = /<main[^>]*>([\s\S]*?)<\/main>/.exec(html); return visible(m ? m[1] : html); };
+// Pages with a loading.tsx stream: the first <main> holds the spinner and the real content arrives in a hidden segment.
+const mainText = (html: string) => { const m = /<main[^>]*>([\s\S]*?)<\/main>/.exec(html); const t = visible(m ? m[1] : html); const h = html.indexOf('<div hidden id="S:'); return t.length < 120 && h >= 0 ? visible(html.slice(h)) : t; };
 const BAD_TEXT = /\bundefined\b|\bNaN\b|\[object [A-Z]|Traceback|ENOENT|SQLITE_|Application error|Internal Server Error|server-side exception|at Object\.|TypeError|ReferenceError|Unhandled|\bnull\b(?! and void)|Infinity/;
 
 let seq = 0;
@@ -246,7 +247,7 @@ function fdFrom(o: Record<string, string>): FormData { const f = new FormData();
 
 async function gPagesStaff() {
   const G = "pages";
-  for (const u of ["/clerk", "/dashboard", "/audit", "/audit/report", "/foundation", "/foundation?status=review", "/foundation?demo=1", "/plantpay", "/plantpay/audit", "/plantpay/graph", "/plantpay/predictions", "/plantpay/process", "/plantpay/suppliers", "/plantpay/journey", "/no-access"]) {
+  for (const u of ["/clerk", "/dashboard", "/audit", "/audit/report", "/foundation", "/foundation?status=review", "/foundation?demo=1", "/plantpay", "/plantpay/audit", "/plantpay/graph", "/plantpay/predictions", "/plantpay/process", "/plantpay/suppliers", "/plantpay/journey", "/plantpay/innovations", "/plantpay/architecture", "/plantpay/responsible-ai", "/plantpay/api-docs", "/no-access"]) {
     await page(G, u, { as: CLERK, minText: u === "/plantpay/journey" ? 20 : u === "/no-access" ? 60 : 120 });
   }
   for (const u of ["/approver", "/audit", "/plantpay", "/dashboard"]) await page(G, u, { as: L1 });

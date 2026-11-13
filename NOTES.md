@@ -663,3 +663,41 @@ Invoice row side drawer; supplier score arc gauges; prediction probability bars;
 - Audit trail and controls report: hash-chained events, verify in one click; six controls in one report.
 - Supplier view: own invoices only; the payment readiness passport says what is holding payment and when it is due.
 - Golden Journey: the nine-step guided story with presenter notes.
+
+## Judging-criteria maximisation audit (2026-11-13)
+
+Stack note as before: the brief says Python/FastAPI/Streamlit; the app is Next.js + TypeScript. "Streamlit grey" and "Swagger /docs" map to CSS modules and a static API reference page.
+
+### Audit result (state found, then action)
+
+| Criterion | Found | Action |
+|---|---|---|
+| 1 Problem fit | login states the problem; role pages had no value message | `ProblemBanner` (clerk home, `/plantpay`), `RoleBanner` per role built from live data (`src/lib/impact.ts`) |
+| 2 Innovation | all features existed; no index page | `/plantpay/innovations`: 10 cards, each with "See it live" and a Rule-based / AI-assisted label |
+| 3 Prototype | done; smoke 782/782 | verified again (below) |
+| 4 Architecture | diagram on `/plantpay` only; no explanation | `/plantpay/architecture`: diagram, 3 data-flow bullets, "how the integration layer works", live source health; `/plantpay/api-docs` lists every REST endpoint |
+| 5 Scalability | models saved to `data/ml/models.json`, evaluations stored; no note | "Scalability and production readiness" expandable with the 5 bullets |
+| 6 Impact | no quantified metrics | `ImpactPanel` on `/dashboard` and "Impact summary" in the controls report; "What would happen without PlantPay?" table |
+| 7 Responsible AI | labels existed in places; no page | `/plantpay/responsible-ai`; `AiLabel` on predictions, suppliers, graph, process, invoice and exception pages |
+| 8 UX | consistent dark system; no loading states | `loading.tsx` spinner on `/dashboard` and `/audit` |
+| 9 Demo | Journey, notes, timer, fallback, checklist existed; no DEMO.md | `DEMO.md`: click path, what to say, fallback plan |
+| 10 Q&A | none | Q&A cheat sheet in `DEMO.md` (6 given + 6 more) |
+
+### Decisions
+
+- **Impact numbers**: counts and rupee values are measured from the records. Time comparisons use three assumptions in `IMPACT_ASSUMPTIONS` (12 min per manual check, 3 days to find a root cause, 5 working days for a supplier reply), tagged "assumption" on screen. Approver "average approval time in minutes" was not shown: it cannot be measured here, so the banner shows items waiting, their value and the oldest age instead. Supplier "wait reduced from X to Y days" likewise shows measured open-invoice age and the assumed baseline reply time.
+- **Loading states limited on purpose**: a `loading.tsx` makes Next stream, which turns `notFound()` pages into HTTP 200. That would weaken the 404 checks (supplier cannot open another supplier's invoice). So spinners exist only on routes with no dynamic id child (`/dashboard`, `/audit`). The Journey and the upload form already show their own progress text. The smoke `mainText` helper now falls back to the hidden streamed segment when the visible shell is under 120 characters.
+- Nav gained Innovations, Architecture, Responsible AI for clerk and approver. API reference is linked from Architecture.
+
+### Verification
+
+- `tsc --noEmit` clean; `npm run build` clean.
+- Smoke (`npm run smoke -- --label r2max`): **786/786 pass**, 0 fail, 0 crash; includes the four new pages and the Golden Journey three times (25/25 each). One slow pass: clean-clone self-seed about 11 s.
+- Unit tests: 443 of 444. The one failure, plantpay.test.ts "every invoice starts with invoice_received and none is dated after today", is a clock dependency that predates this work and is not a flake: events created without an explicit time (src/plantpay/workflowEvents.ts line 44) take the real clock, and the test hard-codes the demo date 2026-11-12, so it fails once the real date is 13-Nov or later (it still fails after `npm run seed:sources`). Earlier "passes alone" notes were from before midnight. Not fixed here (test intent unchanged); the fix is to stamp seeded events with the demo date or compare against the real date. New `src/lib/impact.test.ts`: 2/2.
+
+### What is left
+
+- No browser click-through of the new pages; do one on the demo laptop. Screenshots were not retaken.
+- The nav now has 13 items for staff; check it fits at the venue screen size.
+- Predictions page is still about 2 to 5 s on a cold server; open it once before judges arrive.
+- Process twin and graph are static views, not drag-interactive; the graph supports focusing on a vendor.

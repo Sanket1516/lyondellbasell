@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ProblemBanner } from "@/components/Info";
 import { StatusChip, type ChipKind } from "@/components/ui";
 import { fmtDate, fmtInr } from "@/lib/format";
 import { SourceUnavailableError } from "@/plantpay/connectors";
@@ -55,6 +56,7 @@ export default async function PlantPayHome({ searchParams }: { searchParams: Pro
     <>
       <h1 style={{ marginBottom: 6 }}>PlantPay Intelligence Engine</h1>
       <p className={s.lead}>One view of every invoice, built from six separate department systems through a read-only integration layer. Deterministic rules decide; nothing here is an accusation, only a prompt for a person to look.</p>
+      <ProblemBanner />
       <ArchitectureDiagram />
 
       <h2 className={s.h2}>Data sources</h2>

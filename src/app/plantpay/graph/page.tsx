@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AiLabel } from "@/components/Info";
 import { StatusChip } from "@/components/ui";
 import { graphFor } from "@/plantpay/risk";
 import { plantpay } from "@/plantpay/runtime";
@@ -28,6 +29,7 @@ export default async function GraphPage({ searchParams }: { searchParams: Promis
   return (
     <div>
       <h1>Relationship graph</h1>
+      <div style={{ display: "flex", gap: 8, margin: "0 0 12px" }}><AiLabel kind="rule" /></div>
       <p className={s.lead}>Vendors, bank accounts, addresses, approvers, purchase orders and invoices, linked by what the source databases say. It looks for patterns <em>across</em> records. Everything it surfaces is a <strong>warning, not proof</strong>: group companies legitimately share accounts and addresses. Attributes of a single supplier&apos;s own record are on the invoice page under Vendor red flags.</p>
       <p className={s.tabs}>
         <Link className={`${s.tab} ${!focus ? s.tabOn : ""}`} href="/plantpay/graph">Linked vendors</Link>

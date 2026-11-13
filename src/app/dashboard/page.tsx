@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ImpactPanel } from "@/components/Info";
+import { buildImpact } from "@/lib/impact";
 import { Badge, EmptyState, Panel, StatusChip } from "@/components/ui";
 import { AGE_BUCKETS, buildDashboard, TYPE_LABEL, TYPE_ORDER, typeOf, type AgeBucketId, type ExceptionType } from "@/lib/dashboard";
 import { fmtDate, fmtInr, fmtRupees } from "@/lib/format";
@@ -44,6 +46,8 @@ export default async function DashboardPage({ searchParams }: { searchParams: Pr
       <p className={s.lead}>
         Open exceptions are invoices that failed the match and are not yet approved. Figures are computed from the invoice records each time this page loads. Choose a bar to filter the list at the bottom.
       </p>
+
+      <ImpactPanel m={buildImpact(state)} />
 
       <form className={s.filters} method="get" aria-label="Dashboard filters">
         <label>Supplier

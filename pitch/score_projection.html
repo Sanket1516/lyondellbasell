@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>PlantPay score projection</title>
+<style>
+@page { size: A4; margin: 16mm; }
+body { font-family: "Segoe UI", Arial, sans-serif; color: #1b2430; font-size: 10.5pt; line-height: 1.45; }
+h1 { font-size: 20pt; margin: 0 0 2px; }
+h2 { font-size: 12.5pt; margin: 16px 0 4px; border-bottom: 1px solid #c9d1d9; padding-bottom: 3px; }
+.sub { color: #57606a; margin: 0 0 12px; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0; }
+th, td { border: 1px solid #c9d1d9; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #eef2f7; }
+td.n, th.n { text-align: right; white-space: nowrap; }
+tr.tot td { font-weight: 700; background: #eef2f7; }
+.crit { break-inside: avoid; margin-bottom: 6px; }
+ul { margin: 3px 0 3px 18px; padding: 0; }
+.s { font-weight: 700; }
+.note { color: #57606a; font-size: 9.5pt; }
+</style></head><body>
+<h1>PlantPay Intelligence Engine: score projection</h1>
+<p class="sub">LYB Mumbai Hackathon 2026, Round 2, PS4 Smart Procure-to-Pay. Written for the team (Sanket, Lokesh, Utkarsh). Dated 13 Nov 2026.</p>
+
+<p><strong>Read this first.</strong> These are our own estimates against the 10 judging criteria, not measured scores. They assume a clean browser click-through on the demo laptop, which has not been done yet. The total of about 86.5 clears the target of 85 with little margin.</p>
+
+<h2>Summary</h2>
+<table>
+<tr><th>#</th><th>Criterion</th><th class="n">Max</th><th class="n">Estimate</th><th class="n">Gap</th></tr>
+<tr><td>1</td><td>Problem understanding &amp; user fit</td><td class="n">10</td><td class="n">9</td><td class="n">1</td></tr>
+<tr><td>2</td><td>Innovation &amp; original thinking</td><td class="n">10</td><td class="n">9</td><td class="n">1</td></tr>
+<tr><td>3</td><td>Working prototype / functionality</td><td class="n">20</td><td class="n">18</td><td class="n">2</td></tr>
+<tr><td>4</td><td>Technical design &amp; architecture</td><td class="n">10</td><td class="n">8.5</td><td class="n">1.5</td></tr>
+<tr><td>5</td><td>Feasibility &amp; scalability</td><td class="n">10</td><td class="n">8</td><td class="n">2</td></tr>
+<tr><td>6</td><td>Business / user value &amp; impact</td><td class="n">15</td><td class="n">12</td><td class="n">3</td></tr>
+<tr><td>7</td><td>Responsible AI, security &amp; data</td><td class="n">10</td><td class="n">9</td><td class="n">1</td></tr>
+<tr><td>8</td><td>User experience &amp; accessibility</td><td class="n">5</td><td class="n">4</td><td class="n">1</td></tr>
+<tr><td>9</td><td>Presentation &amp; demo</td><td class="n">5</td><td class="n">4.5</td><td class="n">0.5</td></tr>
+<tr><td>10</td><td>Q&amp;A &amp; team understanding</td><td class="n">5</td><td class="n">4.5</td><td class="n">0.5</td></tr>
+<tr class="tot"><td></td><td>Total</td><td class="n">100</td><td class="n">86.5</td><td class="n">13.5</td></tr>
+</table>
+
+<h2>How each estimate was reached</h2>
+
+<div class="crit"><p><span class="s">1. Problem understanding &amp; user fit: 9 / 10.</span></p><ul>
+<li>The login card states the problem in plain words: mismatches, duplicates, missing approvals.</li>
+<li>A "Why we built this" banner now sits on the clerk home and the PlantPay home.</li>
+<li>Each role has its own welcome banner with live figures: clerk (hours saved, exceptions with owner), approver (items waiting, value, oldest age), supplier (open invoices, cleared vs on hold).</li>
+<li>Gap: the supplier and approver pages show measured counts, but not a measured "wait reduced from X to Y days". The baseline is an assumption.</li></ul></div>
+
+<div class="crit"><p><span class="s">2. Innovation &amp; original thinking: 9 / 10.</span></p><ul>
+<li>All features already existed and work: Root-Cause Resolver, Counterfactual ("would pass if PO price were ₹412"), Process-Mining Twin, Relationship Graph, Supplier Intelligence (three separate scores), four predictive models, Payment Readiness Passport.</li>
+<li>New Innovations page lists 10 features, each with a "See it live" button and a Rule-based or AI-assisted label, so judges can count them.</li>
+<li>Gap: the graph can be focused on a vendor but is not drag-interactive.</li></ul></div>
+
+<div class="crit"><p><span class="s">3. Working prototype: 18 / 20 (highest weight).</span></p><ul>
+<li>Evidence: production smoke test passed 786 of 786 checks, 0 failures, 0 crashes. It covers the full workflow (supplier, clerk, approver, audit), all demo documents, planted cases, outage handling, and the Golden Journey three times in a row (25 of 25 each).</li>
+<li>Duplicate INV-6120R is caught before approval; the chatbot answers from live records; the controls report renders.</li>
+<li>Unit tests: 443 of 444. The one failure is a pre-existing clock dependency in a test (it hard-codes 12-Nov, and the real date is now 13-Nov). It does not affect the app.</li>
+<li>Why not 20: no human browser click-through yet; the Predictions page takes about 2 to 5 seconds when cold, above the 3-second target on the first load; first start on a clean clone takes about 11 seconds.</li></ul></div>
+
+<div class="crit"><p><span class="s">4. Technical design &amp; architecture: 8.5 / 10.</span></p><ul>
+<li>New Architecture page: six-database diagram, 3-bullet data flow, "how the integration layer works" (connectors, canonical model, event stream, REST facade), live source health.</li>
+<li>Rule-based and AI-assisted labels on the feature pages make the separation of concerns visible.</li>
+<li>API reference page lists every endpoint. Swagger-style interactive docs were not built.</li></ul></div>
+
+<div class="crit"><p><span class="s">5. Feasibility &amp; scalability: 8 / 10.</span></p><ul>
+<li>Production-readiness section with five points: database swap, horizontal scaling, authentication, audit compliance, connector extensibility.</li>
+<li>Outage toggle is tested: taking any one of the six sources offline does not crash the pipeline (76 of 76 outage checks pass).</li>
+<li>Models are saved to disk (<code>data/ml/models.json</code>) and loaded once per process; evaluations are stored.</li>
+<li>Capped because scalability is argued by design. The demo runs on SQLite and was not load-tested.</li></ul></div>
+
+<div class="crit"><p><span class="s">6. Business / user value &amp; impact: 12 / 15 (second highest weight).</span></p><ul>
+<li>Dashboard and the controls report now show: value of possible duplicates held back, invoices matched clean and clerk hours saved, exceptions that arrived with a root cause and owner, value blocked from payment.</li>
+<li>"What would happen without PlantPay?" before/after table added.</li>
+<li>Counts and rupee values are measured from the synthetic demo data. The time comparisons rest on three assumptions, marked "assumption" on screen: 12 minutes per manual check, 3 days to find a root cause, 5 working days for a supplier reply.</li>
+<li>Gap: no real Plant X figures exist, so judges may discount the time savings. This is the largest remaining gap.</li></ul></div>
+
+<div class="crit"><p><span class="s">7. Responsible AI, security &amp; data: 9 / 10.</span></p><ul>
+<li>Already in place: unverified-prediction labels, "warning, not proof" on risk flags, "requires independent verification" on bank changes, hash-chained audit trail with a Verify button, role-based access (suppliers see only their own invoices), API requires a key or session (401 otherwise).</li>
+<li>New: Responsible AI page with nine commitments, and Rule-based / AI-assisted labels on feature pages.</li>
+<li>Gap: labels are on the main feature pages, not on every single output.</li></ul></div>
+
+<div class="crit"><p><span class="s">8. User experience &amp; accessibility: 4 / 5.</span></p><ul>
+<li>Consistent dark design system, colour-coded status chips with shapes (not colour alone), friendly empty states, no horizontal overflow at 900 px, no raw errors in the smoke test.</li>
+<li>Spinners only on the dashboard and audit pages. Adding them everywhere made "not found" pages return HTTP 200 and weakened the supplier-isolation check, so we kept them to routes where that is safe.</li>
+<li>Skeleton loaders, side drawers and animated gauges were left out because of the code freeze.</li></ul></div>
+
+<div class="crit"><p><span class="s">9. Presentation &amp; demo: 4.5 / 5.</span></p><ul>
+<li>Golden Journey (nine steps, Back/Next and arrow keys, presenter notes with a timer, automatic fallback to pre-computed results, feature badges, closing checklist) already existed and passes three runs.</li>
+<li>New <code>DEMO.md</code> has the exact click path, what to say, what to point at, and a fallback plan.</li>
+<li>Not yet rehearsed against a stopwatch on the venue laptop.</li></ul></div>
+
+<div class="crit"><p><span class="s">10. Q&amp;A &amp; team understanding: 4.5 / 5.</span></p><ul>
+<li><code>DEMO.md</code> has a Q&amp;A cheat sheet: the six required questions plus six more (impact-number sources, ML evidence, supplier data isolation, API protection, extraction errors, GenAI use).</li>
+<li>Rule: every member must be able to explain all code, and GenAI use must be declared. A cheat sheet does not replace that.</li></ul></div>
+
+<h2>Where the remaining 13.5 points are</h2>
+<table>
+<tr><th>Biggest gaps</th><th>What would close it</th></tr>
+<tr><td>6: impact rests partly on assumptions (3 pts)</td><td>Agree the assumptions with a finance contact, or state them confidently on stage as "illustrative, replaceable with Plant X data".</td></tr>
+<tr><td>3: no human click-through; Predictions slow when cold (2 pts)</td><td>Run the 12-step click path on the demo laptop; open Predictions and the Journey once before judges arrive.</td></tr>
+<tr><td>5: scale argued, not tested (2 pts)</td><td>A simple load test of the matching on a few thousand generated invoices, if time allows.</td></tr>
+</table>
+<p class="note">Everything in this document is derived from the project's NOTES.md audit section and the smoke and unit test runs on 13 Nov 2026. Data in the demo is synthetic.</p>
+</body></html>

@@ -1,3 +1,5 @@
+import { RoleBanner } from "@/components/Info";
+import { supplierValue } from "@/lib/impact";
 import { Panel } from "@/components/ui";
 import { listDemoDocs } from "@/lib/demo-docs";
 import { getSessionUser } from "@/lib/session";
@@ -27,6 +29,7 @@ export default async function SupplierHome() {
   return (
     <>
       <h1 style={{ marginBottom: 16 }}>{vendor?.name ?? user?.displayName}: invoices</h1>
+      <RoleBanner role="supplier" title={supplierValue(state, user?.vendorId, user?.username).headline} lines={supplierValue(state, user?.vendorId, user?.username).lines} note="Your own invoices only. Internal notes are never shown to suppliers." />
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
         <UploadFlow demos={listDemoDocs()} />
         <Panel title={`Your invoices (${rows.length})`}>

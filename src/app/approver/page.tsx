@@ -1,3 +1,5 @@
+import { RoleBanner } from "@/components/Info";
+import { approverValue } from "@/lib/impact";
 import { DEMO_TODAY } from "@/lib/constants";
 import { getSessionUser } from "@/lib/session";
 import { getState } from "@/lib/store";
@@ -25,6 +27,7 @@ export default async function ApproverHome() {
 
   return (
     <>
+      <RoleBanner role="Approver" title={approverValue(state, level).headline} lines={approverValue(state, level).lines} />
       <h1 style={{ marginBottom: 6 }}>Approvals</h1>
       <p style={{ color: "var(--ink-soft)", marginBottom: 14 }}>
         {user?.title}. {rows.length} {rows.length === 1 ? "invoice" : "invoices"} waiting for you, oldest first. Open one to see the evidence and decide.

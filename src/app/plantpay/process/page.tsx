@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AiLabel } from "@/components/Info";
 import { fmtDate } from "@/lib/format";
 import { CHECK_LABEL, COMPLEX_LOOPS, COMPLEX_STATIONS, EXPECTED_HOURS, EXPECTED_PATH, type Conformance, type InvoicePath } from "@/plantpay/processMining";
 import { processTwin } from "@/plantpay/processService";
@@ -47,6 +48,7 @@ export default async function ProcessTwin({ searchParams }: { searchParams: Prom
   return (
     <>
       <h1 style={{ marginBottom: 6 }}>Process-mining twin</h1>
+      <div style={{ display: "flex", gap: 8, margin: "0 0 12px" }}><AiLabel kind="rule" /></div>
       <p className={s.lead}>The path every invoice actually took, rebuilt from the workflow event log and compared with the expected path <strong>{EXPECTED_PATH.join(" → ")}</strong>. It shows where the time goes, which teams invoices wait for, where work is sent back, and which exception types cost the most days. It describes the process, not people: a long wait points at a queue, not at a person.</p>
 
       <div className={s.tiles}>

@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Judging criteria guide</title>
+<style>
+@page { size: A4; margin: 17mm 16mm; }
+body { font-family: "Segoe UI", Arial, sans-serif; color: #1b2430; font-size: 10.8pt; line-height: 1.5; }
+h1 { font-size: 24pt; margin: 0 0 4px; }
+h2 { font-size: 16pt; margin: 0 0 6px; padding-top: 4px; border-bottom: 2px solid #2f6fdc; padding-bottom: 4px; break-before: page; }
+h2.first { break-before: auto; }
+h3 { font-size: 11.5pt; margin: 14px 0 3px; color: #2f6fdc; }
+p { margin: 4px 0 6px; }
+ul { margin: 3px 0 6px 20px; padding: 0; }
+li { margin: 2px 0; }
+.sub { color: #57606a; }
+.box { border: 1px solid #c9d1d9; border-left: 4px solid #2f6fdc; background: #f5f8fc; padding: 8px 12px; margin: 8px 0; break-inside: avoid; }
+.good { border-left-color: #2a9d4b; background: #f2faf4; }
+.weak { border-left-color: #c9842b; background: #fdf7ee; }
+.say { border-left-color: #7a4fd0; background: #f7f3fd; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0; break-inside: avoid; }
+th, td { border: 1px solid #c9d1d9; padding: 5px 8px; text-align: left; vertical-align: top; }
+th { background: #eef2f7; }
+td.n { text-align: right; white-space: nowrap; }
+.pts { float: right; font-size: 11pt; color: #57606a; font-weight: 600; }
+.tag { font-weight: 700; }
+code { background: #eef2f7; padding: 0 3px; border-radius: 3px; font-size: 9.8pt; }
+</style></head><body>
+
+<h1 class="first">How the hackathon judges score a project</h1>
+<p class="sub">A plain-English guide to the 10 judging criteria, with examples, applied to PlantPay. Written for the team (Sanket, Lokesh, Utkarsh) so everyone can explain the scoring and answer judges' questions. Dated 13 Nov 2026.</p>
+
+<div class="box"><strong>How to use this.</strong> Each chapter answers five questions: (1) what the criterion means in simple words, (2) what judges look for, (3) a strong example against a weak example, (4) how PlantPay shows it and where to click, (5) what to say on stage. The last chapter explains how our estimated score of about 86.5 / 100 was worked out. Scores are our own estimates, not measured results.</div>
+
+<h3>The big picture: where the points are</h3>
+<table>
+<tr><th>#</th><th>Criterion</th><th class="n">Max</th><th class="n">Our estimate</th><th>One-line meaning</th></tr>
+<tr><td>1</td><td>Problem understanding &amp; user fit</td><td class="n">10</td><td class="n">9</td><td>Do you really understand the pain of the people who will use it?</td></tr>
+<tr><td>2</td><td>Innovation &amp; original thinking</td><td class="n">10</td><td class="n">9</td><td>Is there an idea judges have not already seen ten times today?</td></tr>
+<tr><td>3</td><td>Working prototype / functionality</td><td class="n">20</td><td class="n">18</td><td>Does it actually work, live, in the room?</td></tr>
+<tr><td>4</td><td>Technical design &amp; architecture</td><td class="n">10</td><td class="n">8.5</td><td>Is it built in a clean, explainable way?</td></tr>
+<tr><td>5</td><td>Feasibility &amp; scalability</td><td class="n">10</td><td class="n">8</td><td>Could this work at real plant scale, not just in a demo?</td></tr>
+<tr><td>6</td><td>Business / user value &amp; impact</td><td class="n">15</td><td class="n">12</td><td>What is it worth, in numbers?</td></tr>
+<tr><td>7</td><td>Responsible AI, security &amp; data</td><td class="n">10</td><td class="n">9</td><td>Can you trust its AI decisions? Are they safe and auditable?</td></tr>
+<tr><td>8</td><td>User experience &amp; accessibility</td><td class="n">5</td><td class="n">4</td><td>Is it easy and pleasant to use?</td></tr>
+<tr><td>9</td><td>Presentation &amp; demo</td><td class="n">5</td><td class="n">4.5</td><td>Is the demo smooth and convincing?</td></tr>
+<tr><td>10</td><td>Q&amp;A &amp; team understanding</td><td class="n">5</td><td class="n">4.5</td><td>Can the team answer hard questions confidently?</td></tr>
+<tr><td></td><td><strong>Total</strong></td><td class="n"><strong>100</strong></td><td class="n"><strong>~86.5</strong></td><td></td></tr>
+</table>
+<p><strong>What this tells us.</strong> Criterion 3 (working prototype, 20) and criterion 6 (impact, 15) together are 35 points, over a third of the total. A beautiful idea that crashes on stage loses the most. That is why so much of our audit effort went into the smoke test and a fallback plan.</p>
+
+<h3>Our project in one paragraph (so every example below makes sense)</h3>
+<p><strong>PlantPay Intelligence Engine</strong> is a Procure-to-Pay assistant for a fictional plant, Plant X. A supplier uploads an invoice. PlantPay reads six fields, then checks it against the purchase order (PO) and the goods receipt note (GRN) pulled from six separate department databases (Procurement, Warehouse, Quality, Finance, Logistics, Supplier). Fixed rules decide <em>approve, flag or block</em>. If something does not match, PlantPay says why, who owns the fix and what exact change would make it pass. Approvals are routed by amount, every step goes into a tamper-evident audit trail, and a supplier can ask "Where is my payment?". The key demo case is <strong>INV-7781</strong>: invoice ₹412 per kg against a PO of ₹398.</p>
+
+<!-- ============ 1 ============ -->
+<h2>1. Problem understanding &amp; user fit <span class="pts">10 points &middot; our estimate 9</span></h2>
+
+<h3>What it means</h3>
+<p>Judges want proof that you understand the <em>real pain</em> of the people who will use your product, not a generic "AI for finance" story. In this problem the users are three people: the <strong>supplier</strong>, the <strong>AP clerk</strong> (accounts payable) and the <strong>approver</strong>. Each has a different pain, so a single generic dashboard shows you did not think about them separately.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>The pain stated in everyday words: large invoice volumes, mismatches, duplicates, missing approvals, late payments, audit risk.</li>
+<li>Different screens for different roles, each speaking to that role's own frustration.</li>
+<li>The problem visible <em>inside the app</em>, not only in the slide deck.</li>
+</ul>
+
+<h3>The three users and their pain</h3>
+<table>
+<tr><th>User</th><th>Their pain, in their words</th><th>What PlantPay gives them</th></tr>
+<tr><td>Supplier (e.g. Vihar Chem Supplies)</td><td>"I sent the invoice three weeks ago. I don't know where my payment is, and nobody replies to my emails."</td><td>A payment readiness passport (what is holding payment, who owns it, when it is due) and a chat that answers "Where is my payment?" from live records.</td></tr>
+<tr><td>AP clerk (e.g. Priya Nair)</td><td>"I spend hours chasing mismatches: ringing the buyer, the store, the supplier, just to find out why a price is different."</td><td>Every exception arrives with a root cause, an owner and a suggested fix. The queue is sorted oldest first.</td></tr>
+<tr><td>Approver (e.g. Neha Kulkarni, Finance Manager)</td><td>"I have no idea what needs my sign-off, and when I do get something I can't see the evidence."</td><td>An inbox of only the items for their approval level, already matched clean, with the evidence on one screen.</td></tr>
+</table>
+
+<h3>Strong example versus weak example</h3>
+<div class="box good"><strong>Strong:</strong> "Plant X receives hundreds of invoices a month. A clerk checks each one by hand against the PO and goods receipt. When the price on the invoice is ₹412 but the PO says ₹398, the clerk spends days emailing the buyer to find out the contract was changed and nobody updated the PO. Meanwhile the supplier is waiting and the auditor will later ask who approved what."</div>
+<div class="box weak"><strong>Weak:</strong> "Finance teams face inefficiencies in invoice processing. Our AI platform leverages machine learning to optimise the procure-to-pay lifecycle."<br>This could describe any product at any company. A judge learns nothing about Plant X.</div>
+
+<h3>How PlantPay shows it</h3>
+<ul>
+<li><strong>Login page:</strong> one paragraph naming Plant X and the problems (mismatches, duplicates, missing approvals).</li>
+<li><strong>"Why we built this" banner:</strong> on the clerk home page and the PlantPay home page.</li>
+<li><strong>Role banners:</strong> each role sees a welcome message with live numbers. Clerk: invoices matched clean, hours saved, exceptions that arrived with an owner. Approver: items waiting, their value, the oldest age. Supplier: open invoices, how many are cleared and how many have a named owner working on them.</li>
+<li><strong>Separate role views:</strong> three logins with different menus. A supplier cannot see the staff pages.</li>
+</ul>
+
+<h3>What to say on stage</h3>
+<div class="box say">"Three people feel this problem differently. The supplier asks 'where is my money'. The clerk asks 'why doesn't this match'. The approver asks 'what do I need to sign'. We built one screen for each of them, then we built the engine underneath."</div>
+
+<h3>Why 9 and not 10</h3>
+<p>The supplier and approver messages use measured counts, but the "payment wait reduced from X to Y days" comparison depends on an assumed baseline. Without real Plant X data we cannot prove the "before" number.</p>
+
+<!-- ============ 2 ============ -->
+<h2>2. Innovation &amp; original thinking <span class="pts">10 points &middot; our estimate 9</span></h2>
+
+<h3>What it means</h3>
+<p>Almost every team in a procure-to-pay hackathon will build <em>three-way matching</em>: compare invoice, PO and goods receipt, and say "mismatch". Judges will have seen that many times. Innovation here means going <strong>beyond detecting the problem to explaining it and fixing it</strong>, in a way a standard system does not.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>Something they have not seen in the other presentations.</li>
+<li>The idea being <em>useful</em>, not just clever. Novelty for its own sake does not score.</li>
+<li>The features being visibly working, not only described on a slide.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box weak"><strong>Standard (what everyone builds):</strong> "Invoice INV-7781 does not match PO 4600009003. Status: mismatch."<br>The clerk still has to find out why.</div>
+<div class="box good"><strong>Innovative (what PlantPay does):</strong> "The invoice price is ₹412. The PO says ₹398. The contract was amended on 1 October to ₹412, but the PO was never updated. Owner: Buyer. This invoice would pass if the PO price were updated to ₹412." Evidence from Procurement is shown, and a sandbox button simulates the fix.</div>
+
+<h3>PlantPay's innovations, in plain words</h3>
+<table>
+<tr><th>Feature</th><th>What it does</th><th>Where to see it</th></tr>
+<tr><td>Root-Cause Resolver</td><td>Names <em>why</em> an invoice fails, who owns the fix, and shows evidence. A cause is marked "evidence-supported" only when a record backs it; otherwise it says "unverified prediction".</td><td><code>/plantpay/invoices/INV-7781/exceptions</code></td></tr>
+<tr><td>Counterfactual explanation</td><td>The smallest change that would make the invoice pass ("what would make this pass"), plus a sandbox "simulate" button.</td><td>Same page</td></tr>
+<tr><td>Process-mining twin</td><td>Replays every workflow event to show the path an invoice actually took versus the expected path, where time goes, and where work loops back.</td><td><code>/plantpay/process</code></td></tr>
+<tr><td>Relationship graph</td><td>Vendors, bank accounts, addresses and approvers as a network. Shared bank accounts appear as warnings for a person to check, never accusations.</td><td><code>/plantpay/graph</code></td></tr>
+<tr><td>Supplier intelligence</td><td>Three separate scores: relationship strength, supply criticality, and risk. A supplier can be strong, critical <em>and</em> risky; one blended score would hide that.</td><td><code>/plantpay/suppliers</code></td></tr>
+<tr><td>Predictive models</td><td>Four trained models (exception, root cause, payment delay, supplier risk) with their contributing factors.</td><td><code>/plantpay/predictions</code></td></tr>
+<tr><td>Payment readiness passport</td><td>A supplier-facing tracker: seven milestones from uploaded to paid, in plain words.</td><td>Supplier login &rarr; Payment readiness</td></tr>
+<tr><td>Hash-chained audit trail</td><td>Each record carries the hash of the previous one, so editing history breaks every later link. One button verifies it.</td><td><code>/audit</code></td></tr>
+</table>
+<p>All ten are listed on the <strong>Innovations</strong> page with a "See it live" button, so judges can count them.</p>
+
+<h3>What to say on stage</h3>
+<div class="box say">"Every system flags a mismatch. None of them tells you the contract was amended, the PO wasn't updated, the buyer owns it, and that changing the PO to ₹412 would make this pass. That last step is what we built."</div>
+
+<h3>Why 9 and not 10</h3>
+<p>The ideas are strong, but some views (the graph, the process twin) are not drag-interactive. Judges who like polish may mark that down slightly.</p>
+
+<!-- ============ 3 ============ -->
+<h2>3. Working prototype / functionality <span class="pts">20 points &middot; our estimate 18</span></h2>
+
+<h3>What it means</h3>
+<p>This is the single biggest criterion: 20% of the entire score. It asks: <strong>does it really work, live, with no excuses?</strong> A prototype that is half-finished or crashes when a judge clicks something scores badly here no matter how good the idea is.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>The core flow works end to end without manual patching: upload, extract, match, approve / flag / block.</li>
+<li>It works on <em>several different inputs</em>, not just one rehearsed example.</li>
+<li>No crashes, no raw error text, no blank screens.</li>
+<li>Reasonable speed: pages that load in seconds, not minutes.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box good"><strong>Strong:</strong> A judge asks "Can you try one with a missing goods receipt?" and the presenter uploads a different document; the system flags it with a clear reason within seconds.</div>
+<div class="box weak"><strong>Weak:</strong> The demo works only on one hard-wired invoice. When a judge asks to try another, the page shows an error or the presenter says "it only works on this one for now".</div>
+
+<h3>What exists and the evidence</h3>
+<table>
+<tr><th>Capability</th><th>State</th></tr>
+<tr><td>Supplier uploads PDF or image, fields extracted, editable before submit</td><td>Working</td></tr>
+<tr><td>Three-way match against PO and goods receipt, with contract, inventory and quality checks</td><td>Working, rule-based</td></tr>
+<tr><td>Verdict is exactly approve, flag or block, with a readable reason</td><td>Working</td></tr>
+<tr><td>Approval by limit: clerk up to ₹1 lakh, Approver L1 up to ₹15 lakh, Approver L2 above; approve, reject or send back with a comment</td><td>Working</td></tr>
+<tr><td>Duplicate detection (INV-6120R caught as a duplicate of INV-6120 before approval)</td><td>Working</td></tr>
+<tr><td>Exceptions dashboard by type, supplier and age</td><td>Working</td></tr>
+<tr><td>"Where is my payment?" chat on live data</td><td>Working</td></tr>
+<tr><td>Controls report for auditors</td><td>Working</td></tr>
+<tr><td>Golden Journey (nine guided demo steps)</td><td>Passes three runs in a row</td></tr>
+</table>
+<p><strong>Evidence:</strong> our production smoke test ran 786 checks and all 786 passed, with zero crashes. It covers every page, all demo documents, unknown and malicious ids, simulated outages of each source, the whole supplier-clerk-approver workflow three times, and the Golden Journey three times.</p>
+
+<h3>What to say on stage</h3>
+<div class="box say">"Everything you are about to see is running live on the real build. If you would like to try a different invoice, pick any of the demo documents."</div>
+
+<h3>Why 18 and not 20</h3>
+<ul>
+<li>No human has yet clicked through the new pages in a real browser on the demo laptop.</li>
+<li>The Predictions page takes about 2 to 5 seconds the first time after the server starts (the target was under 3). Open it once before judges arrive.</li>
+<li>One unit test fails because it hard-codes the date 12-Nov while the real date is now 13-Nov. It does not affect the app, but it is a loose end.</li>
+</ul>
+
+<!-- ============ 4 ============ -->
+<h2>4. Technical design &amp; architecture <span class="pts">10 points &middot; our estimate 8.5</span></h2>
+
+<h3>What it means</h3>
+<p>Can you explain <em>how it is built</em> and <em>why</em>? Judges want a clean structure with sensible separation of parts, not a tangle that happens to work.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>A clear architecture they can understand in a minute: a diagram helps.</li>
+<li>Sensible choices: each part has one job.</li>
+<li>Clear separation between <strong>rules</strong> (decisions) and <strong>AI/ML</strong> (predictions and explanations).</li>
+<li>Documentation of the interfaces, such as an API reference.</li>
+</ul>
+
+<h3>The key architecture idea, simply</h3>
+<p>Plant X's data lives in six separate department databases. A real plant never has everything in one place. PlantPay puts a <strong>read-only integration layer</strong> in front of them:</p>
+<ul>
+<li><strong>Connectors</strong>, one per database, that only read.</li>
+<li>A <strong>canonical data model</strong>: one common shape for a supplier, PO, goods receipt, inspection and invoice, whatever each system calls them.</li>
+<li>An <strong>event stream</strong>: when a PO or receipt changes, an event is written and only the affected invoices are re-checked.</li>
+<li>A <strong>REST facade</strong>: an API that needs a key or a signed-in session, and logs every request.</li>
+</ul>
+<p>On top sits the <strong>intelligence engine</strong>: matching rules, risk detectors, explanations and predictions. On top of that sits the <strong>dashboard</strong>.</p>
+
+<h3>Rules versus AI: the separation that matters</h3>
+<table>
+<tr><th>Job</th><th>Done by</th><th>Why</th></tr>
+<tr><td>Approve / flag / block an invoice</td><td>Deterministic rules</td><td>Same answer every time; auditors can read the rule.</td></tr>
+<tr><td>Predict delay, risk or exception likelihood</td><td>Trained models</td><td>Helps people prioritise; never decides.</td></tr>
+<tr><td>Explain a cause</td><td>Rules plus evidence</td><td>Shown as fact only when a record backs it.</td></tr>
+<tr><td>Approve payment</td><td>A human</td><td>Accountability stays with a person.</td></tr>
+</table>
+
+<h3>Strong example versus weak example</h3>
+<div class="box good"><strong>Strong:</strong> "If the Warehouse database is offline, only the receipt check is marked 'source unavailable'. Everything else continues. The architecture page shows why."</div>
+<div class="box weak"><strong>Weak:</strong> "We used AI to match the invoices." A judge asks which part is AI, and the answer is vague.</div>
+
+<h3>How PlantPay shows it</h3>
+<ul>
+<li><strong>Architecture page:</strong> the diagram, three bullets on how data flows, a "how the integration layer works" panel, and live source health.</li>
+<li><strong>Labels:</strong> "Rule-based" or "AI-assisted. Human review required" on the main feature pages.</li>
+<li><strong>API reference page:</strong> every endpoint listed.</li>
+</ul>
+
+<h3>What to say on stage</h3>
+<div class="box say">"Rules decide, AI explains, people approve. Six systems, one integration layer, one common record. If one source goes down, the rest keeps working: I will show that now."</div>
+
+<h3>Why 8.5 and not 10</h3>
+<p>The API documentation is a static reference page, not an interactive Swagger-style explorer. Labels are on the main feature pages rather than on every single output.</p>
+
+<!-- ============ 5 ============ -->
+<h2>5. Feasibility &amp; scalability <span class="pts">10 points &middot; our estimate 8</span></h2>
+
+<h3>What it means</h3>
+<p>A hackathon demo runs on one laptop with a few hundred invoices. Judges ask: <strong>could this survive in the real plant</strong>, with thousands of invoices, many users and real systems?</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>An honest statement of what is a demo shortcut and what the production path is.</li>
+<li>Graceful handling of failure: one system down must not kill everything.</li>
+<li>Signs the team thought about performance, such as saving trained models rather than retraining each time.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box good"><strong>Strong:</strong> "The demo uses SQLite so it runs on a laptop. The connectors sit behind an interface, so production swaps each one to PostgreSQL without touching the rules or screens. Re-matching is event-driven, so several workers can process the queue at the same time."</div>
+<div class="box weak"><strong>Weak:</strong> "It's scalable because we used the cloud." No specifics, nothing a judge can test.</div>
+
+<h3>The five production-readiness points on the Architecture page</h3>
+<ol>
+<li><strong>Database swap:</strong> SQLite to PostgreSQL by replacing the connector.</li>
+<li><strong>Horizontal scaling:</strong> matching depends only on one invoice's record, so workers can run in parallel.</li>
+<li><strong>Authentication:</strong> demo has signed sessions and API keys; production adds single sign-on and per-role scopes.</li>
+<li><strong>Audit compliance:</strong> the hash chain records who, role, time, outcome and comment; production also stores the chain head in write-once storage.</li>
+<li><strong>Connector extensibility:</strong> a new source is one connector plus a mapping to the canonical model.</li>
+</ol>
+
+<h3>Evidence it handles failure</h3>
+<p>The smoke test takes each of the six sources offline, one at a time, and checks every affected page. 76 of 76 outage checks pass. On the PlantPay home page you can click "Simulate outage" on any source live.</p>
+
+<h3>Caching and speed</h3>
+<p>Trained models are saved to disk (<code>data/ml/models.json</code>) and loaded once, not retrained at every start. Each invoice's evaluation is stored, so a repeat page load reads the saved result.</p>
+
+<h3>What to say on stage</h3>
+<div class="box say">"SQLite is a demo convenience, not a design choice. Watch what happens when I take Warehouse offline: the goods receipt check says 'source unavailable' and the rest carries on."</div>
+
+<h3>Why 8 and not 10</h3>
+<p>Scalability is argued by design, not proven by a load test. We did not run thousands of invoices through the system under concurrent users.</p>
+
+<!-- ============ 6 ============ -->
+<h2>6. Business / user value &amp; impact <span class="pts">15 points &middot; our estimate 12</span></h2>
+
+<h3>What it means</h3>
+<p>The second-biggest criterion. "It saves time" is not enough. Judges want <strong>numbers</strong>: how much money, how many hours, how many days, for whom.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>At least three quantified impact metrics, visible in the app.</li>
+<li>Value shown to each role separately.</li>
+<li>A before / after comparison: what happens without the product.</li>
+<li>Honesty about which numbers are measured and which are assumed.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box weak"><strong>Weak:</strong> "PlantPay will save finance teams a lot of time and reduce errors."</div>
+<div class="box good"><strong>Strong:</strong> "In our demo data, PlantPay held back ₹X of possible duplicate payments, matched N invoices clean on the first pass (about Y clerk hours saved at 12 minutes each), and gave M of K exceptions a named root cause and owner at match time, instead of about three days of chasing."</div>
+
+<h3>The impact metrics PlantPay shows</h3>
+<table>
+<tr><th>Metric</th><th>How it is calculated</th><th>Measured or assumed</th></tr>
+<tr><td>Value of possible duplicate payments held back</td><td>Sum of invoice totals with a duplicate finding, not yet approved</td><td>Measured from the data</td></tr>
+<tr><td>Invoices matched clean first time</td><td>Count of invoices with verdict "approve" and no earlier exception</td><td>Measured</td></tr>
+<tr><td>Clerk hours saved</td><td>Clean invoices &times; 12 minutes &divide; 60</td><td>Assumed: 12 minutes per manual check</td></tr>
+<tr><td>Exceptions with a root cause and owner</td><td>Exception invoices that carry both</td><td>Measured</td></tr>
+<tr><td>Value blocked from payment</td><td>Sum of blocked invoice totals</td><td>Measured</td></tr>
+<tr><td>Time to find a root cause</td><td>3 days manual versus at match time</td><td>Assumed</td></tr>
+<tr><td>Supplier wait for a reply</td><td>5 working days by email versus instant</td><td>Assumed</td></tr>
+</table>
+<p>These appear on the <strong>Exceptions dashboard</strong> and as an <strong>Impact summary</strong> in the <strong>Controls report</strong>, with a <strong>"What would happen without PlantPay?"</strong> table. Assumptions are tagged "assumption" on screen. All data is synthetic.</p>
+
+<h3>What to say on stage</h3>
+<div class="box say">"The rupee values and counts come straight from the demo records. The time savings use three assumptions that you can see on screen, and Plant X's finance team can replace them with their own numbers in a minute."</div>
+
+<h3>Why 12 and not 15</h3>
+<p>This is the largest gap. We have no real Plant X data, so part of the case rests on assumptions. A judge may discount the time savings. Being open about this scores better than pretending the numbers are real.</p>
+
+<!-- ============ 7 ============ -->
+<h2>7. Responsible AI, security &amp; data <span class="pts">10 points &middot; our estimate 9</span></h2>
+
+<h3>What it means</h3>
+<p>If software helps decide who gets paid, mistakes hurt real people. Judges want to see that AI outputs are <strong>explainable, labelled, auditable and safe</strong>, and that data is protected.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>AI predictions that show the reasons behind them.</li>
+<li>Clear labels separating AI output from rule output.</li>
+<li>A human making the final decision.</li>
+<li>An audit trail that cannot be quietly altered.</li>
+<li>Access control: one supplier cannot see another's data.</li>
+<li>Protected APIs.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box weak"><strong>Weak:</strong> "This vendor is fraudulent." An AI accusing a supplier on a hunch is dangerous: shared bank accounts can be completely legitimate, for example within a group of companies.</div>
+<div class="box good"><strong>Strong:</strong> "Warning, not proof. Two suppliers share a bank account. Human review required." The system creates a review task. It never blocks payment on a risk flag alone.</div>
+
+<h3>PlantPay's commitments</h3>
+<table>
+<tr><th>Commitment</th><th>How it is enforced</th></tr>
+<tr><td>Rules decide, AI explains</td><td>Models are not in the decision path.</td></tr>
+<tr><td>Predictions show reasons</td><td>Contributing factors are listed; probabilities come from trained, evaluated models, not hard-coded.</td></tr>
+<tr><td>Unverified means unverified</td><td>A predicted cause is labelled "unverified prediction" unless a record supports it.</td></tr>
+<tr><td>Warnings, not accusations</td><td>Duplicate, splitting, vendor and graph flags read "Warning, not proof. Human review required."</td></tr>
+<tr><td>Bank changes need a second check</td><td>Marked "Requires independent verification".</td></tr>
+<tr><td>Humans stay in the loop</td><td>Approval limits by role; whoever worked on an invoice cannot approve it; rejections need a written reason.</td></tr>
+<tr><td>Verifiable audit trail</td><td>Hash chain plus a "Verify integrity" button.</td></tr>
+<tr><td>Data isolation</td><td>A supplier sees only its own invoices and never internal AP notes.</td></tr>
+<tr><td>API security</td><td>Every call needs an API key or a clerk or approver session; otherwise 401.</td></tr>
+<tr><td>Synthetic data only</td><td>No real LYB data or systems.</td></tr>
+</table>
+<p>These are collected on the <strong>Responsible AI</strong> page.</p>
+
+<h3>A simple way to explain the hash chain</h3>
+<p>Imagine a notebook where each page begins with a fingerprint of the previous page. If someone rewrites page 10, the fingerprint on page 11 no longer matches, and so on down the book. "Verify integrity" re-checks all the fingerprints and shows where the chain breaks. We even demonstrate tampering with a copy in the Golden Journey.</p>
+
+<h3>What to say on stage</h3>
+<div class="box say">"Our AI is deliberately boxed in. It can predict and explain, but it cannot approve, and it cannot accuse. Every flag says 'warning, not proof'."</div>
+
+<h3>Why 9 and not 10</h3>
+<p>The Rule-based / AI-assisted labels are on the main feature pages but not on literally every output on every screen.</p>
+
+<!-- ============ 8 ============ -->
+<h2>8. User experience &amp; accessibility <span class="pts">5 points &middot; our estimate 4</span></h2>
+
+<h3>What it means</h3>
+<p>Does it look professional, and can a busy clerk use it without training? Accessibility means people with different abilities, such as colour-blind users, can use it too.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>Consistent colours, cards, badges and fonts across all pages.</li>
+<li>No raw JSON, error traces or default-grey unstyled pages.</li>
+<li>Status colours that mean something: green pass, amber warning, red block.</li>
+<li>Every page has a title and a one-sentence description.</li>
+<li>Friendly empty states and loading indicators.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box weak"><strong>Weak:</strong> A blank white page with a table of raw database rows, or "undefined" in a cell.</div>
+<div class="box good"><strong>Strong:</strong> "No invoices match these filters. Clear filters" with a link, in the same card style as the rest of the app.</div>
+
+<h3>What PlantPay does</h3>
+<ul>
+<li>One dark design system: shared colour tokens, 12px rounded cards, pill-shaped status badges.</li>
+<li>Status chips carry a shape cue as well as a colour, so meaning does not depend on colour alone.</li>
+<li>Indian number grouping and the &#8377; sign; dates like 12-Nov-2026.</li>
+<li>Tables checked at 900px wide with no sideways page scroll.</li>
+<li>The smoke test fails the build if any page shows "undefined", "NaN", a stack trace or similar text.</li>
+<li>Loading spinners on the dashboard and audit pages.</li>
+</ul>
+
+<h3>Why 4 and not 5</h3>
+<p>Spinners are not on every page. We tried that, but a loading screen on every route turned "not found" pages into HTTP 200, which weakened a security check (a supplier opening another supplier's invoice should get a 404). Skeleton loaders, side drawers and animated gauges were left out because of the code freeze.</p>
+
+<!-- ============ 9 ============ -->
+<h2>9. Presentation &amp; demo <span class="pts">5 points &middot; our estimate 4.5</span></h2>
+
+<h3>What it means</h3>
+<p>Ten minutes per team. Judges score how smooth, clear and rehearsed the demo feels. A great product with a shaky demo loses points.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>A clear story, not a feature tour.</li>
+<li>No awkward pauses, wrong clicks or "let me just fix this".</li>
+<li>A plan for when something goes wrong.</li>
+<li>Staying within time.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box weak"><strong>Weak:</strong> The presenter hunts through menus, a page fails to load, and they say "this worked earlier".</div>
+<div class="box good"><strong>Strong:</strong> A live call fails, the app shows "Fallback mode. Pre-computed results are shown", and the presenter carries on with the same story without stopping.</div>
+
+<h3>What PlantPay provides</h3>
+<ul>
+<li><strong>Golden Journey:</strong> nine guided steps with a stepper, Back and Next, and arrow keys.</li>
+<li><strong>Presenter notes</strong> per step with a timer (about one minute each, nine minutes in all).</li>
+<li><strong>Automatic fallback</strong> to pre-computed results if any live call fails, with a "try live data again" button. Force it with <code>?fallback=1</code>.</li>
+<li><strong>Feature badges</strong> on screen when each feature appears.</li>
+<li><strong>Closing checklist</strong> showing every feature ticked.</li>
+<li><strong><code>DEMO.md</code>:</strong> the exact click path, what to say, what to point at, and a fallback plan.</li>
+</ul>
+
+<h3>Tips for the 10 minutes</h3>
+<ul>
+<li>Start the story with the problem, not the technology.</li>
+<li>Use one invoice (INV-7781) as the thread through everything.</li>
+<li>Warm up the Predictions page and the Journey before you go on.</li>
+<li>Decide who speaks and who clicks. Rehearse with a stopwatch.</li>
+<li>Keep the Q&amp;A sheet open on another screen.</li>
+</ul>
+
+<h3>Why 4.5 and not 5</h3>
+<p>The script has not been timed against a stopwatch on the venue laptop yet.</p>
+
+<!-- ============ 10 ============ -->
+<h2>10. Q&amp;A &amp; team understanding <span class="pts">5 points &middot; our estimate 4.5</span></h2>
+
+<h3>What it means</h3>
+<p>After the demo, judges ask questions. They are checking that <strong>everyone</strong> on the team understands the system, not only the person who built it. The hackathon rules also say every member must be able to explain all the code.</p>
+
+<h3>What judges look for</h3>
+<ul>
+<li>Direct, confident answers, not waffle.</li>
+<li>Honesty about limits ("that is an assumption", "we did not load-test that").</li>
+<li>More than one team member able to answer.</li>
+</ul>
+
+<h3>Strong example versus weak example</h3>
+<div class="box weak"><strong>Weak:</strong> Q: "Is the AI making financial decisions?" A: "Um, kind of, the AI checks the invoices."</div>
+<div class="box good"><strong>Strong:</strong> A: "No. Fixed rules validate. AI explains and predicts. A human approves. Every AI output is labelled and every decision is in the audit trail."</div>
+
+<h3>Likely questions and short answers</h3>
+<table>
+<tr><th>Question</th><th>Answer</th></tr>
+<tr><td>Why not just use SAP or Oracle?</td><td>PlantPay adds an intelligence layer on top: root cause, counterfactual, supplier criticality, process mining. ERP systems flag; PlantPay explains, routes and predicts.</td></tr>
+<tr><td>Is the AI making financial decisions?</td><td>No. Rules validate, AI explains and predicts, humans approve.</td></tr>
+<tr><td>What if a source database is down?</td><td>The affected check says "source unavailable" and the rest continues. Demo it with the outage toggle.</td></tr>
+<tr><td>How does it scale to real volume?</td><td>SQLite is a demo convenience. Swap connectors to PostgreSQL; re-matching is event-driven so workers run in parallel.</td></tr>
+<tr><td>How do you avoid false accusations?</td><td>Every flag says "warning, not proof". Bank changes need independent verification. A flag alone never blocks; it creates a review task.</td></tr>
+<tr><td>What is most innovative?</td><td>Root-Cause Resolver with Counterfactual: why it failed, who owns it, and what change would make it pass.</td></tr>
+<tr><td>Where do the impact numbers come from?</td><td>Counts and rupee values are computed from the demo records; time savings use three assumptions shown on screen. Data is synthetic.</td></tr>
+<tr><td>How do you know the ML is real?</td><td>Four models trained on synthetic history, evaluated on a held-out split, saved to disk. Probabilities come from the model with contributing factors.</td></tr>
+<tr><td>Can a supplier see another supplier's data?</td><td>No. Supplier pages read only their own invoices; internal notes are left out by construction.</td></tr>
+<tr><td>Are the APIs protected?</td><td>Yes: an API key or signed-in session is required, otherwise 401; requests are logged.</td></tr>
+<tr><td>What if extraction reads a field wrongly?</td><td>The supplier reviews and edits the six fields before submitting. Extraction never approves anything.</td></tr>
+<tr><td>What did GenAI do in this project?</td><td>Claude Code helped write code and documents, declared as the rules require. No generative AI runs in the decision path at demo time.</td></tr>
+</table>
+
+<h3>Team preparation</h3>
+<ul>
+<li>Each member picks three of the questions above and answers them out loud without looking.</li>
+<li>Each member should be able to open one page and explain its code in two minutes. Suggested split: Sanket the engine and workflow, Lokesh the tests and smoke harness, Utkarsh the pages and data.</li>
+<li>If you don't know, say so and say what you would check. That scores better than guessing.</li>
+</ul>
+
+<h3>Why 4.5 and not 5</h3>
+<p>A cheat sheet is not understanding. The score depends on how the team actually performs in the room.</p>
+
+<!-- ============ How scored ============ -->
+<h2>How our estimate of 86.5 was worked out</h2>
+<p>Each number is a judgement, made by asking three questions about every criterion: what a judge can see working, what evidence we have, and what a sceptical judge could mark down.</p>
+<table>
+<tr><th>#</th><th>Criterion</th><th class="n">Max</th><th class="n">Est.</th><th class="n">Gap</th><th>Main reason for the gap</th></tr>
+<tr><td>1</td><td>Problem understanding</td><td class="n">10</td><td class="n">9</td><td class="n">1</td><td>"Wait reduced" baseline is assumed</td></tr>
+<tr><td>2</td><td>Innovation</td><td class="n">10</td><td class="n">9</td><td class="n">1</td><td>Some views not interactive</td></tr>
+<tr><td>3</td><td>Working prototype</td><td class="n">20</td><td class="n">18</td><td class="n">2</td><td>No human click-through; cold Predictions load</td></tr>
+<tr><td>4</td><td>Technical design</td><td class="n">10</td><td class="n">8.5</td><td class="n">1.5</td><td>Static API docs; labels not on every output</td></tr>
+<tr><td>5</td><td>Feasibility &amp; scale</td><td class="n">10</td><td class="n">8</td><td class="n">2</td><td>No load test</td></tr>
+<tr><td>6</td><td>Business impact</td><td class="n">15</td><td class="n">12</td><td class="n">3</td><td>No real Plant X data; assumptions</td></tr>
+<tr><td>7</td><td>Responsible AI</td><td class="n">10</td><td class="n">9</td><td class="n">1</td><td>Labels not on every output</td></tr>
+<tr><td>8</td><td>UX &amp; accessibility</td><td class="n">5</td><td class="n">4</td><td class="n">1</td><td>Spinners on two pages only</td></tr>
+<tr><td>9</td><td>Presentation</td><td class="n">5</td><td class="n">4.5</td><td class="n">0.5</td><td>Not timed on venue laptop</td></tr>
+<tr><td>10</td><td>Q&amp;A</td><td class="n">5</td><td class="n">4.5</td><td class="n">0.5</td><td>Depends on live performance</td></tr>
+<tr><td></td><td><strong>Total</strong></td><td class="n"><strong>100</strong></td><td class="n"><strong>86.5</strong></td><td class="n"><strong>13.5</strong></td><td></td></tr>
+</table>
+
+<h3>Biggest opportunities, in order</h3>
+<ol>
+<li><strong>Criterion 6 (3 points):</strong> Say clearly that the time numbers are illustrative and replaceable with Plant X data. Honest framing keeps the credibility of the measured numbers.</li>
+<li><strong>Criterion 3 (2 points):</strong> Do the full 12-step click path on the demo laptop. Warm up Predictions and the Journey first.</li>
+<li><strong>Criterion 5 (2 points):</strong> If time allows, a simple load test of matching with a few thousand generated invoices.</li>
+</ol>
+
+<h3>An honest warning</h3>
+<p>These estimates are our own. Real judges may score higher or lower, and different judges weigh things differently. The estimate assumes the live demo goes cleanly. If the demo fails, criteria 3 and 9 would drop first, and that is worth up to 25 points. The most valuable thing the team can do now is rehearse.</p>
+
+</body></html>

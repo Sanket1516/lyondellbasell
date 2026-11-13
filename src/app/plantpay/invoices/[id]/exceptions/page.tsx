@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AiLabel } from "@/components/Info";
 import { notFound } from "next/navigation";
 import { StatusChip, type ChipKind } from "@/components/ui";
 import { fmtInr } from "@/lib/format";
@@ -35,6 +36,7 @@ export default async function ExceptionDetail({ params, searchParams }: { params
     <>
       <Link href={`/plantpay/invoices/${encodeURIComponent(id)}`} className={s.back}>Back to invoice</Link>
       <h1 style={{ marginBottom: 6 }}>Exception resolution for {id} <StatusChip kind={CHIP[result.status]} label={STATUS_LABEL[result.status]} /></h1>
+      <div style={{ display: "flex", gap: 8, margin: "0 0 12px" }}><><AiLabel kind="rule" /> <AiLabel kind="ai" /></></div>
       <p className={s.lead}>For each problem: what is wrong, the most likely cause and the records it rests on, who can fix it, and what would make the invoice pass. Causes are rule-based. A cause is marked <em>supported by evidence</em> only when a record in a source system backs it; otherwise it is an <em>unverified prediction</em>.</p>
       {result.unavailable.length > 0 && <div className={s.banner} role="status"><strong>Source unavailable:</strong> {result.unavailable.map((u) => SOURCE_META[u].label).join(", ")}. Explanations that need it are limited.</div>}
 

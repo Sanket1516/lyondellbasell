@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AiLabel } from "@/components/Info";
 import { notFound } from "next/navigation";
 import { StatusChip, type ChipKind } from "@/components/ui";
 import { fmtDate, fmtInr } from "@/lib/format";
@@ -43,6 +44,7 @@ export default async function PlantPayInvoice({ params, searchParams }: { params
     <>
       <Link href="/plantpay" className={s.back}>Back to PlantPay</Link>
       <h1 style={{ marginBottom: 6 }}>{id} <StatusChip kind={CHIP[r.status].kind} label={CHIP[r.status].label} /></h1>
+      <div style={{ display: "flex", gap: 8, margin: "0 0 12px" }}><AiLabel kind="rule" /></div>
       <p className={s.lead}>{r.summary}</p>
       <div className={s.meta}>
         {r.meta && <><span>Supplier <b>{r.meta.vendorName}</b></span><span>PO <b className="mono">{r.meta.poId ?? "none"}</b></span><span>Invoice date <b>{fmtDate(r.meta.invoiceDate)}</b></span><span>Total <b>₹{fmtInr(r.meta.totalInr)}</b></span></>}

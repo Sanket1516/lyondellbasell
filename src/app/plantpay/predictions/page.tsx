@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AiLabel } from "@/components/Info";
 import { StatusChip, type ChipKind } from "@/components/ui";
 import { fmtInr } from "@/lib/format";
 import { plantpay } from "@/plantpay/runtime";
@@ -26,6 +27,7 @@ export default async function PredictionsHome() {
   return (
     <>
       <h1 style={{ marginBottom: 6 }}>Predictions</h1>
+      <div style={{ display: "flex", gap: 8, margin: "0 0 12px" }}><AiLabel kind="ai" /></div>
       <p className={s.lead}>Four trained models estimate, for each invoice, the chance of an exception, the likely root cause, the risk of late payment and the risk that the supplier disrupts supply. They add foresight to the deterministic checks; they never replace them.</p>
       <p className={p.disclaimer}>{DISCLAIMER}</p>
 

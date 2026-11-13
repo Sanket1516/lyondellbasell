@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { ProblemBanner, RoleBanner } from "@/components/Info";
+import { clerkValue } from "@/lib/impact";
 import { DEMO_TODAY } from "@/lib/constants";
 import { getState } from "@/lib/store";
 import { workflowView } from "@/lib/workflow-status";
@@ -38,6 +40,8 @@ export default async function ClerkHome({ searchParams }: { searchParams: Promis
 
   return (
     <>
+      <ProblemBanner />
+      <RoleBanner role="AP clerk" title={clerkValue(state).headline} lines={clerkValue(state).lines} note="Measured from the live records; time saved assumes 12 minutes per manual check." />
       <h1 style={{ marginBottom: 6 }}>Invoice queue</h1>
       <p className={s.lead}>
         {open.length} open: {count("block")} blocked, {count("flag")} flagged, {count("approve")} clean. Oldest first. Keys: J and K to move, Enter to open.
