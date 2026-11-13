@@ -53,6 +53,11 @@ export function buildControlsReport(s: AppState, now = new Date()): ControlsRepo
   });
   const waiting = s.invoices.filter((i) => i.status === "pending_approval");
   const inBand = (b: "clerk" | "L1" | "L2") => waiting.filter((i) => bandFor(i.total) === b).length;
+  const byRole = {
+    clerk: liveApproved.filter((i) => i.decision!.outcome === "released").length,
+    L1: liveApproved.filter((i) => i.decision!.outcome === "approved" && i.decision!.level === "L1").length,
+    L2: liveApproved.filter((i) => i.decision!.outcome === "approved" && i.decision!.level === "L2").length,
+  };
 
   // 3. Segregation of duties: nobody decided an invoice they submitted or worked on.
   const involved = liveApproved.filter((i) => {
@@ -90,7 +95,7 @@ export function buildControlsReport(s: AppState, now = new Date()): ControlsRepo
         ? `${plural(wrongBand.length, "decision")} taken at the wrong level: ${wrongBand.map((i) => i.id).join(", ")}.`
         : `${plural(liveApproved.length, "decision")} recorded in this system, all at the level the amount requires.`,
       status: wrongBand.length ? "attention" : "pass",
-      detail: `Up to ₹${THRESHOLDS.clerkMax.toLocaleString("en-IN")}: clerk releases. Up to ₹${THRESHOLDS.l1Max.toLocaleString("en-IN")}: Approver L1. Above: Approver L2. Waiting now: clerk ${inBand("clerk")}, L1 ${inBand("L1")}, L2 ${inBand("L2")}.`,
+      detail: `Up to ₹${THRESHOLDS.clerkMax.toLocaleString("en-IN")}: clerk releases. Up to ₹${THRESHOLDS.l1Max.toLocaleString("en-IN")}: Approver L1. Above: Approver L2. Approvals by role: AP clerk ${byRole.clerk}, Approver L1 ${byRole.L1}, Approver L2 ${byRole.L2}. Waiting now: clerk ${inBand("clerk")}, L1 ${inBand("L1")}, L2 ${inBand("L2")}.`,
     },
     {
       id: "sod", control: "Segregation of duties",

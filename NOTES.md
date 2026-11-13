@@ -562,3 +562,39 @@ npm test               # unit tests (re-run a timing failure alone)
 npm run build && npm run smoke -- --label check   # full smoke test against a copy of the data
 ```
 If `setup` fails with EBUSY on Windows, stop any running `next` process first (it holds the database files). Skipping `setup` also works: the app seeds itself on the first request (6 to 10 s, once).
+
+## Round 2 primary-goals audit (2026-11-13, 05:30 to 05:45)
+
+Every line of the LYB Round 2 brief checked against the code. Stack note as before: the brief names FastAPI/Streamlit/scikit-learn; the app is Next.js + TypeScript (CLAUDE.md). Brief names map to the existing demo records: ABC Chemicals = Vihar Chem Supplies, INV-2044 = INV-7781 (₹412 vs PO ₹398), INV-1001A = INV-6120R.
+
+| Check | State | Where |
+|---|---|---|
+| Plant X used throughout | done | layout title, login hero, AppShell, `PLANT.name` in report |
+| Home/login states the three problems (mismatch, duplicates, missing approvals) | **missing, fixed** | one paragraph added to the login card (`LoginForm.tsx`, `.why`) |
+| Upload PDF/image, real extraction | done | `/supplier` UploadFlow (pdf, jpeg, png), `/api/extract` (text layer + OCR) |
+| Auto check vs PO and GRN on submit | done | `submitInvoice` -> `matchInState` -> `src/engine/match.ts` |
+| Exactly approve / flag / block with a readable reason | done | `Verdict` type; finding messages such as "Price ₹412.00 is 3.5% above PO ₹398.00" |
+| 1a-c three roles, separate views, click-to-fill demo logins | done | `src/lib/users.ts`, role layouts, demo accounts table on `/login` |
+| 2a-c six fields extracted, editable, confirm before submit | done | "Check the extracted fields" -> "Confirm and submit invoice" |
+| 3a-d invoice vs PO vs GRN, one verdict, clear reason on detail and dashboard | done | clerk review page, `/dashboard` table "Issues" and "Root cause" |
+| 4a-e thresholds (clerk up to ₹1 lakh, L1 up to ₹15 lakh, L2 above), approver queue, approve/reject/send back with comment, audit who/role/time/outcome/comment, hash chain | done | `src/lib/workflow.ts`, `/approver`, `/audit` + Verify |
+| 5a-d dashboard by type, supplier, age; supplier sees only own invoices | done | `/dashboard` (By type, By age, By supplier, age badge per row), `/supplier` |
+| B1-B2 duplicates caught with reason before approval | done | duplicate rule blocks INV-6120R ("Confirmed duplicate of INV-6120 ...") |
+| B3-B4 "Where is my payment?" chatbot on live data | done | `src/lib/chatbot.ts` reads the store; supplier page PaymentChat |
+| B5-B6 controls report | **partial, fixed** | had processed, exceptions, duplicates, audit; added **approvals by role** (AP clerk / L1 / L2) to the thresholds line in `src/lib/controls.ts` |
+
+### Judge demo path (10 steps)
+
+All PASS on the production build via `scripts/smoke` group `workflow-run1..3` (24/24 each): login and roles; supplier extracts and submits INV-7781; verdict flag with ₹412 / ₹398 on the clerk page; clerk requests fixes, simulated ERP updates, re-match clean, routed to Approver L1; L1 approves; audit trail records it and chain verifies; dashboard; supplier sees "internal action pending" wording, not internal notes; duplicate INV-6120R; chatbot answers "Where is my payment for INV-7781?"; controls report renders.
+
+Design note kept on purpose: a flagged invoice is not sent to the approver with its findings open. The clerk raises fixes, the owners correct the records, the invoice is re-matched, and only a clean match reaches the approver. Rules decide; people approve.
+
+### Verification
+
+- `tsc --noEmit` clean; `npm run build` clean; t5/workflow/session tests 41/41.
+- Full smoke on a fresh production build: **782/782 pass, 0 fail, 0 crash, 0 timeout** (5 slow but passing: cold start, clean-clone self-seed, first journey build).
+
+### What is left
+
+- The reason text reads "Price ₹412.00 is 3.5% above PO ₹398.00", not literally "Price mismatch: invoice ₹412 vs PO ₹398". It was not reworded because tests assert the engine strings exactly.
+- No browser click-through in this pass; do one on the demo laptop after `npm run setup` and `npm run demo`.

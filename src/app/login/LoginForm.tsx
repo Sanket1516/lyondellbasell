@@ -23,6 +23,9 @@ export default function LoginForm({ accounts }: { accounts: Account[] }) {
       </aside>
       <section className={s.card}>
         <h1>Sign in</h1>
+        <p className={s.why}>
+          Plant X finance processes a high volume of supplier invoices. Mismatches with the purchase order or goods receipt, duplicate bills and missing approvals cause late payments and audit risk. This desk checks every invoice against the purchase records and approves, flags or blocks it with a reason.
+        </p>
         <p className={s.sub}>Sign in with your payables desk account.</p>
         <form action={action} className={s.form}>
           <Input label="Username" name="username" value={username} onChange={(e) => setUsername(e.target.value)} autoComplete="username" required />
