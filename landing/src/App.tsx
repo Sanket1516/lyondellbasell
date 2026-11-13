@@ -333,7 +333,7 @@ export default function App() {
           </div>
           <footer className={css.footer}>
             Prototype for the LYB Mumbai Hackathon 2026. Synthetic data and fictional companies only; amounts in INR.
-            Verdicts come from deterministic rules; predictions are labelled AI-assisted. Built with help from Claude Code (GenAI use declared).
+            Verdicts come from deterministic rules.
           </footer>
         </section>
       </main>
