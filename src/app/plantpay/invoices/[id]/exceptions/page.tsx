@@ -46,16 +46,19 @@ export default async function ExceptionDetail({ params, searchParams }: { params
           {report.resolutions.map((r, i) => (
             <section key={r.id} className={s.disc} aria-labelledby={`r${i}`}>
               <h3 id={`r${i}`}>{i + 1}. {r.problem}</h3>
-              <p><strong>Root cause:</strong> {r.rootCause}
-                <span className={s.tag}>{r.evidenceStatus === "supported_by_evidence" ? "supported by evidence" : "unverified prediction"}</span>
-                <span className={s.tag}>{r.severity === "block" ? "blocks payment" : r.severity === "review" ? "warning for human review" : "needs a fix before approval"}</span></p>
+              <div className={s.rootCause} role="note">
+                <span className={s.rootIcon} aria-hidden="true">!</span>
+                <p><strong>Root cause:</strong> {r.evidenceStatus === "supported_by_evidence" ? r.rootCause : <span className={s.unverified}>{r.rootCause}</span>}
+                  <span className={s.tag}>{r.evidenceStatus === "supported_by_evidence" ? "supported by evidence" : "unverified prediction"}</span>
+                  <span className={s.tag}>{r.severity === "block" ? "blocks payment" : r.severity === "review" ? "warning for human review" : "needs a fix before approval"}</span></p>
+              </div>
               <p style={{ marginBottom: 2 }}><strong>Evidence</strong></p>
               {r.evidence.length === 0 ? <p className={s.srcMeta}>No supporting record was found, which is why this is only a prediction.</p> : (
                 <ul>{r.evidence.map((x, k) => <li key={k}>{x.text} <span className={s.tag}>{SOURCE_META[x.source].label.replace(" DB", "")}</span></li>)}</ul>
               )}
-              <p><strong>Responsible:</strong> {r.responsible.department} · {r.responsible.role}{r.responsible.person ? ` (${r.responsible.person})` : ""}</p>
-              <p><strong>Recommended correction:</strong> {r.correction}</p>
-              <p className={s.cite}><strong>Counterfactual:</strong> {r.counterfactual}</p>
+              <p className={s.fixLine}><b>Responsible:</b> {r.responsible.department} · {r.responsible.role}{r.responsible.person ? ` (${r.responsible.person})` : ""}</p>
+              <p className={s.fixLine}><b>Recommended correction:</b> {r.correction}</p>
+              <div className={s.cfBlock}><b>What would make this pass</b>{r.counterfactual}</div>
               {r.corrections.length > 0
                 ? <Link className={s.btn} style={{ textDecoration: "none", display: "inline-block" }} href={`${base}?sim=${encodeURIComponent(r.id)}#simulation`}>Simulate this correction</Link>
                 : <p className={s.srcMeta}>Cannot be simulated: {r.notSimulatableReason ?? "a person has to supply information first."}</p>}

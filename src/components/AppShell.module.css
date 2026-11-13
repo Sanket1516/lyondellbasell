@@ -7,18 +7,18 @@
   position: sticky; top: 0; height: 100vh;
   display: flex; flex-direction: column; gap: 28px;
   padding: 22px 0 18px;
-  background: linear-gradient(180deg, #1a1a52 0%, #12123a 55%, #0d0d2b 100%); color: var(--rail-ink);
-  box-shadow: 4px 0 24px rgba(18, 18, 58, 0.25);
+  background: var(--rail); color: var(--rail-ink);
+  border-right: 1px solid var(--line);
 }
 .brand { display: flex; flex-direction: column; gap: 2px; padding: 0 20px; }
-.brand strong { font-size: 26px; font-weight: 800; font-stretch: 75%; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1; }
-.brand > span:last-child { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--rail-soft); }
+.brand strong { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+.brand > span:last-child { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rail-soft); }
 .bands { display: block; width: 56px; height: 8px; margin-bottom: 12px; background: var(--bands); border-radius: 999px; }
 
 .rail ul { list-style: none; margin: 0; padding: 0; flex: 1; }
 .rail li a {
-  position: relative; display: block; padding: 10px 20px 10px 34px; margin: 2px 12px; border-radius: 10px;
-  color: var(--rail-ink); text-decoration: none; font-weight: 500;
+  position: relative; display: block; padding: 10px 20px 10px 34px; margin: 2px 12px; border-radius: var(--radius);
+  color: var(--ink-soft); text-decoration: none; font-weight: 500; font-size: 14px;
 }
 .rail li a::before {
   content: ""; position: absolute; left: 14px; top: 50%; width: 6px; height: 6px;
@@ -26,15 +26,15 @@
   border-radius: 50%; transition: transform 180ms var(--ease), background 180ms;
 }
 .rail li a { transition: background 180ms, transform 180ms var(--ease); }
-.rail li a:hover { background: rgba(255, 255, 255, 0.08); transform: translateX(3px); }
+.rail li a:hover { background: rgba(177, 186, 196, 0.08); color: var(--ink); }
 .rail li a:hover::before { transform: scaleX(1.5); }
-.rail li a.on { background: linear-gradient(135deg, rgba(79, 70, 229, 0.75), rgba(139, 92, 246, 0.55)); font-weight: 700; box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35); }
-.rail li a.on::before { transform: scaleX(1); background: #fff; box-shadow: 0 0 8px #fff; }
+.rail li a.on { background: var(--accent-wash); color: var(--ink); font-weight: 600; box-shadow: inset 3px 0 0 var(--accent); }
+.rail li a.on::before { transform: scaleX(1); background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .rail li a:focus-visible { box-shadow: inset 0 0 0 2px var(--band-inv); border-radius: var(--radius); }
 
 .foot { padding: 0 20px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
-.who { display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
-.role { font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--band-inv); font-weight: 600; }
+.who { display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid var(--line); }
+.role { font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-2); font-weight: 600; }
 .link {
   font: inherit; background: none; border: 0; padding: 2px 0; cursor: pointer; align-self: flex-start;
   color: var(--rail-soft); text-decoration: underline; text-underline-offset: 3px;

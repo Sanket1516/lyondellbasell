@@ -3,51 +3,61 @@
   Here the three documents an invoice is matched against get one band each:
   PO = blue, goods receipt = green, invoice = amber. Status colours stay separate.
 */
+/*
+  PlantPay design system (UI beauty pass, 13-Nov-2026). One dark palette for every page.
+  Status colours: green = pass, amber = warning, red = fail, grey = skipped/neutral.
+  Pipe-marking bands kept: PO = blue, goods receipt = green, invoice = amber.
+*/
 :root {
-  --paper: #f3f4fb;
-  --paper-deep: #eaecf8;
-  --surface: #ffffff;
-  --ink: #14162b;
-  --ink-soft: #565b78;
-  --line: #e3e5f2;
-  --line-strong: #c3c7e0;
-  --accent: #4f46e5;
-  --accent-2: #8b5cf6;
+  color-scheme: dark;
+  --paper: #0d1117;
+  --paper-deep: #010409;
+  --surface: #161b22;
+  --surface-2: #1c2129;
+  --row-alt: rgba(110, 118, 129, 0.06);
+  --ink: #e6edf3;
+  --ink-soft: #8b949e;
+  --line: #30363d;
+  --line-strong: #3d444d;
+  --accent: #2f81f7;
+  --accent-2: #58a6ff;
   --accent-ink: #ffffff;
-  --accent-wash: #eceafd;
-  --grad: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%);
+  --accent-wash: rgba(47, 129, 247, 0.14);
+  --grad: linear-gradient(135deg, #2f81f7 0%, #1f6feb 100%);
 
-  --rail: #12123a;
-  --rail-ink: #e8e9ff;
-  --rail-soft: #9a9dd0;
+  --rail: #010409;
+  --rail-ink: #e6edf3;
+  --rail-soft: #8b949e;
 
-  --band-po: #4f7cff;
-  --band-rc: #14c8a0;
-  --band-inv: #ffb020;
+  --band-po: #2f81f7;
+  --band-rc: #3fb950;
+  --band-inv: #d29922;
 
-  --ok: #0f9d6a;
-  --ok-wash: #dcf5ea;
-  --warn: #b26a00;
-  --warn-ink: #6b4000;
-  --warn-wash: #fff0cf;
-  --bad: #dc3545;
-  --bad-wash: #fde4e6;
-  --neutral: #6b7090;
-  --neutral-ink: #474b69;
-  --neutral-wash: #eceef8;
+  --ok: #3fb950;
+  --ok-ink: #56d364;
+  --ok-wash: rgba(63, 185, 80, 0.15);
+  --warn: #d29922;
+  --warn-ink: #e3b341;
+  --warn-wash: rgba(210, 153, 34, 0.15);
+  --bad: #f85149;
+  --bad-ink: #ff7b72;
+  --bad-wash: rgba(248, 81, 73, 0.15);
+  --neutral: #8b949e;
+  --neutral-ink: #c9d1d9;
+  --neutral-wash: rgba(110, 118, 129, 0.18);
 
-  --font-sans: "Archivo Variable", "Segoe UI", system-ui, sans-serif;
+  --font-sans: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-mono: "Spline Sans Mono", ui-monospace, Consolas, monospace;
 
-  --radius: 10px;
-  --radius-lg: 16px;
+  --radius: 8px;
+  --radius-lg: 12px;
   --rail-w: 232px;
   --bar-h: 0px;
-  --shadow-sm: 0 1px 2px rgba(20, 22, 43, 0.06), 0 1px 3px rgba(20, 22, 43, 0.05);
-  --shadow: 0 4px 12px rgba(40, 40, 120, 0.08), 0 1px 3px rgba(20, 22, 43, 0.06);
-  --shadow-lg: 0 18px 40px rgba(40, 40, 120, 0.18);
+  --shadow-sm: 0 1px 0 rgba(1, 4, 9, 0.6);
+  --shadow: 0 1px 3px rgba(1, 4, 9, 0.5), 0 4px 12px rgba(1, 4, 9, 0.35);
+  --shadow-lg: 0 12px 32px rgba(1, 4, 9, 0.6);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+  --focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
 
   --bands: linear-gradient(90deg, var(--band-po), var(--band-rc), var(--band-inv));
 }
@@ -63,30 +73,28 @@ body {
   margin: 0;
   padding: 0;
   background: var(--paper);
-  background-image: radial-gradient(900px 420px at 85% -10%, rgba(139, 92, 246, 0.12), transparent 70%), radial-gradient(700px 380px at 0% 0%, rgba(79, 124, 255, 0.10), transparent 70%);
-  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font-sans);
-  font-size: 14.5px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3 {
   margin: 0;
   font-weight: 700;
-  line-height: 1.15;
-  font-stretch: 78%;
-  letter-spacing: 0.01em;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   text-wrap: balance;
+  color: var(--ink);
 }
-h1 { font-size: 28px; text-transform: uppercase; }
-h2 { font-size: 17px; text-transform: uppercase; }
-h3 { font-size: 15px; font-stretch: 90%; }
+h1 { font-size: 24px; }
+h2 { font-size: 17px; }
+h3 { font-size: 15px; }
 p { margin: 0; }
 
 a {
-  color: var(--accent);
+  color: var(--accent-2);
   text-underline-offset: 3px;
 }
 
@@ -97,7 +105,7 @@ a {
 }
 .num { text-align: right; }
 
-::selection { background: var(--accent-2); color: #fff; }
+::selection { background: var(--accent); color: #fff; }
 :focus-visible {
   outline: none;
   box-shadow: var(--focus);
@@ -121,3 +129,18 @@ main > *:nth-child(2) { animation-delay: 60ms; }
 main > *:nth-child(3) { animation-delay: 120ms; }
 main > *:nth-child(n+4) { animation-delay: 180ms; }
 @media (prefers-reduced-motion: reduce) { main > * { animation: none; } }
+
+/* ---- Shared enterprise baseline (applies to every page's tables, inputs and details) ---- */
+main table { border-collapse: collapse; }
+main table th { background: var(--surface-2); color: var(--ink-soft); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; }
+main table tbody tr:nth-child(even) > td { background: var(--row-alt); }
+main table tbody tr:hover > td { background: var(--accent-wash); }
+main input, main select, main textarea { color-scheme: dark; }
+main details > summary { cursor: pointer; }
+main em { color: inherit; }
+/* Narrow screens (<= 1100px): wide tables scroll inside their own box, never the page. */
+@media (max-width: 1100px) {
+  main table { display: block; max-width: 100%; overflow-x: auto; }
+  main pre, main svg { max-width: 100%; }
+  main pre { overflow-x: auto; }
+}

@@ -11,7 +11,7 @@ export default function ArchitectureDiagram() {
     <div className={s.diagramWrap}>
       <svg className={s.diagram} viewBox="0 0 980 360" role="img" aria-label="PlantPay architecture: six source databases feed a read-only integration layer, then the intelligence engine, then the unified dashboard.">
         <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" className={s.dSub} /></marker></defs>
-        <text x="10" y="18" className={s.dHead}>SOURCE SYSTEMS (one SQLite file each)</text>
+        <text x="10" y="18" className={s.dHead}>6 SOURCE SYSTEMS</text>
         {SOURCES.map(([name, sub], i) => (
           <g key={name} transform={`translate(10 ${28 + i * 54})`}>
             <rect width="178" height="44" rx="6" className={s.dBox} />

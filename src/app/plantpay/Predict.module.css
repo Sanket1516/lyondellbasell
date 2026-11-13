@@ -5,14 +5,14 @@
 .card .q { color: var(--ink-soft); font-size: 0.8rem; margin: 0 0 6px; }
 .big { font-size: 1.9rem; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.1; }
 .level { display: inline-block; margin-left: 8px; font-size: 0.78rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; vertical-align: middle; }
-.High { background: var(--bad-wash); color: #8a1c27; }
+.High { background: var(--bad-wash); color: var(--bad-ink); }
 .Medium { background: var(--warn-wash); color: var(--warn-ink); }
-.Low { background: var(--ok-wash); color: #0a6b49; }
+.Low { background: var(--ok-wash); color: var(--ok-ink); }
 .toneCrit.High { background: var(--accent-wash); color: var(--accent); }
 .toneCrit.Medium { background: var(--neutral-wash); color: var(--neutral-ink); }
 .toneCrit.Low { background: var(--neutral-wash); color: var(--neutral-ink); }
-.toneGood.High { background: var(--ok-wash); color: #0a6b49; }
-.toneGood.Low { background: var(--bad-wash); color: #8a1c27; }
+.toneGood.High { background: var(--ok-wash); color: var(--ok-ink); }
+.toneGood.Low { background: var(--bad-wash); color: var(--bad-ink); }
 .meter { height: 8px; background: var(--neutral-wash); border-radius: 4px; overflow: hidden; margin: 6px 0 4px; }
 .fill { height: 100%; border-radius: 4px; background: var(--accent); }
 .fillHigh { background: var(--bad); }
@@ -33,7 +33,7 @@
 .down { background: var(--ok); right: 50%; }
 .pts { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
 .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; margin-bottom: 8px; }
-.verified { display: inline-block; font-size: 0.74rem; font-weight: 700; padding: 1px 7px; border-radius: 4px; background: var(--ok-wash); color: #0a6b49; white-space: nowrap; }
+.verified { display: inline-block; font-size: 0.74rem; font-weight: 700; padding: 1px 7px; border-radius: 4px; background: var(--ok-wash); color: var(--ok-ink); white-space: nowrap; }
 .unverified { display: inline-block; font-size: 0.74rem; font-weight: 700; padding: 1px 7px; border-radius: 4px; background: var(--warn-wash); color: var(--warn-ink); white-space: nowrap; }
 .evl { margin: 4px 0 0; padding-left: 16px; color: var(--ink-soft); font-size: 0.82rem; }
 .actions { margin: 0; padding-left: 18px; }

@@ -598,3 +598,68 @@ Design note kept on purpose: a flagged invoice is not sent to the approver with 
 
 - The reason text reads "Price ₹412.00 is 3.5% above PO ₹398.00", not literally "Price mismatch: invoice ₹412 vs PO ₹398". It was not reworded because tests assert the engine strings exactly.
 - No browser click-through in this pass; do one on the demo laptop after `npm run setup` and `npm run demo`.
+
+## UI beauty pass (2026-11-13, 05:40 to 06:15)
+
+Brief: "Prompt B, UI beauty pass" (written for Streamlit). Stack note as before: the app is Next.js + CSS Modules, so the "shared style.py / CSS injection" became the token sheet `src/styles/tokens.css`, which every page already reads. Work was limited to low-risk styling because it ran into the 06:00 code freeze. No logic, data or engine code changed.
+
+### Step 1: design audit (before, light theme, screenshots at 1440px)
+
+| Page | What looked unprofessional |
+|---|---|
+| `/login` | Condensed all-caps hero type felt like a poster, not a product. |
+| `/clerk`, `/dashboard`, `/approver`, `/supplier` | Already polished, but gradient status pills and an indigo glow looked decorative rather than enterprise. |
+| `/plantpay` (control tower) | Diagram column headings overlapped ("SOURCE SYSTEMS (one SQLite file each)" ran into "SECURE INTEGRATION LAYER"); plain 6px boxes and default grey buttons, unlike the rest of the app. |
+| `/plantpay/invoices/{id}/exceptions` | Wall of text: root cause, counterfactual and correction all looked the same. |
+| `/plantpay/predictions`, `/plantpay/suppliers` | Unstyled tables: no header band, no row shading, small tags. |
+| `/plantpay/graph` | Default node colours on a white box; edges hard to read. |
+| `/plantpay/process`, `/plantpay/audit`, `/foundation` | Same second, plainer style as the engine pages; tables overflowed at 900px. |
+| `/supplier/passport/{id}` | Fine structure; colours tied to the light theme. |
+| `/plantpay/journey` | Good structure; mixed light-theme hex colours in its stylesheet. |
+
+### Step 2: design system (implemented once)
+
+- `src/styles/tokens.css` now holds the brief's dark palette under the existing token names, so every stylesheet picks it up: background #0D1117, surface #161B22, border #30363D, accent #2F81F7, text #E6EDF3 / #8B949E, pass #3FB950, warning #D29922, fail #F85149. New tokens: `--surface-2`, `--row-alt`, `--ok-ink`, `--bad-ink`, `--warn-ink`.
+- Type: Inter if installed, then Segoe UI / system-ui (no new font download, so it works offline at the venue). 24px bold h1, 15px body (16px made the dense finance tables wrap too much), 12 to 13px captions and badges. Removed all-caps condensed headings.
+- Cards: 12px radius, 1px #30363D border, 20px padding, soft shadow (`.panel`, `.src`, `.tile`, `.disc`, `.evBox`).
+- Badges: pill-shaped, tinted fill + coloured text + border. PASS/approve green, REVIEW/flag amber, BLOCK red, pending/skipped grey. Shape cue (dot, diamond, square, hollow) kept so meaning never relies on colour alone.
+- Tables: a shared rule in tokens.css gives every table in `main` a sticky header band, alternating row shading and a hover tint. Number columns were already right-aligned with Indian comma grouping and ₹.
+- Charts and graph: dashboard age bar uses a blue ramp; relationship graph has a dark radial background, blue vendors, amber bank accounts, green addresses, red outline on unconfirmed shared-account nodes.
+- Sidebar: near-black rail; the active item has an electric-blue inset bar, tint and glowing dot.
+- 60+ hard-coded light-theme colours replaced with tokens (sed across 7 module stylesheets, plus `Charts.tsx`, `GraphView.tsx`, `global-error.tsx`).
+
+### Step 3: page changes made
+
+- Exception detail: root cause sits in an amber alert box with an icon. If a cause is not backed by evidence, the cause text itself is in amber italics next to the "unverified prediction" tag. The counterfactual is a green block headed "What would make this pass". Responsible and correction lines are quieter.
+- Control tower: diagram heading overlap fixed ("6 SOURCE SYSTEMS"); six source cards in a 3×2 grid (2 columns under 1100px, 1 under 640px) with glowing status dots; KPI tiles enlarged.
+- Login: blue/green hero, sentence-case wordmark.
+
+### Brief items NOT done in this pass (left on purpose: code freeze, each is a component rewrite with demo risk)
+
+Invoice row side drawer; supplier score arc gauges; prediction probability bars; audit trail vertical-timeline redesign of `/audit` (the PlantPay audit list got timeline dots); passport milestone circles and countdown chip; Sankey diagram; 2-second step transitions, slide-in presenter panel and animated closing checklist in the Golden Journey; skeleton loaders; new KPI tiles (processed today, payment at risk, avg resolution time).
+
+### Steps 4 and 5: consistency and performance
+
+- Headless Chrome screenshots of 20 pages at 1440px and 900px (CDP script, forged demo session like smoke). At 900px every page now fits with no horizontal page scroll. Wide tables scroll inside their own box under 1100px, and the evidence grid no longer overflows. No browser JS errors on any page.
+- Load time (production build, navigate to load complete): every page under 1 s, except `/plantpay/predictions` at about 2.2 to 2.4 s right after a server start. The Journey shows "Preparing the journey from the six systems..." while its first build runs. Warm up both before judges arrive.
+
+### Verification
+
+- `tsc --noEmit` clean, `npm run build` clean (the only warning is an existing autoprefixer note on `align-items: end` in Foundation.module.css).
+- Unit tests: 438/442 in the full parallel run; the 4 failures (db append-only, state import, INV-6120R OCR timing, workflow-events date) all pass when re-run alone (18/18, 1/1), so they are load/timing flakes, not regressions.
+- Full production smoke (`npm run smoke -- --label uibeauty`): **782/782 pass, 0 fail, 0 crash, 0 timeout**, same as the Round 2 baseline. 3 slow but passing: clean-clone self-seed 7.1 s, journey with procurement offline 6.5 s, `/plantpay/predictions` 4.8 s under smoke load (the 2-second target is not met for that page on a cold or busy server; it is fine once warm).
+
+### Presenter one-liners (for DEMO.md)
+
+- Login: Plant X Payables Desk; one card states the problem, demo accounts click to fill.
+- Invoice queue (clerk): every open invoice, oldest first, with verdict pill, root cause, owner and age.
+- PlantPay engine: control tower; architecture, six live source systems, demo documents with decisions.
+- Exception resolution: each problem with root cause, evidence by source, owner, and what would make it pass; then simulate the fix.
+- Predictions: four trained models give foresight; causes are unverified unless a record backs them.
+- Supplier scores: strength, criticality and risk kept separate; scores order review work, not payments.
+- Relationship graph: shared bank accounts and addresses as warnings for a person, not accusations.
+- Process twin: actual vs expected invoice path, where time goes, rework loops.
+- Exceptions dashboard: by type, age and supplier, with the upstream fix that clears the most cases.
+- Audit trail and controls report: hash-chained events, verify in one click; six controls in one report.
+- Supplier view: own invoices only; the payment readiness passport says what is holding payment and when it is due.
+- Golden Journey: the nine-step guided story with presenter notes.

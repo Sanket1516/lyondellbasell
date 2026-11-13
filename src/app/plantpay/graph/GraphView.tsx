@@ -10,7 +10,7 @@ export interface ViewEdge { source: string; target: string; kind: string }
 export interface ViewFinding { kind: string; nodeIds: string[]; confirmedLegitimate: boolean; text: string }
 
 const W = 900, H = 520;
-const COLOR: Record<ViewNode["type"], string> = { vendor: "#2f6fd0", bank: "#c9822b", address: "#6a8f3b", approver: "#8a5fbf", po: "#7b8794", invoice: "#9aa5b1" };
+const COLOR: Record<ViewNode["type"], string> = { vendor: "#2f81f7", bank: "#d29922", address: "#3fb950", approver: "#a371f7", po: "#6e7681", invoice: "#8b949e" };
 const NAME: Record<ViewNode["type"], string> = { vendor: "Vendor", bank: "Bank account", address: "Address", approver: "Approver", po: "PO", invoice: "Invoice" };
 const EDGE_NAME: Record<string, string> = { holds_account: "holds account", registered_at: "registered at", billed_by: "billed by", for_po: "for PO", approved_by: "approved by", ordered_from: "ordered from" };
 
@@ -71,12 +71,12 @@ export default function GraphView({ nodes, edges, findings }: { nodes: ViewNode[
         ))}
       </div>
       <svg ref={svg} viewBox={`0 0 ${W} ${H}`} className={s.graphSvg} role="img" aria-label="Relationship graph of vendors, accounts, addresses and approvers" onPointerMove={onMove} onPointerUp={() => { if (drag.current && posRef.current[drag.current]) posRef.current[drag.current].fixed = false; drag.current = null; }} onPointerLeave={() => { drag.current = null; }}>
-        {shownEdges.map((e, i) => { const a = pos[e.source], b = pos[e.target]; if (!a || !b) return null; const on = selected && (e.source === selected || e.target === selected); return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? "#2f6fd0" : "#9aa5b1"} strokeWidth={on ? 2 : 1} opacity={selected && !on ? 0.25 : 0.8} />; })}
+        {shownEdges.map((e, i) => { const a = pos[e.source], b = pos[e.target]; if (!a || !b) return null; const on = selected && (e.source === selected || e.target === selected); return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={on ? "#58a6ff" : "#484f58"} strokeWidth={on ? 2 : 1} opacity={selected && !on ? 0.25 : 0.8} />; })}
         {shown.map((n) => { const q = pos[n.id]; if (!q) return null; const r = n.type === "vendor" ? 13 : n.type === "invoice" || n.type === "po" ? 5 : 9; return (
           <g key={n.id} transform={`translate(${q.x},${q.y})`} style={{ cursor: "grab" }} tabIndex={0} role="button" aria-label={`${NAME[n.type]} ${n.label}`}
             onPointerDown={(ev) => { (ev.target as Element).setPointerCapture?.(ev.pointerId); drag.current = n.id; posRef.current[n.id].fixed = true; setSelected(n.id); }}
             onKeyDown={(ev) => { if (ev.key === "Enter" || ev.key === " ") setSelected(n.id); }}>
-            <circle r={r} fill={COLOR[n.type]} stroke={hot(n.id) ? "#c0392b" : selected === n.id ? "#111" : "#fff"} strokeWidth={hot(n.id) ? 3 : 2} />
+            <circle r={r} fill={COLOR[n.type]} stroke={hot(n.id) ? "#f85149" : selected === n.id ? "#e6edf3" : "#0d1117"} strokeWidth={hot(n.id) ? 3 : 2} />
             {(n.type === "vendor" || n.type === "bank" || n.type === "approver" || selected === n.id) && <text y={r + 12} textAnchor="middle" fontSize="10.5" fill="currentColor">{n.label.length > 24 ? n.label.slice(0, 23) + "…" : n.label}</text>}
           </g>
         ); })}
