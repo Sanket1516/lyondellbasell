@@ -127,6 +127,11 @@ async function page(group: string, url: string, opts: { as?: string; expect?: nu
   if (r.status >= 500) return record(group, name, "crash", r.ms, `HTTP ${r.status}${errs.length ? `; server: ${errs[0].slice(0, 220)}` : ""}`);
   if (!want.includes(r.status)) return record(group, name, "fail", r.ms, `HTTP ${r.status}, expected ${want.join("/")}${r.headers.get("location") ? ` -> ${r.headers.get("location")}` : ""}`);
   if (r.status >= 300 && r.status < 400) return record(group, name, "pass", r.ms, `redirect -> ${r.headers.get("location")}`);
+  // notFound() inside a dynamic page: Next serves a shell and the not-found card arrives in the RSC payload (rendered by the browser).
+  if (r.status === 404 && /id="__next_error__"/.test(r.text)) {
+    const miss = (opts.mustContain ?? []).find((m) => !(typeof m === "string" ? r.text.includes(m) : m.test(r.text)));
+    return record(group, name, miss || !/We could not find that page/.test(r.text) ? "fail" : "pass", r.ms, miss ? `missing ${miss}` : "not-found card in payload");
+  }
   const t = mainText(r.text);
   const bad = BAD_TEXT.exec(t);
   if (bad) return record(group, name, "fail", r.ms, `visible text contains "${bad[0]}": …${t.slice(Math.max(0, bad.index - 80), bad.index + 60)}…`);

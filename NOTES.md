@@ -482,3 +482,83 @@ npm run test:journey       # the journey tests, three consecutive runs
 - Rehearse with a human at normal pace; the 9-minute figure is an estimate from word counts.
 - Step 5 shows the full RAG answer truncated at about 520 characters. Narrow-width layout (under 900 px) was only checked in CSS, not in a browser.
 - GenAI declaration: Claude Code (Anthropic) wrote this code; members must be able to explain it.
+
+## QA and crash-free demo pass (2026-11-13, before the live demo)
+
+### Inventory (every page, route and feature the code declares)
+
+Stack note: the QA brief names FastAPI and Streamlit; as in every stage, the app is Next.js + TypeScript (CLAUDE.md). "API endpoints" = Next.js route handlers and server actions; "Streamlit pages" = Next.js pages.
+
+| Area | Items | State |
+|---|---|---|
+| Sign-in and roles | `/login`, `/`, `/no-access`, signed session cookie, 5 demo users | exists |
+| Original workflow (T1 to T5) | `/supplier` (upload, extract, submit, chat), `/supplier/invoices/{id}`, `/clerk`, `/clerk/invoices/{id}`, `/approver`, `/approver/invoices/{id}`, `/audit`, `/audit/report`, `/dashboard` | exists |
+| Stage 1 foundation | `/foundation`, `/foundation/invoices/{id}`, `/api/foundation/invoices[/{id}[/match, /result]]` | exists |
+| Stages 1B to 7 PlantPay | `/plantpay`, `/plantpay/invoices/{id}` (+ `/exceptions`, `/passport`), `/plantpay/graph`, `/plantpay/predictions[/{id}]`, `/plantpay/suppliers[/{id}]`, `/plantpay/process`, `/plantpay/audit`, `/supplier/passport[/{id}]`, REST `/api/plantpay/v1/*` (16 endpoints) | exists |
+| Stage 9 Golden Journey | `/plantpay/journey`, `/api/plantpay/journey`, pre-computed `fallback.json` | exists |
+| Other APIs | `/api/health`, `/api/v1/invoices`, `/api/document`, `/api/extract`, `/api/supplier/invoices/{id}` | exists |
+| Server actions | 19 (login, logout, reset, submit, chat, request fix, simulate ERP, release, reopen, duplicate decision, re-run match, approve, verify chain, outage toggle, process queue, re-evaluate, post GRN, record inspection, foundation match) | exists |
+| Error, not-found and loading screens | none | **missing**: a server exception showed Next's blank "Application error". Added (see Fixed) |
+| Stage 8 / Stage 10 | no section in this file | not inventoried as separate stages; everything the code declares is covered |
+
+Brief names mapped to real records (as in earlier stages): INV-2044 = INV-7781; INV-1001A = INV-6120R; INV-3001/3002/3003 = IG20/26-27/0910 to 0912; ABC Chemicals / XYZ Traders shared account = Coimbatore Motors (V-1023, CM23/26-27/0909) and Kolhapur Castings (V-1015); bank change = CB21/26-27/0908.
+
+### Smoke test (`scripts/smoke/smoke.ts`, `npm run smoke`)
+
+Starts `next start` (production build) on a **copy** of `data/*.db` and `data/sources` in the OS temp folder. The team's files are never touched; the copy is selected with `PLANTX_DB_FILE`, `FOUNDATION_DB_FILE`, `PLANTPAY_INTEGRATION_DB` and `PLANTPAY_SOURCES_DIR`. It signs in each role with a session cookie and drives server actions over HTTP exactly as the browser does (`Next-Action` header, ids from `.next/server/server-reference-manifest.json`).
+
+Groups: auth (12); staff, approver and supplier pages including every invoice in the clerk queue (84); all 25 demo documents x 6 pages plus supplier scores (175); unknown and XSS-looking ids (15); REST facade with valid and edge input: bad JSON, null/array bodies, wrong types, limits `abc`/`-5`/`0`, unknown ids (~150); other APIs including extraction of empty, text and corrupt files and path traversal (82); planted cases and the tamper script (12); supplier submission edge cases including an **all-zero invoice**, null payloads and strings for numbers (23); each of the six sources offline plus quality.db really missing (76); the original clerk/approver golden journey through real server actions x3 (24 each); the Stage 9 Golden Journey x3 (25 each: live build, all 9 screens validated, planted facts, live data untouched, forced failure); the fallback file; and a **clean clone** with no databases at all.
+
+Every check is pass / fail / crash / timeout, plus slow (> 3 s). A page fails if its visible text contains undefined, NaN, [object, null, Infinity, a stack trace, SQLITE_/ENOENT or "Application error", or is near-empty.
+
+### Results before fixes (776 checks): 763 pass, 4 fail, 9 crash, 0 timeout, 1 slow
+
+- Crashes: REST `/ask` with a non-string question (500); `submitInvoice` with a null payload or a null line (500); supplier chat with null input (500); the Golden Journey API returned 500 whenever any of the six sources had been left offline in the live dashboard (the page then silently showed only the pre-computed copy).
+- Fails: REST `GET /invoices/{unknown}` returned 404 without an `error` message. The other three were harness mistakes (short `/no-access` page, approver page tested with the clerk role, a tamper record number from an older dataset), corrected in the harness.
+
+### Fixed (priority order)
+
+1. **Crashes**
+   - REST facade: one `jsonBody()` reader. Null, array, string or invalid JSON bodies become `{}` and get a 400 with a readable message. `/ask` checks the question is a string (capped at 500 chars); `/simulate` requires `all: true` or a non-empty string id; `/audit?limit=-1` no longer returns every row (clamped to 1 to 500).
+   - `submitInvoice` and `askPayment` reject non-object payloads and null lines with a message instead of throwing.
+   - The Golden Journey sandbox clears demo outage flags on its copy, so a source left offline in `/plantpay` no longer forces the whole journey onto the fallback. Step 3 still takes Logistics offline itself, and the live switch is untouched (tested).
+   - Safety net: `src/app/error.tsx` (friendly card, Try again, reference code, no stack trace), `src/app/global-error.tsx`, `src/app/not-found.tsx` (styled, links back). Before this, any unexpected server error during the demo gave a white "Application error" page.
+2. **Junk data from wrong ids**: `PlantPayEngine.evaluate()` stored an "incomplete" evaluation (plus audit and workflow events) for any id it could not read. Opening `/plantpay/invoices/TYPO`, or calling the REST invoice or evaluate endpoint with a wrong number, added a row that inflated the `/plantpay` and journey step 1 counts. Now nothing is stored when there is no invoice record. That covers an unknown id, and Finance offline, where the last good result is also kept instead of being overwritten. A REST unknown invoice returns 404 with `error`. Event processing keeps an invoice event queued while Finance is offline and re-matches the invoice when Finance returns (the Stage 1B promise, now tested).
+3. **Wrong results**: none found. All planted cases give the expected answer (see Verification).
+4. **Performance**: every page and API on the production build answered in under 3 s (largest: journey build 0.7 to 2.6 s, extraction about 2 s). Only the first request on a clean clone is slow (6 to 10 s) because the app seeds itself; `npm run setup` does that before the demo.
+5. **Fallback**: the journey page already switched to `fallback.json` when the live call fails, times out (30 s) or a step's data is incomplete. Added `ScreenBoundary.tsx`: if a screen throws while drawing live data, that step is redrawn from the pre-computed copy; if that also fails, a short message with Next/Reset is shown. Other pages show stored results during outages (verified for all six sources).
+
+New npm scripts: `setup` (seed everything and train), `demo` (production build and start), `smoke`.
+
+### Verification
+
+- Planted cases (smoke, live server): INV-7781 root cause "Contract amendment not reflected in the PO", ₹412.00 / ₹398.00, supported by evidence, counterfactual "assuming all other checks pass"; INV-6120R blocked as a copy of INV-6120; IG20/26-27/0910, 0911 and 0912 each flagged for splitting; CM23 graph link to Kolhapur Castings, worded "warning, not proof", no accusing words; CB21 bank change flagged with independent verification; INV-7782 passes; audit chain intact; tamper script detects all 5 attacks (edit, delete, swap, workflow-row delete and edit).
+- Original workflow journey x3 (supplier extracts and submits INV-7781, Flag, two fixes requested, two simulated ERP updates, clean, Approver L1 approves, audit verified, dashboard, INV-6120R, chatbot, controls report): 24/24 each run.
+- Stage 9 Golden Journey x3: 25/25 each run, live mode, live INV-7781 still Review afterwards; forced failure returns a JSON error and the page switches to the fallback; `fallback.json` passes every screen check.
+- New `src/plantpay/qa.test.ts` (9 tests): unknown ids store nothing; Finance offline keeps the last result; an invoice event stays queued while Finance is down; the journey builds live with each of the six sources left offline.
+- Full unit suite: 442 tests, 439 passed in the parallel full run. The 3 failures are timing under parallel load and pass when run alone: the OCR extraction time budget (known flaky since Stage 1), and journey "same story" / "finishes in a couple of seconds" (33 s against a 30 s budget while another seeding test ran). Run alone: `journey.test.ts` 20/20, `qa.test.ts` 9/9.
+- `tsc --noEmit` clean; `npm run build` clean.
+- **Final regression smoke run (after all fixes, fresh production build): 782/782 pass, 0 fail, 0 crash, 0 timeout, 0 regressions** (before: 763/776). Both journeys ran three times in a row without an error. Slow but passing: server start (5.5 s), the very first page after start (`/login`, 4.7 s, cold start), and the clean-clone self-seed (6 to 23 s depending on machine load). **Before the judges arrive: run `npm run setup`, start the server, and open `/login` once to warm it up.**
+
+### Known remaining limitations (honest list)
+
+- This pass used no browser; pages are checked by HTTP status and server-rendered text. Client-only behaviour (chart drawing after hydration, graph drag, narrow width) is not visually verified here (Stage 9 did a headless Chrome pass of the journey). Do one manual click-through of `/plantpay/journey` and the clerk flow on the demo laptop.
+- `ScreenBoundary` cannot be exercised by server rendering; it is type-checked, not runtime-tested.
+- `notFound()` inside a dynamic page returns a 404 shell whose card is drawn in the browser from the RSC payload (Next 15 streaming); the smoke test checks the card text is in the payload.
+- The session secret falls back to a hard-coded demo value if `SESSION_SECRET` is unset (acceptable for synthetic data, not for production).
+- `npm run dev` compiles each page on first visit (several seconds). Present from the production build (`npm run demo`).
+- The OCR timing test and the journey timing tests can fail on a loaded machine.
+- Stages 8 and 10 have no section in this file.
+
+### Start fresh from a clean clone
+
+```
+git clone <repo> && cd <repo>
+npm install
+npm run setup          # app store seed, foundation.db, trains the 4 models, six source DBs + integration DB (about 1 minute)
+npm run demo           # production build, then next start on http://localhost:3000
+# sign in: priya.clerk / Clerk@2026 -> /plantpay/journey (Golden Journey); neha.approver / ApproverL1@2026; vihar.supplier / Vihar@2026
+npm test               # unit tests (re-run a timing failure alone)
+npm run build && npm run smoke -- --label check   # full smoke test against a copy of the data
+```
+If `setup` fails with EBUSY on Windows, stop any running `next` process first (it holds the database files). Skipping `setup` also works: the app seeds itself on the first request (6 to 10 s, once).
