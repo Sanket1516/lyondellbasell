@@ -1,0 +1,531 @@
+{
+ "generatedFrom": "src/plantpay/journey/fallback.json + data/sources/*.db + data/plantpay-integration.db + data/plantx.db",
+ "builtAt": "2026-11-13T01:25:51.015Z",
+ "today": "2026-11-12",
+ "hero": {
+  "id": "INV-7781",
+  "supplier": "Vihar Chem Supplies",
+  "vendorId": "V-1001",
+  "po": "4500001234",
+  "invoiceDate": "2026-11-10",
+  "receivedOn": "2026-11-11",
+  "totalInr": 1062000,
+  "subtotalInr": 900000,
+  "taxInr": 162000,
+  "taxPct": 18,
+  "lines": [
+   {
+    "lineNo": 1,
+    "description": "Process additive AX-40",
+    "qty": 1000,
+    "uom": "kg",
+    "unitPrice": 412,
+    "amount": 412000
+   },
+   {
+    "lineNo": 2,
+    "description": "Catalyst carrier C-12",
+    "qty": 5,
+    "uom": "MT",
+    "unitPrice": 86000,
+    "amount": 430000
+   },
+   {
+    "lineNo": 3,
+    "description": "HDPE drum 200 L",
+    "qty": 40,
+    "uom": "nos",
+    "unitPrice": 1450,
+    "amount": 58000
+   }
+  ],
+  "gstin": "27FICTV1001A1Z0"
+ },
+ "problem": {
+  "total": 650,
+  "review": 98,
+  "block": 25,
+  "exceptions": 123,
+  "reworkPct": 21,
+  "reworkInvoices": 138,
+  "avgCycleDays": 25.2,
+  "latePaid": 0,
+  "overdueOpen": 60,
+  "late": 60,
+  "openTasks": 129,
+  "departments": 6
+ },
+ "sources": [
+  {
+   "id": "procurement",
+   "label": "Procurement",
+   "holds": "Purchase orders, contracts, agreed prices",
+   "records": 547
+  },
+  {
+   "id": "warehouse",
+   "label": "Warehouse",
+   "holds": "Goods receipts, delivered quantities, stock records",
+   "records": 619
+  },
+  {
+   "id": "quality",
+   "label": "Quality",
+   "holds": "Inspection reports, accepted and rejected quantities",
+   "records": 619
+  },
+  {
+   "id": "finance",
+   "label": "Finance",
+   "holds": "Invoices, payment status, amounts, approvals",
+   "records": 650
+  },
+  {
+   "id": "logistics",
+   "label": "Logistics",
+   "holds": "Gate entry, shipment tracking, weighbridge records",
+   "records": 619
+  },
+  {
+   "id": "supplier",
+   "label": "Supplier",
+   "holds": "Supplier identity, contacts, verified bank details",
+   "records": 30
+  }
+ ],
+ "match": {
+  "summary": "Review: 2 discrepancies (PO not updated after contract change; Goods receipt under-posted).",
+  "priceDetail": "Price ₹412.00 is 3.5% above PO ₹398.00. Contract C-22 (01-Oct-2026) sets ₹412.00, so the PO looks outdated.",
+  "trio": {
+   "invoice": 412,
+   "po": 398,
+   "contract": 412,
+   "unit": "kg",
+   "description": "Line 1, AX-40"
+  },
+  "tolerancePct": 2,
+  "checksPassed": 11,
+  "checksTotal": 13,
+  "grn": "5000009001 + 5000009002",
+  "grnQty": {
+   "ax40": 1000,
+   "c12": 5000,
+   "dr200": 32
+  }
+ },
+ "rootCause": {
+  "cause": "Contract amendment not reflected in the PO",
+  "evidenceStatus": "supported_by_evidence",
+  "amendment": "Contract C-22 amendment effective 01-Oct-2026: AX-40 price changed from ₹398.00 to ₹412.00 (signed 17-Sep-2026)",
+  "responsible": {
+   "department": "Procurement",
+   "role": "Buyer",
+   "person": "Anand Deshpande"
+  },
+  "correction": "Buyer amends PO 4500001234 line 1 unit price from ₹398.00 to ₹412.00.",
+  "counterfactual": "This invoice line would pass the price check if PO 4500001234 line 1 price were updated to ₹412.00, per amendment of contract C-22 effective 01-Oct-2026, assuming all other checks pass.",
+  "evidenceCount": 6
+ },
+ "risk": {
+  "label": "warning, not proof",
+  "duplicate": {
+   "original": "INV-6120",
+   "copy": "INV-6120R",
+   "score": 95,
+   "total": "₹1,24,254.00"
+  },
+  "shared": {
+   "a": "Kolhapur Castings",
+   "b": "Coimbatore Motors",
+   "account": "50100118826968",
+   "note": "A shared account can be legitimate (a group company, a trading arm). This is a prompt for a person to look, never an accusation."
+  },
+  "legitimate": {
+   "vendors": [
+    "Dahej Catalysts",
+    "Dahej Catalysts Trading Co"
+   ],
+   "account": "50100213856372"
+  },
+  "graph": {
+   "vendors": [
+    {
+     "id": "SUP-1001",
+     "name": "Vihar Chem Supplies"
+    },
+    {
+     "id": "SUP-1002",
+     "name": "Konkan Packaging Works"
+    },
+    {
+     "id": "SUP-1003",
+     "name": "Sahyadri Industrial Gases"
+    },
+    {
+     "id": "SUP-1004",
+     "name": "Deccan Valve & Fittings"
+    },
+    {
+     "id": "SUP-1005",
+     "name": "Malabar Lab Instruments"
+    },
+    {
+     "id": "SUP-1006",
+     "name": "Girnar Logistics"
+    },
+    {
+     "id": "SUP-1007",
+     "name": "Ratnagiri Resins"
+    },
+    {
+     "id": "SUP-1008",
+     "name": "Pune Polymer Traders"
+    },
+    {
+     "id": "SUP-1009",
+     "name": "Nashik Pallet Co"
+    },
+    {
+     "id": "SUP-1010",
+     "name": "Thane Lubricants"
+    },
+    {
+     "id": "SUP-1011",
+     "name": "Bhiwandi Packaging Hub"
+    },
+    {
+     "id": "SUP-1012",
+     "name": "Vasai Chemicals"
+    },
+    {
+     "id": "SUP-1013",
+     "name": "Nagpur Abrasives"
+    },
+    {
+     "id": "SUP-1014",
+     "name": "Aurangabad Fasteners"
+    },
+    {
+     "id": "SUP-1015",
+     "name": "Kolhapur Castings"
+    },
+    {
+     "id": "SUP-1016",
+     "name": "Satara Rubber Products"
+    },
+    {
+     "id": "SUP-1023",
+     "name": "Coimbatore Motors"
+    },
+    {
+     "id": "SUP-1027",
+     "name": "Dahej Catalysts"
+    },
+    {
+     "id": "SUP-1028",
+     "name": "Dahej Catalysts Trading Co"
+    }
+   ],
+   "links": [
+    {
+     "vendor": "SUP-1001",
+     "account": "50100007959330"
+    },
+    {
+     "vendor": "SUP-1002",
+     "account": "50100015878447"
+    },
+    {
+     "vendor": "SUP-1003",
+     "account": "50100023797564"
+    },
+    {
+     "vendor": "SUP-1004",
+     "account": "50100031716681"
+    },
+    {
+     "vendor": "SUP-1005",
+     "account": "50100039635798"
+    },
+    {
+     "vendor": "SUP-1006",
+     "account": "50100047554915"
+    },
+    {
+     "vendor": "SUP-1007",
+     "account": "50100055474032"
+    },
+    {
+     "vendor": "SUP-1008",
+     "account": "50100063393149"
+    },
+    {
+     "vendor": "SUP-1009",
+     "account": "50100071312266"
+    },
+    {
+     "vendor": "SUP-1010",
+     "account": "50100079231383"
+    },
+    {
+     "vendor": "SUP-1011",
+     "account": "50100087150500"
+    },
+    {
+     "vendor": "SUP-1013",
+     "account": "50100102988734"
+    },
+    {
+     "vendor": "SUP-1014",
+     "account": "50100110907851"
+    },
+    {
+     "vendor": "SUP-1015",
+     "account": "50100118826968"
+    },
+    {
+     "vendor": "SUP-1016",
+     "account": "50100126746085"
+    },
+    {
+     "vendor": "SUP-1023",
+     "account": "50100182179904"
+    },
+    {
+     "vendor": "SUP-1027",
+     "account": "50100213856372"
+    },
+    {
+     "vendor": "SUP-1028",
+     "account": "50100213856372"
+    },
+    {
+     "vendor": "SUP-1023",
+     "account": "50100118826968"
+    },
+    {
+     "vendor": "SUP-1012",
+     "account": "60410008014028"
+    }
+   ],
+   "flaggedAccount": "50100118826968",
+   "legitAccount": "50100213856372"
+  },
+  "splitting": {
+   "count": 3,
+   "combinedInr": 290166.72
+  }
+ },
+ "approval": {
+  "clerkMax": 100000,
+  "l1Max": 1500000,
+  "staff": [
+   {
+    "name": "Priya Nair",
+    "title": "AP Clerk",
+    "role": "ap_clerk",
+    "limit": 100000
+   },
+   {
+    "name": "Neha Kulkarni",
+    "title": "Finance Manager",
+    "role": "approver_l1",
+    "limit": 1500000
+   },
+   {
+    "name": "Rajesh Menon",
+    "title": "Finance Controller",
+    "role": "approver_l2",
+    "limit": 99999999
+   }
+  ],
+  "approvedOn": "2026-11-12",
+  "note": "Neha Kulkarni approved ₹10,62,000 after the checks cleared. Approval is a person's decision, recorded in the audit trail."
+ },
+ "intelligence": {
+  "criticality": {
+   "score": 99,
+   "band": "High",
+   "summary": "High supply criticality (99). Main driver: material criticality (what they supply is 98% on the plant's criticality scale)."
+  },
+  "risk": {
+   "score": 31,
+   "band": "Low",
+   "summary": "Low supplier risk (31). Main driver: invoice disputes (30% of invoices needed an exception resolved)."
+  },
+  "relationship": {
+   "score": 75,
+   "band": "High",
+   "summary": "High relationship strength (75). Main strongest: quality (100% of inspected goods accepted)."
+  },
+  "materials": "Catalyst carrier C-12 (sole source); Process additive AX-40 (sole source)",
+  "exception": {
+   "p": 0.9737474098332225,
+   "level": "High",
+   "model": "gradient boosting",
+   "auc": 0.7773,
+   "trainedOn": "8,000 synthetic invoices",
+   "factors": [
+    {
+     "label": "Contract price amended after the PO",
+     "value": "the contract price changed after the PO was issued",
+     "effectPoints": 23.7,
+     "direction": "raises"
+    },
+    {
+     "label": "Share of billed quantity received",
+     "value": "80% of the billed quantity received",
+     "effectPoints": 14.7,
+     "direction": "raises"
+    },
+    {
+     "label": "Unit differs from the PO",
+     "value": "billed in a different unit than ordered",
+     "effectPoints": 14.4,
+     "direction": "raises"
+    },
+    {
+     "label": "Days from PO to invoice",
+     "value": "53 days",
+     "effectPoints": 13.7,
+     "direction": "raises"
+    }
+   ]
+  },
+  "delay": {
+   "p": 0.8121204138395353,
+   "level": "High",
+   "model": "logistic regression",
+   "auc": 0.754,
+   "trainedOn": "8,000 synthetic invoices",
+   "factors": [
+    {
+     "label": "Awaiting approval",
+     "value": "no approval recorded yet",
+     "effectPoints": 16.7,
+     "direction": "raises"
+    },
+    {
+     "label": "Invoice value",
+     "value": "₹10,62,000",
+     "effectPoints": 13,
+     "direction": "raises"
+    },
+    {
+     "label": "Early-payment discount",
+     "value": "none",
+     "effectPoints": 12,
+     "direction": "raises"
+    },
+    {
+     "label": "Contract price amended after the PO",
+     "value": "the contract price changed after the PO was issued",
+     "effectPoints": 9.4,
+     "direction": "raises"
+    }
+   ]
+  },
+  "disclaimer": "Predictions are estimates from a model trained on synthetic history. The deterministic checks decide whether an invoice passes; a prediction never overrides them. Predicted causes are unverified unless a record backs them."
+ },
+ "trust": {
+  "auditEntries": 6096,
+  "workflowEvents": 6026,
+  "tamperedSeq": 3048,
+  "reason": "Record 3048 (wf_approval_requested) has been changed since it was written.",
+  "chain": [
+   {
+    "seq": 3044,
+    "hash": "16c98ea826",
+    "action": "department assigned"
+   },
+   {
+    "seq": 3045,
+    "hash": "ca58ae3f75",
+    "action": "approval granted"
+   },
+   {
+    "seq": 3046,
+    "hash": "7c86087a0a",
+    "action": "review started"
+   },
+   {
+    "seq": 3047,
+    "hash": "c02b37bd5b",
+    "action": "review completed"
+   },
+   {
+    "seq": 3048,
+    "hash": "d3be98676a",
+    "action": "approval requested"
+   },
+   {
+    "seq": 3049,
+    "hash": "ae5f62a3e0",
+    "action": "invoice received"
+   },
+   {
+    "seq": 3050,
+    "hash": "8fc45e4d40",
+    "action": "department assigned"
+   },
+   {
+    "seq": 3051,
+    "hash": "7ce8432d6b",
+    "action": "review started"
+   },
+   {
+    "seq": 3052,
+    "hash": "61dc0cf913",
+    "action": "exception raised"
+   }
+  ]
+ },
+ "paid": {
+  "milestones": [
+   {
+    "id": "uploaded",
+    "label": "Invoice uploaded"
+   },
+   {
+    "id": "extracted",
+    "label": "Invoice data extracted"
+   },
+   {
+    "id": "po",
+    "label": "Purchase order matched"
+   },
+   {
+    "id": "receipt",
+    "label": "Goods receipt confirmed"
+   },
+   {
+    "id": "procurement",
+    "label": "Procurement confirmation"
+   },
+   {
+    "id": "approval",
+    "label": "Final approval"
+   },
+   {
+    "id": "payment",
+    "label": "Payment"
+   }
+  ],
+  "headline": "Approved. Payment is scheduled.",
+  "dueDate": "2026-12-25",
+  "termsDays": 45,
+  "ready": true
+ },
+ "impact": {
+  "duplicateCount": 11,
+  "duplicateValue": 2635731,
+  "hoursSaved": 105,
+  "autoClean": 527,
+  "minutesPerInvoice": 12,
+  "exceptionsWithCause": 116,
+  "exceptionsTotal": 123,
+  "manualDays": 3,
+  "evaluated": 650,
+  "appStoreDuplicates": 1
+ }
+}

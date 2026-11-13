@@ -201,6 +201,8 @@ export interface Task {
   fix?: ErpFix;
   /** What was done, in one sentence. */
   resolution?: string;
+  /** The clerk's instruction to the supplier, when the clerk sent the finding back to the supplier. The supplier sees only this text. */
+  note?: string;
 }
 
 export interface AuditEvent {

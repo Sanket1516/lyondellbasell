@@ -56,8 +56,15 @@ function planFix(s: AppState, inv: Invoice, f: Finding): ErpFix | undefined {
   return undefined;
 }
 
-/** The clerk raises a task for the owner named on a Flag or Block finding. */
-export function requestFix(s: AppState, a: Actor, invoiceId: string, findingId: string, at = new Date().toISOString()): Result<{ taskId: string }> {
+/**
+ * The clerk raises a task for the owner named on a Flag or Block finding.
+ * With `toSupplier`, the task goes to the supplier instead (whoever owns the finding), carrying the clerk's note:
+ * the supplier sees the note, fixes the invoice and uploads it again under the same number, which closes the task.
+ */
+export function requestFix(
+  s: AppState, a: Actor, invoiceId: string, findingId: string, at = new Date().toISOString(),
+  opts: { toSupplier?: boolean; note?: string } = {},
+): Result<{ taskId: string }> {
   const inv = s.invoices.find((i) => i.id === invoiceId);
   if (!inv) return { ok: false, error: "That invoice was not found." };
   if (a.role !== "clerk") return refuse(s, a, "request fix", invoiceId, "Only an AP clerk can request a fix from an owner.");
@@ -66,19 +73,28 @@ export function requestFix(s: AppState, a: Actor, invoiceId: string, findingId: 
   if (!f) return { ok: false, error: "That finding was not found. Re-run the match and try again." };
   if (f.verdict === "approve") return { ok: false, error: "This finding needs no action." };
   if (f.kind === "duplicate") return { ok: false, error: "Use Confirm duplicate or Not a duplicate for this finding." };
-  if (s.tasks.some((t) => t.invoiceId === invoiceId && t.status === "requested" && sameFinding(t, f))) return { ok: false, error: "A fix has already been requested for this finding." };
+  const toSupplier = !!opts.toSupplier;
+  const owner = toSupplier ? "Supplier" : f.owner;
+  const note = toSupplier ? String(opts.note ?? "").trim().slice(0, 500) : undefined;
+  if (toSupplier && (note ?? "").length < MIN_REASON_CHARS) return { ok: false, error: "Tell the supplier what to correct, in a few words. They see this note." };
+  if (s.tasks.some((t) => t.invoiceId === invoiceId && t.status === "requested" && sameFinding(t, f) && t.owner === owner)) {
+    return { ok: false, error: toSupplier ? "This finding has already been sent to the supplier." : "A fix has already been requested for this finding." };
+  }
 
   const next = s.tasks.reduce((m, t) => Math.max(m, Number(t.id.replace(/\D/g, "")) || 0), 0) + 1;
   const task: Task = {
-    id: `T-${String(next).padStart(4, "0")}`, invoiceId, findingId, kind: f.kind, lineNo: f.lineNo, rootCause: f.rootCause, owner: f.owner,
-    title: f.smallestFix, status: "requested", dueOn: addDaysIso(DEMO_TODAY, TASK_DUE_DAYS), createdAt: at, createdBy: a.username, fix: planFix(s, inv, f),
+    id: `T-${String(next).padStart(4, "0")}`, invoiceId, findingId, kind: f.kind, lineNo: f.lineNo, rootCause: f.rootCause, owner,
+    title: note ?? f.smallestFix, status: "requested", dueOn: addDaysIso(DEMO_TODAY, TASK_DUE_DAYS), createdAt: at, createdBy: a.username,
+    fix: toSupplier ? { type: "supplier" } : planFix(s, inv, f), ...(note ? { note } : {}),
   };
   s.tasks.push(task);
   touch(inv, a.username);
   appendAudit(s, {
-    actor: a.username, action: "task_requested", invoiceId,
-    detail: `Requested a fix from ${f.owner}${f.lineNo ? ` for line ${f.lineNo}` : ""}: ${f.rootCause}. Due ${fmtDate(task.dueOn)}.`,
-    before: "No task", after: `${task.id} requested from ${f.owner}`,
+    actor: a.username, action: toSupplier ? "sent_to_supplier" : "task_requested", invoiceId,
+    detail: toSupplier
+      ? `Sent to the supplier for correction${f.lineNo ? ` (line ${f.lineNo})` : ""}: ${note} Due ${fmtDate(task.dueOn)}.`
+      : `Requested a fix from ${f.owner}${f.lineNo ? ` for line ${f.lineNo}` : ""}: ${f.rootCause}. Due ${fmtDate(task.dueOn)}.`,
+    before: "No task", after: `${task.id} requested from ${owner}`,
   }, at);
   return { ok: true, taskId: task.id };
 }

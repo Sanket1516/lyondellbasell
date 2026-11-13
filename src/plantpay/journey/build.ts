@@ -381,8 +381,11 @@ function step9(e: PlantPayEngine, dir: string, sb: Omit<JourneyData["steps"], 9>
   if (r.status === "pass") {
     const amount = must(r.meta, "meta").totalInr;
     e.requestApproval(id, "priya.clerk", amount);
-    const approver = (e.connectors.finance.approverNames() as { name: string }[]).find((x) => /L2|CFO|Finance Controller|Head/i.test(String((x as { title?: string }).title ?? "")))?.name ?? (e.connectors.finance.approverNames() as { name: string }[])[0]?.name ?? "Approver";
-    e.grantApproval(id, approver, amount > 1500000 ? "L2" : "L1");
+    // The lowest approver level whose limit covers the amount (never the AP clerk, whose limit is ₹1,00,000).
+    const staff = e.connectors.finance.approverNames() as { name: string; role: string; approval_limit_inr: number }[];
+    const fit = staff.filter((x) => /^approver_l/.test(x.role) && x.approval_limit_inr >= amount).sort((a, b) => a.approval_limit_inr - b.approval_limit_inr)[0];
+    const approver = fit?.name ?? "Approver";
+    e.grantApproval(id, approver, fit?.role === "approver_l1" ? "L1" : "L2");
     approvalNote = `${approver} approved ${inr(amount)} after the checks cleared. Approval is a person's decision, recorded in the audit trail.`;
   } else approvalNote = "The invoice is not clear yet, so it has not gone for approval.";
   const passport = must(buildPassport(e, id), "hero passport");

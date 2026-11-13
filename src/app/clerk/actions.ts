@@ -48,6 +48,15 @@ export async function requestFixAction(invoiceId: string, findingId: string): Pr
   return r.ok ? { ok: true } : r;
 }
 
+/** Send a finding back to the supplier with a note. The supplier corrects the invoice and uploads it again. */
+export async function sendToSupplierAction(invoiceId: string, findingId: string, note: string): Promise<ClerkResult> {
+  const a = await actor();
+  if (!a) return SIGN_IN;
+  const r = updateState((s) => requestFix(s, a, String(invoiceId), String(findingId), undefined, { toSupplier: true, note: String(note ?? "") }));
+  revalidatePath("/", "layout");
+  return r.ok ? { ok: true } : r;
+}
+
 /** Demo control: apply the owner's fix to the seed data, then re-match. */
 export async function simulateErpAction(taskId: string): Promise<{ ok: true; summary: string; verdict: string } | { ok: false; error: string }> {
   const a = await actor();

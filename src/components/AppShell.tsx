@@ -27,7 +27,12 @@ export default function AppShell({ user, children }: { user: User; children: Rea
           <div className={s.who}>
             <span className={s.role}>{user.title}</span>
             <span>{user.displayName}</span>
-            <form action={logoutAction}><button className={s.link} type="submit">Log out</button></form>
+            <form action={logoutAction}>
+              <button className={s.logout} type="submit">
+                <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 2H3v12h3M10 5l3 3-3 3M13 8H6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                Log out
+              </button>
+            </form>
           </div>
           {canReset && (
             <details className={s.footer}>

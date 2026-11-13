@@ -8,18 +8,23 @@ import type { BBox, PageSize } from "@/lib/extract/types";
 import { fmtDate, fmtInr } from "@/lib/format";
 import { STATUS_VIEW } from "@/lib/status";
 import type { EvidenceRef, FindingKind, Invoice, InvoiceStatus, Verdict } from "@/lib/types";
-import { decideDuplicate, releaseAction, reopenAction, requestFixAction, rerunMatch, simulateErpAction } from "../../actions";
+import { decideDuplicate, releaseAction, reopenAction, requestFixAction, rerunMatch, sendToSupplierAction, simulateErpAction } from "../../actions";
 import s from "./Review.module.css";
 
 export interface TaskView {
   id: string; owner: string; status: "requested" | "done"; dueOn: string; resolution?: string;
+  /** The clerk's note to the supplier, when the finding was sent back to them. */
+  note?: string;
   /** "erp": the demo control can apply the fix. "supplier": waits for a corrected invoice. "none": the owner acts outside this system. */
   simulate: "erp" | "supplier" | "none";
 }
 export interface FindingView {
   id: string; lineNo?: number; kind: FindingKind; kindLabel: string; verdict: Verdict; message: string; rootCause: string; owner: string;
   smallestFix: string; expected?: string; actual?: string; evidence: EvidenceRef[]; box: BBox | null;
-  task: TaskView | null; canRequest: boolean;
+  /** Latest task per owner (the named owner, and the supplier when sent back). */
+  tasks: TaskView[]; canRequest: boolean;
+  /** The clerk can send this finding back to the supplier to correct and re-upload. */
+  canSendToSupplier: boolean;
 }
 export interface FlowView {
   /** Plain-language routing line, shown once the invoice is clean. */
@@ -251,21 +256,43 @@ function DuplicateView({ id, lines, total, invoiceDate, poId, dup, decision, onD
 type Run = <T extends { ok: boolean }>(call: () => Promise<T>, done: (r: T & { ok: true }) => string) => Promise<void>;
 
 function TaskLine({ f, invoiceId, busy, run }: { f: FindingView; invoiceId: string; busy: boolean; run: Run }) {
-  const k = f.task;
-  if (!k && !f.canRequest) return null;
-  if (!k) {
-    return (
-      <div className={s.taskRow}>
-        <Button type="button" disabled={busy} onClick={() => run(() => requestFixAction(invoiceId, f.id), () => `Fix requested from ${f.owner}`)}>Request fix from {f.owner}</Button>
-      </div>
-    );
-  }
+  const [composing, setComposing] = useState(false);
+  const [note, setNote] = useState("");
+  if (!f.tasks.length && !f.canRequest && !f.canSendToSupplier) return null;
+  const noteId = `note-${f.id}`;
+  return (
+    <>
+      {f.tasks.map((k) => <TaskStatus key={k.id} k={k} busy={busy} run={run} />)}
+      {(f.canRequest || f.canSendToSupplier) && !composing && (
+        <div className={s.taskRow}>
+          {f.canRequest && <Button type="button" disabled={busy} onClick={() => run(() => requestFixAction(invoiceId, f.id), () => `Fix requested from ${f.owner}`)}>Request fix from {f.owner}</Button>}
+          {f.canSendToSupplier && (
+            <Button type="button" disabled={busy} onClick={() => { setNote(f.owner === "Supplier" ? f.smallestFix : ""); setComposing(true); }}>Send to supplier to correct</Button>
+          )}
+        </div>
+      )}
+      {composing && (
+        <form className={s.decide} onSubmit={(e) => e.preventDefault()}>
+          <label htmlFor={noteId} className={s.decideLabel}>What should the supplier correct? (they see this note)</label>
+          <textarea id={noteId} className={s.textarea} rows={2} value={note} onChange={(e) => setNote(e.target.value)} placeholder="For example: reissue the invoice at the contract price of ₹142.50 per kg" />
+          <div className={s.decideBtns}>
+            <Button variant="primary" type="button" disabled={busy} onClick={() => run(() => sendToSupplierAction(invoiceId, f.id, note), () => { setComposing(false); return "Sent to the supplier. Their corrected invoice will re-run the match."; })}>Send to supplier</Button>
+            <Button type="button" disabled={busy} onClick={() => setComposing(false)}>Cancel</Button>
+          </div>
+        </form>
+      )}
+    </>
+  );
+}
+
+function TaskStatus({ k, busy, run }: { k: TaskView; busy: boolean; run: Run }) {
   return (
     <div className={s.taskRow}>
       <p className={s.taskMeta}>
         <span className="mono">{k.id}</span> · {k.owner} · due {fmtDate(k.dueOn)} · <strong>{k.status === "done" ? "Done" : "Requested"}</strong>
         {k.status === "done" && k.resolution ? `. ${k.resolution}` : ""}
       </p>
+      {k.note && <p className={s.taskNote}>Note to supplier: {k.note}</p>}
       {k.status === "requested" && k.simulate === "erp" && (
         <Button type="button" disabled={busy} onClick={() => run(() => simulateErpAction(k.id), (r) => `${r.summary} ${r.verdict === "approve" ? "The invoice now matches." : "Re-matched: still has open findings."}`)}>
           Demo: simulate ERP update by {k.owner}

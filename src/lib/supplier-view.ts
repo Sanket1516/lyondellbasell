@@ -55,8 +55,14 @@ export function buildSupplierView(s: AppState, invoiceId: string, user: { userna
   const tasks = s.tasks.filter((t) => t.invoiceId === inv.id);
   const internalOpen = tasks.filter((t) => t.status === "requested" && t.owner !== "Supplier").length;
   const done = tasks.filter((t) => t.status === "done");
+  // Corrections come from supplier-owned findings, plus anything the clerk sent back with a note.
+  // Only the clerk's note is shown for those, never the internal finding text.
+  // When the clerk wrote a note for a supplier-owned finding, the note replaces the generated instruction.
+  const noted = tasks.filter((t) => t.status === "requested" && t.owner === "Supplier" && t.note);
+  const hasNote = (f: Finding) => noted.some((t) => t.kind === f.kind && t.lineNo === f.lineNo && t.rootCause === f.rootCause);
+  const sentBack: SupplierAction[] = noted.map((t) => ({ lineNo: t.lineNo, what: `${t.lineNo ? `Line ${t.lineNo}: ` : ""}${t.note}` }));
   const actions = inv.status === "pending_owner" || inv.status === "blocked"
-    ? findings.filter((f) => f.owner === "Supplier").map(actionFor).filter((x): x is SupplierAction => !!x)
+    ? [...findings.filter((f) => f.owner === "Supplier" && !hasNote(f)).map(actionFor).filter((x): x is SupplierAction => !!x), ...sentBack]
     : [];
   const notYetDelivered = findings.some((f) => f.rootCause === "Billed before delivery or receipt");
   const events = s.auditEvents.filter((e) => e.invoiceId === inv.id);

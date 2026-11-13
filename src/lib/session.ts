@@ -32,9 +32,15 @@ export async function getSessionUser(): Promise<User | undefined> {
   return verifyToken(jar.get(COOKIE)?.value);
 }
 
+/** Name, value and options of the session cookie, for route handlers that set it on their own response. */
+export function sessionCookie(username: string) {
+  return { name: COOKIE, value: makeToken(username), options: { httpOnly: true, sameSite: "lax" as const, path: "/", maxAge: 60 * 60 * 12 } };
+}
+
 export async function setSession(username: string) {
   const jar = await cookies();
-  jar.set(COOKIE, makeToken(username), { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 12 });
+  const c = sessionCookie(username);
+  jar.set(c.name, c.value, c.options);
 }
 
 export async function clearSession() {

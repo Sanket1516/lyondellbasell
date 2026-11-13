@@ -20,9 +20,13 @@
     "audit:tamper:plantpay": "tsx scripts/tamper-plantpay.ts",
     "journey:fallback": "tsx scripts/build-journey-fallback.ts",
     "setup": "npm run reset && npm run seed:foundation && npm run train:models && npm run seed:sources",
-    "demo": "npm run build && next start",
+    "demo": "npm run landing:build && npm run build && next start",
     "smoke": "tsx scripts/smoke/smoke.ts",
-    "test:journey": "vitest run src/plantpay/journey && vitest run src/plantpay/journey && vitest run src/plantpay/journey"
+    "test:journey": "vitest run src/plantpay/journey && vitest run src/plantpay/journey && vitest run src/plantpay/journey",
+    "landing:install": "npm --prefix landing install",
+    "landing:story": "tsx scripts/build-landing-story.ts",
+    "landing:build": "node scripts/landing-build.mjs",
+    "landing:test": "node landing/e2e/scroll.mjs"
   },
   "dependencies": {
     "@fontsource-variable/archivo": "^5.3.0",

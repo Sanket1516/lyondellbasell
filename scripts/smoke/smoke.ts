@@ -231,7 +231,25 @@ const want = (g: string) => !ONLY || ONLY.split(",").includes(g);
 async function gAuth() {
   const G = "auth";
   await page(G, "/login", { minText: 20, mustContain: ["Sign in"] });
-  await page(G, "/", { expect: [307, 308, 302, 303] , name: "anon / redirects" });
+  {
+    // "/" is the static scroll-story landing page (rendered in the browser; landing/e2e/scroll.mjs drives it in Edge).
+    const r = await http("GET", "/");
+    record(G, "anon / serves the landing page", r.status === 200 && r.text.includes('id="root"') && r.text.includes("/landing/assets/") ? "pass" : "fail", r.ms, `HTTP ${r.status}`);
+  }
+  await page(G, "/start", { expect: [307, 308, 302, 303], name: "anon /start redirects to sign-in" });
+  for (const [role, home] of [["supplier", "/supplier"], ["clerk", "/clerk"], ["approver", "/approver"]] as const) {
+    const r = await http("GET", `/demo/${role}`);
+    const ok = r.status === 307 && r.headers.get("location") === home && /plantx_session=/.test(r.headers.get("set-cookie") ?? "");
+    record(G, `landing demo sign-in as ${role}`, ok ? "pass" : "fail", r.ms, `${r.status} -> ${r.headers.get("location")}`);
+  }
+  {
+    const r = await http("GET", "/demo/clerk?next=" + encodeURIComponent("//evil.example"));
+    record(G, "demo sign-in ignores an off-site next", r.headers.get("location") === "/clerk" ? "pass" : "fail", r.ms, `-> ${r.headers.get("location")}`);
+    const j = await http("GET", "/demo/clerk?next=" + encodeURIComponent("/plantpay/journey"));
+    record(G, "demo sign-in honours a same-site next", j.headers.get("location") === "/plantpay/journey" ? "pass" : "fail", j.ms, `-> ${j.headers.get("location")}`);
+    const u = await http("GET", "/demo/admin");
+    record(G, "demo sign-in rejects an unknown role", u.status === 307 && u.headers.get("location") === "/login" && !/plantx_session=/.test(u.headers.get("set-cookie") ?? "") ? "pass" : "fail", u.ms, `${u.status} -> ${u.headers.get("location")}`);
+  }
   await page(G, "/plantpay", { expect: [307, 302, 303], name: "anon /plantpay redirects to sign-in" });
   await page(G, "/clerk", { as: VIHAR, expect: [307, 302, 303], name: "supplier kept out of /clerk" });
   await page(G, "/supplier", { as: CLERK, expect: [307, 302, 303], name: "clerk kept out of /supplier" });

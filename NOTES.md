@@ -701,3 +701,57 @@ Stack note as before: the brief says Python/FastAPI/Streamlit; the app is Next.j
 - The nav now has 13 items for staff; check it fits at the venue screen size.
 - Predictions page is still about 2 to 5 s on a cold server; open it once before judges arrive.
 - Process twin and graph are static views, not drag-interactive; the graph supports focusing on a vendor.
+
+## Prompt C: scroll-driven 3D landing page (2026-11-13)
+
+### Audit of existing work
+
+| Item | State found | Action |
+|---|---|---|
+| Landing page at "/" | **missing** (`landing/` held only `.gitkeep`; `/` redirected to the role home or `/login`) | Built: Vite + React + TypeScript app in `landing/`, built to `public/landing`, served by Next.js at `/` |
+| Served by FastAPI | **n/a**: the app is Next.js (stack decision in Stage 1), so Next serves the static build through a `beforeFiles` rewrite in `next.config.mjs` | |
+| Role deep links "already logged in" | **missing** | `GET /demo/{supplier,clerk,approver}?next=/path` signs in the seeded demo account and redirects |
+| Hero numbers | **done** in the Golden Journey fallback (INV-7781 is the brief's INV-2044) | Reused: `scripts/build-landing-story.ts` writes `landing/src/data/story.json` from the fallback, the six source DBs, the real audit-chain hashes and the 650 evaluations |
+| Bug found on the way | Golden Journey step 9 said "Priya Nair approved ₹10,62,000": the approver lookup read a `title` column that `approverNames()` does not select, so it fell back to the first staff row (the AP clerk, limit ₹1,00,000) | Fixed in `src/plantpay/journey/build.ts`: lowest approver role whose limit covers the amount (Neha Kulkarni, L1). `fallback.json` regenerated |
+
+### Decisions
+
+- **Hero record**: the page shows INV-7781 / Vihar Chem Supplies (the record the live demo opens), not the brief's "ABC Chemicals INV-2044", so the judge sees the same invoice on the landing page and in the app.
+- **Numbers**: every figure comes from `story.json`, nothing typed by hand: 650 invoices, 123 exceptions, 60 past due and unpaid (invoice date + supplier terms before the demo day), 25 blocked, 21% rework, source record counts, ₹412 / ₹398 / contract C-22, 95/100 duplicate score, shared account 50100118826968, thresholds ₹1,00,000 / ₹15,00,000, model probabilities and AUCs, audit records 3044 to 3052 with their real sha256 prefixes, tamper at record 3048 as computed by the journey. Closing impact counters are measured over the 650 PlantPay evaluations: 11 possible duplicates held (₹26,35,731), 116 of 123 exceptions with root cause and owner; "105 clerk hours saved" uses the labelled 12-minute assumption from `IMPACT_ASSUMPTIONS`.
+- **One canvas, one coordinate**: scroll position maps to a chapter coordinate `c` (0 to 11). Every 3D transform is a pure function of the damped `c`, so scrolling back plays the story backwards. Only the hero sway, particle drift and the scroll-hint line move on their own. Each chapter's action finishes at its rest point `c = i`, so the side rail (which jumps to `c = i`) always lands on the finished state. Trust is the exception by design: at rest the tamper is caught; scrolling on repairs it.
+- **Text**: chapter copy is real DOM text (GSAP ScrollTrigger timelines fade it in and out; Lenis smooths the scroll). Each chapter also has an off-screen description of what the canvas shows; the canvas is `aria-hidden`.
+- **All 3D is procedural**: boxes, planes, tubes, instanced meshes and canvas-drawn textures using the self-hosted fonts (Archivo display, Inter, Spline Sans Mono, all from `@fontsource`). Environment lighting uses `Lightformer`s (no HDR file). No models, no CDN, no external fonts.
+- **Performance**: pixel ratio capped at 1.5; repeated meshes instanced (invoice piles, red marks, graph nodes, source pulses, chain links, milestones); chapter scenery mounts only within one chapter of the view and disposes of its geometry and textures; three.js is a lazy chunk (first-paint JS 133 KB gzip, scene chunk 300 KB gzip). `PerformanceMonitor` drops to DPR 1 and no MSAA on decline; three straight seconds under 30 fps at that level switches to Lite mode with a notice.
+- **Lite mode**: the same chapters as layered inline SVG with CSS reveals. Chosen automatically when WebGL is missing, when the system asks for reduced motion, when the 3D chunk fails or takes over 12 s, or on low fps. Toggle in the top bar (remembered in localStorage when available). URL overrides: `?lite=1`, `?lite=0`, `?fpsguard=0` (tests).
+- **Demo sign-in** (`src/app/demo/[role]/route.ts`, helpers in `src/lib/demoLogin.ts`): supplier = vihar.supplier, clerk = priya.clerk, approver = neha.approver (L1). `next` must be a same-site path (no `//`, backslash or control characters). Redirects use a relative `Location` so the cookie stays on whatever host the browser used (localhost, 127.0.0.1, a LAN IP). Turn off with `DEMO_AUTOLOGIN=off`. The credentials are the same synthetic ones already in DEMO.md and are printed under the buttons.
+- `/` used to redirect signed-in users to their home; that redirect now lives at `/start`, and the "Back to start" links on the error and not-found pages point there.
+- The built landing (`public/landing`, about 2 MB) is meant to be committed, so a clean clone serves `/` without installing the landing's dependencies (`scripts/landing-build.mjs` keeps it when `landing/node_modules` is absent).
+
+### Schema changes
+
+None. New generated file `landing/src/data/story.json` (committed; re-run `npm run landing:story` when the demo data changes).
+
+### How to run
+
+```
+npm run landing:install      # once: landing dependencies (Vite, three, R3F, drei, postprocessing, GSAP, Lenis, playwright-core)
+npm run landing:story        # optional: refresh story.json from the databases
+npm run demo                 # one command: builds the landing (or keeps the committed build), builds Next, starts on :3000
+# open http://localhost:3000/ , scroll, then "Start the Golden Journey" or a role button
+npm run landing:test         # with the server running (BASE=http://127.0.0.1:3000 by default): Edge + Playwright e2e
+cd landing && npm run dev    # landing dev server on :5173/landing/ (proxies /demo to :3000)
+```
+
+### Verification (2026-11-13)
+
+- `landing/e2e/scroll.mjs` against the production build (Edge, real Intel UHD GPU via ANGLE/D3D11): **31/31 pass**. With the network switched off: 12 chapters render with their text, one screenshot each; a continuous wheel scroll top to bottom (126 steps) reaches the CTA with no console errors, about 80 fps in that headless run; no request ever leaves the server. Lite mode renders all chapters with no canvas and no errors. 900 px window: no horizontal overflow, no errors. The first Tab stop is the skip link, with a visible focus ring. All four CTA buttons land signed in on `/plantpay/journey`, `/supplier`, `/clerk`, `/approver` (HTTP 200). First contentful paint 84 to 996 ms (cold server at the high end).
+- Screenshots: `landing/screens/3d-*.png`, `lite-*.png`, `narrow-*.png`, contact sheets `contact-sheet.png` (3D) and `contact-sheet-lite.png`, report `e2e-report.json`.
+- Smoke (`npx tsx scripts/smoke/smoke.ts --label landing`): **791/791 pass**. The old "anon / redirects" check is replaced by: `/` serves the landing build, `/start` redirects, demo sign-in for each role, off-site `next` ignored, same-site `next` honoured, unknown role refused. Golden Journey ran three times, 25/25 each.
+- Unit tests: 445 of 446; new `src/lib/demoLogin.test.ts` 2/2. The one failure is the known clock-dependent `workflow_events` test described above. `tsc --noEmit` is clean in the app and in `landing/`.
+
+### What is left
+
+- The 60 fps target was measured only on this laptop's integrated GPU, headless. Scroll it once on the venue laptop and projector; switch on Lite mode if it stutters.
+- Cards in the three-document chapters are small at 1440 px; the story is carried by highlights, pills and the text column, so judges should not need to read card fine print.
+- No pass with a real screen reader (headings, descriptions and labels are in place).
+- A Next.js build rewrites `.next`: restart any `next start` that was running from an earlier build (the server on :3000 was running during this work).

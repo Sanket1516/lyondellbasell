@@ -53,10 +53,19 @@ export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
 
   return updateState<SubmitResult>((s) => {
     const existing = s.invoices.find((i) => i.id === id);
+    // Only the vendor's own invoice can be replaced. Another vendor's number is refused without revealing its status.
+    const own = !!existing && (existing.vendorId === user.vendorId || existing.submittedBy === user.username);
+    if (existing && !own) return { ok: false, error: `Invoice number ${id} is already in use. Check the number on your invoice.` };
     // A supplier may correct their own submission until internal work has started on it (an owner task, approval or payment).
     // Tasks waiting on the supplier do not count: sending the corrected invoice is how they get done.
-    const replaceable = existing && existing.submittedBy && ["received", "matched", "pending_owner", "pending_approval", "blocked"].includes(existing.status)
+    const untouched = !!existing?.submittedBy && ["received", "matched", "pending_owner", "pending_approval", "blocked"].includes(existing.status)
       && !s.tasks.some((t) => t.invoiceId === id && (t.status === "done" || t.owner !== "Supplier"));
+    // Once a correction is asked of the supplier (the clerk sent it back, or a finding is theirs to fix), they may always re-upload.
+    const correctionAsked = !!existing && ["pending_owner", "blocked"].includes(existing.status) && (
+      s.tasks.some((t) => t.invoiceId === id && t.status === "requested" && t.owner === "Supplier")
+      || s.findings.some((f) => f.invoiceId === id && f.owner === "Supplier" && f.verdict !== "approve")
+    );
+    const replaceable = untouched || correctionAsked;
     if (existing && !replaceable) return { ok: false, error: `Invoice ${id} has already been submitted and is ${existing.status.replace("_", " ")}.` };
 
     const gstin = text(p.vendorGstin, 15).toUpperCase();

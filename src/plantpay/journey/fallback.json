@@ -1,7 +1,7 @@
 {
  "version": 1,
  "mode": "fallback",
- "builtAt": "2026-11-12T18:04:25.631Z",
+ "builtAt": "2026-11-13T01:25:51.015Z",
  "today": "2026-11-12",
  "hero": "INV-7781",
  "heroSupplier": "Vihar Chem Supplies",
@@ -115,7 +115,7 @@
    ],
    "integrity": {
     "ok": true,
-    "auditEntries": 6069,
+    "auditEntries": 6073,
     "workflowEvents": 6018
    },
    "story": [
@@ -1635,26 +1635,26 @@
   "9": {
    "integrity": {
     "ok": true,
-    "auditEntries": 6092,
+    "auditEntries": 6096,
     "workflowEvents": 6026
    },
    "tamper": [
     {
      "label": "Untouched audit trail",
      "ok": true,
-     "reason": "Chain intact: 6092 audit entries and 6026 workflow events verified."
+     "reason": "Chain intact: 6096 audit entries and 6026 workflow events verified."
     },
     {
-     "label": "Someone edits the text of audit record 3046",
+     "label": "Someone edits the text of audit record 3048",
      "ok": false,
-     "position": 3046,
-     "reason": "Record 3046 (wf_review_started) has been changed since it was written."
+     "position": 3048,
+     "reason": "Record 3048 (wf_approval_requested) has been changed since it was written."
     },
     {
-     "label": "Someone deletes audit record 3046",
+     "label": "Someone deletes audit record 3048",
      "ok": false,
-     "position": 3047,
-     "reason": "Record 3047 follows record 3045: a record is missing or out of order."
+     "position": 3049,
+     "reason": "Record 3049 follows record 3047: a record is missing or out of order."
     },
     {
      "label": "Someone edits a workflow event (changes who approved)",
@@ -1733,7 +1733,7 @@
     }
    },
    "readyForPayment": true,
-   "approvalNote": "Priya Nair approved ₹10,62,000 after the checks cleared. Approval is a person's decision, recorded in the audit trail.",
+   "approvalNote": "Neha Kulkarni approved ₹10,62,000 after the checks cleared. Approval is a person's decision, recorded in the audit trail.",
    "checklist": [
     {
      "feature": "Root-Cause Resolver",
@@ -1813,7 +1813,7 @@
     {
      "feature": "Hash-Chained Audit Trail",
      "step": 9,
-     "evidence": "Tamper detected at record 3046"
+     "evidence": "Tamper detected at record 3048"
     },
     {
      "feature": "Six-source integration",

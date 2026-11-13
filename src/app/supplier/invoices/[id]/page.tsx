@@ -33,7 +33,10 @@ export default async function SupplierInvoicePage({ params }: { params: Promise<
           <ul>
             {v.actions.map((a, i) => <li key={i}>{a.what}</li>)}
           </ul>
-          <p className={s.hint}>Upload the corrected invoice from My invoices using the same invoice number.</p>
+          <p className={s.hint}>
+            Upload the corrected invoice with the same invoice number (<span className="mono">{v.id}</span>). It replaces this one and is checked again straight away.{" "}
+            <Link href="/supplier#upload">Upload corrected invoice</Link>
+          </p>
         </section>
       )}
 

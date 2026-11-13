@@ -13,7 +13,7 @@ export default function PageError({ error, reset }: { error: Error & { digest?: 
         <p>The data is safe and nothing was changed. Try again, or go back to the start page and open it from there.</p>
         <div className={s.actions}>
           <button type="button" className={s.primary} onClick={() => reset()}>Try again</button>
-          <Link href="/" className={s.secondary}>Back to start</Link>
+          <Link href="/start" className={s.secondary}>Back to start</Link>
         </div>
         {error.digest && <p className={s.ref}>Reference {error.digest}</p>}
       </div>

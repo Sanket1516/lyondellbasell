@@ -25,7 +25,7 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
 
   const tasks = state.tasks.filter((t) => t.invoiceId === id);
   const taskView = (t: (typeof tasks)[number]): TaskView => ({
-    id: t.id, owner: t.owner, status: t.status, dueOn: t.dueOn, resolution: t.resolution,
+    id: t.id, owner: t.owner, status: t.status, dueOn: t.dueOn, resolution: t.resolution, note: t.note,
     simulate: !t.fix ? "none" : t.fix.type === "supplier" ? "supplier" : "erp",
   });
   const canFix = (OPEN_FOR_FIXES as readonly string[]).includes(inv.status);
@@ -56,8 +56,18 @@ export default async function ReviewPage({ params }: { params: Promise<{ id: str
     findings: findings.map((f) => ({
       id: f.id, lineNo: f.lineNo, kind: f.kind, kindLabel: FINDING_KIND_LABEL[f.kind], verdict: f.verdict, message: f.message, rootCause: f.rootCause,
       owner: f.owner, smallestFix: f.smallestFix, expected: f.expected, actual: f.actual, evidence: f.evidence ?? [], box: doc ? boxFor(doc.ex, f) : null,
-      task: (() => { const k = [...tasks].reverse().find((x) => x.kind === f.kind && x.lineNo === f.lineNo && x.rootCause === f.rootCause); return k ? taskView(k) : null; })(),
-      canRequest: canFix && f.verdict !== "approve" && f.kind !== "duplicate",
+      ...(() => {
+        // The latest task per owner for this finding: the named owner, and the supplier when the clerk sent it back.
+        const mine = tasks.filter((x) => x.kind === f.kind && x.lineNo === f.lineNo && x.rootCause === f.rootCause);
+        const latest = [...new Set(mine.map((x) => x.owner))].map((o) => mine.filter((x) => x.owner === o).pop()!);
+        const openFor = (o: string) => latest.some((x) => x.owner === o && x.status === "requested");
+        const actionable = canFix && f.verdict !== "approve" && f.kind !== "duplicate";
+        return {
+          tasks: latest.map(taskView),
+          canRequest: actionable && !latest.some((x) => x.owner === f.owner),
+          canSendToSupplier: actionable && !openFor("Supplier"),
+        };
+      })(),
     })),
     flow: {
       route: clean ? routeText(inv.total) : null,

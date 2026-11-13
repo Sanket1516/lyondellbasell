@@ -12,7 +12,7 @@ export default function NotFound() {
         <h1>We could not find that page or record</h1>
         <p>The invoice, supplier or page may not exist in the demo data, or the address has a typo. Invoice numbers that contain a slash, such as IG20/26-27/0910, are opened from the lists.</p>
         <div className={s.actions}>
-          <Link href="/" className={s.primary}>Back to start</Link>
+          <Link href="/start" className={s.primary}>Back to start</Link>
           <Link href="/plantpay" className={s.secondary}>PlantPay dashboard</Link>
         </div>
       </div>

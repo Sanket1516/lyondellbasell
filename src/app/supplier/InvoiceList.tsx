@@ -13,6 +13,8 @@ export interface InvoiceRow {
   poId: string;
   total: number;
   status: InvoiceStatus;
+  /** A correction is waiting on the supplier (sent back by the clerk, or a finding they own). */
+  actionNeeded?: boolean;
 }
 
 export function InvoiceList({ rows, showVendor }: { rows: InvoiceRow[]; showVendor: boolean }) {
@@ -30,7 +32,9 @@ export function InvoiceList({ rows, showVendor }: { rows: InvoiceRow[]; showVend
         { header: "Submitted", render: (r) => fmtDate(r.receivedOn) },
         { header: "PO", render: (r) => <span className="mono">{r.poId}</span> },
         { header: "Total (₹)", numeric: true, render: (r) => fmtInr(r.total) },
-        { header: "Status", render: (r) => <StatusChip kind={STATUS_VIEW[r.status].kind} label={STATUS_VIEW[r.status].label} /> },
+        { header: "Status", render: (r) => (r.actionNeeded
+          ? <Link href={`/supplier/invoices/${encodeURIComponent(r.id)}`}><StatusChip kind="flag" label="Action needed: correct and re-upload" /></Link>
+          : <StatusChip kind={STATUS_VIEW[r.status].kind} label={STATUS_VIEW[r.status].label} />) },
       ]}
     />
   );

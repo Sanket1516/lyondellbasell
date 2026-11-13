@@ -5,8 +5,8 @@
 }
 .rail {
   position: sticky; top: 0; height: 100vh;
-  display: flex; flex-direction: column; gap: 28px;
-  padding: 22px 0 18px;
+  display: flex; flex-direction: column; gap: 20px;
+  padding: 22px 0 16px;
   background: var(--rail); color: var(--rail-ink);
   border-right: 1px solid var(--line);
 }
@@ -15,9 +15,11 @@
 .brand > span:last-child { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rail-soft); }
 .bands { display: block; width: 56px; height: 8px; margin-bottom: 12px; background: var(--bands); border-radius: 999px; }
 
-.rail ul { list-style: none; margin: 0; padding: 0; flex: 1; }
+/* The menu scrolls inside the rail, so the signed-in user and Log out stay pinned at the bottom on short screens
+   (13 staff items no longer push them below the viewport). */
+.rail ul { list-style: none; margin: 0; padding: 0; flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent; }
 .rail li a {
-  position: relative; display: block; padding: 10px 20px 10px 34px; margin: 2px 12px; border-radius: var(--radius);
+  position: relative; display: block; padding: 8px 20px 8px 34px; margin: 2px 12px; border-radius: var(--radius);
   color: var(--ink-soft); text-decoration: none; font-weight: 500; font-size: 14px;
 }
 .rail li a::before {
@@ -32,7 +34,15 @@
 .rail li a.on::before { transform: scaleX(1); background: var(--accent); box-shadow: 0 0 8px var(--accent); }
 .rail li a:focus-visible { box-shadow: inset 0 0 0 2px var(--band-inv); border-radius: var(--radius); }
 
-.foot { padding: 0 20px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
+.foot { flex: none; padding: 0 20px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
+.logout {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 7px 12px;
+  font: inherit; font-size: 13px; font-weight: 600; color: var(--rail-ink); cursor: pointer;
+  background: rgba(177, 186, 196, 0.08); border: 1px solid var(--line-strong); border-radius: var(--radius);
+  transition: background 180ms, border-color 180ms;
+}
+.logout:hover { background: rgba(248, 81, 73, 0.12); border-color: var(--bad); }
+.logout:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--rail), 0 0 0 4px var(--accent); }
 .who { display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid var(--line); }
 .role { font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-2); font-weight: 600; }
 .link {

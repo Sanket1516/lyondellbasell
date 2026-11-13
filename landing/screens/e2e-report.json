@@ -1,0 +1,161 @@
+{
+ "base": "http://127.0.0.1:3300",
+ "at": "2026-11-13T03:04:20.243Z",
+ "results": [
+  {
+   "name": "3D mode starts",
+   "pass": true,
+   "detail": "renderer: ANGLE (Intel, Intel(R) UHD Graphics (0x0000A78B) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  {
+   "name": "first contentful paint under 2 s",
+   "pass": true,
+   "detail": "996 ms"
+  },
+  {
+   "name": "12 chapters on the page",
+   "pass": true,
+   "detail": "hero, problem, read, sources, match, cause, risk, approval, intel, trust, paid, live-demo"
+  },
+  {
+   "name": "chapter 00 hero: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=0.000"
+  },
+  {
+   "name": "chapter 01 problem: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=1.000"
+  },
+  {
+   "name": "chapter 02 read: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=2.000"
+  },
+  {
+   "name": "chapter 03 sources: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=3.000"
+  },
+  {
+   "name": "chapter 04 match: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=4.000"
+  },
+  {
+   "name": "chapter 05 cause: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=5.000"
+  },
+  {
+   "name": "chapter 06 risk: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=6.000"
+  },
+  {
+   "name": "chapter 07 approval: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=7.000"
+  },
+  {
+   "name": "chapter 08 intel: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=8.000"
+  },
+  {
+   "name": "chapter 09 trust: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=9.000"
+  },
+  {
+   "name": "chapter 10 paid: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=10.000"
+  },
+  {
+   "name": "chapter 11 live-demo: text shown, scene at chapter",
+   "pass": true,
+   "detail": "c=11.000"
+  },
+  {
+   "name": "wheel scroll reaches the last chapter",
+   "pass": true,
+   "detail": "126 wheel steps, c=11.00, 80 fps in this headless run"
+  },
+  {
+   "name": "3D: no console errors (network off)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "3D: no request leaves the server",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Lite mode starts",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Lite mode has no WebGL canvas",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Lite: no console errors (network off)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Lite: no request leaves the server",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "900 px: no horizontal overflow",
+   "pass": true,
+   "detail": "0px"
+  },
+  {
+   "name": "900 px: no console errors",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "first Tab stop is the skip link",
+   "pass": true,
+   "detail": "Skip to the live demo"
+  },
+  {
+   "name": "focus is visible",
+   "pass": true,
+   "detail": "solid"
+  },
+  {
+   "name": "four demo buttons",
+   "pass": true,
+   "detail": "Start the Golden Journey, Supplier, AP Clerk, Approver"
+  },
+  {
+   "name": "\"Start the Golden Journey\" opens /plantpay/journey signed in",
+   "pass": true,
+   "detail": "200 /plantpay/journey"
+  },
+  {
+   "name": "\"Supplier\" opens /supplier signed in",
+   "pass": true,
+   "detail": "200 /supplier"
+  },
+  {
+   "name": "\"AP Clerk\" opens /clerk signed in",
+   "pass": true,
+   "detail": "200 /clerk"
+  },
+  {
+   "name": "\"Approver\" opens /approver signed in",
+   "pass": true,
+   "detail": "200 /approver"
+  }
+ ]
+}
