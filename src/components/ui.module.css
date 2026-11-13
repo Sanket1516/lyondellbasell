@@ -17,7 +17,7 @@
 .btn:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .btnPrimary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); box-shadow: 0 4px 14px rgba(47, 129, 247, 0.25); }
-.btnPrimary:hover { background: #4493f8; border-color: #4493f8; box-shadow: 0 6px 20px rgba(47, 129, 247, 0.35); }
+.btnPrimary:hover { background: var(--accent-hover); border-color: var(--accent-hover); box-shadow: 0 6px 20px rgba(47, 129, 247, 0.35); }
 .btnQuiet { border-color: transparent; background: transparent; box-shadow: none; }
 
 /* Fields */
@@ -95,7 +95,7 @@
 .tabActive { color: var(--ink); border-bottom-color: var(--accent); font-weight: 700; }
 
 /* Modal */
-.backdrop { position: fixed; inset: 0; background: rgba(1, 4, 9, 0.7); backdrop-filter: blur(6px); display: grid; place-items: center; z-index: 50; }
+.backdrop { position: fixed; inset: 0; background: var(--backdrop); backdrop-filter: blur(6px); display: grid; place-items: center; z-index: 50; }
 .modal { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); width: min(480px, 92vw); animation: pop 260ms var(--ease) both; }
 @keyframes pop { from { opacity: 0; transform: scale(0.95) translateY(8px); } to { opacity: 1; transform: none; } }
 

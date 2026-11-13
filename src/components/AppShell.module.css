@@ -28,7 +28,7 @@
   border-radius: 50%; transition: transform 180ms var(--ease), background 180ms;
 }
 .rail li a { transition: background 180ms, transform 180ms var(--ease); }
-.rail li a:hover { background: rgba(177, 186, 196, 0.08); color: var(--ink); }
+.rail li a:hover { background: var(--hover); color: var(--ink); }
 .rail li a:hover::before { transform: scaleX(1.5); }
 .rail li a.on { background: var(--accent-wash); color: var(--ink); font-weight: 600; box-shadow: inset 3px 0 0 var(--accent); }
 .rail li a.on::before { transform: scaleX(1); background: var(--accent); box-shadow: 0 0 8px var(--accent); }
@@ -36,11 +36,19 @@
 
 .foot { flex: none; padding: 0 20px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
 .logout {
-  display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; padding: 7px 12px;
+  display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px;
   font: inherit; font-size: 13px; font-weight: 600; color: var(--rail-ink); cursor: pointer;
-  background: rgba(177, 186, 196, 0.08); border: 1px solid var(--line-strong); border-radius: var(--radius);
+  background: var(--hover); border: 1px solid var(--line-strong); border-radius: var(--radius);
   transition: background 180ms, border-color 180ms;
 }
+.actions { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.theme {
+  display: inline-grid; place-items: center; width: 34px; height: 34px; padding: 0; cursor: pointer;
+  color: var(--rail-ink); background: var(--hover); border: 1px solid var(--line-strong); border-radius: var(--radius);
+  transition: background 180ms, border-color 180ms;
+}
+.theme:hover { background: var(--accent-wash); border-color: var(--accent); }
+.theme:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--rail), 0 0 0 4px var(--accent); }
 .logout:hover { background: rgba(248, 81, 73, 0.12); border-color: var(--bad); }
 .logout:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--rail), 0 0 0 4px var(--accent); }
 .who { display: flex; flex-direction: column; gap: 3px; padding-top: 14px; border-top: 1px solid var(--line); }

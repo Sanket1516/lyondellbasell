@@ -60,6 +60,64 @@
   --focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
 
   --bands: linear-gradient(90deg, var(--band-po), var(--band-rc), var(--band-inv));
+
+  --hover: rgba(177, 186, 196, 0.08);
+  --accent-hover: #4493f8;
+  --on-warn: #0d1117;
+  --graph-edge: #484f58;
+  --backdrop: rgba(1, 4, 9, 0.7);
+  --hero-bg: radial-gradient(600px 400px at 90% 0%, rgba(47, 129, 247, 0.35), transparent 70%), radial-gradient(500px 400px at 0% 100%, rgba(63, 185, 80, 0.14), transparent 70%), linear-gradient(160deg, #0d1117, #010409);
+}
+
+/* Light palette. Set on <html data-theme="light"> before first paint (see app/layout.tsx); the same saved choice drives the landing page. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --paper: #f4f6fa;
+  --paper-deep: #e9edf3;
+  --surface: #ffffff;
+  --surface-2: #f3f5f9;
+  --row-alt: rgba(30, 50, 90, 0.03);
+  --ink: #1f2328;
+  --ink-soft: #59636e;
+  --line: #d8dee6;
+  --line-strong: #c3cbd6;
+  --accent: #0969da;
+  --accent-2: #0969da;
+  --accent-ink: #ffffff;
+  --accent-wash: rgba(9, 105, 218, 0.1);
+  --grad: linear-gradient(135deg, #0969da 0%, #0757b8 100%);
+
+  --rail: #ffffff;
+  --rail-ink: #1f2328;
+  --rail-soft: #59636e;
+
+  --band-po: #0969da;
+  --band-rc: #1a7f37;
+  --band-inv: #bf8700;
+
+  --ok: #1a7f37;
+  --ok-ink: #1a7f37;
+  --ok-wash: rgba(26, 127, 55, 0.1);
+  --warn: #9a6700;
+  --warn-ink: #9a6700;
+  --warn-wash: rgba(212, 167, 44, 0.16);
+  --bad: #cf222e;
+  --bad-ink: #c4262e;
+  --bad-wash: rgba(207, 34, 46, 0.08);
+  --neutral: #6e7781;
+  --neutral-ink: #424a53;
+  --neutral-wash: rgba(110, 119, 129, 0.12);
+
+  --shadow-sm: 0 1px 0 rgba(31, 35, 40, 0.04);
+  --shadow: 0 1px 3px rgba(31, 35, 40, 0.08), 0 4px 12px rgba(31, 35, 40, 0.06);
+  --shadow-lg: 0 12px 32px rgba(31, 35, 40, 0.12);
+
+  --hover: rgba(30, 50, 90, 0.06);
+  --accent-hover: #0757b8;
+  --on-warn: #ffffff;
+  --graph-edge: #afb8c1;
+  --backdrop: rgba(31, 35, 40, 0.4);
+  --hero-bg: radial-gradient(600px 400px at 90% 0%, rgba(9, 105, 218, 0.16), transparent 70%), radial-gradient(500px 400px at 0% 100%, rgba(26, 127, 55, 0.1), transparent 70%), linear-gradient(160deg, #ffffff, #e9eef6);
 }
 
 *,
@@ -135,7 +193,7 @@ main table { border-collapse: collapse; }
 main table th { background: var(--surface-2); color: var(--ink-soft); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; }
 main table tbody tr:nth-child(even) > td { background: var(--row-alt); }
 main table tbody tr:hover > td { background: var(--accent-wash); }
-main input, main select, main textarea { color-scheme: dark; }
+main input, main select, main textarea { color-scheme: inherit; }
 main details > summary { cursor: pointer; }
 main em { color: inherit; }
 /* Narrow screens (<= 1100px): wide tables scroll inside their own box, never the page. */

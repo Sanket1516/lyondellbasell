@@ -2,6 +2,7 @@
 import { useActionState, useState } from "react";
 import { loginAction, type LoginState } from "../actions";
 import { Button, Input } from "@/components/ui";
+import ThemeToggle from "@/components/ThemeToggle";
 import s from "./login.module.css";
 
 interface Account { username: string; password: string; displayName: string; title: string }
@@ -13,6 +14,7 @@ export default function LoginForm({ accounts }: { accounts: Account[] }) {
 
   return (
     <div className={s.page}>
+      <ThemeToggle className={s.theme} />
       <aside className={s.hero} aria-hidden="true">
         <div className={s.heroName}><span>Plant X</span><span>Payables</span><span>Desk</span></div>
         <div className={s.run}>

@@ -36,7 +36,7 @@
 .search button, .btn { height: 36px; line-height: 34px; padding: 0 16px; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface-2); color: var(--ink); font: inherit; font-weight: 600; font-size: 14px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: border-color 160ms, background 160ms; }
 .search button:hover, .btn:hover { border-color: var(--accent); background: var(--accent-wash); }
 .btnPrimary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.btnPrimary:hover { background: #4493f8; border-color: #4493f8; }
+.btnPrimary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; margin-bottom: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
 .table th { text-align: left; font-weight: 600; color: var(--ink-soft); border-bottom: 1px solid var(--line-strong); padding: 10px 12px; white-space: nowrap; }
 .table td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
@@ -91,13 +91,13 @@
 .riskDetails summary { cursor: pointer; color: var(--ink-soft); }
 .riskTask { margin: 6px 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--accent-wash); border-radius: 0 var(--radius) var(--radius) 0; font-size: 14px; }
 .riskLabel { margin: 4px 0 0; font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); }
-.graphSvg { width: 100%; height: auto; max-height: 560px; border: 1px solid var(--line); border-radius: var(--radius-lg); touch-action: none; user-select: none; background: radial-gradient(circle at 50% 40%, #161b22, #0d1117 75%); }
+.graphSvg { width: 100%; height: auto; max-height: 560px; border: 1px solid var(--line); border-radius: var(--radius-lg); touch-action: none; user-select: none; background: radial-gradient(circle at 50% 40%, var(--surface), var(--paper) 75%); }
 .graphTools { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; font-size: 0.88rem; }
 .graphTools label { display: inline-flex; gap: 5px; align-items: center; cursor: pointer; }
 
 /* UI beauty pass: exception detail blocks */
 .rootCause { display: flex; gap: 12px; align-items: flex-start; margin: 4px 0 14px; padding: 12px 16px; border: 1px solid rgba(210, 153, 34, 0.45); background: var(--warn-wash); border-radius: var(--radius); }
-.rootIcon { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--warn); color: #0d1117; font-weight: 800; font-size: 14px; }
+.rootIcon { flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--warn); color: var(--on-warn); font-weight: 800; font-size: 14px; }
 .rootCause p { margin: 0; }
 .cfBlock { margin: 14px 0; padding: 14px 16px; border: 1px solid rgba(63, 185, 80, 0.4); background: var(--ok-wash); border-radius: var(--radius); }
 .cfBlock > b { display: block; color: var(--ok-ink); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }

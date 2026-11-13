@@ -10,9 +10,15 @@ export const metadata: Metadata = {
   description: "Invoice matching and approval for Plant X accounts payable (prototype, synthetic data).",
 };
 
+// Theme before first paint (no flash): ?theme=light|dark, else the saved choice (shared with the landing page), else the system setting.
+const THEME_SCRIPT = `(function(){try{var t=new URLSearchParams(location.search).get("theme");if(t!=="light"&&t!=="dark"){try{t=localStorage.getItem("plantpay-landing-theme")}catch(e){t=null}}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>{children}</body>
     </html>
   );

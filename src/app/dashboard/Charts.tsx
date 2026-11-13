@@ -42,7 +42,7 @@ export function AgeBar({ data }: { data: AgeDatum[] }) {
           const rect = w > 0 ? (
             <a key={d.id} href={d.href}>
               <title>{`${d.label}: ${d.count}`}</title>
-              <rect x={x} y="0" width={w} height="14" fill={SHADE[i]} stroke="#0d1117" strokeWidth="0.4" />
+              <rect x={x} y="0" width={w} height="14" fill={SHADE[i]} style={{ stroke: "var(--surface)" }} strokeWidth="0.4" />
             </a>
           ) : null;
           x += w;
