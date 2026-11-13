@@ -10,13 +10,13 @@ import {
 import { Billboard, Card, Cell, GLASS, hdr, Label, useTex, useTexList, useTube } from "./common";
 import { act, easeBack, easeInOut, easeOut, enter, exit, fade, lerp, rng, seg, story, vis } from "./motion";
 import {
-  C, COLS, DOC, INTEL, ROWS, amendmentTexture, chipTexture, colX, gaugeLabelTexture, grnTexture, hashBlockTexture, intelTexture,
+  C, COL, COLS, DOC, INTEL, ROWS, amendmentTexture, chipTexture, colX, gaugeLabelTexture, grnTexture, hashBlockTexture, intelTexture,
   labelTexture, pillTexture, poTexture, rowY,
 } from "./textures";
 import { APPROVER, CLERK, S, inr, rs } from "../content";
 
 const tmp = new Object3D();
-const BAD = new Color(C.bad), OK = new Color(C.ok), ACC = new Color(C.accent), DIM = new Color("#3a4a63");
+const BAD = COL.bad, OK = COL.ok, ACC = COL.acc, DIM = COL.dim;
 
 // ============================================================== 1. the problem: invoices pile up, red marks appear
 export function Problem() {
@@ -65,7 +65,7 @@ export function Problem() {
     <group ref={g} position={[0.1, 0, 0]}>
       <instancedMesh ref={slabs} args={[undefined, undefined, N]}>
         <boxGeometry args={[1.2, 0.03, 0.86]} />
-        <meshPhysicalMaterial {...GLASS} color="#1a2538" transparent opacity={0.96} />
+        <meshPhysicalMaterial {...GLASS} color={C.glass2} transparent opacity={0.96} />
       </instancedMesh>
       <instancedMesh ref={marks} args={[undefined, undefined, N]}>
         <boxGeometry args={[0.42, 0.036, 0.05]} />
@@ -193,7 +193,7 @@ export function Sources() {
       {S.sources.map((x, k) => (
         <group key={x.id} ref={(el) => { nodes.current[k] = el; }}>
           <RoundedBox args={[0.34, 0.34, 0.34]} radius={0.06} smoothness={3}>
-            <meshPhysicalMaterial {...GLASS} color="#15233a" transparent opacity={0.95} />
+            <meshPhysicalMaterial {...GLASS} color={C.glass3} transparent opacity={0.95} />
           </RoundedBox>
           <mesh><sphereGeometry args={[0.08, 16, 16]} /><meshBasicMaterial color={hdr(C.accent, 2.4)} toneMapped={false} transparent /></mesh>
           <Billboard position={[0, 0.4, 0]}><Label {...labels[k]} height={0.3} /></Billboard>
@@ -347,7 +347,7 @@ export function Risk() {
     for (const l of R.graph.links) {
       const a = lay.pos.get(l.vendor)!, b = lay.accts.get(l.account)!;
       p.push(a.x, a.y, a.z, b.x, b.y, b.z);
-      const cl = l.account === R.graph.flaggedAccount ? hdr(C.warn, 1.1) : l.account === R.graph.legitAccount ? new Color("#6f8bb0") : new Color("#2c3a52");
+      const cl = l.account === R.graph.flaggedAccount ? hdr(C.warn, 1.1) : l.account === R.graph.legitAccount ? new Color(C.legit) : new Color(C.node);
       col.push(cl.r, cl.g, cl.b, cl.r, cl.g, cl.b);
     }
     const geo = new BufferGeometry();
@@ -359,7 +359,7 @@ export function Risk() {
   const accList = useMemo(() => [...lay.accts.entries()], [lay]);
   const lblA = useTex(() => labelTexture(R.shared.a, "holds account …" + R.shared.account.slice(-4), { w: 620 }));
   const lblB = useTex(() => labelTexture(R.shared.b, "same account", { w: 620 }));
-  const lblL = useTex(() => labelTexture("Dahej group", "shared, confirmed legitimate", { w: 620, color: "#a9b8cc" }));
+  const lblL = useTex(() => labelTexture("Dahej group", "shared, confirmed legitimate", { w: 620, color: C.labelSoft }));
   const dupMap = useTex(() => miniDoc(R.duplicate.original, "Deccan Valve & Fittings", "14-Oct-2026", "Paid", C.band.inv));
   const ghostMap = useTex(() => miniDoc(R.duplicate.copy, "Deccan Valve & Fittings", "09-Nov-2026", "New", C.warn));
   const scoreMap = useTex(() => pillTexture(`${R.duplicate.score} / 100`, C.warn, "possible duplicate · person decides"));
@@ -374,14 +374,14 @@ export function Risk() {
       const isF = lay.flagged.includes(id);
       tmp.scale.setScalar(isF ? 1 + 0.6 * hi : 1);
       tmp.updateMatrix(); vNodes.current!.setMatrixAt(k, tmp.matrix);
-      vNodes.current!.setColorAt(k, isF ? DIM.clone().lerp(hdr(C.warn, 1.05), hi) : lay.legit.includes(id) ? new Color("#7d93b3") : DIM);
+      vNodes.current!.setColorAt(k, isF ? DIM.clone().lerp(hdr(C.warn, 1.05), hi) : lay.legit.includes(id) ? new Color(C.legit2) : DIM);
     });
     accList.forEach(([acct, p], k) => {
       tmp.position.copy(p); tmp.rotation.set(0.6, 0.6, 0);
       const isF = acct === R.graph.flaggedAccount;
       tmp.scale.setScalar(isF ? 1 + 0.9 * hi : 0.8);
       tmp.updateMatrix(); aNodes.current!.setMatrixAt(k, tmp.matrix);
-      aNodes.current!.setColorAt(k, isF ? new Color("#3a4a63").lerp(hdr(C.warn, 1.1), hi) : new Color("#26344b"));
+      aNodes.current!.setColorAt(k, isF ? new Color(C.dim).lerp(hdr(C.warn, 1.1), hi) : new Color(C.node2));
     });
     for (const m of [vNodes.current!, aNodes.current!]) { m.instanceMatrix.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; }
     (edges.material as LineBasicMaterial).opacity = v * lerp(0.5, 1, hi);
@@ -497,7 +497,7 @@ export function Approval() {
       <Gate x={-0.9} i={0} map={g1} />
       <Gate x={1.45} i={1} map={g2} />
       {/* amount axis: ₹0 to the L1 limit, with the clerk-limit marker */}
-      <mesh position={[0, AXIS.y, 0]}><planeGeometry args={[AXIS.x1 - AXIS.x0, 0.05]} /><meshBasicMaterial color="#1c2a40" transparent /></mesh>
+      <mesh position={[0, AXIS.y, 0]}><planeGeometry args={[AXIS.x1 - AXIS.x0, 0.05]} /><meshBasicMaterial color={C.track} transparent /></mesh>
       <mesh ref={fill} position={[AXIS.x0, AXIS.y, 0.005]}>
         <planeGeometry args={[1, 0.05]} onUpdate={(geo) => geo.translate(0.5, 0, 0)} />
         <meshBasicMaterial color={hdr(C.accent, 1.6)} toneMapped={false} transparent />
@@ -546,7 +546,7 @@ export function Intelligence() {
   return (
     <group ref={g} position={[0.1, 0.05, 0]}>
       <group position={[-1.3, 0.15, 0]}>
-        <mesh geometry={track.geo}><meshBasicMaterial color="#1c2a40" transparent /></mesh>
+        <mesh geometry={track.geo}><meshBasicMaterial color={C.track} transparent /></mesh>
         <mesh geometry={fillT.geo}><meshBasicMaterial color={hdr(C.accent, 1.8)} toneMapped={false} transparent /></mesh>
         <mesh position={[0, -0.05, 0]}><planeGeometry args={[1.6, 1.12]} /><meshBasicMaterial map={gauge} transparent depthWrite={false} toneMapped={false} /></mesh>
       </group>
@@ -638,7 +638,7 @@ export function Trust() {
       {chain.map((b, k) => (
         <group key={b.seq} ref={(el) => { blocks.current[k] = el; }}>
           <RoundedBox args={[0.98, 0.7, 0.2]} radius={0.04} smoothness={3}>
-            <meshPhysicalMaterial ref={(m) => { glassRefs.current[k] = m; }} {...GLASS} color="#111d31" transparent opacity={0.95} />
+            <meshPhysicalMaterial ref={(m) => { glassRefs.current[k] = m; }} {...GLASS} color={C.glass4} transparent opacity={0.95} />
           </RoundedBox>
           <mesh ref={(el) => { faces.current[k] = el; }} position={[0, 0, 0.102]}>
             <planeGeometry args={[0.96, 0.686]} />
@@ -684,7 +684,7 @@ export function Paid() {
       const on = seg(p, k / (n - 1) - 0.02, k / (n - 1) + 0.04);
       tmp.position.set(X(k), Y, 0.01); tmp.rotation.set(0, 0, 0); tmp.scale.setScalar(1 + 0.35 * Math.sin(Math.PI * on));
       tmp.updateMatrix(); dots.current!.setMatrixAt(k, tmp.matrix);
-      dots.current!.setColorAt(k, new Color("#2a3a55").lerp(hdr(C.ok, 1.25), on));
+      dots.current!.setColorAt(k, new Color(C.node3).lerp(hdr(C.ok, 1.25), on));
     });
     dots.current!.instanceMatrix.needsUpdate = true;
     if (dots.current!.instanceColor) dots.current!.instanceColor.needsUpdate = true;
@@ -697,7 +697,7 @@ export function Paid() {
   });
   return (
     <group ref={g} position={[0.1, 0, 0]}>
-      <mesh geometry={base.geo}><meshBasicMaterial color="#1c2a40" transparent /></mesh>
+      <mesh geometry={base.geo}><meshBasicMaterial color={C.track} transparent /></mesh>
       <mesh geometry={line.geo}><meshBasicMaterial color={hdr(C.ok, 1.2)} toneMapped={false} transparent /></mesh>
       <instancedMesh ref={dots} args={[undefined, undefined, n]}>
         <sphereGeometry args={[0.085, 20, 20]} /><meshBasicMaterial toneMapped={false} transparent />

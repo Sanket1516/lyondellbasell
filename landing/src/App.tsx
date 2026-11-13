@@ -12,6 +12,7 @@ import css from "./App.module.css";
 gsap.registerPlugin(ScrollTrigger);
 
 type Mode = "3d" | "lite";
+export type Theme = "dark" | "light";
 const params = new URLSearchParams(location.search);
 const FPS_GUARD = params.get("fpsguard") !== "0";
 const LAST = CHAPTERS.length - 1;
@@ -33,6 +34,11 @@ function initial(): { mode: Mode; reason?: string } {
   if (reducedMotion()) return { mode: "lite", reason: "Lite mode is on because your system asks for reduced motion." };
   return { mode: "3d" };
 }
+
+// The theme is set on <html> before first paint (index.html); an explicit choice is saved, otherwise it follows the system.
+const THEME_KEY = "plantpay-landing-theme";
+const currentTheme = (): Theme => (document.documentElement.dataset.theme === "light" ? "light" : "dark");
+function savedTheme(): Theme | null { try { const v = localStorage.getItem(THEME_KEY); return v === "light" || v === "dark" ? v : null; } catch { return null; } }
 
 const fmt = (c: Counter, v: number) => `${c.prefix ?? ""}${inr(v, c.decimals ?? 0)}${c.suffix ?? ""}`;
 
@@ -75,6 +81,7 @@ export default function App() {
   const [ready, setReady] = useState(false);
   const [Scene, setScene] = useState<ComponentType<SceneProps> | null>(null);
   const [active, setActive] = useState(0);
+  const [theme, setTheme] = useState<Theme>(currentTheme);
   const sections = useRef<(HTMLElement | null)[]>([]);
   const lenis = useRef<Lenis | null>(null);
   const mids = useRef<number[]>([]);
@@ -215,10 +222,25 @@ export default function App() {
   // ---------------------------------------------------------------- test and presenter hooks
   useEffect(() => {
     const w = window as unknown as { __story: Record<string, unknown> };
-    w.__story = { ...(w.__story ?? {}), goTo, chapters: CHAPTERS.length, mode, ready, c: () => story.c, setMode: (m: Mode) => setMode(m) };
+    w.__story = { ...(w.__story ?? {}), goTo, chapters: CHAPTERS.length, mode, ready, theme, c: () => story.c, setMode: (m: Mode) => setMode(m), setTheme: (t: Theme) => setTheme(t) };
     document.documentElement.dataset.ready = ready ? "1" : "0";
     document.documentElement.dataset.mode = mode;
-  }, [goTo, mode, ready, setMode]);
+  }, [goTo, mode, ready, setMode, theme]);
+
+  // ---------------------------------------------------------------- theme: apply, and follow the system until the viewer picks one
+  useEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
+  useEffect(() => {
+    const mq = window.matchMedia?.("(prefers-color-scheme: light)");
+    if (!mq) return;
+    const on = (e: MediaQueryListEvent) => { if (!savedTheme() && !params.get("theme")) setTheme(e.matches ? "light" : "dark"); };
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  const toggleTheme = () => {
+    const next: Theme = theme === "light" ? "dark" : "light";
+    try { localStorage.setItem(THEME_KEY, next); } catch { /* storage blocked: fine */ }
+    setTheme(next);
+  };
 
   const toggleLite = () => {
     const next: Mode = mode === "lite" ? "3d" : "lite";
@@ -237,6 +259,13 @@ export default function App() {
           PlantPay
         </a>
         <div className={css.barRight}>
+          <button type="button" className={css.themeBtn} onClick={toggleTheme} aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"} title={theme === "light" ? "Dark mode" : "Light mode"}>
+            {theme === "light" ? (
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round" /></svg>
+            ) : (
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" strokeWidth="1.9" /><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg>
+            )}
+          </button>
           <button type="button" className={css.lite} aria-pressed={mode === "lite"} onClick={toggleLite}>
             <span className={css.switch} aria-hidden="true" />Lite mode
           </button>
@@ -246,7 +275,8 @@ export default function App() {
 
       {mode === "3d" && Scene && (
         <div className={css.stage} aria-hidden="true">
-          <Scene onReady={onSceneReady} onLowFps={onLowFps} fpsGuard={FPS_GUARD} />
+          {/* Keyed by theme: textures are drawn once per mount, so a theme change remounts the canvas with the new palette. */}
+          <Scene key={theme} theme={theme} onReady={onSceneReady} onLowFps={onLowFps} fpsGuard={FPS_GUARD} />
         </div>
       )}
       <div className={css.grain} aria-hidden="true" style={{ backgroundImage: `url(${grain.current})` }} />
@@ -270,7 +300,7 @@ export default function App() {
         {CHAPTERS.slice(0, LAST).map((ch, i) => (
           <section key={ch.id} id={ch.id} ref={(el) => { sections.current[i] = el; }} className={css.section} aria-labelledby={`h-${ch.id}`}>
             <div className={css.copyWrap}><Copy ch={ch} i={i} /></div>
-            {mode === "lite" && <div className={css.art}><LiteArt i={i} /></div>}
+            {mode === "lite" && <div className={css.art}><LiteArt i={i} theme={theme} /></div>}
             <p className={css.srOnly}>{ch.alt}</p>
           </section>
         ))}

@@ -3,10 +3,10 @@
 // blends from one rest pose to the next while the chapter text is off screen.
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { AdditiveBlending, BufferAttribute, BufferGeometry, CanvasTexture, Color, type Group, type Mesh, type MeshBasicMaterial, type Points } from "three";
+import { AdditiveBlending, NormalBlending, BufferAttribute, BufferGeometry, CanvasTexture, Color, type Group, type Mesh, type MeshBasicMaterial, type Points } from "three";
 import { Card, Cell, hdr, useTex } from "./common";
 import { act, easeInOut, easeOut, fade, lerp, rng, seg, story } from "./motion";
-import { C, COLS, ROWS, colX, invoiceTexture, rowY, stampTexture } from "./textures";
+import { C, COL, COLS, ROWS, colX, invoiceTexture, isLight, rowY, stampTexture } from "./textures";
 import { APPROVER, day, S } from "../content";
 
 interface Pose { p: [number, number, number]; r: [number, number, number]; s: number; o: number }
@@ -35,7 +35,7 @@ function pose(c: number, t: number): Pose {
   return { p: [m(a.p[0], z.p[0]), m(a.p[1], z.p[1]), m(a.p[2], z.p[2])], r: [m(a.r[0], z.r[0]), m(a.r[1], z.r[1]), m(a.r[2], z.r[2])], s: m(a.s, z.s), o: m(a.o, z.o) };
 }
 
-const RED = new Color(C.bad), GREEN = new Color(C.ok);
+const RED = COL.bad, GREEN = COL.ok;
 export function HeroInvoice() {
   const g = useRef<Group>(null);
   const glow = useRef<Mesh>(null);
@@ -122,12 +122,13 @@ export function Particles({ count = 1400 }: { count?: number }) {
     p.rotation.y = clock.elapsedTime * 0.012 + c * 0.22;
     p.rotation.x = c * 0.03;
     const m = p.material as unknown as { opacity: number; size: number };
-    m.opacity = lerp(0.85, 0.32, seg(c, 0.2, 0.9)) + 0.4 * seg(c, 10.4, 11);
+    // additive specks vanish on a pale background, so light mode draws them normally and fainter
+    m.opacity = (lerp(0.85, 0.32, seg(c, 0.2, 0.9)) + 0.4 * seg(c, 10.4, 11)) * (isLight ? 0.55 : 1);
     m.size = lerp(0.04, 0.028, seg(c, 0.2, 0.9));
   });
   return (
     <points ref={ref} geometry={geo}>
-      <pointsMaterial map={sprite} color={hdr(C.accentHi, 1.05)} size={0.04} sizeAttenuation transparent depthWrite={false} blending={AdditiveBlending} toneMapped={false} />
+      <pointsMaterial map={sprite} color={isLight ? new Color(C.accent) : hdr(C.accentHi, 1.05)} size={0.04} sizeAttenuation transparent depthWrite={false} blending={isLight ? NormalBlending : AdditiveBlending} toneMapped={false} />
     </points>
   );
 }

@@ -9,6 +9,7 @@ import { Vector3, type PerspectiveCamera } from "three";
 import { HeroInvoice, Particles } from "./Hero";
 import { Approval, Documents, Intelligence, Paid, Problem, Risk, Sources, Trust, Upload } from "./Chapters";
 import { damp, easeInOut, lerp, seg, story } from "./motion";
+import { C, setPalette } from "./textures";
 
 /** Camera rest pose per chapter: [position, look-at]. */
 // Distances follow a fit budget: at 1440 x 900 each chapter's content stays within about 370 px either side of the scene centre,
@@ -104,8 +105,11 @@ function Ready({ onReady }: { onReady: () => void }) {
   return null;
 }
 
-export interface SceneProps { onReady: () => void; onLowFps: () => void; fpsGuard: boolean }
-export default function Scene({ onReady, onLowFps, fpsGuard }: SceneProps) {
+export interface SceneProps { theme: "dark" | "light"; onReady: () => void; onLowFps: () => void; fpsGuard: boolean }
+export default function Scene({ theme, onReady, onLowFps, fpsGuard }: SceneProps) {
+  // Runs before any child renders, so every texture and material below is built from this palette (App remounts on change).
+  setPalette(theme);
+  const light = theme === "light";
   const [low, setLow] = useState(false);
   const [dpr, setDpr] = useState(Math.min(1.5, window.devicePixelRatio || 1));
   useEffect(() => {
@@ -118,7 +122,7 @@ export default function Scene({ onReady, onLowFps, fpsGuard }: SceneProps) {
       gl={{ antialias: false, powerPreference: "high-performance", alpha: false, stencil: false }}
       camera={{ fov: 36, near: 0.1, far: 60, position: [0, 0.1, 6.2] }}
       onCreated={({ gl }) => {
-        gl.setClearColor("#05070d");
+        gl.setClearColor(C.bg);
         const ext = gl.getContext();
         const dbg = ext.getExtension("WEBGL_debug_renderer_info");
         const w = window as unknown as { __story?: Record<string, unknown> };
@@ -126,23 +130,23 @@ export default function Scene({ onReady, onLowFps, fpsGuard }: SceneProps) {
       }}
     >
       <PerformanceMonitor onDecline={() => { setLow(true); setDpr(1); }} flipflops={2} onFallback={() => { setLow(true); setDpr(1); }} />
-      <fog attach="fog" args={["#05070d", 9, 22]} />
-      <ambientLight intensity={0.35} />
-      <directionalLight position={[3, 5, 4]} intensity={1.6} color="#dfe8ff" />
-      <pointLight position={[-4, 1, -3]} intensity={18} color="#3d8bff" distance={14} />
+      <fog attach="fog" args={[C.bg, 9, 22]} />
+      <ambientLight intensity={light ? 0.9 : 0.35} />
+      <directionalLight position={[3, 5, 4]} intensity={light ? 1.9 : 1.6} color={light ? "#ffffff" : "#dfe8ff"} />
+      <pointLight position={[-4, 1, -3]} intensity={light ? 8 : 18} color={C.accent} distance={14} />
       <Environment resolution={64} frames={1}>
         <Lightformer form="rect" intensity={2.2} position={[0, 4, 3]} scale={[8, 1.2, 1]} color="#cfe0ff" />
         <Lightformer form="rect" intensity={1.4} position={[-5, 0.5, -2]} rotation-y={Math.PI / 2} scale={[6, 2, 1]} color="#3d8bff" />
         <Lightformer form="ring" intensity={1.2} position={[4, 1, -4]} scale={2} color="#7fb3ff" />
       </Environment>
-      <Grid position={[0, -2.35, 0]} args={[40, 40]} cellSize={0.5} cellThickness={0.6} cellColor="#101a2b" sectionSize={2.5} sectionThickness={1} sectionColor="#18294a" fadeDistance={20} fadeStrength={1.6} infiniteGrid followCamera={false} />
+      <Grid position={[0, -2.35, 0]} args={[40, 40]} cellSize={0.5} cellThickness={0.6} cellColor={C.gridCell} sectionSize={2.5} sectionThickness={1} sectionColor={C.gridSection} fadeDistance={20} fadeStrength={1.6} infiniteGrid followCamera={false} />
       <Rig />
       <Particles count={low ? 700 : 1400} />
       <HeroInvoice />
       <Chapters />
       <EffectComposer multisampling={low ? 0 : 4} enableNormalPass={false}>
-        <Bloom mipmapBlur intensity={0.85} luminanceThreshold={1} luminanceSmoothing={0.15} radius={0.72} />
-        <Vignette offset={0.28} darkness={0.72} />
+        <Bloom mipmapBlur intensity={light ? 0.3 : 0.85} luminanceThreshold={light ? 1.6 : 1} luminanceSmoothing={0.15} radius={0.72} />
+        <Vignette offset={light ? 0.4 : 0.28} darkness={light ? 0.22 : 0.72} />
       </EffectComposer>
       <FpsGuard low={low} onLowFps={onLowFps} enabled={fpsGuard} />
       <Ready onReady={onReady} />

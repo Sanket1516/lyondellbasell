@@ -1,6 +1,6 @@
 {
  "base": "http://127.0.0.1:3300",
- "at": "2026-11-13T03:04:20.243Z",
+ "at": "2026-11-13T05:24:51.681Z",
  "results": [
   {
    "name": "3D mode starts",
@@ -10,7 +10,7 @@
   {
    "name": "first contentful paint under 2 s",
    "pass": true,
-   "detail": "996 ms"
+   "detail": "988 ms"
   },
   {
    "name": "12 chapters on the page",
@@ -80,7 +80,7 @@
   {
    "name": "wheel scroll reaches the last chapter",
    "pass": true,
-   "detail": "126 wheel steps, c=11.00, 80 fps in this headless run"
+   "detail": "126 wheel steps, c=11.00, 86 fps in this headless run"
   },
   {
    "name": "3D: no console errors (network off)",

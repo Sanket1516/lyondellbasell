@@ -75,6 +75,7 @@ export function upstreamFix(cause: string, n: number): string {
     case "Invoice tax rate differs from PO tax code": return `Upstream fix: supplier reissues ${s("invoice")} at the PO tax rate`;
     case "Price differs from both PO and contract": return `Upstream fix: ${s("credit note")} or corrected invoice from the supplier`;
     case "Possible duplicate of a paid invoice": return `Upstream fix: clerk decides ${s("possible duplicate")}`;
+    case "Re-keyed copy of an earlier invoice": return `Upstream fix: clerk closes ${s("re-keyed copy")}`;
     default: return `Upstream fix: resolve ${s("case")}`;
   }
 }

@@ -115,6 +115,18 @@ describe("submitInvoice", () => {
     expect(state.auditEvents.map((e) => e.action)).toEqual(expect.arrayContaining(["sent_to_supplier", "invoice_resubmitted", "task_done"]));
   });
 
+  it("holds the same invoice re-submitted under a new number and tells the supplier which invoice it copies", async () => {
+    expect(await submitInvoice(payload())).toEqual({ ok: true, invoiceId: "INV-7781" });
+    const r = await submitInvoice(payload({ invoiceNumber: "1234" }));
+    expect(r).toEqual({ ok: true, invoiceId: "1234", duplicateOf: "INV-7781" });
+    expect(state.invoices.find((i) => i.id === "1234")).toMatchObject({ status: "blocked", verdict: "block" });
+    const view = buildSupplierView(state, "1234", user!)!;
+    expect(view.heldAsCopyOf).toBe("INV-7781");
+    expect(view.headline).toMatch(/copy of invoice INV-7781/);
+    // The original is not held because of its copy.
+    expect(buildSupplierView(state, "INV-7781", user!)!.heldAsCopyOf).toBeUndefined();
+  });
+
   it("ignores a source reference that is not an allowed file", async () => {
     await submitInvoice(payload({ source: "demo:../../package.json" }));
     expect(state.invoices[0].sourceFile).toBeUndefined();

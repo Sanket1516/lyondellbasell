@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, type ReactNode } from "react";
 import { useFrame } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
+import { C } from "./textures";
 import { CanvasTexture, Color, CatmullRomCurve3, TubeGeometry, Vector3, type Group, type Texture, type Mesh, type Curve } from "three";
 
 /** Create a texture once and dispose of it when the component unmounts (chapters mount lazily). */
@@ -35,7 +36,7 @@ function halo() {
   return haloTex;
 }
 
-export const GLASS = { color: "#0e1626", roughness: 0.28, metalness: 0.15, clearcoat: 1, clearcoatRoughness: 0.18, envMapIntensity: 1.1 };
+export const GLASS = { roughness: 0.28, metalness: 0.15, clearcoat: 1, clearcoatRoughness: 0.18, envMapIntensity: 1.1 };
 
 interface CardProps { map: Texture; w?: number; h?: number; glow?: string; glowRef?: React.Ref<Mesh>; children?: ReactNode; opacity?: number }
 /** A thin glass slab with a drawn face. Children are placed in face space (z just above the face). */
@@ -49,7 +50,7 @@ export function Card({ map, w = 1.6, h = 2.1, glow, glowRef, children, opacity =
         </mesh>
       )}
       <RoundedBox args={[w, h, 0.035]} radius={0.03} smoothness={3}>
-        <meshPhysicalMaterial {...GLASS} transparent opacity={opacity} />
+        <meshPhysicalMaterial {...GLASS} color={C.glass} transparent opacity={opacity} />
       </RoundedBox>
       <mesh position={[0, 0, 0.0185]}>
         <planeGeometry args={[w, h]} />

@@ -24,7 +24,8 @@ export interface SubmitPayload {
   taxAmount: number;
   total: number;
 }
-export type SubmitResult = { ok: true; invoiceId: string } | { ok: false; error: string };
+/** `duplicateOf` is set when the submitted invoice is held as a copy of an invoice already on file. */
+export type SubmitResult = { ok: true; invoiceId: string; duplicateOf?: string } | { ok: false; error: string };
 
 const isNum = (n: unknown): n is number => typeof n === "number" && Number.isFinite(n) && n >= 0;
 const text = (s: unknown, max = 200) => (typeof s === "string" ? s.trim().slice(0, max) : "");
@@ -108,6 +109,7 @@ export async function submitInvoice(p: SubmitPayload): Promise<SubmitResult> {
     });
     if (existing) closeSupplierTasks(s, id, user.username);
     matchInState(s, id, user.username);
-    return { ok: true, invoiceId: id };
+    const dup = s.findings.find((f) => f.invoiceId === id && f.kind === "duplicate" && f.verdict === "block")?.matchedInvoiceId;
+    return dup ? { ok: true, invoiceId: id, duplicateOf: dup } : { ok: true, invoiceId: id };
   });
 }

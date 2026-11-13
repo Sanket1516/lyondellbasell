@@ -21,11 +21,15 @@ export default async function SupplierHome() {
   const mine = state.invoices
     .filter((i) => i.vendorId === user?.vendorId || i.submittedBy === user?.username)
     .sort((a, b) => (a.receivedOn === b.receivedOn ? (a.id < b.id ? 1 : -1) : a.receivedOn < b.receivedOn ? 1 : -1));
-  const rows: InvoiceRow[] = mine.map((i) => ({
-    id: i.id, vendor: nameOf(i.vendorId, i.printedVendor?.name), invoiceDate: i.invoiceDate, receivedOn: i.receivedOn,
-    poId: i.poId ?? "", total: i.total, status: i.status,
-    actionNeeded: !!user && (buildSupplierView(state, i.id, user)?.actions.length ?? 0) > 0,
-  }));
+  const rows: InvoiceRow[] = mine.map((i) => {
+    const view = user ? buildSupplierView(state, i.id, user) : undefined;
+    return {
+      id: i.id, vendor: nameOf(i.vendorId, i.printedVendor?.name), invoiceDate: i.invoiceDate, receivedOn: i.receivedOn,
+      poId: i.poId ?? "", total: i.total, status: i.status,
+      actionNeeded: (view?.actions.length ?? 0) > 0,
+      heldAsCopyOf: view?.heldAsCopyOf,
+    };
+  });
   const showVendor = rows.some((r) => r.vendor !== vendor?.name);
 
   return (

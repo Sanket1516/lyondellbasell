@@ -1,4 +1,6 @@
 /* One palette: navy-black base, one electric-blue accent; green / amber / red only where they mean pass / warning / fail. */
+/* Light mode: same structure, inverted surfaces; accents darkened so text keeps AA contrast on the pale base.
+   The theme is set on <html data-theme> before first paint (index.html) and switched by the top-bar button. */
 :root {
   color-scheme: dark;
   --bg: #05070d;
@@ -10,13 +12,64 @@
   --line: rgba(140, 160, 190, 0.18);
   --accent: #3d8bff;
   --accent-hi: #7fb3ff;
+  --accent-press: #2f7cf0;
   --ok: #3fb950;
   --warn: #e3a72f;
   --bad: #ff6b61;
+  --chip-bg: rgba(8, 12, 22, 0.7);
+  --switch-off: #233149;
+  --tick: #2a3954;
+  --tick-glow: rgba(61, 139, 255, 0.8);
+  --quote-bg: rgba(63, 185, 80, 0.07);
+  --lite-glow: rgba(61, 139, 255, 0.08);
+  --art-bg: linear-gradient(180deg, rgba(14, 22, 38, 0.7), rgba(8, 12, 22, 0.4));
+  --cta-fade: linear-gradient(180deg, transparent, rgba(5, 7, 13, 0.82) 22%, rgba(5, 7, 13, 0.92));
+  --card-bg: rgba(12, 18, 31, 0.72);
+  --card-bg-hover: rgba(18, 28, 48, 0.85);
+  --card-line-hover: rgba(127, 179, 255, 0.55);
+  --track: #1a2539;
+  --toast-bg: rgba(10, 15, 26, 0.94);
+  --btn-bg: #131c2e;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --scrim: linear-gradient(to top, rgba(5, 7, 13, 0.94) 0%, rgba(5, 7, 13, 0.72) 30%, transparent 52%);
+  --grain: 0.055;
   --display: "Archivo Variable", "Inter Variable", "Segoe UI", system-ui, sans-serif;
   --sans: "Inter Variable", "Segoe UI", system-ui, sans-serif;
   --mono: "Spline Sans Mono", Consolas, ui-monospace, monospace;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #eef2f8;
+  --bg-2: #e3e9f2;
+  --panel: rgba(255, 255, 255, 0.82);
+  --ink: #0d1626;
+  --soft: #45536a;
+  --faint: #5f6c80;
+  --line: rgba(30, 50, 90, 0.16);
+  --accent: #1f6fe5;
+  --accent-hi: #1a5fc8;
+  --accent-press: #185bc2;
+  --ok: #1a7f37;
+  --warn: #9a6200;
+  --bad: #c9302c;
+  --chip-bg: rgba(255, 255, 255, 0.78);
+  --switch-off: #c5cfdd;
+  --tick: #b9c4d4;
+  --tick-glow: rgba(31, 111, 229, 0.35);
+  --quote-bg: rgba(26, 127, 55, 0.08);
+  --lite-glow: rgba(31, 111, 229, 0.08);
+  --art-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+  --cta-fade: linear-gradient(180deg, transparent, rgba(238, 242, 248, 0.86) 22%, rgba(238, 242, 248, 0.95));
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-bg-hover: rgba(255, 255, 255, 0.96);
+  --card-line-hover: rgba(31, 111, 229, 0.45);
+  --track: #d3dbe7;
+  --toast-bg: rgba(255, 255, 255, 0.96);
+  --btn-bg: #eef2f8;
+  --shadow: rgba(20, 35, 60, 0.18);
+  --scrim: linear-gradient(to top, rgba(238, 242, 248, 0.96) 0%, rgba(238, 242, 248, 0.78) 30%, transparent 52%);
+  --grain: 0.035;
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { background: var(--bg); }
@@ -34,7 +87,7 @@ body {
 a { color: var(--accent-hi); }
 :focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 3px; border-radius: 6px; }
 button { font: inherit; }
-::selection { background: rgba(61, 139, 255, 0.35); }
+::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); }
 
 /* Lite-mode SVG layers: revealed when their section scrolls in. */
 .liteArt { width: 100%; height: auto; display: block; overflow: visible; }

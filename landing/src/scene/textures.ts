@@ -1,13 +1,39 @@
 // Procedural canvas textures: documents, chips, labels and hash blocks are drawn with the self-hosted fonts.
 // No image files and no downloaded models. Row positions are exported so highlight meshes line up with what is drawn.
-import { CanvasTexture, SRGBColorSpace, LinearFilter } from "three";
+import { CanvasTexture, Color, SRGBColorSpace, LinearFilter } from "three";
 import { S, rs, inr, day } from "../content";
 
-export const C = {
+// Two palettes for the 3D scene. `C` is mutated in place by setPalette() before the canvas mounts (Scene.tsx), and the
+// canvas is remounted on a theme change, so every texture and material is rebuilt from the active palette.
+const DARK = {
   ink: "#e8edf5", soft: "#8d99ab", faint: "#5b6678", line: "rgba(140,160,190,0.22)",
   accent: "#3d8bff", accentHi: "#7fb3ff", ok: "#3fb950", warn: "#e3a72f", bad: "#f85149",
   band: { inv: "#e3a72f", po: "#3d8bff", grn: "#3fb950" },
+  bg: "#05070d", gridCell: "#101a2b", gridSection: "#18294a",
+  glass: "#0e1626", glass2: "#1a2538", glass3: "#15233a", glass4: "#111d31",
+  track: "#1c2a40", dim: "#3a4a63", node: "#2c3a52", node2: "#26344b", node3: "#2a3a55", legit: "#6f8bb0", legit2: "#7d93b3", labelSoft: "#a9b8cc",
+  chipBg: "rgba(12,20,36,0.92)", pillBg: "rgba(10,14,24,0.94)", trackBg: "rgba(140,160,190,0.14)",
 };
+type Palette = typeof DARK;
+const LIGHT: Palette = {
+  ink: "#0d1626", soft: "#4f5d73", faint: "#7a879b", line: "rgba(30,50,90,0.18)",
+  accent: "#1f6fe5", accentHi: "#2f7cf0", ok: "#1a8a3a", warn: "#c27c0e", bad: "#d1352b",
+  band: { inv: "#d99a1e", po: "#2f7cf0", grn: "#2ea043" },
+  bg: "#eef2f8", gridCell: "#d5dce8", gridSection: "#b8c4d6",
+  glass: "#ffffff", glass2: "#e4eaf3", glass3: "#dde5f1", glass4: "#f6f8fc",
+  track: "#d3dbe8", dim: "#a9b5c7", node: "#c3ccda", node2: "#cdd5e1", node3: "#c3ccda", legit: "#5b7aa6", legit2: "#5b7aa6", labelSoft: "#4f5d73",
+  chipBg: "rgba(255,255,255,0.95)", pillBg: "rgba(255,255,255,0.96)", trackBg: "rgba(30,50,90,0.10)",
+};
+export const C: Palette = { ...DARK, band: { ...DARK.band } };
+/** Shared Color instances (updated in place so module-level references stay valid). */
+export const COL = { bad: new Color(DARK.bad), ok: new Color(DARK.ok), acc: new Color(DARK.accent), dim: new Color(DARK.dim) };
+export let isLight = false;
+export function setPalette(theme: "dark" | "light") {
+  const P = theme === "light" ? LIGHT : DARK;
+  Object.assign(C, P, { band: { ...P.band } });
+  COL.bad.set(P.bad); COL.ok.set(P.ok); COL.acc.set(P.accent); COL.dim.set(P.dim);
+  isLight = theme === "light";
+}
 const SANS = '"Inter Variable", "Segoe UI", system-ui, sans-serif';
 const DISP = '"Archivo Variable", "Inter Variable", "Segoe UI", sans-serif';
 const MONO = '"Spline Sans Mono", Consolas, ui-monospace, monospace';
@@ -147,7 +173,7 @@ export function amendmentTexture() {
 export function chipTexture(label: string, value: string, tone = C.accent) {
   const [cv, ctx] = canvas(560, 132);
   rrect(ctx, 4, 4, 552, 124, 26);
-  ctx.fillStyle = "rgba(12,20,36,0.92)"; ctx.fill();
+  ctx.fillStyle = C.chipBg; ctx.fill();
   ctx.strokeStyle = tone; ctx.lineWidth = 3; ctx.stroke();
   ctx.fillStyle = tone; ctx.beginPath(); ctx.arc(46, 66, 9, 0, Math.PI * 2); ctx.fill();
   text(ctx, label.toUpperCase(), 74, 52, { px: 21, color: C.soft, w: 600, ls: 2 });
@@ -172,7 +198,7 @@ export function pillTexture(textS: string, tone: string, sub?: string) {
   const W = Math.ceil(Math.max(360, tw, sw) + 92), Hh = sub ? 200 : 132;
   const [cv, ctx] = canvas(W, Hh);
   rrect(ctx, 4, 4, W - 8, Hh - 8, 30);
-  ctx.fillStyle = "rgba(10,14,24,0.94)"; ctx.fill();
+  ctx.fillStyle = C.pillBg; ctx.fill();
   ctx.strokeStyle = tone; ctx.lineWidth = 5; ctx.stroke();
   text(ctx, textS, 44, 86, { px: 54, w: 700, f: DISP, stretch: "expanded", color: tone, ls: 2 });
   if (sub) text(ctx, sub, 44, 154, { px: 28, color: C.ink });
@@ -204,7 +230,7 @@ export function intelTexture() {
   const [cv, ctx] = canvas(INTEL.w, INTEL.h);
   INTEL.bars = [];
   const track = (y: number, value: number, tone: string, x0 = 40, x1 = 960) => {
-    rrect(ctx, x0, y - 9, x1 - x0, 18, 9); ctx.fillStyle = "rgba(140,160,190,0.14)"; ctx.fill();
+    rrect(ctx, x0, y - 9, x1 - x0, 18, 9); ctx.fillStyle = C.trackBg; ctx.fill();
     INTEL.bars.push({ y, x0, x1, value, tone });
   };
   const block = (top: number, title: string, p: number, model: string, auc: number | undefined, factors: { label: string; value: string; effectPoints: number }[]) => {

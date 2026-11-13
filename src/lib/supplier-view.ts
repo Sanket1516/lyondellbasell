@@ -17,6 +17,8 @@ export interface SupplierInvoiceView {
   steps: SupplierStep[];
   /** What the supplier has to correct, with the expected value. Empty when nothing is needed from them. */
   actions: SupplierAction[];
+  /** Set while the invoice is held as a possible copy of this earlier invoice. */
+  heldAsCopyOf?: string;
   payment?: { dueOn: string; termsDays: number; paid: boolean };
 }
 
@@ -71,6 +73,9 @@ export function buildSupplierView(s: AppState, invoiceId: string, user: { userna
     return e ? fmtDateTime(e.at) : fmtDate(fallback);
   };
   const confirmedDuplicate = inv.duplicateDecision?.decision === "duplicate" ? inv.duplicateDecision.matchedInvoiceId : undefined;
+  // An open duplicate finding (a clerk has not yet decided) holds the invoice. The supplier is told which earlier invoice it repeats.
+  const heldAsCopyOf = !confirmedDuplicate && (inv.status === "blocked" || inv.status === "pending_owner")
+    ? findings.find((f) => f.kind === "duplicate" && f.matchedInvoiceId)?.matchedInvoiceId : undefined;
 
   const dueOn = paymentDueDate(inv, vendor);
   const terms = paymentTermsDays(vendor);
@@ -91,6 +96,13 @@ export function buildSupplierView(s: AppState, invoiceId: string, user: { userna
   if (confirmedDuplicate) {
     headline = `Closed as a duplicate of ${confirmedDuplicate}. No payment will be made for this copy.`;
     steps.push({ title: "Closed as a duplicate", detail: `This invoice repeats ${confirmedDuplicate}.`, state: "current" });
+  } else if (heldAsCopyOf) {
+    headline = `On hold: this looks like a copy of invoice ${heldAsCopyOf}, already on file. It will not be paid unless accounts payable confirms it is a separate bill.`;
+    steps.push({
+      title: "On hold as a possible duplicate",
+      detail: `It matches ${heldAsCopyOf}: same supplier, PO and amount for the same goods. If this is a genuine separate bill, contact Plant X accounts payable.`,
+      state: "current",
+    });
   } else if (reviewing) {
     if (actions.length) {
       const also = internalOpen ? ` ${plural(internalOpen, "internal action")} also pending.` : "";
@@ -145,7 +157,7 @@ export function buildSupplierView(s: AppState, invoiceId: string, user: { userna
 
   return {
     id: inv.id, poId: inv.poId ?? "", invoiceDate: inv.invoiceDate, receivedOn: inv.receivedOn, total: inv.total,
-    headline, steps, actions,
+    headline, steps, actions, ...(heldAsCopyOf ? { heldAsCopyOf } : {}),
     payment: inv.status === "rejected" || confirmedDuplicate ? undefined : { dueOn, termsDays: terms, paid: inv.status === "paid" },
   };
 }

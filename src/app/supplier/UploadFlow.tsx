@@ -36,7 +36,7 @@ function ConfChip({ c, edited }: { c: Confidence; edited?: boolean }) {
   return <span className={`${s.conf} ${s[`conf_${c}`]}`}>{CONF_LABEL[c]}</span>;
 }
 
-type Stage = { t: "idle" } | { t: "busy"; label: string } | { t: "review"; source: string; ex: ExtractedInvoice } | { t: "done"; invoiceId: string };
+type Stage = { t: "idle" } | { t: "busy"; label: string } | { t: "review"; source: string; ex: ExtractedInvoice } | { t: "done"; invoiceId: string; duplicateOf?: string };
 
 export function UploadFlow({ demos }: { demos: Demo[] }) {
   const router = useRouter();
@@ -128,8 +128,16 @@ export function UploadFlow({ demos }: { demos: Demo[] }) {
 
   if (stage.t === "done") {
     return (
-      <Panel title="Invoice submitted">
-        <p className={s.doneText}>Invoice <span className="mono">{stage.invoiceId}</span> is submitted. Its status is now shown in the list below.</p>
+      <Panel title={stage.duplicateOf ? "Invoice on hold: possible duplicate" : "Invoice submitted"}>
+        {stage.duplicateOf ? (
+          <p role="alert" className={`${s.doneText} ${s.error}`}>
+            Invoice <span className="mono">{stage.invoiceId}</span> matches invoice <span className="mono">{stage.duplicateOf}</span>, already
+            on file: same supplier, PO and amount for the same goods. It is on hold and will not be paid unless Plant X accounts payable
+            confirms it is a separate bill.
+          </p>
+        ) : (
+          <p className={s.doneText}>Invoice <span className="mono">{stage.invoiceId}</span> is submitted. Its status is now shown in the list below.</p>
+        )}
         <div className={s.actions}><Button variant="primary" onClick={reset}>Upload another invoice</Button></div>
         {toast.node}
       </Panel>
@@ -213,8 +221,8 @@ export function UploadFlow({ demos }: { demos: Demo[] }) {
     }).catch(() => ({ ok: false as const, error: "The invoice could not be submitted. Please try again." }));
     setSubmitting(false);
     if (!res.ok) return setError(res.error);
-    toast.show(`Invoice ${res.invoiceId} submitted`);
-    setStage({ t: "done", invoiceId: res.invoiceId });
+    toast.show(res.duplicateOf ? `Invoice ${res.invoiceId} held: copy of ${res.duplicateOf}` : `Invoice ${res.invoiceId} submitted`);
+    setStage({ t: "done", invoiceId: res.invoiceId, duplicateOf: res.duplicateOf });
     router.refresh();
   }
 

@@ -83,8 +83,27 @@ export function normaliseInvoiceNo(no: string): string {
   return core || alnum;
 }
 
+/** Case, spacing and punctuation never make two descriptions different: "Stretch wrap film, 500mm" = "stretch wrap film 500 mm". */
+const norm = (s: string | undefined) => (s ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "");
 const sameLines = (a: InvoiceLine[], b: InvoiceLine[]) =>
-  a.length === b.length && a.every((l, i) => l.description.trim().toLowerCase() === b[i].description.trim().toLowerCase() && l.qty === b[i].qty);
+  a.length === b.length && a.every((l, i) => norm(l.description) === norm(b[i].description) && l.qty === b[i].qty);
+
+/** Who the bill is from: the vendor master id, or what is printed on it when the supplier is not in the master. */
+const supplierKey = (inv: Invoice) => inv.vendorId !== "UNKNOWN" ? inv.vendorId : `printed:${norm(inv.printedVendor?.gstin) || norm(inv.printedVendor?.name)}`;
+const paise = (n: number) => Math.round(n * 100);
+
+/**
+ * The document's content signature: everything that makes a bill a bill EXCEPT its invoice number.
+ * Supplier, PO, invoice date, every line (description, quantity, unit, rate, amount; in any order) and the totals.
+ * Two invoices with the same signature are the same document re-keyed under a new number. Printed as 8 hex digits (FNV-1a).
+ */
+export function contentSignature(inv: Invoice): string {
+  const lines = inv.lines.map((l) => [norm(l.description), l.qty, norm(l.uom), paise(l.unitPrice), paise(l.amount)].join(":")).sort();
+  const text = [supplierKey(inv), inv.poId ?? "", inv.invoiceDate, ...lines, paise(inv.subtotal), paise(inv.tax), paise(inv.total)].join("|");
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 0x01000193) >>> 0;
+  return h.toString(16).toUpperCase().padStart(8, "0");
+}
 
 // ---------------------------------------------------------------- the engine
 export function matchInvoice(invoice: Invoice, data: MatchData, today: string, cfg: EngineConfig = ENGINE_CONFIG): MatchResult {
@@ -153,10 +172,20 @@ export function matchInvoice(invoice: Invoice, data: MatchData, today: string, c
       return billed + toPo(l.itemCode, l.qty, l.uom) > received * (1 + cfg.qtyPct / 100) + EPS;
     });
   };
-  if (vendor) {
+  // 2a. Exact content signature: the same document under any other invoice number. No date window and no receipts
+  //     exception: a genuine second bill always differs in something (date, quantity, amount), so it never shares the signature.
+  //     Only a copy that arrived FIRST counts, so re-checking the original never flags it against its own copy.
+  const signature = contentSignature(invoice);
+  const pos = (x: Invoice) => { const i = data.invoices.indexOf(x); return i < 0 ? Infinity : i; };
+  const arrivedFirst = (o: Invoice) => o.receivedOn < invoice.receivedOn || (o.receivedOn === invoice.receivedOn && pos(o) < pos(invoice));
+  const twin = data.invoices
+    .filter((o) => o.id !== invoice.id && paise(o.total) === paise(invoice.total) && o.invoiceDate === invoice.invoiceDate && supplierKey(o) === supplierKey(invoice))
+    .filter((o) => arrivedFirst(o) && contentSignature(o) === signature)[0];
+  // 2b. Near match (known supplier only): same number apart from a prefix/suffix, or a re-keyed copy on the same PO.
+  if (vendor || twin) {
     const key = normaliseInvoiceNo(invoice.id);
-    const hits = data.invoices
-      .filter((o) => o.id !== invoice.id && o.vendorId === invoice.vendorId)
+    const near = !vendor ? [] : data.invoices
+      .filter((o) => o.id !== invoice.id && o.vendorId === invoice.vendorId && arrivedFirst(o))
       // Same number apart from a prefix/suffix, OR a different number but the same PO and the same lines (a re-keyed copy).
       // A re-keyed copy only counts when the PO's receipts cannot cover both bills; two halves of a staged delivery are legitimate.
       .filter((o) => normaliseInvoiceNo(o.id) === key || (!!invoice.poId && o.poId === invoice.poId && sameLines(o.lines, invoice.lines) && billedBeyondReceipts()))
@@ -164,29 +193,41 @@ export function matchInvoice(invoice: Invoice, data: MatchData, today: string, c
       .filter((o) => Math.abs(day(o.invoiceDate) - day(invoice.invoiceDate)) <= cfg.duplicateDays)
       .filter((o) => o.poId === invoice.poId || sameLines(o.lines, invoice.lines))
       .sort((a, b) => Math.abs(day(a.invoiceDate) - day(invoice.invoiceDate)) - Math.abs(day(b.invoiceDate) - day(invoice.invoiceDate)));
-    const hit = hits[0];
+    // The exact signature match wins: it is the strongest evidence and needs no tolerance.
+    const hit = twin ?? near[0];
     const dec = invoice.duplicateDecision;
     if (hit && !(dec && dec.decision === "not_duplicate" && dec.matchedInvoiceId === hit.id)) {
       const state = hit.status === "paid" ? `paid ${fmtDate(hit.resolvedOn)}`.trim() : `still open, ${hit.status.replace("_", " ")}`;
-      const matched = [
-        `same supplier`,
-        normaliseInvoiceNo(hit.id) === key ? `invoice number differs only by a prefix or suffix (${invoice.id} and ${hit.id})` : `different invoice numbers (${invoice.id} and ${hit.id}) for the same PO and lines`,
-        `total ${inr(invoice.total)} against ${inr(hit.total)}`,
-        `dates ${Math.round(Math.abs(day(hit.invoiceDate) - day(invoice.invoiceDate)))} days apart`,
-        ...(hit.poId === invoice.poId ? [`same PO ${invoice.poId}`] : []),
-        ...(sameLines(hit.lines, invoice.lines) ? [`the same ${hit.lines.length} line${hit.lines.length === 1 ? "" : "s"}`] : []),
-      ];
+      const exact = hit === twin;
+      const n = hit.lines.length;
+      const matched = exact
+        ? [
+          `content signature ${signature} is identical`,
+          `only the invoice number differs (${invoice.id} and ${hit.id})`,
+          `same supplier, ${invoice.poId ? `PO ${invoice.poId}` : "no PO"}, invoice date ${fmtDate(invoice.invoiceDate)}`,
+          `the same ${n} line${n === 1 ? "" : "s"}, quantities and rates`,
+          `total ${inr(invoice.total)}`,
+        ]
+        : [
+          `same supplier`,
+          normaliseInvoiceNo(hit.id) === key ? `invoice number differs only by a prefix or suffix (${invoice.id} and ${hit.id})` : `different invoice numbers (${invoice.id} and ${hit.id}) for the same PO and lines`,
+          `total ${inr(invoice.total)} against ${inr(hit.total)}`,
+          `dates ${Math.round(Math.abs(day(hit.invoiceDate) - day(invoice.invoiceDate)))} days apart`,
+          ...(hit.poId === invoice.poId ? [`same PO ${invoice.poId}`] : []),
+          ...(sameLines(hit.lines, invoice.lines) ? [`the same ${n} line${n === 1 ? "" : "s"}`] : []),
+        ];
       const confirmed = dec?.decision === "duplicate" && dec.matchedInvoiceId === hit.id;
       add({
         kind: "duplicate", verdict: "block",
-        message: `${confirmed ? "Confirmed duplicate" : "Possible duplicate"} of ${hit.id} (${state}): ${matched.join("; ")}.`,
-        rootCause: confirmed ? "Confirmed duplicate of an earlier invoice" : "Possible duplicate of a paid invoice", owner: "AP Clerk",
+        message: `${confirmed ? "Confirmed duplicate" : exact ? "Re-keyed copy" : "Possible duplicate"} of ${hit.id} (${state}): ${matched.join("; ")}.`,
+        rootCause: confirmed ? "Confirmed duplicate of an earlier invoice" : exact ? "Re-keyed copy of an earlier invoice" : "Possible duplicate of a paid invoice", owner: "AP Clerk",
         smallestFix: confirmed
           ? "No payment. The supplier is told this invoice duplicates " + hit.id + "."
           : `Passes if a clerk compares the two documents and records that this is a different bill (reason required).`,
-        expected: `No earlier invoice with the same fingerprint`, actual: `${hit.id} (${hit.status})`,
+        expected: exact ? `A content signature not already on file` : `No earlier invoice with the same fingerprint`,
+        actual: exact ? `${signature} = ${hit.id} (${hit.status})` : `${hit.id} (${hit.status})`,
         matchedInvoiceId: hit.id,
-        evidence: [ev("invoice", hit.id, `${hit.id}: dated ${fmtDate(hit.invoiceDate)}, PO ${hit.poId ?? "none"}, total ${inr(hit.total)}, ${hit.status}`)],
+        evidence: [ev("invoice", hit.id, `${hit.id}: dated ${fmtDate(hit.invoiceDate)}, PO ${hit.poId ?? "none"}, total ${inr(hit.total)}, ${hit.status}${exact ? `, signature ${contentSignature(hit)}` : ""}`)],
       });
     }
   }

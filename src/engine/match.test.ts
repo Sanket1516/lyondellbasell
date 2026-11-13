@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { DEMO_TODAY } from "../lib/constants";
 import type { Invoice, InvoiceLine } from "../lib/types";
 import { ENGINE_CONFIG } from "./config";
-import { matchInvoice, normaliseInvoiceNo, type MatchData } from "./match";
+import { contentSignature, matchInvoice, normaliseInvoiceNo, type MatchData } from "./match";
 
 const root = process.cwd();
 const seed = <T,>(n: string) => JSON.parse(fs.readFileSync(path.join(root, "data", "seed", `${n}.json`), "utf8")) as T;
@@ -242,6 +242,50 @@ describe("duplicate fingerprint", () => {
   it("a different supplier's matching number is not a duplicate", () => {
     const other = { ...data, invoices: data.invoices.map((i) => (i.id === "INV-6120" ? { ...i, vendorId: "V-1001" } : i)) };
     expect(run(dup, other).findings.some((f) => f.kind === "duplicate")).toBe(false);
+  });
+});
+
+describe("content signature: the same document under a new invoice number", () => {
+  const original = demoInvoice("INV-7782");
+  const withOriginal = (inv: Invoice = original): MatchData => ({ ...data, invoices: [...data.invoices, inv] });
+  const dupOf = (r: ReturnType<typeof run>) => r.findings.find((f) => f.kind === "duplicate");
+
+  it("ignores the invoice number but nothing else", () => {
+    expect(contentSignature({ ...original, id: "1234" })).toBe(contentSignature(original));
+    expect(contentSignature({ ...original, invoiceDate: "2026-11-10" })).not.toBe(contentSignature(original));
+    expect(contentSignature(edit(original, 0, { qty: 499 }))).not.toBe(contentSignature(original));
+    expect(contentSignature({ ...original, poId: "4500001237" })).not.toBe(contentSignature(original));
+    expect(contentSignature(original)).toMatch(/^[0-9A-F]{8}$/);
+  });
+
+  it("blocks INV-7782 re-submitted as 1234 with every other field unchanged", () => {
+    const r = run({ ...original, id: "1234" }, withOriginal());
+    expect(r.verdict).toBe("block");
+    expect(dupOf(r)).toMatchObject({ matchedInvoiceId: "INV-7782", rootCause: "Re-keyed copy of an earlier invoice", owner: "AP Clerk" });
+    expect(dupOf(r)!.message).toContain(`content signature ${contentSignature(original)} is identical`);
+  });
+
+  it("catches it even when the receipts would cover both bills, extraction dropped the item codes, or spacing and line order changed", () => {
+    const bigGr = { ...data, goodsReceipts: data.goodsReceipts.map((g) => (g.poId === "4500001236" ? { ...g, lines: g.lines.map((l) => ({ ...l, qtyReceived: l.qtyReceived * 10 })) } : g)) };
+    const copy: Invoice = {
+      ...original, id: "1234",
+      lines: [...original.lines].reverse().map((l) => ({ ...l, itemCode: undefined, description: `  ${l.description.toUpperCase().replace(/ /g, "  ")} ` })),
+    };
+    const r = run(copy, { ...bigGr, invoices: [...bigGr.invoices, original] });
+    expect(dupOf(r)).toMatchObject({ matchedInvoiceId: "INV-7782", rootCause: "Re-keyed copy of an earlier invoice" });
+  });
+
+  it("never flags the original against its own later copy", () => {
+    const copy = { ...original, id: "1234" };
+    expect(dupOf(run(original, { ...data, invoices: [...data.invoices, original, copy] }))).toBeUndefined();
+  });
+
+  it("a genuine second bill (another date, receipts cover both) is not a duplicate, and a clerk's 'not a duplicate' clears a copy", () => {
+    const bigGr = { ...data, goodsReceipts: data.goodsReceipts.map((g) => (g.poId === "4500001236" ? { ...g, lines: g.lines.map((l) => ({ ...l, qtyReceived: l.qtyReceived * 2 })) } : g)) };
+    const coded = { ...original, lines: original.lines.map((l, i) => ({ ...l, itemCode: ["CTN-5P", "WRAP-500"][i] })) };
+    expect(dupOf(run({ ...coded, id: "INV-7790", invoiceDate: "2026-11-12" }, { ...bigGr, invoices: [...bigGr.invoices, coded] }))).toBeUndefined();
+    const cleared = run({ ...original, id: "1234", duplicateDecision: { decision: "not_duplicate", matchedInvoiceId: "INV-7782", by: "x", reason: "Separate order", at: "" } }, withOriginal());
+    expect(dupOf(cleared)).toBeUndefined();
   });
 });
 

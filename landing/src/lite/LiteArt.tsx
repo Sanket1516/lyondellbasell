@@ -3,7 +3,12 @@
 import type { ReactNode } from "react";
 import { APPROVER, CLERK, S, inr, rs } from "../content";
 
-const K = { ink: "#e8edf5", soft: "#8d99ab", faint: "#5b6678", line: "#24324a", glass: "#0e1626", acc: "#3d8bff", hi: "#7fb3ff", ok: "#3fb950", warn: "#e3a72f", bad: "#f85149" };
+// Two palettes; LiteArt copies the active one into K before its layers render (all sections share one theme).
+const KD = { ink: "#e8edf5", soft: "#8d99ab", faint: "#5b6678", line: "#24324a", glass: "#0e1626", acc: "#3d8bff", hi: "#7fb3ff", ok: "#3fb950", warn: "#e3a72f", bad: "#f85149",
+  pill: "#0a0e18", slab: "#1a2538", chip: "#0c1424", node: "#15233a", dim: "#3a4a63", track: "#1c2a40" };
+const KL: typeof KD = { ink: "#0d1626", soft: "#4f5d73", faint: "#7a879b", line: "#cfd8e5", glass: "#ffffff", acc: "#1f6fe5", hi: "#1a5fc8", ok: "#1a7f37", warn: "#a86a00", bad: "#c9302c",
+  pill: "#ffffff", slab: "#e6ecf4", chip: "#f3f6fb", node: "#e6edf7", dim: "#aab6c8", track: "#dbe2ec" };
+const K = { ...KD };
 const L = ({ d = 0, children }: { d?: number; children: ReactNode }) => <g className="layer" style={{ ["--d" as string]: `${d * 110}ms` }}>{children}</g>;
 const T = (p: { x: number; y: number; s?: number; c?: string; w?: number; a?: "start" | "middle" | "end"; f?: "d" | "m"; children: ReactNode }) => (
   <text x={p.x} y={p.y} fontSize={p.s ?? 13} fill={p.c ?? K.ink} fontWeight={p.w ?? 500} textAnchor={p.a ?? "start"}
@@ -27,7 +32,7 @@ function Doc({ x, y, w = 150, h = 196, band, title, sub, rows = [], hi }: { x: n
   );
 }
 const Pill = ({ x, y, text, c, w = 150 }: { x: number; y: number; text: string; c: string; w?: number }) => (
-  <g transform={`translate(${x} ${y})`}><rect width={w} height={28} rx={14} fill="#0a0e18" stroke={c} strokeWidth={1.5} /><T x={w / 2} y={18.5} s={11} w={700} c={c} a="middle" f="d">{text}</T></g>
+  <g transform={`translate(${x} ${y})`}><rect width={w} height={28} rx={14} fill={K.pill} stroke={c} strokeWidth={1.5} /><T x={w / 2} y={18.5} s={11} w={700} c={c} a="middle" f="d">{text}</T></g>
 );
 
 const H = S.hero;
@@ -40,7 +45,7 @@ const ART: (() => ReactNode)[] = [
   () => (<>
     {[0, 1, 2].map((p) => (
       <L key={p} d={p}>{Array.from({ length: 8 }, (_, j) => (
-        <g key={j}><rect x={50 + p * 110} y={230 - j * 16} width={90} height={12} rx={2} fill="#1a2538" stroke={K.line} />
+        <g key={j}><rect x={50 + p * 110} y={230 - j * 16} width={90} height={12} rx={2} fill={K.slab} stroke={K.line} />
           {(p * 8 + j) % 3 === 0 && <rect x={54 + p * 110} y={233 - j * 16} width={24} height={6} rx={2} fill={(p + j) % 2 ? K.warn : K.bad} />}</g>
       ))}</L>
     ))}
@@ -50,13 +55,13 @@ const ART: (() => ReactNode)[] = [
     <L><Doc x={40} y={50} band={K.warn} title={H.id} sub={H.supplier} rows={[["AX-40", "₹412"], ["C-12", "₹86,000"], ["DR-200", "₹1,450"]]} /></L>
     <L d={1}><rect x={36} y={140} width={158} height={2} fill={K.hi} /></L>
     {["Vendor", "PO number", "Items", "Quantities", "Prices", "Tax"].map((c, i) => (
-      <L key={c} d={2 + i * 0.5}><g transform={`translate(220 ${48 + i * 36})`}><rect width={150} height={28} rx={14} fill="#0c1424" stroke={K.acc} /><circle cx={14} cy={14} r={4} fill={K.acc} /><T x={26} y={18} s={11}>{c}</T></g></L>
+      <L key={c} d={2 + i * 0.5}><g transform={`translate(220 ${48 + i * 36})`}><rect width={150} height={28} rx={14} fill={K.chip} stroke={K.acc} /><circle cx={14} cy={14} r={4} fill={K.acc} /><T x={26} y={18} s={11}>{c}</T></g></L>
     ))}
   </>),
   () => (<>
     <L><circle cx={200} cy={150} r={28} fill={K.acc} /><circle cx={200} cy={150} r={46} fill="none" stroke={K.hi} opacity={0.5} /></L>
     {S.sources.map((s, i) => { const a = (i / 6) * Math.PI * 2 - Math.PI / 2, x = 200 + Math.cos(a) * 130, y = 150 + Math.sin(a) * 105;
-      return (<L key={s.id} d={1 + i * 0.4}><line x1={x} y1={y} x2={200} y2={150} stroke={K.acc} opacity={0.6} /><rect x={x - 11} y={y - 11} width={22} height={22} rx={5} fill="#15233a" stroke={K.acc} /><T x={x} y={y + (y > 150 ? 30 : -18)} s={11} a="middle">{s.label}</T><T x={x} y={y + (y > 150 ? 43 : -6)} s={9.5} a="middle" c={K.soft}>{`${inr(s.records)} records`}</T></L>); })}
+      return (<L key={s.id} d={1 + i * 0.4}><line x1={x} y1={y} x2={200} y2={150} stroke={K.acc} opacity={0.6} /><rect x={x - 11} y={y - 11} width={22} height={22} rx={5} fill={K.node} stroke={K.acc} /><T x={x} y={y + (y > 150 ? 30 : -18)} s={11} a="middle">{s.label}</T><T x={x} y={y + (y > 150 ? 43 : -6)} s={9.5} a="middle" c={K.soft}>{`${inr(s.records)} records`}</T></L>); })}
   </>),
   () => (<>
     <L><Doc x={14} y={70} w={118} h={150} band={K.warn} title="Invoice" rows={[["AX-40", "₹412"], ["C-12", "₹86"], ["DR-200", "40 nos"]]} hi={{ row: 0, c: K.bad }} /></L>
@@ -72,7 +77,7 @@ const ART: (() => ReactNode)[] = [
     <L d={4}><Pill x={20} y={48} text="EVIDENCE-SUPPORTED" c={K.ok} w={160} /></L>
   </>),
   () => { const v = S.risk.graph.vendors.slice(0, 14); return (<>
-    <L>{v.map((n, i) => { const a = i * 2.4, r = 60 + (i % 4) * 22; return <circle key={n.id} cx={170 + Math.cos(a) * r} cy={140 + Math.sin(a) * r * 0.7} r={5} fill="#3a4a63" />; })}</L>
+    <L>{v.map((n, i) => { const a = i * 2.4, r = 60 + (i % 4) * 22; return <circle key={n.id} cx={170 + Math.cos(a) * r} cy={140 + Math.sin(a) * r * 0.7} r={5} fill={K.dim} />; })}</L>
     <L d={1}><circle cx={120} cy={110} r={9} fill={K.warn} /><circle cx={230} cy={150} r={9} fill={K.warn} /><rect x={170} y={92} width={12} height={12} fill={K.warn} transform="rotate(20 176 98)" /><line x1={120} y1={110} x2={176} y2={98} stroke={K.warn} strokeWidth={2} /><line x1={230} y1={150} x2={176} y2={98} stroke={K.warn} strokeWidth={2} /></L>
     <L d={2}><T x={96} y={92} s={10.5}>{S.risk.shared.a}</T><T x={214} y={176} s={10.5}>{S.risk.shared.b}</T></L>
     <L d={3}><g transform="translate(300 170)"><rect width={70} height={92} rx={6} fill={K.glass} stroke={K.line} /><rect x={8} y={-8} width={70} height={92} rx={6} fill={K.glass} stroke={K.warn} strokeDasharray="4 3" opacity={0.8} /><T x={43} y={44} s={16} w={650} f="d" a="middle" c={K.warn}>{S.risk.duplicate.score}</T><T x={43} y={58} s={9} a="middle" c={K.soft}>of 100</T></g></L>
@@ -82,14 +87,14 @@ const ART: (() => ReactNode)[] = [
     <L><line x1={20} y1={170} x2={380} y2={170} stroke={K.acc} strokeWidth={2} /></L>
     <L d={1}><rect x={120} y={80} width={60} height={90} fill="none" stroke={K.ok} strokeWidth={3} /><T x={150} y={70} s={11} a="middle">AP Clerk</T><T x={150} y={56} s={9.5} a="middle" c={K.soft}>{CLERK.name}</T></L>
     <L d={2}><rect x={250} y={80} width={60} height={90} fill="none" stroke={K.ok} strokeWidth={3} /><T x={280} y={70} s={11} a="middle">Approver L1</T><T x={280} y={56} s={9.5} a="middle" c={K.soft}>{APPROVER.name}</T></L>
-    <L d={3}><rect x={20} y={220} width={360} height={5} rx={2} fill="#1c2a40" /><rect x={20} y={220} width={360 * (H.totalInr / S.approval.l1Max)} height={5} rx={2} fill={K.acc} /><rect x={20 + 360 * (S.approval.clerkMax / S.approval.l1Max)} y={210} width={2} height={24} fill={K.warn} /><T x={20 + 360 * (S.approval.clerkMax / S.approval.l1Max) + 6} y={248} s={10} c={K.warn}>{`${rs(S.approval.clerkMax)} clerk limit`}</T><T x={20 + 360 * (H.totalInr / S.approval.l1Max)} y={208} s={10} a="middle" c={K.hi}>{rs(H.totalInr)}</T></L>
+    <L d={3}><rect x={20} y={220} width={360} height={5} rx={2} fill={K.track} /><rect x={20} y={220} width={360 * (H.totalInr / S.approval.l1Max)} height={5} rx={2} fill={K.acc} /><rect x={20 + 360 * (S.approval.clerkMax / S.approval.l1Max)} y={210} width={2} height={24} fill={K.warn} /><T x={20 + 360 * (S.approval.clerkMax / S.approval.l1Max) + 6} y={248} s={10} c={K.warn}>{`${rs(S.approval.clerkMax)} clerk limit`}</T><T x={20 + 360 * (H.totalInr / S.approval.l1Max)} y={208} s={10} a="middle" c={K.hi}>{rs(H.totalInr)}</T></L>
     <L d={4}><g transform="translate(300 110) rotate(-8)"><rect x={-44} y={-16} width={88} height={32} rx={5} fill="none" stroke={K.ok} strokeWidth={2.5} /><T x={0} y={6} s={14} w={750} a="middle" c={K.ok} f="d">APPROVED</T></g></L>
   </>),
   () => { const I = S.intelligence; const arc = (v: number) => { const a0 = Math.PI * 0.75, a1 = a0 + Math.PI * 1.5 * v; const p = (a: number) => `${100 + Math.cos(a) * 70} ${150 + Math.sin(a) * 70}`; return `M ${p(a0)} A 70 70 0 ${v > 0.66 ? 1 : 0} 1 ${p(a1)}`; };
     return (<>
-      <L><path d={arc(1)} fill="none" stroke="#1c2a40" strokeWidth={10} strokeLinecap="round" /><path d={arc(I.criticality.score / 100)} fill="none" stroke={K.acc} strokeWidth={10} strokeLinecap="round" /><T x={100} y={158} s={30} w={650} f="d" a="middle">{I.criticality.score}</T><T x={100} y={176} s={10} a="middle" c={K.soft}>supply criticality</T></L>
+      <L><path d={arc(1)} fill="none" stroke={K.track} strokeWidth={10} strokeLinecap="round" /><path d={arc(I.criticality.score / 100)} fill="none" stroke={K.acc} strokeWidth={10} strokeLinecap="round" /><T x={100} y={158} s={30} w={650} f="d" a="middle">{I.criticality.score}</T><T x={100} y={176} s={10} a="middle" c={K.soft}>supply criticality</T></L>
       {[["Exception risk", I.exception.p], ["Payment-delay risk", I.delay.p]].map(([l, p], i) => (
-        <L key={l as string} d={1 + i}><T x={200} y={92 + i * 70} s={11.5}>{l as string}</T><T x={380} y={92 + i * 70} s={14} w={650} a="end" f="d" c={K.warn}>{`${Math.round((p as number) * 100)}%`}</T><rect x={200} y={100 + i * 70} width={180} height={6} rx={3} fill="#1c2a40" /><rect x={200} y={100 + i * 70} width={180 * (p as number)} height={6} rx={3} fill={K.warn} /></L>
+        <L key={l as string} d={1 + i}><T x={200} y={92 + i * 70} s={11.5}>{l as string}</T><T x={380} y={92 + i * 70} s={14} w={650} a="end" f="d" c={K.warn}>{`${Math.round((p as number) * 100)}%`}</T><rect x={200} y={100 + i * 70} width={180} height={6} rx={3} fill={K.track} /><rect x={200} y={100 + i * 70} width={180 * (p as number)} height={6} rx={3} fill={K.warn} /></L>
       ))}
       <L d={3}><T x={200} y={226} s={10} c={K.soft}>{`Top factor: ${I.exception.factors[0].label.toLowerCase()}`}</T><Pill x={200} y={244} text="AI-ASSISTED" c={K.hi} w={120} /></L>
     </>); },
@@ -106,12 +111,13 @@ const ART: (() => ReactNode)[] = [
   () => null,
 ];
 
-export function LiteArt({ i }: { i: number }) {
+export function LiteArt({ i, theme }: { i: number; theme: "dark" | "light" }) {
+  Object.assign(K, theme === "light" ? KL : KD);
   const art = ART[i]?.();
   if (!art) return null;
   return (
     <svg className="liteArt" viewBox="0 0 400 300" role="img" aria-hidden="true" focusable="false">
-      <defs><radialGradient id="glow"><stop offset="0" stopColor="#3d8bff" stopOpacity="0.35" /><stop offset="1" stopColor="#3d8bff" stopOpacity="0" /></radialGradient></defs>
+      <defs><radialGradient id="glow"><stop offset="0" stopColor={K.acc} stopOpacity={theme === "light" ? 0.18 : 0.35} /><stop offset="1" stopColor={K.acc} stopOpacity="0" /></radialGradient></defs>
       {art}
     </svg>
   );
