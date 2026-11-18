@@ -1,4 +1,4 @@
-# <PROJECT TITLE — TBD>
+# Procure to smart pay
 
 LYB Mumbai Hackathon 2026 · 12–13 Nov 2026
 
@@ -34,7 +34,3 @@ Demo accounts (fictional, also shown on the login page):
 ## Fictional data
 Everything in `data/seed/` and `data/demo-docs/` is invented: Plant X, the six vendors, GSTINs, POs, receipts and invoices. Nothing is real LYB data.
 
-Optional: set `SESSION_SECRET` in `.env` to change the cookie signing key.
-
-## Prompt order
-01 → (answer questions) → 02 → team picks one → 03 → loop 04 + 05 → 06 when switching or sleeping → 08 if ahead → 07 after code freeze.
