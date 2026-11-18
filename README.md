@@ -2,11 +2,6 @@
 
 LYB Mumbai Hackathon 2026 · 12–13 Nov 2026
 
-## Team
-- Sanket — team leader & builder (Claude Code)
-- Lokesh — tester (Google Antigravity)
-- Utkarsh — tester (OpenAI Codex)
-
 ## How to run
 Requires Node 20+.
 
